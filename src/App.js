@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import SearchBar from './components/SearchBar';
+import Index from './pages/Index';
 import CartBasket from './pages/CartBasket';
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
     <BrowserRouter>
       <Switch>
         <Route path="/cart-basket" component={ CartBasket } />
-        <Route path="/" component={ SearchBar } />
+        <Route path="/" component={ Index } />
       </Switch>
     </BrowserRouter>
   );

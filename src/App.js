@@ -1,6 +1,3 @@
-// Renan Costa;
-// Felipe Flores;
-// Patrick Southier;
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';

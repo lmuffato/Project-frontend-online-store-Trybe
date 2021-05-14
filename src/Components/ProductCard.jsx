@@ -5,10 +5,10 @@ class ProductCard extends Component {
   render() {
     const { title, price, imagePath } = this.props;
     return (
-      <div>
-        <h1 data-testid="product">{title}</h1>
-        <img data-testid="product" src={ imagePath } alt="Imagem do produto" />
-        <span data-testid="product">{price}</span>
+      <div data-testid="product">
+        <h1 >{title}</h1>
+        <img src={ imagePath } alt="Imagem do produto" />
+        <span>{price}</span>
       </div>
     );
   }

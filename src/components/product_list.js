@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ShopCartButton from './ShopCartButton';
 
 export default class ProductList extends Component {
   render() {
@@ -11,6 +12,7 @@ export default class ProductList extends Component {
           />
           Digite algum termo de pesquisa ou escolha uma categoria.
         </label>
+        <ShopCartButton />
       </div>
     );
   }

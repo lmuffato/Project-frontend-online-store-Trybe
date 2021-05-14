@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import ProductList from './components/product_list';
 import ShoppingCart from './components/ShoppingCart';
-import ShopCartButton from './components/ShopCartButton';
 
 function App() {
   return (

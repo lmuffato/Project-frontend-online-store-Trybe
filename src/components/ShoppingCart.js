@@ -5,11 +5,11 @@ export default class ShoppingCart extends Component {
     return (
       <div>
         <span
-        data-testid="shopping-cart-empty-message"
-        >
-        Seu carrinho está vazio
+          data-testid="shopping-cart-empty-message"
+          >
+          Seu carrinho está vazio
         </span>
       </div>
-    )
+    );
   }
 }

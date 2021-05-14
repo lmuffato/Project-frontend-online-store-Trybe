@@ -7,11 +7,11 @@ export default class ShopCartButton extends Component {
       <div>
         <Link
           data-testid="shopping-cart-button"
-          to ="/ShoppingCart"
-        >
+          to="/ShoppingCart"
+          >
         Carrinho
         </Link>
       </div>
-    )
+    );
   }
 }

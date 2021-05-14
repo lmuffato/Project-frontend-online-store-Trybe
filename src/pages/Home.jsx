@@ -27,10 +27,10 @@ export default class Home extends Component {
     this.handleFetchProducts();
   }
 
-  handleFetchProducts() {
+  async handleFetchProducts() {
     const { search } = this.state;
-    const result = api.getProductsFromQuery(search);
-    this.setState({ productsList: result });
+    const result = await api.getProductsFromQuery(search);
+    return this.setState({ productsList: result.results, search: '' });
   }
 
   render() {

@@ -1,22 +1,14 @@
 import React from 'react';
-import logo from './logo.svg';
+import { getCategories, getProductsFromCategoryAndQuery } from './services/api';
 import './App.css';
 
-function App() {
+async function App() {
+  const data = await getCategories();
+  console.log(data);
+  // getProductsFromCategoryAndQuery(data.id, data.name);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={ logo } className="App-logo" alt="logo" />
-        <p>Edit src/App.js and save to reload.</p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {/* <h1>{}</h1> */}
     </div>
   );
 }

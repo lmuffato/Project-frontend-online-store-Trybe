@@ -1,11 +1,13 @@
 import React from 'react';
 import './App.css';
-import * as api from './services/api';
+import { BrowserRouter, Route } from 'react-router-dom';
+import SearchBar from './components/SearchBar';
 
 function App() {
-  console.log(api.getCategories());
   return (
-    <div />
+    <BrowserRouter>
+      <Route path="/" component={ SearchBar } />
+    </BrowserRouter>
   );
 }
 

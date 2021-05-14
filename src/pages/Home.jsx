@@ -1,12 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import shoppingCart from '../images/shoppingCart.svg';
+import shoppingCart from '../imagens/shoppingCart.svg';
 
 export default class Home extends React.Component {
   render() {
     return (
       <div>
-        {/* Mudamos o link de lugar */}
         <Link
           to="/ShoppingCart"
           data-testid="shopping-cart-button"

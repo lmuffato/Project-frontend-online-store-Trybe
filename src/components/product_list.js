@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { getProductsFromCategoryAndQuery } from '../services/api';
+import ShopCartButton from './ShopCartButton';
 
 export default class ProductList extends Component {
   constructor() {
@@ -84,6 +85,7 @@ export default class ProductList extends Component {
             </section>
           </div>
         </label>
+        <ShopCartButton />
       </div>
     );
   }

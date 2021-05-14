@@ -1,13 +1,13 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import ProductList from './pages/ProductList';
 
 function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route to="/" component={ProductList} />
+        <Route to="/" component={ ProductList } />
       </Switch>
     </BrowserRouter>
   );

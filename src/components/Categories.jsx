@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import * as api from '../services/api';
+import * as apiUrl from '../services/api';
 
 class Categories extends Component {
   constructor() {
@@ -11,9 +11,15 @@ class Categories extends Component {
   }
 
   componentDidMount() {
-    api.getCategories().then(
-      (results) => this.setState({ categoryName: results }),
-    );
+    this.categories();
+  }
+
+  async categories() {
+    const { getCategories } = apiUrl;
+    const result = await getCategories();
+    this.setState({
+      categoryName: [...result],
+    });
   }
 
   render() {

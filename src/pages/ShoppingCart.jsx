@@ -7,6 +7,7 @@ class ShoppingCart extends React.Component {
       cart: [],
     };
   }
+
   render() {
     const { cart } = this.state;
     if (cart.length === 0) {
@@ -14,7 +15,7 @@ class ShoppingCart extends React.Component {
         <div>
           <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
         </div>
-      )
+      );
     }
   }
 }

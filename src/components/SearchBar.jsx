@@ -9,7 +9,7 @@ class SearchBar extends Component {
         <p data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
-        <Link data-testid="shopping-cart-button" to="/shopping-cart" >Carrinho</Link>
+        <Link data-testid="shopping-cart-button" to="/shopping-cart">Carrinho</Link>
       </div>
     );
   }

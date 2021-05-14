@@ -5,12 +5,8 @@ import * as api from './services/api';
 class App extends Component {
   render() {
     api.getProductsFromCategoryAndQuery('MLB5672', 'Acessórios para Veículos');
-    return (
-      <div className="App">
-        
-    </div>
-  );
-}
+    return <div className="App" />;
+  }
 }
 
 export default App;

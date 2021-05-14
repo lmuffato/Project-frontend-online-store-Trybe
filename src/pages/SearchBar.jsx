@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import Cart from './images/shoppingCart.png';
 
 class SearchBar extends Component {
   render() {
@@ -9,6 +11,12 @@ class SearchBar extends Component {
           <br />
           Digite algum termo de pesquisa ou escolha uma categoria.
         </label>
+        <Link
+          to="/CartContent"
+          data-testid="shopping-cart-button"
+        >
+          <img style={ { width: '40px' } } src={ Cart } alt="Carrinho de compras" />
+        </Link>
       </section>
     );
   }

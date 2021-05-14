@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import App from '../App';
 
-describe.skip('3 - Crie a página do carrinho de compras', () => {
+describe('3 - Crie a página do carrinho de compras', () => {
   it('A home deve ter o botão do carrinho de compras', () => {
     render(<App />);
     expect(screen.getByTestId('shopping-cart-button')).toBeDefined();

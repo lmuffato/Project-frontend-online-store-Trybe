@@ -9,7 +9,11 @@ class App extends React.Component {
         <label htmlFor="input">
           <input type="text" id="input" />
         </label>
-        <h1>Digite algum termo de pesquisa ou escolha uma categoria.</h1>
+        <h1
+          data-testid="home-initial-message"
+        >
+          Digite algum termo de pesquisa ou escolha uma categoria.
+        </h1>
       </div>
     );
   }

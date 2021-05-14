@@ -11,7 +11,7 @@ export default class ProductList extends Component {
             type="text"
             id="catSearchID"
           />
-          Digite algum termo de pesquisa ou escolha uma categoria.!
+          Digite algum termo de pesquisa ou escolha uma categoria.!!!
         </label>
       </div>
     );

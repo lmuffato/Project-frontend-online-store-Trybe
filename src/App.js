@@ -1,14 +1,15 @@
 import React from 'react';
-import { getCategories, getProductsFromCategoryAndQuery } from './services/api';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+// import { getCategories, getProductsFromCategoryAndQuery } from './services/api';
+import Home from './pages/Home';
 import './App.css';
 
-async function App() {
-  const data = await getCategories();
-  console.log(data);
-  // getProductsFromCategoryAndQuery(data.id, data.name);
+function App() {
   return (
     <div className="App">
-      {/* <h1>{}</h1> */}
+      <Router>
+        <Route path="/" component={ Home } />
+      </Router>
     </div>
   );
 }

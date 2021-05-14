@@ -1,24 +1,24 @@
 body {
- background-image: linear-gradient(#49F2C2, #00BD87);
+  background-image: linear-gradient(#49f2c2, #00bd87);
 }
 
 .App {
+  color: #00291d;
   text-align: center;
-  color: #00291D;
 }
 
 .icon-cart {
   max-width: 40px;
 }
 
-button:hover {
-  background-color: #22705A;
-  border: 2px solid #00291D;
-}
-
 button {
-  background-color: #00BD87;
-  padding: 8px;
+  background-color: #00bd87;
   border-radius: 25%;
   cursor: pointer;
+  padding: 8px;
+}
+
+button:hover {
+  background-color: #22705a;
+  border: 2px solid #00291d;
 }

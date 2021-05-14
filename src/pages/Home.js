@@ -1,7 +1,29 @@
 import React, { Component } from 'react';
+import { getCategories } from '../services/api';
 
 export default class Home extends Component {
+  constructor() {
+    super();
+
+    this.fetchCategories = this.fetchCategories.bind(this);
+
+    this.state = {
+      categories: [],
+    };
+  }
+
+  componentDidMount() {
+    this.fetchCategories();
+  }
+
+  fetchCategories() {
+    getCategories().then((result) => this.setState({
+      categories: result,
+    }));
+  }
+
   render() {
+    const { categories } = this.state;
     return (
       <div>
         <input type="seach" />
@@ -10,6 +32,10 @@ export default class Home extends Component {
         >
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
+        <ul>
+          { categories
+            .map(({ id, name }) => <li key={ id } data-testid="category">{ name }</li>) }
+        </ul>
       </div>
     );
   }

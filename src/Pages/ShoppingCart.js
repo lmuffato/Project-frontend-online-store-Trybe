@@ -3,7 +3,7 @@ import React from 'react';
 class ShoppingCart extends React.Component {
   render() {
     return (
-      <h3 data-testid="shopping-cart-empty-message">Seu carrinho está vazio</h3>
+      <h4 data-testid="shopping-cart-empty-message">Seu carrinho está vazio</h4>
     );
   }
 }

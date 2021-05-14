@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import * as api from '../services/api';
 
 class Category extends Component {
@@ -27,19 +28,31 @@ class Category extends Component {
 
   render() {
     const { categories } = this.state;
+    const { value, onChange } = this.props;
     return (
       <div className="categories">
         <h1>Categorias</h1>
-        <ul>
+        <select value={ value } onChange={ onChange }>
           {
             categories.map((category) => (
-              <li data-testid="category" key={ category.name }>{ category.name }</li>
+              <option
+                value={ category.id }
+                data-testid="category"
+                key={ category.name }
+              >
+                { category.name }
+              </option>
             ))
           }
-        </ul>
+        </select>
       </div>
     );
   }
 }
+
+Category.propTypes = {
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+};
 
 export default Category;

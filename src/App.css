@@ -5,6 +5,7 @@ body {
 .App {
   color: #00291d;
   text-align: center;
+  margin-top: 10px;
 }
 
 .icon-cart {

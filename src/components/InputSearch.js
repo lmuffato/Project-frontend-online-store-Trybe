@@ -11,7 +11,12 @@ class InputSearch extends Component {
     this.state = {
       inputValue: '',
       products: [],
+      selectValue: '',
     };
+  }
+
+  componentDidMount() {
+    this.handleApi();
   }
 
   handleInput = (event) => {
@@ -21,10 +26,17 @@ class InputSearch extends Component {
     });
   }
 
-  handleButton = async () => {
-    const { inputValue } = this.state;
+  handleSelect = (event) => {
+    const { value } = event.target;
+    this.setState({
+      selectValue: value,
+    });
+  }
+
+  handleApi= async () => {
+    const { inputValue, selectValue } = this.state;
     this.setState(async () => {
-      const query = await api.getProductsFromCategoryAndQuery(false, inputValue);
+      const query = await api.getProductsFromCategoryAndQuery(selectValue, inputValue);
       const { results } = await query;
       this.setState(() => ({
         products: [...results],
@@ -33,7 +45,7 @@ class InputSearch extends Component {
   }
 
   render() {
-    const { inputValue, products } = this.state;
+    const { inputValue, products, selectValue } = this.state;
     return (
       <div>
         <input
@@ -55,7 +67,12 @@ class InputSearch extends Component {
         <Link to="/cart-shopping" data-testid="shopping-cart-button">
           <img className="icon-cart" src={ icon } alt="shopping cart icon" />
         </Link>
-        <Category />
+        <Category
+          value={ selectValue }
+          onChange={ (event) => {
+            this.handleSelect(event);
+          } }
+        />
         {products.map((element) => <Product key={ element.id } product={ element } />)}
       </div>
     );

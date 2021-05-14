@@ -19,26 +19,26 @@ export default class SideBarCategory extends Component {
     const data = await categories;
     this.setState({ categoriesList: data, loading: false });
     console.log(data);
-  }
+  };
 
   sideBar = () => {
     const { categoriesList } = this.state;
     return (
       <div>
         <ul>
-          {categoriesList.map((category) => <li data-testid="category" key={ category.id }>{category.name}</li>)}
+          {categoriesList.map((category) => (
+            <li data-testid="category" key={ category.id }>
+              {category.name}
+            </li>
+          ))}
         </ul>
       </div>
     );
-  }
+  };
 
   render() {
     const { loading } = this.state;
-    return (
-      <div>
-        {loading ? 'loading..' : this.sideBar()}
-      </div>
-    );
+    return <div>{loading ? 'loading..' : this.sideBar()}</div>;
   }
 }
 

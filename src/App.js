@@ -1,14 +1,15 @@
 import React from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
+import Home from './pages/Home';
 
 function App() {
   return (
-    <>
-      <input type="text" />
-      <strong data-testid="home-initial-message">
-        Digite algum termo de pesquisa ou escolha uma categoria.
-      </strong>
-    </>
+    <BrowserRouter>
+      <Switch>
+        <Route path="/" component={ Home } exact />
+      </Switch>
+    </BrowserRouter>
   );
 }
 

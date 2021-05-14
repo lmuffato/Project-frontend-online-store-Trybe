@@ -8,6 +8,7 @@ class Home extends Component {
           <p>Digite algum termo de pesquisa ou escolha uma categoria.</p>
           <input type="text" id="searchBar" />
         </label>
+        <h1>Olá Mundo</h1>
       </div>
     );
   }

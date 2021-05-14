@@ -8,8 +8,7 @@ class CartContent extends Component {
           Seu carrinho está vazio
         </p>
       </section>
-    )
+    );
   }
 }
-
-export default CartContent
+export default CartContent;

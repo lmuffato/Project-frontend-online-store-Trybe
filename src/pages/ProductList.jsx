@@ -12,7 +12,7 @@ class ProductList extends Component {
           <Link to="/shopping-cart" data-testid="shopping-cart-button">
             <img
               src="../src/img/shopping-basket.jpg"
-              alt="icone de crrinho de compras"
+              alt="icone de carrinho de compras"
             />
           </Link>
         </div>

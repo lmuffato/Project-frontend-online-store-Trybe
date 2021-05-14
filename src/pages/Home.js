@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ButtonCart from '../components/ButtonCart';
 
 export default class Home extends Component {
   render() {
@@ -8,6 +9,8 @@ export default class Home extends Component {
           Digite algum termo de pesquisa ou escolha uma categoria.
           <input id="search" />
         </label>
+
+        <ButtonCart />
       </main>
     );
   }

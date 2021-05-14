@@ -6,8 +6,8 @@ import CartContent from './pages/CartContent';
 function App() {
   return (
     <Router>
-      <Route path="/" component={ SearchBar } />
-      <Route path="/CartContent" component={ CartContent } />
+      <Route exact path="/CartContent" component={ CartContent } />
+      <Route exact path="/" component={ SearchBar } />
     </Router>
   );
 }

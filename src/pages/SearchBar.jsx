@@ -15,7 +15,7 @@ class SearchBar extends Component {
           to="/CartContent"
           data-testid="shopping-cart-button"
         >
-          <img src={ Cart } alt="Carrinho de compras" />
+          <img style={ { width: '40px' } } src={ Cart } alt="Carrinho de compras" />
         </Link>
       </section>
     );

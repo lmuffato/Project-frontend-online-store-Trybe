@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import * as Api from './services/api';
 
 function App() {
   return (

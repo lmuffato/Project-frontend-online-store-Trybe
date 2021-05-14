@@ -10,6 +10,7 @@ function App() {
     <div className="App">
       <Router>
         <Route exact path="/" component={ Home } />
+        {/* Adição do componente nas routes */}
         <Route path="/ShoppingCart" component={ ShoppingCart } />
       </Router>
     </div>

@@ -6,6 +6,7 @@ export default class Home extends React.Component {
   render() {
     return (
       <div>
+        {/* Mudamos o link de lugar */}
         <Link
           to="/ShoppingCart"
           data-testid="shopping-cart-button"

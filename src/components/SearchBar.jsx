@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import CartButton from './CartButton';
 
 class SearchBar extends Component {
   render() {
@@ -8,6 +9,7 @@ class SearchBar extends Component {
           <input name="searchBar" type="text" />
           Digite algum termo de pesquisa ou escolha uma categoria.
         </label>
+        <CartButton />
       </header>
     );
   }

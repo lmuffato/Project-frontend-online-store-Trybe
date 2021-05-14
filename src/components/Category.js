@@ -19,8 +19,8 @@ class Category extends Component {
   async fetchCategory() {
     this.setState(async () => {
       const response = await api.getCategories();
-      this.setState((paststate) => ({
-        categories: [...paststate.categories, ...response],
+      this.setState(() => ({
+        categories: [...response],
       }));
     });
   }
@@ -33,7 +33,7 @@ class Category extends Component {
         <ul>
           {
             categories.map((category) => (
-              <li data-testid="category" key={ category.id }>{ category.name }</li>
+              <li data-testid="category" key={ category.name }>{ category.name }</li>
             ))
           }
         </ul>

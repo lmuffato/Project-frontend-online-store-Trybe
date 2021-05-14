@@ -1,6 +1,6 @@
 import React from 'react';
-// import logo from './logo.svg';
 import './App.css';
+import ListCategories from './components/ListCategories';
 
 class App extends React.Component {
   render() {
@@ -14,6 +14,9 @@ class App extends React.Component {
         >
           Digite algum termo de pesquisa ou escolha uma categoria.
         </h1>
+        <aside>
+          <ListCategories />
+        </aside>
       </div>
     );
   }

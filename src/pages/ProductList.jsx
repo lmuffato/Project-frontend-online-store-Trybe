@@ -10,8 +10,10 @@ class ProductList extends Component {
         </p>
         <div>
           <Link to="/shopping-cart" data-testid="shopping-cart-button">
-            <img src="../src/img/shopping-basket.jpg" 
-              alt="icone de crrinho de compras" />
+            <img
+              src="../src/img/shopping-basket.jpg"
+              alt="icone de crrinho de compras"
+            />
           </Link>
         </div>
       </section>

@@ -8,6 +8,7 @@ function App() {
       <strong data-testid="home-initial-message">
         Digite algum termo de pesquisa ou escolha uma categoria.
       </strong>
+      <button type="button" data-testid="shopping-cart-button">Carrinho</button>
     </>
   );
 }

@@ -11,7 +11,13 @@ class Index extends Component {
 
     this.state = {
       categories: undefined,
+      searchText: '',
     };
+  }
+
+  handleSearchInput({ target }) {
+    const searchText = target.value;
+    this.setState({ searchText });
   }
 
   async getData() {

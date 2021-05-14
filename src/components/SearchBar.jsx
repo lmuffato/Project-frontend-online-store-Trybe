@@ -6,9 +6,10 @@ class SearchBar extends Component {
     return (
       <header>
         <label htmlFor="searchBar" data-testid="home-initial-message">
-          <input name="searchBar" type="text" />
+          <input name="searchBar" type="text" data-testid="query-input"/>
           Digite algum termo de pesquisa ou escolha uma categoria.
         </label>
+        <button type="button" data-testid="query-button">Busca</button>
         <CartButton />
       </header>
     );

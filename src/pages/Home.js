@@ -9,7 +9,7 @@ class Home extends React.Component {
         <strong data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </strong>
-        <Link to="/shoppingcart">
+        <Link to="/cart">
           <button type="button" data-testid="shopping-cart-button">Carrinho</button>
         </Link>
       </>

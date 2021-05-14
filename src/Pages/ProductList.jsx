@@ -1,5 +1,6 @@
 // implement AddMovie component here
 import React, { Component } from 'react';
+import CategoriesBar from '../components/CategoriesBar';
 
 class ProductList extends Component {
   render() {
@@ -21,6 +22,7 @@ class ProductList extends Component {
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
         </div>
+        <CategoriesBar />
       </div>
     );
   }

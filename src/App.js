@@ -5,7 +5,7 @@ import Landing from './pages/Landing';
 function App() {
   return (
     <Router>
-      <Route exact path="/" component={ Landing } />
+      <Route path="/" component={ Landing } />
     </Router>
   );
 }

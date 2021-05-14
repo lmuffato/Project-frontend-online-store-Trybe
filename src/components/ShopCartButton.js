@@ -6,7 +6,7 @@ export default class ShopCartButton extends Component {
     return (
       <div>
         <Link data-testid="shopping-cart-button" to="/ShoppingCart">
-        Carrinho
+          Carrinho
         </Link>
       </div>
     );

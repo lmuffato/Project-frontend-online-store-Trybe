@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Category from './category_list';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import ShopCartButton from './ShopCartButton';
 
@@ -62,6 +63,7 @@ export default class ProductList extends Component {
     const { obj, searchText } = this.state;
     return (
       <div>
+        <Category />
         <label htmlFor="catSearchID" data-testid="home-initial-message">
           <input
             data-testid="query-input"

@@ -20,6 +20,11 @@ class CategoriesBar extends React.Component {
     });
   }
 
+  allCategories() {
+    const { categories } = this.state;
+    return categories.map((category) => this.renderLi(category));
+  }
+
   renderLi(category) {
     return (
       <li
@@ -33,11 +38,10 @@ class CategoriesBar extends React.Component {
   }
 
   render() {
-    const { categories } = this.state;
     return (
       <div>
         <p>Categorias:</p>
-        <ul>{categories.map((category) => this.renderLi(category))}</ul>
+        <ul>{this.allCategories()}</ul>
       </div>
     );
   }

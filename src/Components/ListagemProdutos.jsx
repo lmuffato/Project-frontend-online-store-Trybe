@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import * as api from '../services/api';
 
 import ProductCard from './ProductCard';
 
@@ -18,9 +19,7 @@ class ListagemProdutos extends Component {
     this.setState(
       { isLoading: true },
       async () => {
-        const { results } = await fetch(`https://api.mercadolibre.com/sites/MLB/search?q=${query}`)
-          .then((data) => data.json());
-        console.log(results);
+        const { results } = await api.getProductsFromCategoryAndQuery(query);
         this.setState({
           products: results,
           isLoading: false,
@@ -53,7 +52,7 @@ class ListagemProdutos extends Component {
             onChange={ (e) => this.handleChangeInput(e) }
           />
         </label>
-        <button query-button="query-button" type="button" onClick={ this.fetchAPI }>
+        <button data-testid="query-button" type="button" onClick={ this.fetchAPI }>
           Pesquisar
         </button>
         <p data-testid="home-initial-message">

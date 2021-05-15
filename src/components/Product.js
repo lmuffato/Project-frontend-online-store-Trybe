@@ -17,7 +17,7 @@ class Product extends Component {
           {console.log(this.props)}
         </p>
         <Link
-          to={ `/details/${id}/${category}` } 
+          to={ `/details/${id}/${category}` }
           data-testid="product-detail-link"
         >
           Detalhes

@@ -32,12 +32,12 @@ class Category extends Component {
     return (
       <div className="categories">
         <h1>Categorias</h1>
-        <select value={ value } onChange={ onChange } data-testid="category">
+        <select value={ value } onChange={ onChange }>
           {
             categories.map((category) => (
               <option
                 value={ category.id }
-                
+                data-testid="category"
                 key={ category.name }
               >
                 { category.name }

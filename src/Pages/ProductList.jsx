@@ -1,6 +1,7 @@
 // implement AddMovie component here
 import React, { Component } from 'react';
 import SearchProduct from '../components/SearchProducts';
+import CategoriesBar from '../components/CategoriesBar';
 
 class ProductList extends Component {
   render() {
@@ -23,6 +24,7 @@ class ProductList extends Component {
           </p>
           <SearchProduct />
         </div>
+        <CategoriesBar />
       </div>
     );
   }

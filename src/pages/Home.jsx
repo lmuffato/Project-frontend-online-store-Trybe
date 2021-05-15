@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import CategoriesList from '../components/CategoriesList';
 import Products from '../components/Products';
-import SearchBar from '../components/SearchBar';
+import Header from '../components/Header';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 
 class Home extends Component {
@@ -31,7 +30,6 @@ class Home extends Component {
     getProductsFromCategoryAndQuery('', inputSearch).then(({ results: products }) => {
       this.setState({
         products,
-        loading: false,
       });
     });
   }
@@ -42,16 +40,11 @@ class Home extends Component {
       <section className="container-home">
         <CategoriesList />
         <section className="container-search-products">
-          <section>
-            <SearchBar onChange={ this.handleInput } onSubmit={ this.handleProductsByQuery } value={ inputSearch } />
-            <Link to="/shopping-cart" data-testid="shopping-cart-button">
-              <img
-                className="shopping-cart-img"
-                src="../images/shopping-basket.jpg"
-                alt="Ícone de carrinho de compras"
-              />
-            </Link>
-          </section>
+          <Header
+            handleInput={ this.handleInput }
+            handleProductsByQuery={ this.handleProductsByQuery }
+            inputSearch={ inputSearch }
+          />
           <main>
             <Products products={ products } />
           </main>

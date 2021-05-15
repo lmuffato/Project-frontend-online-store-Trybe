@@ -45,6 +45,7 @@ class InputSearch extends Component {
   }
 
   render() {
+    const { AddCart } = this.props;
     const { inputValue, products, selectValue } = this.state;
     return (
       <div>
@@ -64,7 +65,7 @@ class InputSearch extends Component {
         >
           Pesquisar
         </button>
-        <Link to="/cart-shopping" data-testid="shopping-cart-button">
+        <Link to="/cart-shopping/" data-testid="shopping-cart-button">
           <img className="icon-cart" src={ icon } alt="shopping cart icon" />
         </Link>
         <Category
@@ -78,6 +79,7 @@ class InputSearch extends Component {
           selectValue={ selectValue }
           key={ element.id }
           product={ element }
+          addCart={ AddCart }
         />))}
       </div>
     );

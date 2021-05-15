@@ -1,12 +1,20 @@
 import React, { Component } from 'react';
 
 class ShoppingCart extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    const { products, quantity } = this.props;
     this.state = {
       empty: true,
+      products,
+      quantity,
     };
   }
+
+  componentDidMount() {
+    this.fetchProduct();
+  }
+  
 
   conditional = () => {
     const { empty } = this.state;

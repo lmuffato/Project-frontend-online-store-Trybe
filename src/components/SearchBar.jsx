@@ -13,6 +13,7 @@ class SearchBar extends Component {
             type="text"
             data-testid="query-input"
             onChange={ onChange }
+            value={ searchText }
           />
           Digite algum termo de pesquisa ou escolha uma categoria.
         </label>

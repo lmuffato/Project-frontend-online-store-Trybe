@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import SearchBar from '../components/SearchBar';
 import Categories from '../components/Categories';
 import * as api from '../services/api';
+import Products from '../components/Products';
 
 class Index extends Component {
   constructor() {
@@ -9,6 +10,7 @@ class Index extends Component {
 
     this.fetchCategories = this.fetchCategories.bind(this);
     this.fetchProducts = this.fetchProducts.bind(this);
+    this.handleSearchInput = this.handleSearchInput.bind(this);
 
     this.state = {
       categories: [],
@@ -29,7 +31,7 @@ class Index extends Component {
 
   async fetchProducts() {
     const { searchText } = this.state;
-    const products = await api.getProductsFromQuery(searchText);
+    const products = await api.getProductsFromCategoryAndQuery(searchText);
     this.setState({ products });
   }
 
@@ -44,6 +46,7 @@ class Index extends Component {
           onClick={ this.fetchProducts }
         />
         <Categories categories={ categories } getData={ this.fetchCategories } />
+        <Products products={ products } />
       </main>
     );
   }

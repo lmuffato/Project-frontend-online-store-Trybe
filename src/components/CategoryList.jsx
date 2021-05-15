@@ -1,17 +1,16 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { getCategories } from '../services/api';
 
-export default class ProductList extends React.Component {
-  constructor() {
-    super();
-    this.state = { categories: [] };
+export default class CategoryList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      categories: [],
+    };
   }
 
   componentDidMount() {
-    this.callCategories();
-  }
-
-  callCategories = () => {
     getCategories()
       .then((categories) => this.setState({ categories }))
       .catch((error) => console.log(error));
@@ -19,6 +18,7 @@ export default class ProductList extends React.Component {
 
   render() {
     const { categories } = this.state;
+    const { handleChange, checked } = this.props;
     return (
       <div className="category-box">
         {categories.map((item) => (
@@ -28,7 +28,14 @@ export default class ProductList extends React.Component {
             data-testid="category"
             className="category"
           >
-            <input type="radio" className="category-checkbox" />
+            <input
+              type="checkbox"
+              checked={ checked }
+              name={ item.id }
+              value={ item.id }
+              onChange={ handleChange }
+              className="category-checkbox"
+            />
             {item.name}
           </label>
         ))}
@@ -36,3 +43,7 @@ export default class ProductList extends React.Component {
     );
   }
 }
+
+CategoryList.propTypes = {
+  handleChange: PropTypes.func,
+}.isRequired;

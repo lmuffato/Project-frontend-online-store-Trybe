@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import icon from '../assets/icon.svg';
 import Category from './Category';
 import * as api from '../services/api';
@@ -85,5 +86,9 @@ class InputSearch extends Component {
     );
   }
 }
+
+InputSearch.propTypes = {
+  AddCart: PropTypes.func.isRequired,
+};
 
 export default InputSearch;

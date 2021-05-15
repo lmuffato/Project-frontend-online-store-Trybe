@@ -22,13 +22,21 @@ class Product extends Component {
         >
           Detalhes
         </Link>
-        <button type="button" onClick={ addCart } value={ title }>Adicionar ao carrinho</button>
+        <button
+          type="button"
+          onClick={ addCart }
+          value={ title }
+          data-testid="product-add-to-cart"
+        >
+          Adicionar ao carrinho
+        </button>
       </div>
     );
   }
 }
 
 Product.propTypes = {
+  addCart: PropTypes.func.isRequired,
   key: PropTypes.string.isRequired,
   product: PropTypes.shape({
     title: PropTypes.string,

@@ -25,7 +25,8 @@ class App extends Component {
     } else {
       this.setState((paststate) => ({
         productsCart: [...paststate.productsCart, value],
-        quantityCart: { ...paststate.quantityCart, [value]: paststate.quantityCart[value] + 1 },
+        quantityCart: { ...paststate.quantityCart,
+          [value]: paststate.quantityCart[value] + 1 },
       }));
       console.log('oi');
     }

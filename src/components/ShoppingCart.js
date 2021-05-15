@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class ShoppingCart extends Component {
   constructor(props) {
@@ -12,11 +13,29 @@ class ShoppingCart extends Component {
   }
 
   componentDidMount() {
-    this.fetchProduct();
+    this.changeEmpty();
   }
-  
 
-  conditional = () => {
+  changeEmpty = () => {
+    const { products } = this.state;
+    if (products.length > 0) {
+      this.setState({
+        empty: false,
+      });
+    }
+  }
+
+  reduce = (arr) => {
+    const reduced = [];
+    arr.forEach((element) => {
+      if (!reduced.includes(element)) {
+        reduced.push(element);
+      }
+    });
+    return reduced;
+  }
+
+  conditionalEmpty = () => {
     const { empty } = this.state;
     if (empty) {
       return (
@@ -26,12 +45,27 @@ class ShoppingCart extends Component {
   }
 
   render() {
+    const { products, quantity } = this.state;
+    const reducedProducts = this.reduce(products);
     return (
       <div>
-        {this.conditional()}
+        {this.conditionalEmpty()}
+        <ul>
+          { reducedProducts.map((element) => (
+            <li key={ element }>
+              <h1 data-testid="shopping-cart-product-name">{element}</h1>
+              <h2 data-testid="shopping-cart-product-quantity">{quantity[element]}</h2>
+            </li>
+          ))}
+        </ul>
       </div>
     );
   }
 }
+
+ShoppingCart.propTypes = {
+  products: PropTypes.arrayOf(PropTypes.object).isRequired,
+  quantity: PropTypes.objectOf(PropTypes.string).isRequired,
+};
 
 export default ShoppingCart;

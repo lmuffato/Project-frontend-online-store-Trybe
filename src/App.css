@@ -50,6 +50,7 @@
   display: flex;
   flex-direction: column;
 }
+
 .shopping-cart-img {
   width: 100px;
 }

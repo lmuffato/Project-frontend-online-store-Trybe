@@ -15,9 +15,13 @@ class Button extends React.Component {
   }
 }
 
+Button.defaultProps = {
+  dataId: 'test',
+};
+
 Button.propTypes = {
   children: PropTypes.node.isRequired,
-  dataId: PropTypes.string.isRequired,
+  dataId: PropTypes.string,
 };
 
 export default Button;

@@ -1,37 +1,43 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../components/Button';
-import ListItems from '../components/ListItems';
+import CategoriesBar from '../components/CategoriesBar';
 import SearchBar from '../components/SearchBar';
-import { getProductsFromCategoryAndQuery } from '../services/api';
+import { getCategories } from '../services/api';
 
 class Home extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+
+    this.fetchCategories = this.fetchCategories.bind(this);
 
     this.state = {
-      arrayOfItems: [],
+      categories: [],
     };
   }
 
-  generateArray = async (item) => {
-    const array = await getProductsFromCategoryAndQuery(false, item);
-    // console.log(array.results);
-    this.setState({
-      arrayOfItems: array.results,
-    });
+  componentDidMount() {
+    this.fetchCategories();
+  }
+
+  async fetchCategories() {
+    const categories = await getCategories();
+
+    this.setState({ categories });
   }
 
   render() {
-    const { arrayOfItems } = this.state;
+    const { categories } = this.state;
     return (
-      <>
-        <SearchBar func={ this.generateArray } />
-        <Button>
-          <Link data-testid="shopping-cart-button" to="/Cart">Cart</Link>
-        </Button>
-        <ListItems arrayOfItems={ arrayOfItems } />
-      </>
+      <main>
+        <CategoriesBar categories={ categories } />
+        <section>
+          <SearchBar />
+          <Button>
+            <Link data-testid="shopping-cart-button" to="/Cart">Cart</Link>
+          </Button>
+        </section>
+      </main>
     );
   }
 }

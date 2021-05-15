@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import * as api from '../services/api';
+import icon from '../assets/icon.svg';
 
 class ProductDetails extends Component {
   constructor(props) {
@@ -43,6 +45,7 @@ class ProductDetails extends Component {
   }
 
   render() {
+    const { AddCart } = this.props;
     const { product: { title, price, thumbnail } } = this.state;
     return (
       <div>
@@ -53,12 +56,24 @@ class ProductDetails extends Component {
           {price}
         </p>
         {this.conditional()}
+        <button
+          type="button"
+          onClick={ AddCart }
+          value={ title }
+          data-testid="product-detail-add-to-cart"
+        >
+          Adicionar ao carrinho
+        </button>
+        <Link to="/cart-shopping/" data-testid="shopping-cart-button">
+          <img className="icon-cart" src={ icon } alt="shopping cart icon" />
+        </Link>
       </div>
     );
   }
 }
 
 ProductDetails.propTypes = {
+  AddCart: PropTypes.func.isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
       id: PropTypes.string,

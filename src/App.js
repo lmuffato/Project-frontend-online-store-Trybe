@@ -1,12 +1,17 @@
 import React from 'react';
-// import logo from './logo.svg';
 import './App.css';
 import Input from './services/input';
+import ListCategories from './components/ListCategories';
 
 class App extends React.Component {
   render() {
     return (
-      <Input />
+      <div>
+        <Input />
+        <aside>
+          <ListCategories />
+        </aside>
+      </div>
     );
   }
 }

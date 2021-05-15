@@ -2,8 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../components/Button';
 import CategoriesBar from '../components/CategoriesBar';
+import ListItems from '../components/ListItems';
 import SearchBar from '../components/SearchBar';
-import { getCategories } from '../services/api';
+import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 
 class Home extends React.Component {
   constructor(props) {
@@ -13,11 +14,19 @@ class Home extends React.Component {
 
     this.state = {
       categories: [],
+      arrayOfItems: [],
     };
   }
 
   componentDidMount() {
     this.fetchCategories();
+  }
+
+  generateArray = async (item) => {
+    const array = await getProductsFromCategoryAndQuery(false, item);
+    this.setState({
+      arrayOfItems: array.results,
+    });
   }
 
   async fetchCategories() {
@@ -27,15 +36,18 @@ class Home extends React.Component {
   }
 
   render() {
-    const { categories } = this.state;
+    const { categories, arrayOfItems } = this.state;
     return (
       <main>
         <CategoriesBar categories={ categories } />
         <section>
-          <SearchBar />
+          <SearchBar func={ this.generateArray } />
           <Button>
             <Link data-testid="shopping-cart-button" to="/Cart">Cart</Link>
           </Button>
+          {arrayOfItems.length === 0
+            ? <p>Nenhum produto foi encontrado</p>
+            : <ListItems arrayOfItems={ arrayOfItems } />}
         </section>
       </main>
     );

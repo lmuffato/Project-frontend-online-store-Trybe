@@ -7,11 +7,13 @@ class Index extends Component {
   constructor() {
     super();
 
-    this.getData = this.getData.bind(this);
+    this.fetchCategories = this.fetchCategories.bind(this);
+    this.fetchProducts = this.fetchProducts.bind(this);
 
     this.state = {
-      categories: undefined,
+      categories: [],
       searchText: '',
+      products: [],
     };
   }
 
@@ -20,18 +22,28 @@ class Index extends Component {
     this.setState({ searchText });
   }
 
-  async getData() {
+  async fetchCategories() {
     const categories = await api.getCategories();
     this.setState({ categories });
   }
 
+  async fetchProducts() {
+    const { searchText } = this.state;
+    const products = await api.getProductsFromQuery(searchText);
+    this.setState({ products });
+  }
+
   render() {
-    const { categories } = this.state;
+    const { categories, searchText, products } = this.state;
 
     return (
       <main>
-        <SearchBar />
-        <Categories categories={ categories } getData={ this.getData } />
+        <SearchBar
+          searchText={ searchText }
+          onChange={ this.handleSearchInput }
+          onClick={ this.fetchProducts }
+        />
+        <Categories categories={ categories } getData={ this.fetchCategories } />
       </main>
     );
   }

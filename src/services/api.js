@@ -12,13 +12,17 @@ export async function getProductsFromCategoryAndQuery(categoryId, query) {
       )
     ).json();
   }
-  if (categoryId) {
-    return (
-      await fetch(
-        `https://api.mercadolibre.com/sites/MLB/search?category=${categoryId}`,
-      )
-    ).json();
-  }
+}
+
+export async function getCategoryById(categoryId) {
+  return (
+    await fetch(
+      `https://api.mercadolibre.com/sites/MLB/search?category=${categoryId}`,
+    )
+  ).json();
+}
+
+export async function getProductsFromQuery(query) {
   return (
     await fetch(`https://api.mercadolibre.com/sites/MLB/search?q=${query}`)
   ).json();

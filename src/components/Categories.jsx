@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class Categories extends Component {
   constructor() {
@@ -33,5 +34,13 @@ class Categories extends Component {
     );
   }
 }
+
+Categories.propTypes = {
+  getData: PropTypes.func.isRequired,
+  categories: PropTypes.shape({
+    id: PropTypes.string,
+    name: PropTypes.string,
+  }).isRequired,
+};
 
 export default Categories;

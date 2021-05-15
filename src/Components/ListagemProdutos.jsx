@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 
 import Categories from './Categories';
 
-
 class ListagemProdutos extends Component {
   render() {
     return (

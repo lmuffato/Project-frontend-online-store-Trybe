@@ -3,6 +3,10 @@ import * as api from '../services/api';
 
 import ProductCard from './ProductCard';
 
+import { Link } from 'react-router-dom';
+
+import Categories from './Categories';
+
 class ListagemProdutos extends Component {
   constructor() {
     super();
@@ -55,6 +59,14 @@ class ListagemProdutos extends Component {
         <button data-testid="query-button" type="button" onClick={ this.fetchAPI }>
           Pesquisar
         </button>
+
+        <Categories />
+        <aside>
+          <Link to="/cart">
+            <button type="button" data-testid="shopping-cart-button">Cart</button>
+          </Link>
+        </aside>
+
         <p data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>

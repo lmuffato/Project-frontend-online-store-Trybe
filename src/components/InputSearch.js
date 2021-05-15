@@ -60,7 +60,7 @@ class InputSearch extends Component {
         <button
           data-testid="query-button"
           type="button"
-          onClick={ this.handleButton }
+          onClick={ this.handleApi }
         >
           Pesquisar
         </button>
@@ -73,7 +73,12 @@ class InputSearch extends Component {
             this.handleSelect(event);
           } }
         />
-        {products.map((element) => <Product key={ element.id } product={ element } />)}
+        {products.map((element) => (<Product
+          inputValue={ inputValue }
+          selectValue={ selectValue }
+          key={ element.id }
+          product={ element }
+        />))}
       </div>
     );
   }

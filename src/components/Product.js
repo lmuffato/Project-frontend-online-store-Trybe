@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 class Product extends Component {
   render() {
     const { product, key } = this.props;
-    const { title, thumbnail, price } = product;
+    const { title, thumbnail, price, id } = product;
+    const category = product.category_id;
     return (
       <div key={ key } data-testid="product">
         <img src={ thumbnail } alt={ title } />
@@ -12,7 +14,14 @@ class Product extends Component {
         <p>
           R$
           { price }
+          {console.log(this.props)}
         </p>
+        <Link
+          to={ `/details/${id}/${category}` } 
+          data-testid="product-detail-link"
+        >
+          Detalhes
+        </Link>
       </div>
     );
   }
@@ -24,6 +33,8 @@ Product.propTypes = {
     title: PropTypes.string,
     thumbnail: PropTypes.string,
     price: PropTypes.number,
+    id: PropTypes.string,
+    category_id: PropTypes.string,
   }).isRequired,
 };
 

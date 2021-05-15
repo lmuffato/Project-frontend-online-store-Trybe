@@ -55,9 +55,9 @@ class Home extends Component {
       } } = this.state;
 
     return (
-      <div id="home-container">
+      <div className="home-container">
         <aside>
-          <ul id="categories">
+          <ul className="categories">
             {
               isCategoriesLoading ? <Loading />
                 : categories.map((category) => (
@@ -67,7 +67,7 @@ class Home extends Component {
           </ul>
         </aside>
 
-        <main id="produtcs">
+        <main className="produtcs">
           <h3 data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
           </h3>

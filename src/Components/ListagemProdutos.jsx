@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
+
 import { Link } from 'react-router-dom';
+
+import Categories from './Categories';
+
 
 class ListagemProdutos extends Component {
   render() {
     return (
       <div>
+        <Categories />
         <input type="text" />
         <aside>
           <Link to="/cart">

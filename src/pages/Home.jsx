@@ -37,7 +37,6 @@ class Home extends React.Component {
             <Link data-testid="shopping-cart-button" to="/Cart">Cart</Link>
           </Button>
         </section>
-
       </main>
     );
   }

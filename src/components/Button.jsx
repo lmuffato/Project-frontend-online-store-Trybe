@@ -5,7 +5,10 @@ class Button extends React.Component {
   render() {
     const { dataId, children } = this.props;
     return (
-      <button type="button" data-testid={ dataId }>
+      <button
+        type="button"
+        data-testid={ dataId }
+      >
         {children}
       </button>
     );

@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+
 import * as api from '../services/api';
 
 import ProductCard from './ProductCard';
-
-import { Link } from 'react-router-dom';
-
 import Categories from './Categories';
 
 class ListagemProdutos extends Component {

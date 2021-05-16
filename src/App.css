@@ -40,3 +40,21 @@
     transform: rotate(360deg);
   }
 }
+
+.products-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.container-home {
+  display: flex;
+}
+
+.container-search-products {
+  display: flex;
+  flex-direction: column;
+}
+
+.shopping-cart-img {
+  width: 100px;
+}

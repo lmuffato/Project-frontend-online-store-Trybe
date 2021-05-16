@@ -15,10 +15,8 @@ class Categories extends React.Component {
   }
 
   async handleCategories() {
-    this.setState({ categories: [] }, () => {
-      api.getCategories().then((data) => {
-        this.setState({ categories: data });
-      });
+    api.getCategories().then((data) => {
+      this.setState({ categories: data });
     });
   }
 
@@ -26,7 +24,7 @@ class Categories extends React.Component {
     const { categories } = this.state;
     return (
       <div>
-        <ol>
+        <ol className="categories-list">
           {categories.map((category) => (
             <li key={ category.id } data-testid="category">{category.name}</li>))}
         </ol>

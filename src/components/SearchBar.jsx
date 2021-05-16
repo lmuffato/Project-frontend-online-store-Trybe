@@ -1,5 +1,7 @@
 import React from 'react';
 import { getProductsFromCategoryAndQuery } from '../services/api';
+import Card from './Card';
+import CartButton from './CartButton';
 
 class SearchBar extends React.Component {
   constructor(props) {
@@ -10,7 +12,7 @@ class SearchBar extends React.Component {
     };
   }
 
-  handleTitle =(event) => {
+  handleChange = (event) => {
     this.setState({ text: event.target.value });
   };
 
@@ -32,34 +34,35 @@ class SearchBar extends React.Component {
     ));
   };
 
-   handleClick = async () => {
-     const { text } = this.state;
-     getProductsFromCategoryAndQuery(text);
-   }
+  render() {
+    const { text, query } = this.state;
+    const { results } = query;
 
-   render() {
-     const { text } = this.state;
-     return (
-       <header>
-         <input
-           type="text"
-           data-testid="query-input"
-           onChange={ this.handleTitle }
-           value={ text }
-         />
-         <button
-           type="button"
-           data-testid="query-button"
-           onClick={ this.handleClick }
-         >
-           Search
-         </button>
-         <h2 data-testid="home-initial-message">
-           Digite algum termo de pesquisa ou escolha uma categoria.
-         </h2>
-       </header>
-     );
-   }
+    return (
+      <>
+        <header>
+          <input
+            type="text"
+            data-testid="query-input"
+            onChange={ this.handleChange }
+            value={ text }
+          />
+          <button
+            type="button"
+            data-testid="query-button"
+            onClick={ () => this.handleClick(text) }
+          >
+            Search
+          </button>
+          <CartButton />
+          <h2 data-testid="home-initial-message">
+            Digite algum termo de pesquisa ou escolha uma categoria.
+          </h2>
+        </header>
+        <section>{results === undefined ? null : this.cardsElements()}</section>
+      </>
+    );
+  }
 }
 
 export default SearchBar;

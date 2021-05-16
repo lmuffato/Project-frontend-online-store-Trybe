@@ -4,25 +4,31 @@ import shoppingCart from '../imagens/shoppingCart.svg';
 import CategoryList from '../components/CategoryList';
 import ProductList from '../components/ProductList';
 import { getProductsFromCategoryAndQuery } from '../services/api';
+import Loading from './Loading';
 
 export default class Home extends React.Component {
   constructor() {
     super();
 
     this.state = {
-      input: '',
-      checkbox: [],
+      input: undefined,
+      checkbox: undefined,
       checked: false,
-      items: '',
+      items: [],
+      loading: true,
     };
   }
 
   request = () => {
     const { input, checkbox } = this.state;
     getProductsFromCategoryAndQuery(checkbox, input)
-      .then((item) => this.setState({
-        items: item.results,
-      }));
+      .then((finalData) => {
+        console.log(finalData.results);
+        this.setState({
+          loading: false,
+          items: finalData.results,
+        });
+      });
     // results.price, results.thumbnail, results.title
   }
 
@@ -32,24 +38,29 @@ export default class Home extends React.Component {
     });
   }
 
-  handleChangeCheckbox = ({ target }) => {
-    const { checked } = this.state;
-
-    this.setState((prevState) => ({
-      checkbox: prevState.checkbox.splice(target.value),
+  handleChangeCheckbox = async ({ target }) => {
+    await this.setState((prevState) => ({
+      checkbox: [...prevState.checkbox, target.value],
       checked: target.checked,
     }));
-
-    if (checked) {
+    const { checked } = this.state;
+    if (checked === false) {
+      console.log('ok');
       this.setState((prevState) => ({
-        checkbox: [...prevState.checkbox, target.value],
-        checked: target.checked,
+        checkbox: prevState.checkbox.filter((id) => id !== target.value),
       }));
     }
   }
 
+  handleArrayItems = (items) => {
+    if (items.length > 0) {
+      return true;
+    }
+    return false;
+  }
+
   render() {
-    const { input, items } = this.state;
+    const { input, loading, items } = this.state;
     return (
       <div className="content-container">
         <section className="search-and-products">
@@ -84,16 +95,10 @@ export default class Home extends React.Component {
           <p data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
-          <div>
-            {items.map((item) => (
-              <div key={ item.id }>
-                <h3>{item.title}</h3>
-                <img src={ item.thumbnail } alt={ item.title } />
-                <p>{item.price}</p>
-              </div>
-            ))}
-          </div>
-          <ProductList query={ input } />
+          {loading
+            ? <Loading />
+            : items.map((item) => <ProductList item={ item } key={ item.id } />)
+          }
         </section>
         <CategoryList
           className="product-list"

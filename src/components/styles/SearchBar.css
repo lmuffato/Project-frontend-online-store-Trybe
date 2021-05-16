@@ -2,14 +2,15 @@
   display: flex;
   flex-direction: column;
 }
+
 .search-bar {
-  width: 80%;
   height: 100px;
+  width: 80%;
 }
 
 .products-container {
   display: flex;
-  justify-content: space-between;
   flex-wrap: wrap;
+  justify-content: space-between;
   width: 80vw;
 }

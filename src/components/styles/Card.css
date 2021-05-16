@@ -1,10 +1,10 @@
 .card {
-  width: 250px;
-  height: 200px;
+  border: 1px solid black;
   display: flex;
   flex-direction: column;
-  border: 1px solid black;
+  height: 200px;
   margin-top: 15px;
+  width: 250px;
 }
 
 .card img {

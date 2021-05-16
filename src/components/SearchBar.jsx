@@ -6,12 +6,31 @@ class SearchBar extends React.Component {
     super(props);
     this.state = {
       text: '',
+      query: [],
     };
   }
 
   handleTitle =(event) => {
     this.setState({ text: event.target.value });
-  }
+  };
+
+  handleClick = async (categoryId, query) => {
+    const data = await getProductsFromCategoryAndQuery(categoryId, query);
+    this.setState({ query: data });
+  };
+
+  cardsElements = () => {
+    const { query } = this.state;
+    const { results } = query;
+    return results.map((item) => (
+      <Card
+        title={ item.title }
+        image={ item.thumbnail }
+        price={ item.price }
+        key={ item.id }
+      />
+    ));
+  };
 
    handleClick = async () => {
      const { text } = this.state;

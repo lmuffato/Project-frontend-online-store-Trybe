@@ -7,8 +7,8 @@ class Card extends React.Component {
     return (
       <div data-testid="product">
         <p>{title}</p>
-        <p>{image}</p>
-        <p>{price}</p>
+        <img src={ image } alt="foto do produto" />
+        <p>{`R$: ${price}`}</p>
       </div>
     );
   }

@@ -8,8 +8,8 @@ class App extends React.Component {
   render() {
     return (
       <BrowserRouter>
-        <Route path="/" component={ Home } />
-        <Route exact path="/ShoppingCartPage" component={ ShoppingCartPage } />
+        <Route exact path="/" component={ Home } />
+        <Route path="/ShoppingCartPage" component={ ShoppingCartPage } />
       </BrowserRouter>
     );
   }

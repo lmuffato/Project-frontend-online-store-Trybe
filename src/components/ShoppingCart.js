@@ -16,6 +16,39 @@ class ShoppingCart extends Component {
     this.changeEmpty();
   }
 
+  handleSubtractButton = (event) => {
+    const { quantity } = this.state;
+    const { value } = event.target;
+    if (quantity[value] > 1) {
+      this.setState((paststate) => ({
+        quantity: {
+          ...paststate.quantity,
+          [value]: paststate.quantity[value] - 1,
+        },
+      }));
+    }
+  }
+
+  handleAddButton = (event) => {
+    const { value } = event.target;
+    this.setState((paststate) => ({
+      quantity: {
+        ...paststate.quantity,
+        [value]: paststate.quantity[value] + 1,
+      },
+    }));
+  }
+
+  handleExcludeButton = (event) => {
+    const { value } = event.target;
+    const { products } = this.state;
+    const filtered = products.filter((element) => element !== value);
+    this.setState({
+      products: [...filtered],
+      empty: true,
+    });
+  }
+
   changeEmpty = () => {
     const { products } = this.state;
     if (products.length > 0) {
@@ -55,6 +88,29 @@ class ShoppingCart extends Component {
             <li key={ element }>
               <h1 data-testid="shopping-cart-product-name">{element}</h1>
               <h2 data-testid="shopping-cart-product-quantity">{quantity[element]}</h2>
+              <button
+                type="button"
+                value={ element }
+                onClick={ this.handleSubtractButton }
+                data-testid="product-decrease-quantity"
+              >
+                -
+              </button>
+              <button
+                type="button"
+                value={ element }
+                onClick={ this.handleAddButton }
+                data-testid="product-increase-quantity"
+              >
+                +
+              </button>
+              <button
+                type="button"
+                value={ element }
+                onClick={ this.handleExcludeButton }
+              >
+                Excluir
+              </button>
             </li>
           ))}
         </ul>

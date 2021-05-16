@@ -1,40 +1,66 @@
 import React from 'react';
+import { getProductsFromCategoryAndQuery } from '../services/api';
+import Card from './Card';
+import CartButton from './CartButton';
 
 class SearchBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       text: '',
+      query: [],
     };
-    this.handleTitle = this.handleTitle.bind(this);
   }
 
-  handleTitle(event) {
+  handleChange = (event) => {
     this.setState({ text: event.target.value });
-  }
+  };
+
+  handleClick = async (categoryId, query) => {
+    const data = await getProductsFromCategoryAndQuery(categoryId, query);
+    this.setState({ query: data });
+  };
+
+  cardsElements = () => {
+    const { query } = this.state;
+    const { results } = query;
+    return results.map((item) => (
+      <Card
+        title={ item.title }
+        image={ item.thumbnail }
+        price={ item.price }
+        key={ item.id }
+      />
+    ));
+  };
 
   render() {
-    const { text } = this.state;
-    const { clique } = this.props;
+    const { text, query } = this.state;
+    const { results } = query;
+
     return (
-      <header>
-        <input
-          type="text"
-          data-testid="query-input"
-          onChange={ this.handleTitle }
-          value={ text }
-        />
-        <button
-          type="button"
-          data-testid="query-button"
-          onClick={ clique }
-        >
-          Search
-        </button>
-        <h2 data-testid="home-initial-message">
-          Digite algum termo de pesquisa ou escolha uma categoria.
-        </h2>
-      </header>
+      <>
+        <header>
+          <input
+            type="text"
+            data-testid="query-input"
+            onChange={ this.handleChange }
+            value={ text }
+          />
+          <button
+            type="button"
+            data-testid="query-button"
+            onClick={ () => this.handleClick(text) }
+          >
+            Search
+          </button>
+          <CartButton />
+          <h2 data-testid="home-initial-message">
+            Digite algum termo de pesquisa ou escolha uma categoria.
+          </h2>
+        </header>
+        <section>{results === undefined ? null : this.cardsElements()}</section>
+      </>
     );
   }
 }

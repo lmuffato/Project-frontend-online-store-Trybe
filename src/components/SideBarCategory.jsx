@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import './styles/SideBarCategory.css';
 
 export default class SideBarCategory extends Component {
   constructor() {
@@ -18,13 +19,12 @@ export default class SideBarCategory extends Component {
     const { categories } = this.props;
     const data = await categories;
     this.setState({ categoriesList: data, loading: false });
-    console.log(data);
   };
 
   sideBar = () => {
     const { categoriesList } = this.state;
     return (
-      <div>
+      <div className="side-bar-category">
         <ul>
           {categoriesList.map((category) => (
             <li data-testid="category" key={ category.id }>

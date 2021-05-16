@@ -1,6 +1,7 @@
 .side-bar-category {
   border: 1px solid black;
   width: 300px;
+  margin-right: 15px;
 }
 
 .side-bar-category ul {

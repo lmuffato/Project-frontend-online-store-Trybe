@@ -2,6 +2,7 @@ import React from 'react';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import Card from './Card';
 import CartButton from './CartButton';
+import './styles/SearchBar.css';
 
 class SearchBar extends React.Component {
   constructor(props) {
@@ -39,8 +40,8 @@ class SearchBar extends React.Component {
     const { results } = query;
 
     return (
-      <>
-        <header>
+      <div className="search-bar-container">
+        <header className="search-bar">
           <input
             type="text"
             data-testid="query-input"
@@ -59,8 +60,10 @@ class SearchBar extends React.Component {
             Digite algum termo de pesquisa ou escolha uma categoria.
           </h2>
         </header>
-        <section>{results === undefined ? null : this.cardsElements()}</section>
-      </>
+        <section className="products-container">
+          {results === undefined ? null : this.cardsElements()}
+        </section>
+      </div>
     );
   }
 }

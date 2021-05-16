@@ -24,21 +24,23 @@ export default class SideBarCategory extends Component {
   sideBar = () => {
     const { categoriesList } = this.state;
     return (
-      <div className="side-bar-category">
-        <ul>
-          {categoriesList.map((category) => (
-            <li data-testid="category" key={ category.id }>
-              {category.name}
-            </li>
-          ))}
-        </ul>
-      </div>
+      <ul>
+        {categoriesList.map((category) => (
+          <li data-testid="category" key={ category.id }>
+            {category.name}
+          </li>
+        ))}
+      </ul>
     );
   };
 
   render() {
     const { loading } = this.state;
-    return <div>{loading ? 'loading..' : this.sideBar()}</div>;
+    return (
+      <div className="side-bar-category">
+        {loading ? 'loading..' : this.sideBar()}
+      </div>
+    );
   }
 }
 

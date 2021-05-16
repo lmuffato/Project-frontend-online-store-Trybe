@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './styles/Card.css';
 
 class Card extends React.Component {
   render() {
     const { title, price, image } = this.props;
     return (
-      <div data-testid="product">
+      <div className="card" data-testid="product">
         <p>{title}</p>
         <img src={ image } alt="foto do produto" />
         <p>{`R$: ${price}`}</p>

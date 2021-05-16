@@ -1,0 +1,15 @@
+.search-bar-container {
+  display: flex;
+  flex-direction: column;
+}
+.search-bar {
+  width: 80%;
+  height: 100px;
+}
+
+.products-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 80vw;
+}

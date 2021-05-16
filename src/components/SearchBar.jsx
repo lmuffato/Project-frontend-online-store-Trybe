@@ -16,8 +16,8 @@ class SearchBar extends React.Component {
     this.setState({ text: event.target.value });
   };
 
-  handleClick = async (categoryId, query) => {
-    const data = await getProductsFromCategoryAndQuery(categoryId, query);
+  handleClick = async (query) => {
+    const data = await getProductsFromCategoryAndQuery(null, query);
     this.setState({ query: data });
   };
 

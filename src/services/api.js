@@ -1,9 +1,9 @@
 // const fetch = require('node-fetch');
 
 export async function getCategories() {
-  return fetch('https://api.mercadolibre.com/sites/MLB/categories')
-    .then((response) => response.json())
-    .then((respo) => respo);
+  const resolve = await fetch('https://api.mercadolibre.com/sites/MLB/categories');
+  const data = await resolve.json();
+  return data;
 }
 
 export async function getProductsFromCategoryAndQuery(categoryId, query) {

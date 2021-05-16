@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import { getCategories } from '../services/api';
 
 class Categories extends React.Component {
@@ -22,6 +24,7 @@ class Categories extends React.Component {
 
   render() {
     const { categories, didMount } = this.state;
+    const { onChange, value } = this.props;
 
     if (didMount === false) {
       return (
@@ -31,13 +34,27 @@ class Categories extends React.Component {
 
     return (
       <div>
-        <ul>
-          {categories
-            .map((cat) => <li data-testid="category" key={ cat.id }>{cat.name}</li>)}
-        </ul>
+        <select value={ value } onChange={ (e) => onChange(e) }>
+          {
+            categories.map((cat) => (
+              <option
+                value={ cat.id }
+                data-testid="category"
+                key={ cat.name }
+              >
+                { cat.name }
+              </option>
+            ))
+          }
+        </select>
       </div>
     );
   }
 }
+
+Categories.propTypes = {
+  onChange: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired,
+};
 
 export default Categories;

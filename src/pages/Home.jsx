@@ -1,6 +1,7 @@
 import React from 'react';
 import SearchBar from '../components/SearchBar';
 import Categories from '../components/Categories';
+import CartButton from '../components/CartButton';
 
 class Home extends React.Component {
   render() {
@@ -8,6 +9,7 @@ class Home extends React.Component {
       <>
         <SearchBar />
         <Categories />
+        <CartButton data-testid="shopping-cart-button" />
       </>
     );
   }

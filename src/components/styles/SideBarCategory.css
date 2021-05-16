@@ -1,0 +1,9 @@
+.side-bar-category {
+  border: 1px solid black;
+  margin-right: 15px;
+  width: 300px;
+}
+
+.side-bar-category ul {
+  list-style: none;
+}

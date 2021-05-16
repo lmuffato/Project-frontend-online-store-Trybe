@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import './styles/SideBarCategory.css';
 
 export default class SideBarCategory extends Component {
   constructor() {
@@ -18,27 +19,28 @@ export default class SideBarCategory extends Component {
     const { categories } = this.props;
     const data = await categories;
     this.setState({ categoriesList: data, loading: false });
-    console.log(data);
   };
 
   sideBar = () => {
     const { categoriesList } = this.state;
     return (
-      <div>
-        <ul>
-          {categoriesList.map((category) => (
-            <li data-testid="category" key={ category.id }>
-              {category.name}
-            </li>
-          ))}
-        </ul>
-      </div>
+      <ul>
+        {categoriesList.map((category) => (
+          <li data-testid="category" key={ category.id }>
+            {category.name}
+          </li>
+        ))}
+      </ul>
     );
   };
 
   render() {
     const { loading } = this.state;
-    return <div>{loading ? 'loading..' : this.sideBar()}</div>;
+    return (
+      <div className="side-bar-category">
+        {loading ? 'loading..' : this.sideBar()}
+      </div>
+    );
   }
 }
 

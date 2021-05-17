@@ -38,15 +38,15 @@ class ListagemProdutos extends Component {
     });
   }
 
-  handleChangeCategory = ({ target }) => {
+  handleChangeCategory = (category) => {
     this.setState(
-      { category: target.value },
+      { category },
       () => this.fetchAPI(),
     );
   }
 
   render() {
-    const { products, isLoading, category } = this.state;
+    const { products, isLoading } = this.state;
 
     if (isLoading) {
       return (
@@ -67,7 +67,7 @@ class ListagemProdutos extends Component {
           Pesquisar
         </button>
 
-        <Categories onChange={ this.handleChangeCategory } value={ category } />
+        <Categories onClick={ this.handleChangeCategory } />
         <aside>
           <Link to="/cart">
             <button type="button" data-testid="shopping-cart-button">Cart</button>

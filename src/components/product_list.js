@@ -10,9 +10,13 @@ export default class ProductList extends Component {
     this.loadProductsByText = this.loadProductsByText.bind(this);
     this.loadProducts = this.loadProducts.bind(this);
     this.submitSearch = this.submitSearch.bind(this);
+    this.filterObjs = this.filterObjs.bind(this);
 
     this.state = {
       searchText: '',
+      checkFilter: '',
+      objText: [],
+      objCategory: [],
       obj: [],
     };
   }
@@ -23,26 +27,68 @@ export default class ProductList extends Component {
   }
 
   async submitSearch() {
-    const { searchText } = this.state;
-    let result = '';
-    if (searchText !== '') {
-      result = await getProductsFromCategoryAndQuery('a', searchText);
+    const { searchText, checkFilter } = this.state;
+    this.setState({ obj: 'nenhum' });
+    let resultCategory = [];
+    let resultText = [];
+    const ArrayText = [];
+    const ArrayCategory = [];
+    if (checkFilter !== '') {
+      resultCategory = await getProductsFromCategoryAndQuery(checkFilter, 1);
     }
-    if (result && result.results.length > 0) {
-      const Array = [];
-      result.results.map((item) => {
-        const newObj = {
+    if (searchText !== '') {
+      resultText = await getProductsFromCategoryAndQuery(1, searchText);
+    }
+    if (resultText.results) {
+      resultText.results.map((item) => {
+        const newObjText = {
           id: item.id,
           title: item.title,
           price: item.price,
           thumbnail: item.thumbnail,
         };
-        return (Array.push(newObj));
+        console.log(newObjText);
+        ArrayText.push(newObjText);
+        return this.setState({
+          objText: ArrayText,
+        });
       });
-      this.setState({ obj: Array });
-    } else {
-      this.setState({ obj: 'nenhum' });
     }
+    console.log(resultCategory)
+    if (resultCategory.results) {
+      resultCategory.results.map((item) => {
+        const newObjCategory = {
+          id: item.id,
+          title: item.title,
+          price: item.price,
+          thumbnail: item.thumbnail,
+        };
+        console.log(newObjCategory);
+        ArrayCategory.push(newObjCategory);
+        return this.setState({
+          objCategory: ArrayCategory,
+        });
+      });
+    }
+    this.filterObjs();
+  }
+
+  filterObjs() {
+    const { objCategory, objText, searchText } = this.state;
+    console.log(`objCategory${objCategory}`);
+    console.log(`objText${objText}`);
+    console.log(`searchText${searchText}`);
+    let filterObj = '';
+    if (objCategory.length > 0 && objText.length > 0) {
+      filterObj = objCategory.filter((item) => item.title.toLowerCase().includes(searchText.toLowerCase()));
+    } else if (objCategory.length > 0) {
+      filterObj = objCategory;
+    } else {
+      filterObj = objText;
+    }
+    this.setState({
+      obj: filterObj,
+    });
   }
 
   loadProducts(obj) {
@@ -63,7 +109,7 @@ export default class ProductList extends Component {
     const { obj, searchText } = this.state;
     return (
       <div>
-        <Category />
+        <Category handleFunction={ this.loadProductsByText } />
         <label htmlFor="catSearchID" data-testid="home-initial-message">
           <input
             data-testid="query-input"

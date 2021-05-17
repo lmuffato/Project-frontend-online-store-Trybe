@@ -23,12 +23,18 @@ class Category extends React.Component {
 
   render() {
     const { categories } = this.state;
+    const { handleFunction } = this.props;
     return (
       <section>
         {categories.map((category) => (
           <div key={ category.id }>
             <label htmlFor={ category.id } data-testid="category">
-              <input type="checkbox" value={ category.id } name="checkFilter" />
+              <input
+                type="radio"
+                value={ category.id }
+                name="checkFilter"
+                onChange={ handleFunction }
+              />
               { category.name }
             </label>
             <br />

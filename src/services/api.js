@@ -7,11 +7,11 @@ export async function getCategories() {
 
 export async function getProductsFromCategoryAndQuery(categoryId, query) {
   let url = '';
-  if (categoryId && typeof (categoryId) === 'number') {
+  if (categoryId && categoryId !== 1) {
     url = `https://api.mercadolibre.com/sites/MLB/search?category=${categoryId}`;
   }
 
-  if (query && typeof (query) === 'string') {
+  if (query && query !== 1) {
     url = `https://api.mercadolibre.com/sites/MLB/search?q=${query}`;
   }
 

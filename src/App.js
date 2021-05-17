@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Landing from './pages/Landing';
-import Cart from './pages/Cart';
+import Cart from './pages/Cart.jsx';
 
 function App() {
   return (

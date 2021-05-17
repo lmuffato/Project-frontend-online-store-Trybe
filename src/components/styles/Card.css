@@ -2,11 +2,13 @@
   border: 1px solid black;
   display: flex;
   flex-direction: column;
-  height: 200px;
+  align-items: center;
+  height: 250px;
   margin-top: 15px;
   width: 250px;
+  text-align: center;
 }
 
 .card img {
-  width: 50px;
+  width: 100px;
 }

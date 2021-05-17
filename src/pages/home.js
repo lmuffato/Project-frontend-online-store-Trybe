@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import SearchBar from '../components/SearchBar';
 import SideBarCategory from '../components/SideBarCategory';
+import ProductList from '../components/ProductList';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 import './styles/home.css';
 
@@ -12,6 +13,7 @@ class home extends Component {
       query: 'QUERY',
       category: 'CATEGORY_ID',
       data: [],
+      wasRequested: false,
     };
   }
 
@@ -29,18 +31,32 @@ class home extends Component {
     e.preventDefault(e);
     const { query, category } = this.state;
     const apiData = await getProductsFromCategoryAndQuery(category, query);
-    this.setState({ data: apiData });
+    this.setState({
+      data: apiData,
+      wasRequested: true,
+    });
     console.log(apiData);
   }
 
+  renderProductList = () => {
+    const { data } = this.state;
+    return <ProductList data={ data } />;
+  };
+
   render() {
+    const { wasRequested, data } = this.state;
     return (
-      <main className="home">
-        <SideBarCategory
-          categories={ getCategories() }
-          getCategory={ this.getCategory }
-        />
-        <SearchBar getQuery={ this.getQuery } getProducts={ this.getProducts } />
+      <main>
+        <div className="home">
+          <SearchBar getQuery={ this.getQuery } getProducts={ this.getProducts } />
+        </div>
+        <div className="sidebar-and-list">
+          <SideBarCategory
+            categories={ getCategories() }
+            getCategory={ this.getCategory }
+          />
+          { wasRequested ? <ProductList data={ data } /> : console.log('waiting') }
+        </div>
       </main>
     );
   }

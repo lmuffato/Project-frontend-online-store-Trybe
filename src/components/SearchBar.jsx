@@ -1,23 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Card from './Card';
 import CartButton from './CartButton';
 import './styles/SearchBar.css';
 
 class SearchBar extends React.Component {
-  cardsElements = () => {
-    const { query } = this.state;
-    const { results } = query;
-    return results.map((item) => (
-      <Card
-        title={ item.title }
-        image={ item.thumbnail }
-        price={ item.price }
-        key={ item.id }
-      />
-    ));
-  };
-
   render() {
     const { getQuery, getProducts } = this.props;
     return (

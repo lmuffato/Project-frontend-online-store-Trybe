@@ -14,6 +14,7 @@ class SearchProducts extends Component {
 
   componentWillReceiveProps() {
     this.search();
+    console.log('filtro');
   }
 
   handle = ({ target: { value } }) => {
@@ -30,7 +31,6 @@ class SearchProducts extends Component {
       const { results } = request;
       productsList = results;
     }
-    console.log(productsList);
     this.setState({ productsList });
   };
 

@@ -35,10 +35,16 @@ class CategoriesBar extends React.Component {
     return (
       <li
         key={ category.id }
-        data-testid="category"
         id={ category.id }
       >
-        <button type="button" value={ category.id } onClick={ this.handleClick }>{category.name}</button>
+        <button
+          type="button"
+          data-testid="category"
+          value={ category.id }
+          onClick={ this.handleClick }
+        >
+          {category.name}
+        </button>
       </li>
     );
   }

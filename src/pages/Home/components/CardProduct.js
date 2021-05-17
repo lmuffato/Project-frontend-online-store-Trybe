@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import NotFound from '../NotFound';
+import ProductDetails from './ProductDetails';
 
 class CardProduct extends React.Component {
   render() {
@@ -19,6 +20,7 @@ class CardProduct extends React.Component {
                   <p>{product.price}</p>
                 </div>
               </Link>
+              <ProductDetails products={ products } />
             </div>
           ))}
       </div>

@@ -1,7 +1,8 @@
 /* eslint-disable react/no-unused-state */
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import CardItem from '../components/CardItem';
-import { getProductsFromCategoryAndQuery } from '../services/api';
+import { getProductsFromCategoryAndQuery, getCategories } from '../services/api';
 
 export default class Home extends Component {
   constructor(props) {
@@ -9,8 +10,14 @@ export default class Home extends Component {
     this.state = {
       inputValue: '',
       products: [],
+      categories: [],
     };
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.fetchCategories = this.fetchCategories.bind(this);
+}
+
+  componentDidMount() {
+    this.fetchCategories();
   }
 
   handleInputChange(e) {
@@ -28,8 +35,14 @@ export default class Home extends Component {
     });
   };
 
+  fetchCategories() {
+    getCategories().then((result) => this.setState({
+      categories: result,
+    }));
+  }
+
   render() {
-    const { inputValue, products } = this.state;
+    const { inputValue, products, categories } = this.state;
     return (
       <div>
         <input
@@ -45,10 +58,21 @@ export default class Home extends Component {
         >
           Click
         </button>
+
         <p data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
         <CardItem products={ products } />
+        <ul>
+          { categories
+            .map(({ id, name }) => <li key={ id } data-testid="category">{ name }</li>) }
+        </ul>
+        <Link
+          to="/shopping-cart"
+          data-testid="shopping-cart-button"
+        >
+          Cart
+        </Link>
       </div>
     );
   }

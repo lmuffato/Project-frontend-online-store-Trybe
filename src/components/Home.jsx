@@ -70,6 +70,8 @@ class Home extends Component {
               title={ item.title }
               img={ item.thumbnail }
               price={ item.price }
+              id={ item.id }
+              currItem={ item }
             />
           )) }
       </div>

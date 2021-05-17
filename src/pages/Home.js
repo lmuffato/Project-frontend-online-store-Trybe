@@ -10,6 +10,7 @@ export default class Home extends Component {
     this.state = {
       query: '',
       products: [],
+      loading: false,
     };
   }
 
@@ -18,17 +19,24 @@ export default class Home extends Component {
     this.setState({ query: value });
   }
 
-  handleClick = async () => {
+  getProducts = async () => {
     const { query } = this.state;
-    this.setState({
-      products: await api.getItemsByTerm(query),
+    const apiProducts = await api.getProductsFromCategoryAndQuery('all', query);
+    return apiProducts.results;
+  }
+
+  handleClick = () => {
+    this.getProducts().then((response) => {
+      this.setState({
+        products: response,
+        loading: true,
+      });
     });
-    console.log(this.state.products);
   }
 
   render() {
-    const { products } = this.state;
-    console.log(products);
+    const { products, loading } = this.state;
+    // console.log(products, 'oi');
     return (
       <main>
         <label data-testid="home-initial-message" htmlFor="search">
@@ -41,10 +49,10 @@ export default class Home extends Component {
         <SideBar />
         <ButtonCart />
         <section>
-          {products.map(({ results }) => (<Product
-            key={ product.id }
-            product={ results }
-          />))}
+          { loading ? products.map((product, index) => (<Product
+            key={ index }
+            product={ product }
+          />)) : <span>Nenhum produto foi encontrado</span> }
         </section>
       </main>
     );

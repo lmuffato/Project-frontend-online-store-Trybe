@@ -6,16 +6,18 @@ import './styles/ProductList.css';
 class ProductList extends Component {
   cardsElements = () => {
     const { data } = this.props;
-    const { results } = data;
-    return results.map((item) => (
-      <Card
-        title={ item.title }
-        image={ item.thumbnail }
-        price={ item.price }
-        key={ item.id }
-        data-testid="product"
-      />
-    ));
+    if (data !== undefined) {
+      const { results } = data;
+      return results.map((item) => (
+        <Card
+          title={ item.title }
+          image={ item.thumbnail }
+          price={ item.price }
+          key={ item.id }
+          data-testid="product"
+        />
+      ));
+    }
   };
 
   render() {

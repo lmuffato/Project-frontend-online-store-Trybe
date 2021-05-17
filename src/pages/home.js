@@ -62,7 +62,7 @@ class home extends Component {
             categories={ getCategories() }
             getCategory={ this.getCategory }
           />
-          { wasRequested ? <ProductList data={ data } /> : console.log('waiting') }
+          { wasRequested ? <ProductList data={ data } /> : console.log('waiting api') }
         </div>
       </main>
     );

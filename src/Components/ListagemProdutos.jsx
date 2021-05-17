@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import * as api from '../services/api';
@@ -45,9 +46,17 @@ class ListagemProdutos extends Component {
     );
   }
 
+  // handleAddProductToCart = (product) => {
+  //   return (
+  //     <Link to="/cart">
+  //       <button type="button" data-testid="shopping-cart-button">Cart</button>
+  //     </Link>
+  //   );
+  // }
+
   render() {
     const { products, isLoading } = this.state;
-    console.log(products);
+    const { addCart } = this.props;
 
     if (isLoading) {
       return (
@@ -89,11 +98,17 @@ class ListagemProdutos extends Component {
               title={ product.title }
               price={ product.price }
               imagePath={ product.thumbnail }
+              onClick={ addCart }
             />
           ))}
+
       </div>
     );
   }
 }
+
+ListagemProdutos.propTypes = {
+  addCart: PropTypes.func.isRequired,
+};
 
 export default ListagemProdutos;

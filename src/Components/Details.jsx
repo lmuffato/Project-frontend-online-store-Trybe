@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-// import { getProductsFromId } from '../services/api';
 
 class Details extends Component {
   render() {
@@ -39,9 +38,7 @@ Details.propTypes = {
     key: PropTypes.string.isRequired,
     pathname: PropTypes.string.isRequired,
     search: PropTypes.string.isRequired,
-    state: PropTypes.shape({
-      productDetail: PropTypes.objectOf(PropTypes.string),
-    }),
+    state: PropTypes.objectOf(PropTypes.object),
   }).isRequired,
 };
 

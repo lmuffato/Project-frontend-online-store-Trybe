@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import * as api from '../services/api';
 
 class CategoriesList extends Component {
@@ -20,6 +21,7 @@ class CategoriesList extends Component {
 
   render() {
     const { categories } = this.state;
+    const { filterCategory } = this.props;
     return (
       <div>
         <h3>Categorias:</h3>
@@ -33,6 +35,7 @@ class CategoriesList extends Component {
                 id={ categoria.id }
                 value={ categoria.name }
                 name="categories"
+                onChange={ filterCategory }
               />
             </label>
             <br />
@@ -41,5 +44,9 @@ class CategoriesList extends Component {
     );
   }
 }
+
+CategoriesList.propTypes = {
+  filterCategory: PropTypes.func.isRequired,
+};
 
 export default CategoriesList;

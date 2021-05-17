@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import icon from '../assets/icon.svg';
 import Category from './Category';
 import * as api from '../services/api';
@@ -11,7 +12,12 @@ class InputSearch extends Component {
     this.state = {
       inputValue: '',
       products: [],
+      selectValue: '',
     };
+  }
+
+  componentDidMount() {
+    this.handleApi();
   }
 
   handleInput = (event) => {
@@ -21,19 +27,31 @@ class InputSearch extends Component {
     });
   }
 
-  handleButton = async () => {
-    const { inputValue } = this.state;
+  handleSelect = (event) => {
+    const { value } = event.target;
+    this.setState({
+      selectValue: value,
+    });
+  }
+
+  handleApi= async () => {
+    const { inputValue, selectValue } = this.state;
     this.setState(async () => {
-      const query = await api.getProductsFromCategoryAndQuery(false, inputValue);
-      const { results } = await query;
-      this.setState(() => ({
-        products: [...results],
-      }));
+      try {
+        const query = await api.getProductsFromCategoryAndQuery(selectValue, inputValue);
+        const { results } = await query;
+        this.setState(() => ({
+          products: [...results],
+        }));
+      } catch {
+        return null;
+      }
     });
   }
 
   render() {
-    const { inputValue, products } = this.state;
+    const { AddCart } = this.props;
+    const { inputValue, products, selectValue } = this.state;
     return (
       <div>
         <input
@@ -48,18 +66,33 @@ class InputSearch extends Component {
         <button
           data-testid="query-button"
           type="button"
-          onClick={ this.handleButton }
+          onClick={ this.handleApi }
         >
           Pesquisar
         </button>
-        <Link to="/cart-shopping" data-testid="shopping-cart-button">
+        <Link to="/cart-shopping/" data-testid="shopping-cart-button">
           <img className="icon-cart" src={ icon } alt="shopping cart icon" />
         </Link>
-        <Category />
-        {products.map((element) => <Product key={ element.id } product={ element } />)}
+        <Category
+          value={ selectValue }
+          onChange={ (event) => {
+            this.handleSelect(event);
+          } }
+        />
+        {products.map((element) => (<Product
+          inputValue={ inputValue }
+          selectValue={ selectValue }
+          key={ element.id }
+          product={ element }
+          addCart={ AddCart }
+        />))}
       </div>
     );
   }
 }
+
+InputSearch.propTypes = {
+  AddCart: PropTypes.func.isRequired,
+};
 
 export default InputSearch;

@@ -1,61 +1,25 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { getProductsFromCategoryAndQuery } from '../../services/api';
 import CardProduct from './components/CardProduct';
 import Category from './components/Category';
 
 class Home extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
-    this.state = {
-      products: [],
-      selectedCategory: '',
-      searchedQuery: '',
-    };
-
-    this.filterFromCategory = this.filterFromCategory.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  async handleClick() {
-    const { searchedQuery, selectedCategory } = this.state;
-
-    const request = await getProductsFromCategoryAndQuery(
-      selectedCategory, searchedQuery,
-    );
-
-    this.setState({
-      products: request.results,
-    });
-  }
-
-  handleChange({ target }) {
-    this.setState({
-      searchedQuery: target.value,
-    });
-  }
-
-  async filterFromCategory(categoryId) {
-    const { searchedQuery } = this.state;
-    let products = await getProductsFromCategoryAndQuery(categoryId, searchedQuery);
-    products = products.results;
-    this.setState({
-      products,
-      selectedCategory: categoryId,
-    });
+    this.state = {};
   }
 
   render() {
-    const { products } = this.state;
+    const { onSearch, onFilterByCategory, onFilterByQuery, products } = this.props;
     return (
       <>
-        <input type="text" data-testid="query-input" onChange={ this.handleChange } />
+        <input type="text" data-testid="query-input" onChange={ onFilterByQuery } />
 
         <button
           data-testid="query-button"
-          onClick={ this.handleClick }
+          onClick={ onSearch }
           type="button"
         >
           Pesquisa
@@ -67,7 +31,7 @@ class Home extends React.Component {
         <Link to="/cart">
           <button type="button" data-testid="shopping-cart-button">Carrinho</button>
         </Link>
-        <Category onCategorySelection={ this.filterFromCategory } />
+        <Category onCategorySelection={ onFilterByCategory } />
         <CardProduct products={ products } />
 
       </>
@@ -76,3 +40,7 @@ class Home extends React.Component {
 }
 
 export default Home;
+
+Home.propTypes = {
+  onSearch: PropTypes.func,
+}.isRequired;

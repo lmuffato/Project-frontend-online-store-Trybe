@@ -32,7 +32,7 @@ class CategoriesList extends Component {
                 type="radio"
                 id={ categoria.id }
                 value={ categoria.name }
-                name={ categoria.name }
+                name="categories"
               />
             </label>
             <br />

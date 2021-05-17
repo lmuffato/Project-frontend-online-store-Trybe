@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SideBar from '../components/SideBar';
 import ButtonCart from '../components/ButtonCart';
+import { SideBar, ButtonCart } from '../'
 
 export default class Home extends Component {
   render() {

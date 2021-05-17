@@ -4,6 +4,7 @@ import { getCategories } from '../services/api';
 class CategoriesBar extends React.Component {
   constructor() {
     super();
+    this.handleClick = this.handleClick.bind(this);
     this.state = {
       categories: [],
     };
@@ -11,6 +12,10 @@ class CategoriesBar extends React.Component {
 
   componentDidMount() {
     this.fetchCategories();
+  }
+
+  handleClick() {
+    console.log('Categoria selecionada');
   }
 
   async fetchCategories() {
@@ -32,7 +37,7 @@ class CategoriesBar extends React.Component {
         data-testid="category"
         id={ category.id }
       >
-        {category.name}
+        <button type="submit" onClick={ this.handleClick }>{category.name}</button>
       </li>
     );
   }

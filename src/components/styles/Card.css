@@ -1,12 +1,12 @@
 .card {
+  align-items: center;
   border: 1px solid black;
   display: flex;
   flex-direction: column;
-  align-items: center;
   height: 250px;
   margin-top: 15px;
-  width: 250px;
   text-align: center;
+  width: 250px;
 }
 
 .card img {

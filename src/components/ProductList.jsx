@@ -20,7 +20,7 @@ class ProductList extends Component {
 
   render() {
     return (
-      <section id="product-list">
+      <section className="product-list">
         { this.cardsElements() }
       </section>
     );

@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { getProductsFromCategoryAndQuery, getCategories } from '../services/api';
 import CardItems from '../components/CardItems';
+import CategoriesList from '../components/CategoriesList';
 
 export default class Home extends Component {
   constructor(props) {
@@ -11,30 +12,38 @@ export default class Home extends Component {
       inputValue: '',
       products: [],
       categories: [],
+      category: '',
     };
-    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.fetchCategories = this.fetchCategories.bind(this);
     this.fetchProducts = this.fetchProducts.bind(this);
+    this.fetchProductsByCategory = this.fetchProductsByCategory.bind(this);
   }
 
   componentDidMount() {
     this.fetchCategories();
   }
 
-  handleInputChange(e) {
-    const { value } = e.target;
+  handleChange({ target }) {
+    const { value, name } = target;
     this.setState({
-      inputValue: value,
+      [name]: value,
     });
   }
 
   fetchProducts = async () => {
-    const { inputValue } = this.state;
-    const data = await getProductsFromCategoryAndQuery(null, inputValue);
+    const { inputValue = null, category = null } = this.state;
+    const data = await getProductsFromCategoryAndQuery(category, inputValue);
     this.setState({
       products: data.results,
     });
   };
+
+  async fetchProductsByCategory(event) {
+    await this.handleChange(event);
+    await this.fetchProducts();
+    await console.log(event);
+  }
 
   fetchCategories() {
     getCategories().then((result) => {
@@ -48,8 +57,9 @@ export default class Home extends Component {
       <div>
         <input
           value={ inputValue }
+          name="inputValue"
           type="text"
-          onChange={ this.handleInputChange }
+          onChange={ this.handleChange }
           data-testid="query-input"
         />
         <button
@@ -63,10 +73,10 @@ export default class Home extends Component {
         <p data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
-        <ul>
-          { categories
-            .map(({ id, name }) => <li key={ id } data-testid="category">{ name }</li>) }
-        </ul>
+        <CategoriesList
+          categories={ categories }
+          onClick={ this.fetchProductsByCategory }
+        />
         <Link
           to="/shopping-cart"
           data-testid="shopping-cart-button"

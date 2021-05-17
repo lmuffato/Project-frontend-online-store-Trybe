@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { getProductsFromCategoryAndQuery, getCategories } from '../services/api';
 import CardItems from '../components/CardItems';
+import CategoriesList from '../components/Categories';
 
 export default class Home extends Component {
   constructor(props) {
@@ -63,10 +64,9 @@ export default class Home extends Component {
         <p data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
-        <ul>
-          { categories
-            .map(({ id, name }) => <li key={ id } data-testid="category">{ name }</li>) }
-        </ul>
+
+        <CategoriesList categories={ categories } />
+
         <Link
           to="/shopping-cart"
           data-testid="shopping-cart-button"

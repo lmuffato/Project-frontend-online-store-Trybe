@@ -5,19 +5,19 @@ import PropTypes from 'prop-types';
 class ProductCard extends Component {
   render() {
     const { item } = this.props;
-
+    console.log(item);
     return (
       <div data-testid="product">
         <h4>{ item.title }</h4>
         <img src={ item.thumbnail } alt="imagem do produto" />
         <p>{ item.price }</p>
         <Link
-          to={ `/products/${item.id}` }
+          to={ { pathname: `/products/${item.id}`, state: { product: item } } }
+          data-testid="product-detail-link"
         >
-          <h5 data-testid="product-detail-link">Ver Detalhes</h5>
+          Ver Detalhes
         </Link>
       </div>
-
     );
   }
 }

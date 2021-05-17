@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import shoppingCart from '../imagens/shoppingCart.svg';
 import CategoryList from '../components/CategoryList';
-import ProductList from '../components/ProductList';
+import ProductList from '../components/ProductCard';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import Loading from './Loading';
 
@@ -23,7 +23,7 @@ export default class Home extends React.Component {
     const { input, checkbox } = this.state;
     getProductsFromCategoryAndQuery(checkbox, input)
       .then((finalData) => {
-        console.log(finalData.results);
+        // console.log(finalData.results);
         this.setState({
           loading: false,
           items: finalData.results,

@@ -1,7 +1,7 @@
 import React from 'react';
 // import { getProductsFromCategoryAndQuery } from '../services/api';
 
-export default class ProductList extends React.Component {
+export default class ProductCard extends React.Component {
   render() {
     const { item } = this.props;
 
@@ -17,3 +17,11 @@ export default class ProductList extends React.Component {
     );
   }
 }
+
+ProductCard.propTypes = {
+  item: PropTypes.shape({
+    title: PropTypes.string,
+    thumbnail: PropTypes.string,
+    price: PropTypes.number,
+  }),
+}.isRequired;

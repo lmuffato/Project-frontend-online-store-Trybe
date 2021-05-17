@@ -13,10 +13,6 @@ class Home extends Component {
     };
   }
 
-  // componentDidMount() {
-  //   this.getProducts();
-  // }
-
   productName = (event) => {
     const { value } = event.target;
     this.setState({ inputValue: value });

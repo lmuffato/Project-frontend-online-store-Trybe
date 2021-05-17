@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Loading from './Loading';
 
 class Products extends Component {
   constructor() {
@@ -25,7 +24,7 @@ class Products extends Component {
     return (
       <section>
         <ul>
-          { products ? this.productsList(products) : <Loading /> }
+          { this.productsList(products) }
         </ul>
       </section>
     );

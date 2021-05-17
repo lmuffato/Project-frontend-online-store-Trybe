@@ -1,15 +1,37 @@
 import React from 'react';
-import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
 import ListCategories from '../../components/ListCategories';
 import Input from '../../services/input';
+import ProductsByCategory from '../ProductsByCategory';
 
 class Main extends React.Component {
-  click() {
-    return <Redirect to="/carrinho-de-compras" />;
+  constructor() {
+    super();
+
+    this.state = {
+      categories: [],
+      categorySelected: '',
+    };
+
+    this.setCategorySelected = this.setCategorySelected.bind(this);
+    this.setCategories = this.setCategories.bind(this);
+  }
+
+  setCategories(value) {
+    this.setState({
+      categories: value,
+    });
+  }
+
+  setCategorySelected(value) {
+    this.setState({
+      categories: [],
+      categorySelected: value,
+    });
   }
 
   render() {
+    const { categories, categorySelected } = this.state;
     return (
       <div>
         <h1>Página Inicial</h1>
@@ -22,8 +44,15 @@ class Main extends React.Component {
 
         </Link>
         <aside>
-          <ListCategories />
+          <ListCategories
+            categories={ categories }
+            setCategorySelected={ this.setCategorySelected }
+            setCategories={ this.setCategories }
+          />
         </aside>
+        <main>
+          { categorySelected && <ProductsByCategory id={ categorySelected } /> }
+        </main>
       </div>
     );
   }

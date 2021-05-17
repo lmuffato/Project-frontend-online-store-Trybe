@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Categories from './Categories';
 
 class SearchBar extends React.Component {
   render() {
@@ -12,6 +13,7 @@ class SearchBar extends React.Component {
         <Link to="/cart" data-testid="shopping-cart-button">
           <img src="https://image.flaticon.com/icons/png/512/126/126083.png" alt="Icone Cart" />
         </Link>
+        <Categories />
       </div>
     );
   }

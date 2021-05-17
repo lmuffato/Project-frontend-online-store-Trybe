@@ -11,6 +11,7 @@ class Index extends Component {
     this.fetchCategories = this.fetchCategories.bind(this);
     this.fetchProducts = this.fetchProducts.bind(this);
     this.handleSearchInput = this.handleSearchInput.bind(this);
+    this.selectCategory = this.selectCategory.bind(this);
 
     this.state = {
       categories: [],
@@ -32,14 +33,21 @@ class Index extends Component {
 
   async fetchProducts() {
     const { searchText, categoryId } = this.state;
-    const products = await api.getProductsFromCategoryAndQuery(searchText, categoryId);
+    const products = await api.getProductsFromCategoryAndQuery(
+      searchText,
+      categoryId,
+    );
     this.setState({ products });
+  }
+
+  selectCategory(id) {
+    this.setState({ categoryId: id }, async () => {
+      this.fetchProducts();
+    });
   }
 
   render() {
     const { categories, searchText, products } = this.state;
-    console.log(products);
-
     return (
       <main>
         <SearchBar
@@ -47,8 +55,12 @@ class Index extends Component {
           onChange={ this.handleSearchInput }
           onClick={ this.fetchProducts }
         />
-        <Categories categories={ categories } getData={ this.fetchCategories } />
-        { products ? <Products products={ products } /> : null }
+        <Categories
+          onClick={ this.selectCategory }
+          categories={ categories }
+          getData={ this.fetchCategories }
+        />
+        {products && <Products products={ products } />}
       </main>
     );
   }

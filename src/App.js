@@ -4,7 +4,6 @@ import './App.css';
 import ProductList from './Pages/ProductList';
 import ShoppingCart from './Pages/ShoppingCart';
 
-
 function App() {
   return (
     <section>

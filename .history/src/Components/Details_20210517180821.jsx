@@ -11,8 +11,8 @@ class Details extends Component {
     };
   }
 
-  async componentDidMount() {
-    await this.myProduct();
+  componentDidMount() {
+    this.myProduct();
   }
 
   myProduct = async () => {

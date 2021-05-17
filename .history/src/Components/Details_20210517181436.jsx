@@ -11,8 +11,8 @@ class Details extends Component {
     };
   }
 
-  async componentDidMount() {
-    await this.myProduct();
+  componentDidMount() {
+    this.myProduct();
   }
 
   myProduct = async () => {
@@ -24,8 +24,8 @@ class Details extends Component {
   }
 
   render() {
-    const { product } = this.state;
-    const { title, id, price, thumbnail, condition } = product;
+    const { product: { title, id, price, thumbnail, condition } } = this.state;
+    // const { title, id, price, thumbnail, condition } = product;
     return (
       <div>
         <img src={ thumbnail } alt="imagem do produto" />

@@ -11,8 +11,8 @@ class Details extends Component {
     };
   }
 
-  async componentDidMount() {
-    await this.myProduct();
+  componentDidMount() {
+    this.myProduct();
   }
 
   myProduct = async () => {
@@ -30,18 +30,9 @@ class Details extends Component {
       <div>
         <img src={ thumbnail } alt="imagem do produto" />
         <h1 data-testid="product-detail-name">{title}</h1>
-        <p>
-          Identificação:
-          {id}
-        </p>
-        <p>
-          Preço:
-          {price}
-        </p>
-        <p>
-          Condição atual do Produto:
-          {condition}
-        </p>
+        <p>Identificação: {id}</p>
+        <p>Preço: {price}</p>
+        <p>Condição atual do Produto: {condition}</p>
         <Link to="/cart">
           <button type="button">Cart</button>
         </Link>

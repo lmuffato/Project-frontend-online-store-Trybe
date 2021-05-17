@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { getCategories } from '../services/api';
 
 class Category extends React.Component {
@@ -23,12 +24,19 @@ class Category extends React.Component {
 
   render() {
     const { categories } = this.state;
+    const { handleFunction } = this.props;
     return (
       <section>
         {categories.map((category) => (
           <div key={ category.id }>
-            <label htmlFor={ category.id } data-testid="category">
-              <input type="checkbox" value={ category.id } name="checkFilter" />
+            <label htmlFor={ category.id }>
+              <input
+                type="radio"
+                value={ category.id }
+                name="checkFilter"
+                onChange={ handleFunction }
+                data-testid="category"
+              />
               { category.name }
             </label>
             <br />
@@ -39,3 +47,7 @@ class Category extends React.Component {
 }
 
 export default Category;
+
+Category.propTypes = {
+  handleFunction: PropTypes.func.isRequired,
+};

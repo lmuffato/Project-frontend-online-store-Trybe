@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import * as api from '../services/api';
 import icon from '../assets/icon.svg';
+import Evaluation from './Evaluation';
 
 class ProductDetails extends Component {
   constructor(props) {
@@ -31,15 +32,19 @@ class ProductDetails extends Component {
     const { product: { attributes } } = this.state;
     if (attributes) {
       return (
-        <ul>
-          {attributes.map((element) => (
-            <li key={ element.id }>
-              {element.name}
-              :
-              {element.value_name}
-            </li>
-          ))}
-        </ul>
+        <div>
+          <ul>
+            {attributes.map((element) => (
+              <li key={ element.id }>
+                {element.name}
+                :
+                {element.value_name}
+              </li>
+            ))}
+          </ul>
+          <Evaluation />
+        </div>
+
       );
     }
   }

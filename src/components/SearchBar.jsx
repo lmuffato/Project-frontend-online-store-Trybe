@@ -35,9 +35,12 @@ class SearchBar extends React.Component {
   async handleFilterCategory(event) {
     const category = event.target.value;
     // console.log(category);
-    const { getCategoryId } = apiUrl;
-    const result = await getCategoryId(category);
-    this.setState({ products: result.results });
+    const { getProductsFromCategoryAndQuery } = apiUrl;
+    const result = await getProductsFromCategoryAndQuery(category, '');
+    const { results } = result;
+    this.setState({
+      products: results,
+    });
   }
 
   products() {
@@ -83,7 +86,11 @@ class SearchBar extends React.Component {
           Search
         </button>
         <Link to="/cart" data-testid="shopping-cart-button">
-          <img src="https://image.flaticon.com/icons/png/512/126/126083.png" alt="Icone Cart" id="cart-image" />
+          <img
+            src="https://image.flaticon.com/icons/png/512/126/126083.png"
+            alt="Icone Cart"
+            id="cart-image"
+          />
         </Link>
         { this.products()}
         <Categories func={ this.handleFilterCategory } />
@@ -91,5 +98,7 @@ class SearchBar extends React.Component {
     );
   }
 }
+
+// vqv
 
 export default SearchBar;

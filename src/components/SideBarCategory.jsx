@@ -23,11 +23,12 @@ export default class SideBarCategory extends Component {
 
   sideBar = () => {
     const { categoriesList } = this.state;
+    const { getCategory } = this.props;
     return (
       <ul>
         {categoriesList.map((category) => (
           <li data-testid="category" key={ category.id }>
-            {category.name}
+            <a href={ category.id } onClick={ getCategory }>{category.name}</a>
           </li>
         ))}
       </ul>

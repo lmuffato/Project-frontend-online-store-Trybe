@@ -1,33 +1,25 @@
 import React, { Component } from 'react';
-import { getProductsFromCategoryAndQuery } from '../services/api';
-
-
+import PropTypes from 'prop-types';
+import ProductCard from './ProductCard';
 
 class Products extends Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      loading: true,
-      products: undefined,
-    }
-
-  }
-
-  componentDidMount() {
-    getProductsFromCategoryAndQuery().then((categories) => {
-      this.setState({
-        products,
-        loading: false,
-      });
-    });
-  }
-  
   render() {
-
+    const { products } = this.props;
     return (
+      <section className="products-container">
+        {products.map((product) => <ProductCard key={ product.id } item={ product } />)}
+      </section>
     );
   }
 }
+
+Products.propTypes = {
+  products: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string,
+    title: PropTypes.string,
+    thumbnail: PropTypes.string,
+    price: PropTypes.string,
+  })).isRequired,
+};
 
 export default Products;

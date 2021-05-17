@@ -15,6 +15,7 @@ class Home extends React.Component {
     this.state = {
       categories: [],
       arrayOfItems: [],
+      query: '',
     };
   }
 
@@ -26,6 +27,7 @@ class Home extends React.Component {
     const array = await getProductsFromCategoryAndQuery(false, item);
     this.setState({
       arrayOfItems: array.results,
+      query: array.query,
     });
   }
 
@@ -36,7 +38,7 @@ class Home extends React.Component {
   }
 
   render() {
-    const { categories, arrayOfItems } = this.state;
+    const { categories, arrayOfItems, query } = this.state;
     return (
       <main>
         <CategoriesBar categories={ categories } />
@@ -47,7 +49,7 @@ class Home extends React.Component {
           </Button>
           {arrayOfItems.length === 0
             ? <p>Nenhum produto foi encontrado</p>
-            : <ListItems arrayOfItems={ arrayOfItems } />}
+            : <ListItems arrayOfItems={ arrayOfItems } query={ query } />}
         </section>
       </main>
     );

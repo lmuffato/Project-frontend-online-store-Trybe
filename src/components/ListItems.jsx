@@ -4,7 +4,7 @@ import Item from './Item';
 
 class ListItems extends React.Component {
   render() {
-    const { arrayOfItems } = this.props;
+    const { arrayOfItems, query } = this.props;
     return (
       <>
         { arrayOfItems.map(
@@ -13,6 +13,8 @@ class ListItems extends React.Component {
             imagePath={ thumbnail }
             price={ price }
             key={ id }
+            itemId={ id }
+            query={ query }
           />),
         )}
       </>

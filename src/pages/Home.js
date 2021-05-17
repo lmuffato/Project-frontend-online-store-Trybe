@@ -1,36 +1,66 @@
+/* eslint-disable react/no-unused-state */
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { getCategories } from '../services/api';
+import { getProductsFromCategoryAndQuery, getCategories } from '../services/api';
+import CardItems from '../components/CardItems';
 
 export default class Home extends Component {
-  constructor() {
-    super();
-
-    this.fetchCategories = this.fetchCategories.bind(this);
-
+  constructor(props) {
+    super(props);
     this.state = {
+      inputValue: '',
+      products: [],
       categories: [],
     };
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.fetchCategories = this.fetchCategories.bind(this);
+    this.fetchProducts = this.fetchProducts.bind(this);
   }
 
   componentDidMount() {
     this.fetchCategories();
   }
 
+  handleInputChange(e) {
+    const { value } = e.target;
+    this.setState({
+      inputValue: value,
+    });
+  }
+
+  fetchProducts = async () => {
+    const { inputValue } = this.state;
+    const data = await getProductsFromCategoryAndQuery(null, inputValue);
+    this.setState({
+      products: data.results,
+    });
+  };
+
   fetchCategories() {
-    getCategories().then((result) => this.setState({
-      categories: result,
-    }));
+    getCategories().then((result) => {
+      this.setState({ categories: result });
+    });
   }
 
   render() {
-    const { categories } = this.state;
+    const { inputValue, products, categories } = this.state;
     return (
       <div>
-        <input type="text" />
-        <p
-          data-testid="home-initial-message"
+        <input
+          value={ inputValue }
+          type="text"
+          onChange={ this.handleInputChange }
+          data-testid="query-input"
+        />
+        <button
+          type="button"
+          onClick={ this.fetchProducts }
+          data-testid="query-button"
         >
+          Click
+        </button>
+
+        <p data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
         <ul>
@@ -43,6 +73,7 @@ export default class Home extends Component {
         >
           Cart
         </Link>
+        <CardItems products={ products } />
       </div>
     );
   }

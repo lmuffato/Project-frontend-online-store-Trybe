@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import SearchBar from './components/SearchBar';
 import HomeCart from './components/HomeCart';
+import SearchBar from './components/SearchBar';
 import './App.css';
 
 function App() {

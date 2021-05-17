@@ -1,0 +1,24 @@
+#search-bar {
+  /* border: 1px solid #333; */
+  margin-top: 1rem;
+  
+  display: flex;
+}
+
+#search-bar label {
+  font-size: 1.3rem;
+}
+
+#search-bar input {
+  margin: 0 1rem;
+  height: 100%;
+  border-radius: 4px;
+}
+
+#search-bar button {
+  background-color: #333;
+  color: white;
+  border: 1px solid #333;
+  padding: 0.4rem;
+  border-radius: 4px;
+}

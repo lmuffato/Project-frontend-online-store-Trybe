@@ -8,7 +8,7 @@ function CategoriesBar(props) {
 
   return (
     <aside>
-      <h1>Categorias</h1>
+      <h1>Categorias:</h1>
       <ul>
         {categories.map((category) => (
           <button

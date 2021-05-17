@@ -14,8 +14,9 @@ class CategoriesBar extends React.Component {
     this.fetchCategories();
   }
 
-  handleClick() {
-    console.log('Categoria selecionada');
+  handleClick({ target: { value } }) {
+    const { handle } = this.props;
+    handle(value);
   }
 
   async fetchCategories() {
@@ -37,7 +38,7 @@ class CategoriesBar extends React.Component {
         data-testid="category"
         id={ category.id }
       >
-        <button type="button" onClick={ this.handleClick }>{category.name}</button>
+        <button type="button" value={ category.id } onClick={ this.handleClick }>{category.name}</button>
       </li>
     );
   }

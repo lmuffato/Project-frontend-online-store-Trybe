@@ -11,6 +11,10 @@ class SearchProducts extends Component {
     };
   }
 
+  componentWillReceiveProps() {
+    this.search();
+  }
+
   handle = ({ target: { value } }) => {
     this.setState({ query: value });
   };
@@ -18,7 +22,8 @@ class SearchProducts extends Component {
   search = async () => {
     const { query } = this.state;
     const { getProductsFromCategoryAndQuery } = api;
-    const request = await getProductsFromCategoryAndQuery('', query);
+    const { categorie } = this.props;
+    const request = await getProductsFromCategoryAndQuery(categorie, query);
     let productsList = [];
     if (request !== []) {
       const { results } = request;

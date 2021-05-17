@@ -13,7 +13,12 @@ class ProductList extends Component {
     };
   }
 
+  handle = (categorie) => {
+    this.setState({ categorie });
+  };
+ 
   render() {
+    const { categorie } = this.state;
     return (
       <div>
         <label htmlFor="searchText" data-testid="text-input-label">
@@ -31,7 +36,7 @@ class ProductList extends Component {
           <p data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
-          <SearchProduct />
+          <SearchProduct categorie={ categorie } />
         </div>
         <Link
           to="/ShoppingCart"
@@ -43,7 +48,7 @@ class ProductList extends Component {
             src={ cartIcon }
           />
         </Link>
-        <CategoriesBar />
+        <CategoriesBar handle={ this.handle } />
       </div>
     );
   }

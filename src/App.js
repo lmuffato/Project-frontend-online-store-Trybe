@@ -3,8 +3,8 @@ import './App.css';
 import { BrowserRouter, Route } from 'react-router-dom';
 import CartButton from './Components/CartButton';
 import CartShopPage from './Components/CartShopPage';
-
 import Search from './Components/Search';
+import CategorieList from './Components/CategorieList';
 
 function App() {
   return (
@@ -13,7 +13,7 @@ function App() {
         <Search />
         <Route path="/CartShopPage" component={ CartShopPage } />
         <CartButton />
-
+        <CategorieList />
       </div>
     </BrowserRouter>
   );

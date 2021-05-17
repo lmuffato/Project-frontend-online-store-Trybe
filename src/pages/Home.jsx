@@ -29,6 +29,11 @@ class Home extends Component {
     this.setState({ products: request.results });
   };
 
+  async handleCategoryClicked(id) {
+    const request = await getProductsFromCategoryAndQuery(id);
+    this.setState({ products: request.results });
+  }
+
   checkRequest = () => {
     const { products } = this.state;
     if (products.length === 0) return <h2>Nenhum Produto encontrado</h2>;
@@ -50,7 +55,6 @@ class Home extends Component {
       'data-testid': 'shopping-cart-button',
       to: '/carrinho',
     };
-
     return (
       <section>
         <div>
@@ -78,9 +82,14 @@ class Home extends Component {
           {categories.map(({ id, name }) => (
             <li
               key={ id }
-              data-testid="category"
             >
-              {name}
+              <button
+                type="button"
+                onClick={ () => this.handleCategoryClicked(id) }
+                data-testid="category"
+              >
+                {name}
+              </button>
             </li>))}
         </ul>
         {this.checkRequest()}

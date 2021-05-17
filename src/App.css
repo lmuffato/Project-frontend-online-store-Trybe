@@ -7,6 +7,7 @@
 .cart-button-container {
   display: flex;
 }
+
 .shopping-cart-img {
   display: flex;
   flex-direction: row;

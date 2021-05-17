@@ -10,12 +10,19 @@ export default class Home extends Component {
     super();
     this.state = {
       productsList: [],
+      categories: [],
       search: '',
       message: null,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleFetchProducts = this.handleFetchProducts.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.handleFetchCategories = this.handleFetchCategories.bind(this);
+    this.handleCategoryEvent = this.handleCategoryEvent.bind(this);
+  }
+
+  componentDidMount() {
+    this.handleFetchCategories();
   }
 
   handleChange({ target }) {
@@ -39,8 +46,31 @@ export default class Home extends Component {
     }
   }
 
+  handleCategoryEvent(event) {
+    const id = event.target.getAttribute('data-id');
+    this.handleFetchFromCategory(id);
+  }
+
+  async handleFetchCategories() {
+    this.setState({ categories: [] }, () => {
+      api.getCategories().then((data) => {
+        this.setState({ categories: data });
+        console.log(data);
+      });
+    });
+  }
+
+  async handleFetchFromCategory(id) {
+    const request = await api.getProductsFromCategoryAndQuery(id, '');
+    if (request.results.length === 0) {
+      this.setState({ productsList: [], message: true });
+    } else {
+      this.setState({ productsList: request.results, message: false });
+    }
+  }
+
   render() {
-    const { search, message, productsList } = this.state;
+    const { search, message, productsList, categories } = this.state;
     return (
       <>
         <SearchBar
@@ -49,7 +79,10 @@ export default class Home extends Component {
           handleClick={ this.handleClick }
         />
         <aside>
-          <Categories />
+          <Categories
+            categories={ categories }
+            handleClick={ this.handleCategoryEvent }
+          />
         </aside>
         {message ? <ProductNotFound /> : <ProductList products={ productsList } /> }
       </>

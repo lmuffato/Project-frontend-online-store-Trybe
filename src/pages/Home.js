@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unused-state */
 import React, { Component } from 'react';
-import CardItem from '../components/CardItem';
+import CardItems from '../components/CardItems';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 
 export default class Home extends Component {
@@ -11,6 +11,7 @@ export default class Home extends Component {
       products: [],
     };
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.fetchProducts = this.fetchProducts.bind(this);
   }
 
   handleInputChange(e) {
@@ -20,7 +21,7 @@ export default class Home extends Component {
     });
   }
 
-  fetchResponse = async () => {
+  fetchProducts = async () => {
     const { inputValue } = this.state;
     const data = await getProductsFromCategoryAndQuery(null, inputValue);
     this.setState({
@@ -40,7 +41,7 @@ export default class Home extends Component {
         />
         <button
           type="button"
-          onClick={ this.fetchResponse }
+          onClick={ this.fetchProducts }
           data-testid="query-button"
         >
           Click
@@ -48,7 +49,7 @@ export default class Home extends Component {
         <p data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
-        <CardItem products={ products } />
+        <CardItems products={ products } />
       </div>
     );
   }

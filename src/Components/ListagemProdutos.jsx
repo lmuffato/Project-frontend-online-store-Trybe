@@ -14,15 +14,16 @@ class ListagemProdutos extends Component {
       products: [],
       isLoading: false,
       query: '',
+      category: '',
     };
   }
 
   fetchAPI = () => {
-    const { query } = this.state;
+    const { query, category } = this.state;
     this.setState(
       { isLoading: true },
       async () => {
-        const { results } = await api.getProductsFromCategoryAndQuery(query);
+        const { results } = await api.getProductsFromCategoryAndQuery(category, query);
         this.setState({
           products: results,
           isLoading: false,
@@ -35,6 +36,13 @@ class ListagemProdutos extends Component {
     this.setState({
       query: target.value,
     });
+  }
+
+  handleChangeCategory = (category) => {
+    this.setState(
+      { category },
+      () => this.fetchAPI(),
+    );
   }
 
   render() {
@@ -59,7 +67,7 @@ class ListagemProdutos extends Component {
           Pesquisar
         </button>
 
-        <Categories />
+        <Categories onClick={ this.handleChangeCategory } />
         <aside>
           <Link to="/cart">
             <button type="button" data-testid="shopping-cart-button">Cart</button>

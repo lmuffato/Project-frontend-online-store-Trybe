@@ -42,7 +42,6 @@ export default class Home extends Component {
   async fetchProductsByCategory(event) {
     await this.handleChange(event);
     await this.fetchProducts();
-    await console.log(event);
   }
 
   fetchCategories() {
@@ -73,6 +72,7 @@ export default class Home extends Component {
         <p data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
+
         <CategoriesList
           categories={ categories }
           onClick={ this.fetchProductsByCategory }

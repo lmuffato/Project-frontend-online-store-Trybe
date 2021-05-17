@@ -11,9 +11,11 @@ export default class ProductList extends Component {
     this.loadProducts = this.loadProducts.bind(this);
     this.submitSearch = this.submitSearch.bind(this);
     this.filterObjs = this.filterObjs.bind(this);
+    this.loadProductsByCategory = this.loadProductsByCategory.bind(this);
 
     this.state = {
       searchText: '',
+      search: '',
       checkFilter: '',
       objText: [],
       objCategory: [],
@@ -26,16 +28,33 @@ export default class ProductList extends Component {
     this.setState({ [name]: value });
   }
 
-  async submitSearch() {
-    const { searchText, checkFilter } = this.state;
-    this.setState({ obj: 'nenhum' });
+  async loadProductsByCategory({ target }) {
     let resultCategory = [];
+    const ArrayCategory = [];
+    const { name, value } = target;
+    this.setState({ [name]: value });
+    resultCategory = await getProductsFromCategoryAndQuery(value, 1);
+    resultCategory.results.map((item) => {
+      const newObjCategory = {
+        id: item.id,
+        title: item.title,
+        price: item.price,
+        thumbnail: item.thumbnail,
+      };
+      console.log(newObjCategory);
+      ArrayCategory.push(newObjCategory);
+      return this.setState({
+        obj: ArrayCategory,
+        objCategory: ArrayCategory,
+      });
+    });
+  }
+
+  async submitSearch() {
+    const { searchText } = this.state;
+    this.setState({ obj: 'nenhum' });
     let resultText = [];
     const ArrayText = [];
-    const ArrayCategory = [];
-    if (checkFilter !== '') {
-      resultCategory = await getProductsFromCategoryAndQuery(checkFilter, 1);
-    }
     if (searchText !== '') {
       resultText = await getProductsFromCategoryAndQuery(1, searchText);
     }
@@ -51,22 +70,6 @@ export default class ProductList extends Component {
         ArrayText.push(newObjText);
         return this.setState({
           objText: ArrayText,
-        });
-      });
-    }
-    console.log(resultCategory)
-    if (resultCategory.results) {
-      resultCategory.results.map((item) => {
-        const newObjCategory = {
-          id: item.id,
-          title: item.title,
-          price: item.price,
-          thumbnail: item.thumbnail,
-        };
-        console.log(newObjCategory);
-        ArrayCategory.push(newObjCategory);
-        return this.setState({
-          objCategory: ArrayCategory,
         });
       });
     }
@@ -109,7 +112,7 @@ export default class ProductList extends Component {
     const { obj, searchText } = this.state;
     return (
       <div>
-        <Category handleFunction={ this.loadProductsByText } />
+        <Category handleFunction={ this.loadProductsByCategory } />
         <label htmlFor="catSearchID" data-testid="home-initial-message">
           <input
             data-testid="query-input"

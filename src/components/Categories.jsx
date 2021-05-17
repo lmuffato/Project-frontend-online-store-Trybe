@@ -1,37 +1,35 @@
 import React from 'react';
-import * as api from '../services/api';
+import PropTypes from 'prop-types';
 
 class Categories extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      categories: [],
-    };
-    this.handleFetchCategories = this.handleFetchCategories.bind(this);
-  }
-
-  componentDidMount() {
-    this.handleFetchCategories();
-  }
-
-  async handleFetchCategories() {
-    this.setState({ categories: [] }, () => {
-      api.getCategories().then((data) => {
-        this.setState({ categories: data });
-      });
-    });
-  }
-
   render() {
-    const { categories } = this.state;
+    const { categories, handleClick } = this.props;
+
     return (
-      <ul>
+      <>
         {categories.map((category) => (
-          <li data-testid="category" key={ category.id }>{category.name}</li>
+          <button
+            type="button"
+            data-id={ category.id }
+            data-testid="category"
+            key={ category.id }
+            onClick={ handleClick }
+          >
+            {category.name}
+          </button>
         ))}
-      </ul>
+      </>
     );
   }
 }
+
+Categories.defaultProps = {
+  handleClick: () => {},
+};
+
+Categories.propTypes = {
+  categories: PropTypes.arrayOf(PropTypes.object).isRequired,
+  handleClick: PropTypes.func,
+};
 
 export default Categories;

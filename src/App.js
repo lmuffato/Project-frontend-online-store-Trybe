@@ -15,13 +15,12 @@ class App extends Component {
 
   handleClickAddCart = async (event) => {
     const elementos = [...event.target.parentNode.children];
-    const price = Number(elementos[2].innerText.split('$')[1]);
     this.setState((anterior) => ({
       cartList: [...anterior.cartList, {
         img: elementos[1].src,
-        title: elementos[0].innerText,
+        title: elementos[0].innerHTML,
         quant: 1,
-        price,
+        price: elementos[2].innerHTML,
       }],
     }));
   };
@@ -32,7 +31,7 @@ class App extends Component {
       <Router>
         <Route
           path="/carrinho"
-          render={ (props) => <CartItem { ...props } state={ cartList } /> }
+          render={ (props) => <CartItem { ...props } cartList={ cartList } /> }
         />
         <Route
           exact

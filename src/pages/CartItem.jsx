@@ -5,10 +5,10 @@ import CartList from '../components/CartList';
 
 class CartItem extends Component {
   xablau = () => {
-    const { state } = this.props;
+    const { cartList } = this.props;
     const string = 'Seu carrinho está vazio';
-    return state.length > 0
-      ? state
+    return cartList.length > 0
+      ? cartList
         .map((product, index) => <CartList key={ index } product={ product } />)
       : string;
   };
@@ -24,7 +24,7 @@ class CartItem extends Component {
 }
 
 CartItem.propTypes = {
-  state: PropTypes.arrayOf().isRequired,
+  cartList: PropTypes.arrayOf().isRequired,
 };
 
 export default CartItem;

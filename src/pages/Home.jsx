@@ -40,8 +40,13 @@ class Home extends Component {
     const { onClick } = this.props;
     if (products.length === 0) return <h2>Nenhum Produto encontrado</h2>;
     return (
-      products
-        .map((product) => <CardProduct onClick={ onClick } key={ product.id } product={ product } />)
+      products.map((product) => (
+        <CardProduct
+          onClick={ onClick }
+          key={ product.id }
+          product={ product }
+        />
+      ))
     );
   };
 

@@ -4,6 +4,13 @@ import SearchProduct from '../components/SearchProducts';
 import CategoriesBar from '../components/CategoriesBar';
 
 class ProductList extends Component {
+  constructor (props) {
+    super(props);
+    this.state = {
+      categorie: '',
+    };
+  }
+
   render() {
     // const { } = this.props;
     return (

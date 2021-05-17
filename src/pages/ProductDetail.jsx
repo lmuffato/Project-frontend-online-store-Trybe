@@ -1,14 +1,32 @@
 import React, { Component } from 'react';
-// import ProductInfo from '../components/ProductInfo';
+import ProductInfo from '../components/ProductInfo';
+import * as api from '../services/api';
 
 class ProductDetail extends Component {
-  render() {
+  constructor() {
+    super();
+    this.state = {
+      result: [],
+    };
+    this.fetchProductById = this.fetchProductById.bind(this);
+  }
+
+  componentDidMount() {
+    this.fetchProductById();
+  }
+
+  async fetchProductById() {
     const { match } = this.props;
     const { id } = match.params;
+    const result = await api.getProductById(id);
+    this.setState({ result });
+  }
+
+  render() {
+    const { result } = this.state;
     return (
       <>
-        <p>{id}</p>
-        {/* <ProductInfo id={ id } /> */}
+        <ProductInfo product={ result } />
         {/* <ProductRating />
         <AddToCart /> */}
       </>

@@ -23,13 +23,11 @@ export default class Home extends React.Component {
     const { input, checkbox } = this.state;
     getProductsFromCategoryAndQuery(checkbox, input)
       .then((finalData) => {
-        // console.log(finalData.results);
         this.setState({
           loading: false,
           items: finalData.results,
         });
       });
-    // results.price, results.thumbnail, results.title
   }
 
   handleChangeInput = ({ target }) => {
@@ -42,6 +40,7 @@ export default class Home extends React.Component {
     await this.setState(() => ({
       checkbox: target.value,
     }));
+    this.request();
   }
 
   handleArrayItems = (items) => {
@@ -94,7 +93,7 @@ export default class Home extends React.Component {
         <CategoryList
           className="product-list"
           handleChange={ this.handleChangeCheckbox }
-          request={ this.request }
+          // request={ this.request }
         />
       </div>
     );

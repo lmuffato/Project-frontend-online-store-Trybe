@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 import * as api from '../services/api';
 
@@ -45,8 +45,17 @@ class ListagemProdutos extends Component {
     );
   }
 
+  // handleAddProductToCart = (product) => {
+  //   return (
+  //     <Link to="/cart">
+  //       <button type="button" data-testid="shopping-cart-button">Cart</button>
+  //     </Link>
+  //   );
+  // }
+
   render() {
     const { products, isLoading } = this.state;
+    const {addCart} = this.props;
 
     if (isLoading) {
       return (
@@ -80,14 +89,16 @@ class ListagemProdutos extends Component {
 
         { products === []
           ? (<p>Nenhum produto foi encontrado</p>)
-          : products.map(({ title, price, thumbnail, id }) => (
+          : products.map((product) => (
             <ProductCard
-              key={ id }
-              title={ title }
-              price={ price }
-              imagePath={ thumbnail }
+              key={ product.id }
+              title={ product.title }
+              price={ product.price }
+              imagePath={ product.thumbnail }
+              onClick={addCart}
             />
           ))}
+          
       </div>
     );
   }

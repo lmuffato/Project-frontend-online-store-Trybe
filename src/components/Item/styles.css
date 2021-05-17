@@ -1,9 +1,8 @@
 .product-card {
-  width: 200px;
-  height: 450px;
-
   background-color: bisque;
   border: 1px solid #333;
+  height: 450px;
+  width: 200px;
 }
 
 .product-card img {

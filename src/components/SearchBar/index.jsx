@@ -24,7 +24,7 @@ class SearchBar extends React.Component {
     const { itemToSearch } = this.state;
     const { func } = this.props;
     return (
-      <header id="search-bar">
+      <header>
         <label htmlFor="input-search" data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
           <input

@@ -1,0 +1,24 @@
+header {
+  display: flex;
+
+  /* border: 1px solid #333; */
+  margin-top: 1rem;
+}
+
+header label {
+  font-size: 1.3rem;
+}
+
+header input {
+  border-radius: 4px;
+  height: 100%;
+  margin: 0 1rem;
+}
+
+header button {
+  background-color: #333;
+  border: 1px solid #333;
+  border-radius: 4px;
+  color: white;
+  padding: 0.4rem;
+}

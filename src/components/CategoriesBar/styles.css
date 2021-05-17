@@ -1,0 +1,21 @@
+aside {
+  border: 1px solid #333;
+  margin: 1rem;
+  padding: 1rem;
+  width: 300px;
+}
+
+aside h1 {
+  font-weight: 500;
+  margin-bottom: 0.6rem;
+}
+
+.category-item {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: block;
+  font-size: 1rem;
+  line-height: 1.5;
+  text-decoration: underline;
+}

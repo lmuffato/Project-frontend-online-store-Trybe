@@ -1,16 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Button from '../components/Button';
-import CategoriesBar from '../components/CategoriesBar';
-import ListItems from '../components/ListItems';
-import SearchBar from '../components/SearchBar';
-import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
+
+import Button from '../../components/Button';
+import CategoriesBar from '../../components/CategoriesBar';
+import ListItems from '../../components/ListItems';
+import SearchBar from '../../components/SearchBar';
+
+import { getCategories, getProductsFromCategoryAndQuery } from '../../services/api';
+
+import './styles.css';
 
 class Home extends React.Component {
   constructor(props) {
     super(props);
 
     this.fetchCategories = this.fetchCategories.bind(this);
+    this.getProductsFromCategory = this.getProductsFromCategory.bind(this);
 
     this.state = {
       categories: [],
@@ -20,6 +25,12 @@ class Home extends React.Component {
 
   componentDidMount() {
     this.fetchCategories();
+  }
+
+  async getProductsFromCategory(categoryId) {
+    const response = await getProductsFromCategoryAndQuery(categoryId);
+
+    this.setState({ arrayOfItems: response.results });
   }
 
   generateArray = async (item) => {
@@ -38,8 +49,11 @@ class Home extends React.Component {
   render() {
     const { categories, arrayOfItems } = this.state;
     return (
-      <main>
-        <CategoriesBar categories={ categories } />
+      <main id="home-page">
+        <CategoriesBar
+          categories={ categories }
+          onClick={ this.getProductsFromCategory }
+        />
         <section>
           <SearchBar func={ this.generateArray } />
           <Button>

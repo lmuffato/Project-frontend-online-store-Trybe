@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import * as apiUrl from '../services/api';
 import Categories from './Categories';
 
@@ -81,6 +82,9 @@ class SearchBar extends React.Component {
         <button type="button" data-testid="query-button" onClick={ this.handleFilter }>
           Search
         </button>
+        <Link to="/cart" data-testid="shopping-cart-button">
+          <img src="https://image.flaticon.com/icons/png/512/126/126083.png" alt="Icone Cart" id="cart-image" />
+        </Link>
         { this.products()}
         <Categories func={ this.handleFilterCategory } />
       </div>

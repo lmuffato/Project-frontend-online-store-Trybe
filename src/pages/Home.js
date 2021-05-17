@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unused-state */
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { getProductsFromCategoryAndQuery, getCategories } from '../services/api';
@@ -39,6 +38,7 @@ export default class Home extends Component {
     });
   };
 
+  // Define a categoria escolhida e realiza a busca
   async fetchProductsByCategory(event) {
     await this.handleChange(event);
     await this.fetchProducts();

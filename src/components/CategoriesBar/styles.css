@@ -1,0 +1,9 @@
+.category-item {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: block;
+  text-decoration: underline;
+  font-size: 0.9rem;
+  font-weight: bold;
+}

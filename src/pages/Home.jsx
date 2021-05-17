@@ -11,6 +11,7 @@ class Home extends React.Component {
     super(props);
 
     this.fetchCategories = this.fetchCategories.bind(this);
+    this.getProductsFromCategory = this.getProductsFromCategory.bind(this);
 
     this.state = {
       categories: [],
@@ -20,6 +21,12 @@ class Home extends React.Component {
 
   componentDidMount() {
     this.fetchCategories();
+  }
+
+  async getProductsFromCategory(categoryId) {
+    const response = await getProductsFromCategoryAndQuery(categoryId);
+
+    this.setState({ arrayOfItems: response.results });
   }
 
   generateArray = async (item) => {
@@ -39,7 +46,10 @@ class Home extends React.Component {
     const { categories, arrayOfItems } = this.state;
     return (
       <main>
-        <CategoriesBar categories={ categories } />
+        <CategoriesBar
+          categories={ categories }
+          onClick={ this.getProductsFromCategory }
+        />
         <section>
           <SearchBar func={ this.generateArray } />
           <Button>

@@ -38,6 +38,7 @@ class Index extends Component {
 
   render() {
     const { categories, searchText, products } = this.state;
+    console.log(products);
 
     return (
       <main>
@@ -47,7 +48,7 @@ class Index extends Component {
           onClick={ this.fetchProducts }
         />
         <Categories categories={ categories } getData={ this.fetchCategories } />
-        <Products products={ products } />
+        { products ? <Products products={ products } /> : null }
       </main>
     );
   }

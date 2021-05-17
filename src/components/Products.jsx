@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Loading from './Loading';
 
 class Products extends Component {
   constructor() {
@@ -20,12 +21,11 @@ class Products extends Component {
 
   render() {
     const { products } = this.props;
-    console.log(products);
 
     return (
       <section>
         <ul>
-          { products ? this.productsList(products) : 'loading...' }
+          { products ? this.productsList(products) : <Loading /> }
         </ul>
       </section>
     );
@@ -33,7 +33,11 @@ class Products extends Component {
 }
 
 Products.propTypes = {
-  products: PropTypes.objectOf(PropTypes.object),
+  products: PropTypes.objectOf(PropTypes.oneOfType([
+    PropTypes.array,
+    PropTypes.string,
+    PropTypes.object,
+  ])),
 };
 
 Products.defaultProps = {

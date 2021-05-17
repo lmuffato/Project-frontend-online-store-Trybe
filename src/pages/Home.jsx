@@ -11,7 +11,7 @@ export default class Home extends Component {
     this.state = {
       productsList: [],
       search: '',
-      message: true,
+      message: null,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleFetchProducts = this.handleFetchProducts.bind(this);
@@ -32,7 +32,7 @@ export default class Home extends Component {
   async handleFetchProducts() {
     const { search } = this.state;
     const result = await api.getProductsFromCategoryAndQuery('', search);
-    if (!result.results) {
+    if (result.results.length === 0) {
       this.setState({ productsList: [], message: true, search: '' });
     } else {
       this.setState({ productsList: result.results, search: '', message: false });

@@ -37,7 +37,7 @@ class CategoriesBar extends React.Component {
         data-testid="category"
         id={ category.id }
       >
-        <button type="submit" onClick={ this.handleClick }>{category.name}</button>
+        <button type="button" onClick={ this.handleClick }>{category.name}</button>
       </li>
     );
   }

@@ -40,8 +40,12 @@ class SearchProducts extends Component {
               return (
                 <section className="product-conteiner" data-testid="product" key={ id }>
                   <h3 className="title-product">{ title }</h3>
-                  <img className="image-product" src={ thumbnail } alt={ `Imagem-${title}` } />
-                  <p className="price-product">{ `R$ ${ price.toFixed(2) }` }</p>
+                  <img
+                    className="image-product"
+                    src={ thumbnail }
+                    alt={ `Imagem-${title}` }
+                  />
+                  <p className="price-product">{ `R$ ${price.toFixed(2)}` }</p>
                 </section>
               );
             })

@@ -664,7 +664,7 @@ O que será verificado:
 
 **PRIORIDADE 5** - Exibir o conteúdo do carrinho num slider na lateral da tela, de forma que ele possa ser exibido e escondido através da interação com botão (veja os detalhes no card).
 
-- [Tela - Listagem com carrinho populado.png](https://github.com/tryber/sd-010-a-project-frontend-online-store/tree/master/wireframes/bonus_slider.1.png)
+- [Tela - Listagem com carrinho populado.png](https://github.com/tryber/sd-010-a-project-frontend-online-store/tree/master/wireframes/bonus_slider.2.png)
 - [Tela - Listagem com carrinho vazio.png](https://github.com/tryber/sd-010-a-project-frontend-online-store/tree/master/wireframes/bonus_slider.1.png)
 
 #### 21. Destaque, na tela principal, os produtos já adicionados ao carrinho

@@ -28,12 +28,13 @@ class Category extends React.Component {
       <section>
         {categories.map((category) => (
           <div key={ category.id }>
-            <label htmlFor={ category.id } data-testid="category">
+            <label htmlFor={ category.id }>
               <input
                 type="radio"
                 value={ category.id }
                 name="checkFilter"
                 onChange={ handleFunction }
+                data-testid="category"
               />
               { category.name }
             </label>

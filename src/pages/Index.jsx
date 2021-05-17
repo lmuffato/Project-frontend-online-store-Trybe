@@ -3,6 +3,7 @@ import SearchBar from '../components/SearchBar';
 import Categories from '../components/Categories';
 import * as api from '../services/api';
 import Products from '../components/Products';
+import Loading from '../components/Loading';
 
 class Index extends Component {
   constructor() {
@@ -11,8 +12,10 @@ class Index extends Component {
     this.fetchCategories = this.fetchCategories.bind(this);
     this.fetchProducts = this.fetchProducts.bind(this);
     this.handleSearchInput = this.handleSearchInput.bind(this);
+    this.selectCategory = this.selectCategory.bind(this);
 
     this.state = {
+      loading: false,
       categories: [],
       categoryId: '',
       searchText: '',
@@ -31,15 +34,23 @@ class Index extends Component {
   }
 
   async fetchProducts() {
+    this.setState({ loading: true, products: null });
     const { searchText, categoryId } = this.state;
-    const products = await api.getProductsFromCategoryAndQuery(searchText, categoryId);
-    this.setState({ products });
+    const products = await api.getProductsFromCategoryAndQuery(
+      searchText,
+      categoryId,
+    );
+    this.setState({ products, loading: false });
+  }
+
+  selectCategory(id) {
+    this.setState({ categoryId: id }, async () => {
+      await this.fetchProducts();
+    });
   }
 
   render() {
-    const { categories, searchText, products } = this.state;
-    console.log(products);
-
+    const { categories, searchText, products, loading } = this.state;
     return (
       <main>
         <SearchBar
@@ -47,8 +58,13 @@ class Index extends Component {
           onChange={ this.handleSearchInput }
           onClick={ this.fetchProducts }
         />
-        <Categories categories={ categories } getData={ this.fetchCategories } />
-        { products ? <Products products={ products } /> : null }
+        <Categories
+          onClick={ this.selectCategory }
+          categories={ categories }
+          getData={ this.fetchCategories }
+        />
+        { loading && <Loading /> }
+        {products && <Products products={ products } />}
       </main>
     );
   }

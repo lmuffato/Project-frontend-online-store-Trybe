@@ -12,22 +12,28 @@ class Categories extends Component {
     getData();
   }
 
-  categoriesList(categories) {
+  categoriesList(categories, onClick) {
     return categories.map((category) => (
-      <li data-testid="category" key={ category.id }>
-        {category.name}
+      <li key={ category.id }>
+        <button
+          data-testid="category"
+          type="button"
+          onClick={ () => onClick(category.id) }
+        >
+          {category.name}
+        </button>
       </li>
     ));
   }
 
   render() {
-    const { categories } = this.props;
+    const { categories, onClick } = this.props;
 
     return (
       <aside>
         <ul>
           {categories
-            ? this.categoriesList(categories)
+            ? this.categoriesList(categories, onClick)
             : 'loading...'}
         </ul>
       </aside>
@@ -38,6 +44,7 @@ class Categories extends Component {
 Categories.propTypes = {
   getData: PropTypes.func.isRequired,
   categories: PropTypes.arrayOf(PropTypes.object).isRequired,
+  onClick: PropTypes.func.isRequired,
 };
 
 export default Categories;

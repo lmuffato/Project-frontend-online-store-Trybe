@@ -25,12 +25,14 @@ class Category extends React.Component {
     const { categories } = this.state;
     return (
       <section>
-        <ul>
-          {categories.map((category) => (
-            <li data-testid="category" key={ category.id }>
+        {categories.map((category) => (
+          <div key={ category.id }>
+            <label htmlFor={ category.id } data-testid="category">
+              <input type="checkbox" value={ category.id } name="checkFilter" />
               { category.name }
-            </li>))}
-        </ul>
+            </label>
+            <br />
+          </div>))}
       </section>
     );
   }

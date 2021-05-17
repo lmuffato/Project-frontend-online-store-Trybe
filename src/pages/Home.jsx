@@ -97,8 +97,7 @@ export default class Home extends React.Component {
           </p>
           {loading
             ? <Loading />
-            : items.map((item) => <ProductList item={ item } key={ item.id } />)
-          }
+            : items.map((item) => <ProductList item={ item } key={ item.id } />)}
         </section>
         <CategoryList
           className="product-list"

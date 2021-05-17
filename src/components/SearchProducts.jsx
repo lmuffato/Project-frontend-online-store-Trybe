@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 import * as api from '../services/api';
 import './SearchProducts.css';
 
@@ -9,7 +9,6 @@ class SearchProducts extends Component {
     this.state = {
       query: '',
       productsList: [],
-      category: '',
     };
   }
 

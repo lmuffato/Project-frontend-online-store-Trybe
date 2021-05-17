@@ -1,53 +1,122 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import '../Css/home.css';
-import cardItem from '..Components/cardItem';
+import CardItem from '../Components/CardItem';
+import Category from '../Components/Category';
+import Loading from '../Components/Loading';
 import * as api from '../services/api';
+import '../styles/home.css';
 
 class Home extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
 
     this.state = {
-      query: undefined,
-      categoryId: undefined,
+      categories: [],
+      products: [],
+      query: '',
+      categoryId: '',
+      isCategoriesLoading: true,
+      isProdutcsLoading: true,
     };
   }
 
-  newStateQuery = (event) => {
+  componentDidMount() {
+    this.getCategories();
+  }
+
+  getCategories = async () => {
+    const categoriesList = await api.getCategories();
     this.setState({
-      query: event.target.value,
+      categories: categoriesList,
+      isCategoriesLoading: false,
+    });
+  };
+
+  newStateCategoryAndQuery = ({ target }) => {
+    const { name, value } = target;
+    this.setState({
+      [name]: value,
     });
   }
 
   fetchItem = async () => {
-    const { query } = this.state;
-    const response = await api.getProductsFromCategoryAndQuery(categoryId, query);
-    const data = await response.json();
-    return data;
+    const { query, categoryId } = this.state;
+    const data = await api.getProductsFromCategoryAndQuery(categoryId, query);
+    this.setState({
+      products: data.results,
+      isProdutcsLoading: false,
+    });
   }
 
   render() {
-    return (
-      <main>
-        <h3 data-testid="home-initial-message">
-          Digite algum termo de pesquisa ou escolha uma categoria.
-        </h3>
+    const {
+      categories,
+      products,
+      isCategoriesLoading,
+      isProdutcsLoading,
+    } = this.state;
 
-        <label htmlFor="myInput">
-          <input id="myInput" onChange={ this.newStateQuery } type="text" data-testid="query-input" />
-          <button type="button" data-testid="query-button">Pesquisar</button>
-        </label>
-        <button type="button">
-          <Link to="/shopping-cart" data-testid="shopping-cart-button">
-            <img
-              className="shopping-cart"
-              src="https://img2.gratispng.com/20180425/lcq/kisspng-computer-icons-shopping-cart-5ae061983e57a6.1325375415246544882554.jpg"
-              alt="carrinho de compras"
+    return (
+      <div className="home-container">
+        <aside>
+          <form className="categories">
+            {
+              isCategoriesLoading ? <Loading />
+                : categories.map((category) => (
+                  <Category
+                    { ...category }
+                    key={ category.id }
+                    onChange={ this.newStateCategoryAndQuery }
+                  />
+                ))
+            }
+          </form>
+        </aside>
+
+        <main className="produtcs">
+          <h3 data-testid="home-initial-message">
+            Digite algum termo de pesquisa ou escolha uma categoria.
+          </h3>
+
+          <label htmlFor="myInput">
+            <input
+              id="myInput"
+              name="query"
+              onChange={ this.newStateCategoryAndQuery }
+              type="text"
+              data-testid="query-input"
             />
-          </Link>
-        </button>
-      </main>
+            <button
+              type="button"
+              data-testid="query-button"
+              onClick={ this.fetchItem }
+            >
+              Pesquisar
+            </button>
+          </label>
+
+          <button type="button">
+            <Link to="/shopping-cart" data-testid="shopping-cart-button">
+              <img
+                className="shopping-cart"
+                src="https://img2.gratispng.com/20180425/lcq/kisspng-computer-icons-shopping-cart-5ae061983e57a6.1325375415246544882554.jpg"
+                alt="carrinho de compras"
+              />
+            </Link>
+          </button>
+
+          <section>
+            <ul className="products">
+              {
+                isProdutcsLoading ? <Loading />
+                  : products.map((product) => (
+                    <CardItem key={ product.id } { ...product } />
+                  ))
+              }
+            </ul>
+          </section>
+        </main>
+      </div>
     );
   }
 }

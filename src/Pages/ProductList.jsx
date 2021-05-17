@@ -1,5 +1,6 @@
 // implement AddMovie component here
 import React, { Component } from 'react';
+import SearchProduct from '../components/SearchProducts';
 import CategoriesBar from '../components/CategoriesBar';
 
 class ProductList extends Component {
@@ -21,6 +22,7 @@ class ProductList extends Component {
           <p data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
+          <SearchProduct />
         </div>
         <CategoriesBar />
       </div>

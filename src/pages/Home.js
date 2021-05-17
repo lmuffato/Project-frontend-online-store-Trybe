@@ -2,11 +2,7 @@ import React, { Component } from 'react';
 import Product from '../components/Product';
 import SideBar from '../components/SideBar';
 import ButtonCart from '../components/ButtonCart';
-<<<<<<< HEAD
-import { SideBar, ButtonCart } from '../'
-=======
 import * as api from '../services/api';
->>>>>>> 31afc135192dc219d799a9a6fd007c24d2dfb398
 
 export default class Home extends Component {
   constructor() {

@@ -24,7 +24,7 @@ class Categories extends React.Component {
 
   render() {
     const { categories, didMount } = this.state;
-    const { onChange, value } = this.props;
+    const { onClick } = this.props;
 
     if (didMount === false) {
       return (
@@ -34,27 +34,27 @@ class Categories extends React.Component {
 
     return (
       <div>
-        <select value={ value } onChange={ (e) => onChange(e) }>
-          {
-            categories.map((cat) => (
-              <option
-                value={ cat.id }
-                data-testid="category"
-                key={ cat.name }
-              >
-                { cat.name }
-              </option>
-            ))
-          }
-        </select>
+        <ul style={ { display: 'flex', flexDirection: 'column' } }>
+          {categories
+            .map((cat) => (
+              <label htmlFor="category" key={ cat.id }>
+                <input
+                  data-testid="category"
+                  type="radio"
+                  name="category"
+                  onClick={ () => onClick(cat.id) }
+                />
+                {cat.name}
+              </label>
+            ))}
+        </ul>
       </div>
     );
   }
 }
 
 Categories.propTypes = {
-  onChange: PropTypes.func.isRequired,
-  value: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
 };
 
 export default Categories;

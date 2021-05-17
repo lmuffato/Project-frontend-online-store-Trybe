@@ -8,8 +8,8 @@ function Routes() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/" exact component={Main} />
-        <Route path="/carrinho-de-compras" component={CarrinhoDeCompras} />
+        <Route path="/" exact component={ Main } />
+        <Route path="/carrinho-de-compras" component={ CarrinhoDeCompras } />
       </Switch>
     </BrowserRouter>
   );

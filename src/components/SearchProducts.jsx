@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import * as api from '../services/api';
 import './SearchProducts.css';
 
@@ -11,6 +12,12 @@ class SearchProducts extends Component {
     };
   }
 
+  componentDidUpdate(prevProps) {
+    const { category: categoryPrevious } = prevProps;
+    const { category } = this.props;
+    if (category !== categoryPrevious) this.search();
+  }
+
   handle = ({ target: { value } }) => {
     this.setState({ query: value });
   };
@@ -18,13 +25,13 @@ class SearchProducts extends Component {
   search = async () => {
     const { query } = this.state;
     const { getProductsFromCategoryAndQuery } = api;
-    const request = await getProductsFromCategoryAndQuery('', query);
+    const { category } = this.props;
+    const request = await getProductsFromCategoryAndQuery(category, query);
     let productsList = [];
     if (request !== []) {
       const { results } = request;
       productsList = results;
     }
-    console.log(productsList);
     this.setState({ productsList });
   };
 
@@ -77,5 +84,9 @@ class SearchProducts extends Component {
     );
   }
 }
+
+SearchProducts.propTypes = {
+  category: PropTypes.string.isRequired,
+};
 
 export default SearchProducts;

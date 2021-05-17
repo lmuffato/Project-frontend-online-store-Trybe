@@ -6,7 +6,19 @@ import SearchProduct from '../components/SearchProducts';
 import CategoriesBar from '../components/CategoriesBar';
 
 class ProductList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      category: '',
+    };
+  }
+
+  handle = (category) => {
+    this.setState({ category });
+  };
+
   render() {
+    const { category } = this.state;
     return (
       <div>
         <label htmlFor="searchText" data-testid="text-input-label">
@@ -24,7 +36,7 @@ class ProductList extends Component {
           <p data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
-          <SearchProduct />
+          <SearchProduct category={ category } />
         </div>
         <Link
           to="/ShoppingCart"
@@ -36,7 +48,7 @@ class ProductList extends Component {
             src={ cartIcon }
           />
         </Link>
-        <CategoriesBar />
+        <CategoriesBar handle={ this.handle } />
       </div>
     );
   }

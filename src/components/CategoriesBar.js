@@ -1,9 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { getCategories } from '../services/api';
+import './CategoriesBar.css';
 
 class CategoriesBar extends React.Component {
   constructor() {
     super();
+    this.handleClick = this.handleClick.bind(this);
     this.state = {
       categories: [],
     };
@@ -11,6 +14,11 @@ class CategoriesBar extends React.Component {
 
   componentDidMount() {
     this.fetchCategories();
+  }
+
+  handleClick({ target: { value } }) {
+    const { handle } = this.props;
+    handle(value);
   }
 
   async fetchCategories() {
@@ -27,24 +35,32 @@ class CategoriesBar extends React.Component {
 
   renderLi(category) {
     return (
-      <li
+      <button
+        className="category-item"
         key={ category.id }
-        data-testid="category"
         id={ category.id }
+        type="button"
+        data-testid="category"
+        value={ category.id }
+        onClick={ this.handleClick }
       >
         {category.name}
-      </li>
+      </button>
     );
   }
 
   render() {
     return (
-      <div>
-        <p>Categorias:</p>
-        <ul>{this.allCategories()}</ul>
-      </div>
+      <section className="categories">
+        <h3>Categorias:</h3>
+        <aside className="categories">{this.allCategories()}</aside>
+      </section>
     );
   }
 }
+
+CategoriesBar.propTypes = {
+  handle: PropTypes.func.isRequired,
+};
 
 export default CategoriesBar;

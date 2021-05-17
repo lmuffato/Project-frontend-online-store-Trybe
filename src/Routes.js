@@ -11,7 +11,7 @@ function Routes() {
         <Route path="/Cart" component={ Cart } />
         <Route path="/" component={ Home } exact />
         <Route
-          path="/item-details/:title/:item-id"
+          path="/item-details/:query/:itemId"
           render={ (props) => <ItemDetails { ...props } /> }
         />
       </Switch>

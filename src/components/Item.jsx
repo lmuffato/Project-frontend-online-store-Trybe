@@ -10,10 +10,9 @@ class Item extends React.Component {
         <img src={ imagePath } alt={ title } />
         <h1>{ title }</h1>
         <p>{ price }</p>
-        <Link to={ `/item-details/${query}/${itemId}` }>
+        <Link to={ `/item-details/${query}/${itemId}` } data-testid="product-detail-link">
           <button
             type="button"
-            data-testid="product-detail-link"
           >
             Ver detalhes
           </button>

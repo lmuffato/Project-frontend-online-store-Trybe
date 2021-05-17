@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { getCategories } from '../services/api';
+import { Link } from 'react-router-dom';
 
 export default class Home extends Component {
   constructor() {
@@ -26,7 +27,7 @@ export default class Home extends Component {
     const { categories } = this.state;
     return (
       <div>
-        <input type="seach" />
+        <input type="text" />
         <p
           data-testid="home-initial-message"
         >
@@ -36,6 +37,12 @@ export default class Home extends Component {
           { categories
             .map(({ id, name }) => <li key={ id } data-testid="category">{ name }</li>) }
         </ul>
+        <Link
+          to="/shopping-cart"
+          data-testid="shopping-cart-button"
+        >
+          Cart
+        </Link>
       </div>
     );
   }

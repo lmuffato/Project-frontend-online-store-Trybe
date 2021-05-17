@@ -26,27 +26,24 @@ class ShoppingCart extends Component {
           </span>
         </div>
       );
-    }else {
-      return (
-        <>
-          {reducedProducts.map((product) => (
-            <div className="product-shopping-cart" key={ product }>
-              <p data-testid="shopping-cart-product-name">{product}</p>
-              <p data-testid="shopping-cart-product-quantity">{quantity[product]}</p>
-            </div>
-          ))}
-          <Link to="/">VOLTAR</Link>
-        </>
-      );
     }
-
-    
+    return (
+      <>
+        {reducedProducts.map((product) => (
+          <div className="product-shopping-cart" key={ product }>
+            <p data-testid="shopping-cart-product-name">{product}</p>
+            <p data-testid="shopping-cart-product-quantity">{quantity[product]}</p>
+          </div>
+        ))}
+        <Link to="/">VOLTAR</Link>
+      </>
+    );
   }
 }
 
 ShoppingCart.propTypes = {
   products: PropTypes.arrayOf(PropTypes.string).isRequired,
-  quantity: PropTypes.object.isRequired,
+  quantity: PropTypes.objectOf(PropTypes.number).isRequired,
 };
 
 export default ShoppingCart;

@@ -13,3 +13,14 @@ body {
   padding: 5px;
   width: 1200px;
 }
+
+.container-searchBar {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.cart {
+  margin-left: 10px;
+  margin-top: 10px;
+}

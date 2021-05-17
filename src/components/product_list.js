@@ -15,8 +15,7 @@ export default class ProductList extends Component {
 
     this.state = {
       searchText: '',
-      search: '',
-      checkFilter: '',
+      // checkFilter: '',
       objText: [],
       objCategory: [],
       obj: [],
@@ -41,7 +40,6 @@ export default class ProductList extends Component {
         price: item.price,
         thumbnail: item.thumbnail,
       };
-      console.log(newObjCategory);
       ArrayCategory.push(newObjCategory);
       return this.setState({
         obj: ArrayCategory,
@@ -66,7 +64,6 @@ export default class ProductList extends Component {
           price: item.price,
           thumbnail: item.thumbnail,
         };
-        console.log(newObjText);
         ArrayText.push(newObjText);
         return this.setState({
           objText: ArrayText,
@@ -78,12 +75,10 @@ export default class ProductList extends Component {
 
   filterObjs() {
     const { objCategory, objText, searchText } = this.state;
-    console.log(`objCategory${objCategory}`);
-    console.log(`objText${objText}`);
-    console.log(`searchText${searchText}`);
     let filterObj = '';
     if (objCategory.length > 0 && objText.length > 0) {
-      filterObj = objCategory.filter((item) => item.title.toLowerCase().includes(searchText.toLowerCase()));
+      filterObj = objCategory
+        .filter((item) => item.title.toLowerCase().includes(searchText.toLowerCase()));
     } else if (objCategory.length > 0) {
       filterObj = objCategory;
     } else {

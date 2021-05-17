@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { getCategories } from '../services/api';
 
 class Category extends React.Component {
@@ -46,3 +47,7 @@ class Category extends React.Component {
 }
 
 export default Category;
+
+Category.propTypes = {
+  handleFunction: PropTypes.func.isRequired,
+};

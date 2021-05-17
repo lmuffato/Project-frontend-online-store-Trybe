@@ -17,15 +17,19 @@ class home extends Component {
     };
   }
 
-  getQuery = (e) => {
-    this.setState({ query: e.target.value });
-  };
+  componentDidMount() {
+    this.renderProductList();
+  }
 
   getCategory = (e) => {
     e.preventDefault();
     const nodeInfo = [...Object.values(e.target.parentNode)].shift();
     this.setState({ category: nodeInfo.key });
   }
+
+  getQuery = (e) => {
+    this.setState({ query: e.target.value });
+  };
 
   getProducts = async (e) => {
     e.preventDefault(e);
@@ -35,13 +39,16 @@ class home extends Component {
       data: apiData,
       wasRequested: true,
     });
-    console.log(apiData);
   }
 
-  renderProductList = () => {
-    const { data } = this.state;
-    return <ProductList data={ data } />;
-  };
+  renderProductList = async () => {
+    const { query, category } = this.state;
+    const apiData = await getProductsFromCategoryAndQuery(category, query);
+    this.setState({
+      data: apiData,
+      wasRequested: true,
+    });
+  }
 
   render() {
     const { wasRequested, data } = this.state;

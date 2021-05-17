@@ -8,6 +8,7 @@ class SearchProducts extends Component {
     this.state = {
       query: '',
       productsList: [],
+      
     };
   }
 
@@ -22,8 +23,8 @@ class SearchProducts extends Component {
   search = async () => {
     const { query } = this.state;
     const { getProductsFromCategoryAndQuery } = api;
-    const { categorie } = this.props;
-    const request = await getProductsFromCategoryAndQuery(categorie, query);
+    const { category } = this.props;
+    const request = await getProductsFromCategoryAndQuery(category, query);
     let productsList = [];
     if (request !== []) {
       const { results } = request;

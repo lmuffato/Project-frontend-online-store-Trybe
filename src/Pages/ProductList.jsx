@@ -9,16 +9,16 @@ class ProductList extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      categorie: '',
+      category: '',
     };
   }
 
-  handle = (categorie) => {
-    this.setState({ categorie });
+  handle = (category) => {
+    this.setState({ category });
   };
- 
+
   render() {
-    const { categorie } = this.state;
+    const { category } = this.state;
     return (
       <div>
         <label htmlFor="searchText" data-testid="text-input-label">
@@ -36,7 +36,7 @@ class ProductList extends Component {
           <p data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
-          <SearchProduct categorie={ categorie } />
+          <SearchProduct category={ category } />
         </div>
         <Link
           to="/ShoppingCart"

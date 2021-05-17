@@ -5,6 +5,7 @@ import CartButton from './Components/CartButton';
 import CartShopPage from './Components/CartShopPage';
 import Search from './Components/Search';
 import CategorieList from './Components/CategorieList';
+import ProductCard from './Components/ProductCard';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/CartShopPage" component={ CartShopPage } />
         <CartButton />
         <CategorieList />
+        <ProductCard />
       </div>
     </BrowserRouter>
   );

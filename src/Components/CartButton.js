@@ -11,8 +11,6 @@ class CartButton extends React.Component {
             <img src={ cart } style={ { width: '50px' } } alt="imagem carrinho" />
           </button>
         </Link>
-        <p>olá</p>
-
       </div>
     );
   }

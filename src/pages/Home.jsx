@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 import carrinho from '../services/Carrinho-compras.png';
@@ -36,10 +37,16 @@ class Home extends Component {
 
   checkRequest = () => {
     const { products } = this.state;
+    const { onClick } = this.props;
     if (products.length === 0) return <h2>Nenhum Produto encontrado</h2>;
     return (
-      products
-        .map((product) => <CardProduct key={ product.id } product={ product } />)
+      products.map((product) => (
+        <CardProduct
+          onClick={ onClick }
+          key={ product.id }
+          product={ product }
+        />
+      ))
     );
   };
 
@@ -97,5 +104,9 @@ class Home extends Component {
     );
   }
 }
+
+Home.propTypes = {
+  onClick: PropTypes.func.isRequired,
+};
 
 export default Home;

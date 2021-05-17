@@ -35,8 +35,9 @@ class ItemDetails extends React.Component {
   render() {
     const { item: { title, price, thumbnail }, itemInfo } = this.state;
     return (
-      <>
-        <h1 data-testid="product-detail-name">{`${title} - R$ ${price}`}</h1>
+      <div>
+        <h1 data-testid="product-detail-name">{ title }</h1>
+        <h1>{`${title} - R$ ${price}`}</h1>
         <img src={ thumbnail } alt={ title } />
         <div>
           <ul>
@@ -46,7 +47,7 @@ class ItemDetails extends React.Component {
               </li>))}
           </ul>
         </div>
-      </>
+      </div>
     );
   }
 }

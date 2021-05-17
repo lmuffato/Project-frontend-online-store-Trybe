@@ -2,6 +2,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import cartIcon from './ShoppinCart/cartIcon.png';
+import SearchProduct from '../components/SearchProducts';
+import CategoriesBar from '../components/CategoriesBar';
 
 class ProductList extends Component {
   render() {
@@ -22,6 +24,7 @@ class ProductList extends Component {
           <p data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
+          <SearchProduct />
         </div>
         <Link
           to="/ShoppingCart"
@@ -33,6 +36,7 @@ class ProductList extends Component {
             src={ cartIcon }
           />
         </Link>
+        <CategoriesBar />
       </div>
     );
   }

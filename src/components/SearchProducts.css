@@ -1,0 +1,29 @@
+.search-conteiner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.product-conteiner {
+  border: solid gray 2px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  height: 400px;
+  width: 200px;
+}
+
+.title-product {
+  align-self: initial;
+  background-color: cadetblue;
+  font-size: small;
+}
+
+.image-product {
+  align-self: center;
+  width: 100%;
+}
+
+.price-product {
+  align-self: center;
+}

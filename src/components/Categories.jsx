@@ -10,7 +10,7 @@ class Categories extends React.Component {
         {categories.map((category) => (
           <button
             type="button"
-            data-id={ category.id }
+            id={ category.id }
             data-testid="category"
             key={ category.id }
             onClick={ handleClick }

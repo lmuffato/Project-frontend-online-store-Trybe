@@ -37,11 +37,15 @@ class InputSearch extends Component {
   handleApi= async () => {
     const { inputValue, selectValue } = this.state;
     this.setState(async () => {
-      const query = await api.getProductsFromCategoryAndQuery(selectValue, inputValue);
-      const { results } = await query;
-      this.setState(() => ({
-        products: [...results],
-      }));
+      try {
+        const query = await api.getProductsFromCategoryAndQuery(selectValue, inputValue);
+        const { results } = await query;
+        this.setState(() => ({
+          products: [...results],
+        }));
+      } catch {
+        return null;
+      }
     });
   }
 

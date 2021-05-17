@@ -22,7 +22,7 @@ class ProductCard extends Component {
 }
 
 ProductCard.propTypes = {
-  id: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired
   title: PropTypes.string.isRequired,
   imagePath: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,

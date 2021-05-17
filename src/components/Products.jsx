@@ -24,7 +24,7 @@ class Products extends Component {
     return (
       <section>
         <ul>
-          {products.length === 0 ? 'loading...' : this.productsList(products)}
+          { this.productsList(products) }
         </ul>
       </section>
     );
@@ -32,13 +32,15 @@ class Products extends Component {
 }
 
 Products.propTypes = {
-  products: PropTypes.shape({
-    id: PropTypes.string,
-    title: PropTypes.string,
-    thumbnail: PropTypes.string,
-    price: PropTypes.number,
-    length: PropTypes.number,
-  }).isRequired,
+  products: PropTypes.objectOf(PropTypes.oneOfType([
+    PropTypes.array,
+    PropTypes.string,
+    PropTypes.object,
+  ])),
+};
+
+Products.defaultProps = {
+  products: undefined,
 };
 
 export default Products;

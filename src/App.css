@@ -40,3 +40,8 @@
     transform: rotate(360deg);
   }
 }
+
+.shopping-cart {
+  margin-top: 1%;
+  width: 25px;
+}

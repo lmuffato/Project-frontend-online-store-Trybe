@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import * as apiUrl from '../services/api';
 
 class Categories extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       categoryName: [],
@@ -23,6 +24,7 @@ class Categories extends Component {
   }
 
   render() {
+    const { func } = this.props;
     const { categoryName } = this.state;
     return (
       <aside>
@@ -31,6 +33,8 @@ class Categories extends Component {
             key={ thisCategory.id }
             type="button"
             data-testid="category"
+            value={ thisCategory.id }
+            onClick={ func }
           >
             {thisCategory.name}
           </button>)) }
@@ -39,4 +43,7 @@ class Categories extends Component {
   }
 }
 
+Categories.propTypes = {
+  func: PropTypes.func.isRequired,
+};
 export default Categories;

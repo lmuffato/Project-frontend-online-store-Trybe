@@ -2,7 +2,19 @@
   text-align: center;
 }
 
-.App-logo {
+aside {
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+  padding: 5px;
+  width: 200px;
+}
+
+button {
+  margin: 3px;
+}
+
+/* .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
@@ -39,4 +51,4 @@
   to {
     transform: rotate(360deg);
   }
-}
+} */

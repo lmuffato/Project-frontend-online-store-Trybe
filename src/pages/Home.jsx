@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import shoppingCart from '../imagens/shoppingCart.svg';
 import CategoryList from '../components/CategoryList';
-import ProductList from '../components/ProductList';
+import ProductList from '../components/ProductCard';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import Loading from './Loading';
 
@@ -12,8 +12,8 @@ export default class Home extends React.Component {
 
     this.state = {
       input: undefined,
-      checkbox: [],
-      checked: false,
+      checkbox: '',
+      // checked: false,
       items: [],
       loading: true,
     };
@@ -23,13 +23,11 @@ export default class Home extends React.Component {
     const { input, checkbox } = this.state;
     getProductsFromCategoryAndQuery(checkbox, input)
       .then((finalData) => {
-        console.log(finalData.results);
         this.setState({
           loading: false,
           items: finalData.results,
         });
       });
-    // results.price, results.thumbnail, results.title
   }
 
   handleChangeInput = ({ target }) => {
@@ -39,17 +37,10 @@ export default class Home extends React.Component {
   }
 
   handleChangeCheckbox = async ({ target }) => {
-    await this.setState((prevState) => ({
-      checkbox: [...prevState.checkbox, target.value],
-      checked: target.checked,
+    await this.setState(() => ({
+      checkbox: target.value,
     }));
-    const { checked } = this.state;
-    if (checked === false) {
-      // console.log('ok');
-      this.setState((prevState) => ({
-        checkbox: prevState.checkbox.filter((id) => id !== target.value),
-      }));
-    }
+    this.request();
   }
 
   handleArrayItems = (items) => {
@@ -102,6 +93,7 @@ export default class Home extends React.Component {
         <CategoryList
           className="product-list"
           handleChange={ this.handleChangeCheckbox }
+          // request={ this.request }
         />
       </div>
     );

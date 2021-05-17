@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import * as api from '../services/api';
+import './SearchProducts.css';
 
 class SearchProducts extends Component {
   constructor(props) {

@@ -7,32 +7,21 @@ class Details extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      product: { title: '' },
-    };
-  }
 
-  componentDidMount() {
-    this.myProduct();
+    };
   }
 
   myProduct = async () => {
     const { match } = this.props;
     const { params } = match;
     const { id } = params;
-    const produc = await getProductsFromId(id);
-    this.setState({ product: produc });
+    const product = await getProductsFromId(id);
+    return product;
   }
 
   render() {
-    const { product } = this.state;
-    const { title, id, price, thumbnail, condition } = product;
     return (
       <div>
-        <img src={ thumbnail } alt="imagem do produto" />
-        <h1 data-testid="product-detail-name">{title}</h1>
-        <p>{id}</p>
-        <p>{price}</p>
-        <p>{condition}</p>
         <Link to="/cart">
           <button type="button">Cart</button>
         </Link>

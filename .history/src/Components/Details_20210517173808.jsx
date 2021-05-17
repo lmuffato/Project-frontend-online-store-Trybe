@@ -7,7 +7,7 @@ class Details extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      product: { title: '' },
+      product: {},
     };
   }
 
@@ -29,7 +29,7 @@ class Details extends Component {
     return (
       <div>
         <img src={ thumbnail } alt="imagem do produto" />
-        <h1 data-testid="product-detail-name">{title}</h1>
+        <h1>{title}</h1>
         <p>{id}</p>
         <p>{price}</p>
         <p>{condition}</p>

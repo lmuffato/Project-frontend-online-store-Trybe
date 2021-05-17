@@ -5,7 +5,7 @@ import ListagemProdutos from './Components/ListagemProdutos';
 import ShoppingCart from './Pages/ShoppingCart';
 
 class App extends Component {
-  constructor(){
+  constructor() {
     super();
 
     this.state = {
@@ -13,9 +13,9 @@ class App extends Component {
       quantityCart: {},
     };
   }
-  
-  handleAddToCart = ({target}) => {
-    const {quantityCart} = this.state;
+
+  handleAddToCart = ({ target }) => {
+    const { quantityCart } = this.state;
     const { value } = target;
     if (quantityCart[value] === undefined) {
       this.setState((prevState) => ({
@@ -30,23 +30,31 @@ class App extends Component {
       }));
     }
   }
-  
+
   render() {
     const { productsCart, quantityCart } = this.state;
     return (
       <BrowserRouter>
         <Switch>
-          <Route exact path="/cart" render={() => (
-            <ShoppingCart 
-              products={productsCart}
-              quantity={quantityCart}
-            />
-          )}/>
-          <Route exact path="/" render={ () => (
-            <ListagemProdutos
-              addCart={this.handleAddToCart}
-            />
-            ) } />
+          <Route
+            exact
+            path="/cart"
+            render={ () => (
+              <ShoppingCart
+                products={ productsCart }
+                quantity={ quantityCart }
+              />
+            ) }
+          />
+          <Route
+            exact
+            path="/"
+            render={ () => (
+              <ListagemProdutos
+                addCart={ this.handleAddToCart }
+              />
+            ) }
+          />
         </Switch>
       </BrowserRouter>
     );

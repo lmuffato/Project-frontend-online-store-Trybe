@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import * as api from '../services/api';
 
@@ -55,7 +56,7 @@ class ListagemProdutos extends Component {
 
   render() {
     const { products, isLoading } = this.state;
-    const {addCart} = this.props;
+    const { addCart } = this.props;
 
     if (isLoading) {
       return (
@@ -95,13 +96,17 @@ class ListagemProdutos extends Component {
               title={ product.title }
               price={ product.price }
               imagePath={ product.thumbnail }
-              onClick={addCart}
+              onClick={ addCart }
             />
           ))}
-          
+
       </div>
     );
   }
 }
+
+ListagemProdutos.propTypes = {
+  addCart: PropTypes.func.isRequired,
+};
 
 export default ListagemProdutos;

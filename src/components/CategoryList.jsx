@@ -25,11 +25,11 @@ export default class CategoryList extends React.Component {
           <label
             htmlFor="category"
             key={ item.id }
-            data-testid="category"
             className="category"
           >
             <input
               type="radio"
+              data-testid="category"
               checked={ checked }
               name="category"
               value={ item.id }

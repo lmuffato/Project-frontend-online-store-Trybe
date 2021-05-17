@@ -11,17 +11,23 @@ export default class Home extends Component {
       query: '',
       products: [],
       loading: false,
+      category: 'all',
+      categoryId: '',
     };
   }
 
   handleChange = (event) => {
-    const { value } = event.target;
-    this.setState({ query: value });
+    const { value, name } = event.target;
+    this.setState({
+      [name]: value,
+    });
+    this.handleClick();
+    this.forceUpdate();
   }
 
   getProducts = async () => {
-    const { query } = this.state;
-    const apiProducts = await api.getProductsFromCategoryAndQuery('all', query);
+    const { query, category } = this.state;
+    const apiProducts = await api.getProductsFromCategoryAndQuery(category, query);
     return apiProducts.results;
   }
 
@@ -36,17 +42,22 @@ export default class Home extends Component {
 
   render() {
     const { products, loading } = this.state;
-    // console.log(products, 'oi');
+    console.log(this.state);
     return (
       <main>
         <label data-testid="home-initial-message" htmlFor="search">
           Digite algum termo de pesquisa ou escolha uma categoria.
-          <input id="search" data-testid="query-input" onChange={ this.handleChange } />
+          <input
+            id="search"
+            data-testid="query-input"
+            onChange={ this.handleChange }
+            name="query"
+          />
           <button type="button" data-testid="query-button" onClick={ this.handleClick }>
             Buscar
           </button>
         </label>
-        <SideBar />
+        <SideBar handleChange={ this.handleChange } />
         <ButtonCart />
         <section>
           { loading ? products.map((product, index) => (<Product

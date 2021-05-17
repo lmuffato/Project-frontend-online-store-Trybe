@@ -12,6 +12,8 @@ class Home extends Component {
       inputSearch: '',
       products: [],
     };
+    this.selectCategory = this.selectCategory.bind(this);
+    this.searchFunction = this.searchFunction.bind(this);
   }
 
   componentDidMount() {
@@ -27,18 +29,27 @@ class Home extends Component {
   handleProductsByQuery = (event) => {
     event.preventDefault();
     const { inputSearch } = this.state;
-    getProductsFromCategoryAndQuery('', inputSearch).then(({ results: products }) => {
+    this.searchFunction('', inputSearch);
+  }
+
+  searchFunction(id = '', text = '') {
+    getProductsFromCategoryAndQuery(id, text).then(({ results: products }) => {
       this.setState({
         products,
       });
     });
   }
 
+  selectCategory({ target }) {
+    const dataCategoryId = target.getAttribute('data-category-id');
+    this.searchFunction(dataCategoryId, '');
+  }
+
   render() {
     const { inputSearch, products } = this.state;
     return (
       <section className="container-home">
-        <CategoriesList />
+        <CategoriesList onClick={ this.selectCategory } />
         <section className="container-search-products">
           <Header
             handleInput={ this.handleInput }

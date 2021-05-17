@@ -5,6 +5,7 @@ import ProductCard from './ProductCard';
 class Products extends Component {
   render() {
     const { products } = this.props;
+    // console.log(this.props);
     return (
       <section className="products-container">
         {products.map((product) => <ProductCard key={ product.id } item={ product } />)}

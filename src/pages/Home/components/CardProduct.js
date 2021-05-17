@@ -3,6 +3,18 @@ import PropTypes from 'prop-types';
 import NotFound from '../NotFound';
 
 class CardProduct extends React.Component {
+  constructor() {
+    super();
+
+    this.state = { addedProducts: '', };
+
+    this.addProduct = this.addProduct.bind(this);
+  }
+
+  addProduct({ target }) {
+    this.setState({ addedProducts: target.id });
+  }
+
   render() {
     const { products } = this.props;
 
@@ -14,6 +26,14 @@ class CardProduct extends React.Component {
               <p>{product.title}</p>
               <img src={ product.thumbnail } alt={ product.title } />
               <p>{product.price}</p>
+              <button
+                type="button"
+                data-testid="product-detail-add-to-cart"
+                onClick={ this.addProduct }
+                id={ product.id }
+              >
+                Adicionar ao carrinho
+              </button>
             </div>
           ))}
       </div>

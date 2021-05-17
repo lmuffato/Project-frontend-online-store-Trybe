@@ -9,8 +9,20 @@ class Home extends Component {
     super();
     this.state = {
       inputValue: '',
+      searchedProducts: '',
+      filteredCategory: '',
       products: [],
     };
+  }
+
+  filterCategory = async (event) => {
+    const { id } = event.target;
+    const { searchedProducts } = this.state;
+    const currCatergory = await api.getProductsFromCategoryAndQuery(id, searchedProducts);
+    this.setState({
+      products: currCatergory.results,
+      filteredCategory: id,
+    });
   }
 
   productName = (event) => {
@@ -18,11 +30,13 @@ class Home extends Component {
     this.setState({ inputValue: value });
   }
 
-  getProducts = async () => {
-    const { inputValue } = this.state;
-    const productsList = await api.getProductsFromCategoryAndQuery(undefined, inputValue);
+  filterSearchedProducts = async () => {
+    const { inputValue, filteredCategory } = this.state;
+    const productsList = await
+    api.getProductsFromCategoryAndQuery(filteredCategory, inputValue);
     this.setState({
       products: productsList.results,
+      searchedProducts: inputValue,
     });
   }
 
@@ -39,7 +53,7 @@ class Home extends Component {
         <button
           data-testid="query-button"
           type="button"
-          onClick={ this.getProducts }
+          onClick={ this.filterSearchedProducts }
         >
           Consultar
         </button>
@@ -47,7 +61,7 @@ class Home extends Component {
         <h3 data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </h3>
-        <CategoriesList />
+        <CategoriesList filterCategory={ this.filterCategory } />
         { products.length < 1
           ? <h2>Nenhum Produto foi encontrado</h2>
           : products.map((item) => (

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import ListagemProdutos from './Components/ListagemProdutos';
+import Details from './Components/Details';
 import ShoppingCart from './Pages/ShoppingCart';
 
 class App extends Component {
@@ -55,6 +56,7 @@ class App extends Component {
               />
             ) }
           />
+          <Route path="/details/:id" render={ (props) => <Details { ...props } /> } />
         </Switch>
       </BrowserRouter>
     );

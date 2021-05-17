@@ -6,7 +6,7 @@ import SearchProduct from '../components/SearchProducts';
 import CategoriesBar from '../components/CategoriesBar';
 
 class ProductList extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
     this.state = {
       category: '',

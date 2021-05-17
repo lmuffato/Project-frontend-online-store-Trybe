@@ -1,5 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { getCategories } from '../services/api';
+import './CategoriesBar.css';
 
 class CategoriesBar extends React.Component {
   constructor() {
@@ -33,30 +35,32 @@ class CategoriesBar extends React.Component {
 
   renderLi(category) {
     return (
-      <li
+      <button
+        className="category-item"
         key={ category.id }
         id={ category.id }
+        type="button"
+        data-testid="category"
+        value={ category.id }
+        onClick={ this.handleClick }
       >
-        <button
-          type="button"
-          data-testid="category"
-          value={ category.id }
-          onClick={ this.handleClick }
-        >
-          {category.name}
-        </button>
-      </li>
+        {category.name}
+      </button>
     );
   }
 
   render() {
     return (
-      <div>
-        <p>Categorias:</p>
-        <ul>{this.allCategories()}</ul>
-      </div>
+      <section className="categories">
+        <h3>Categorias:</h3>
+        <aside className="categories">{this.allCategories()}</aside>
+      </section>
     );
   }
 }
+
+CategoriesBar.propTypes = {
+  handle: PropTypes.func.isRequired,
+};
 
 export default CategoriesBar;

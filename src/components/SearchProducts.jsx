@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types'
 import * as api from '../services/api';
 import './SearchProducts.css';
 
@@ -8,13 +9,14 @@ class SearchProducts extends Component {
     this.state = {
       query: '',
       productsList: [],
-      
+      category: '',
     };
   }
 
-  componentWillReceiveProps() {
-    this.search();
-    console.log('filtro');
+  componentDidUpdate(prevProps) {
+    const { category: categoryPrevious } = prevProps;
+    const { category } = this.props;
+    if (category !== categoryPrevious) this.search();
   }
 
   handle = ({ target: { value } }) => {
@@ -83,5 +85,9 @@ class SearchProducts extends Component {
     );
   }
 }
+
+SearchProducts.propTypes = {
+  category: PropTypes.string.isRequired,
+};
 
 export default SearchProducts;

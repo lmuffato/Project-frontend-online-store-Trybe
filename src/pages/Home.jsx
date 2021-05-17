@@ -3,7 +3,7 @@ import '../components/Categories/Categories.css';
 import SearchBar from '../components/SearchBar/SearchBar';
 import Categories from '../components/Categories/Categories';
 import Products from '../components/Products/Products';
-import { getProductsByQuery } from '../services/api';
+import { getProductsFromCategoryAndQuery } from '../services/api';
 
 class Home extends Component {
   constructor() {
@@ -11,14 +11,15 @@ class Home extends Component {
 
     this.state = {
       requestedProducts: [],
-    }
+    };
     this.fetchProducts = this.fetchProducts.bind(this);
   }
 
   async fetchProducts(requestedProduct) {
-
-    const result = await getProductsByQuery(requestedProduct);
-    this.setState({requestedProducts: result});
+    const response = await getProductsFromCategoryAndQuery(requestedProduct);
+    const { results } = response;
+    this.setState({ requestedProducts: results });
+    console.log(response.results);
   }
 
   render() {

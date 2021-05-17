@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import './SearchBar.css';
 
 class SearchBar extends Component {
@@ -11,13 +12,13 @@ class SearchBar extends Component {
     };
   }
 
-  handle({ target: value }) {
+  handle({ target: { value } }) {
     this.setState({ inputValue: value });
   }
 
   render() {
     const { onClick } = this.props;
-    const { value } = this.state;
+    const { inputValue } = this.state;
 
     return (
       <section className="search">
@@ -43,7 +44,7 @@ class SearchBar extends Component {
         </Link>
         <button
           type="button"
-          onClick={() => onClick(value) }
+          onClick={ () => onClick(inputValue) }
           data-testid="query-button"
         >
           PESQUISAR
@@ -52,5 +53,9 @@ class SearchBar extends Component {
     );
   }
 }
+
+SearchBar.propTypes = {
+  onClick: PropTypes.func.isRequired,
+};
 
 export default SearchBar;

@@ -81,13 +81,14 @@ class ListagemProdutos extends Component {
 
         { products === []
           ? (<p>Nenhum produto foi encontrado</p>)
-          : products.map(({ title, price, thumbnail, id }) => (
+          : products.map((product) => (
             <ProductCard
-              id={ id }
-              key={ id }
-              title={ title }
-              price={ price }
-              imagePath={ thumbnail }
+              product={ product }
+              id={ product.id }
+              key={ product.id }
+              title={ product.title }
+              price={ product.price }
+              imagePath={ product.thumbnail }
             />
           ))}
       </div>

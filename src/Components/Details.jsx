@@ -1,31 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { getProductsFromId } from '../services/api';
+// import { getProductsFromId } from '../services/api';
 
 class Details extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      product: {},
-    };
-  }
-
-  async componentDidMount() {
-    await this.myProduct();
-  }
-
-  myProduct = async () => {
-    const { match } = this.props;
-    const { params } = match;
-    const { id } = params;
-    const produc = await getProductsFromId(id);
-    this.setState({ product: produc });
-  }
-
   render() {
-    const { product } = this.state;
-    const { title, id, price, thumbnail, condition } = product;
+    const { location } = this.props;
+    const { state } = location;
+    const { productDetail } = state;
+    const { title, id, price, thumbnail, condition } = productDetail;
     return (
       <div>
         <img src={ thumbnail } alt="imagem do produto" />
@@ -51,11 +34,14 @@ class Details extends Component {
 }
 
 Details.propTypes = {
-  match: PropTypes.shape({
-    isExact: PropTypes.bool,
-    params: PropTypes.shape({ id: PropTypes.string }),
-    path: PropTypes.string,
-    url: PropTypes.string,
+  location: PropTypes.shape({
+    hash: PropTypes.string.isRequired,
+    key: PropTypes.string.isRequired,
+    pathname: PropTypes.string.isRequired,
+    search: PropTypes.string.isRequired,
+    state: PropTypes.shape({
+      productDetail: PropTypes.objectOf(PropTypes.string),
+    }),
   }).isRequired,
 };
 

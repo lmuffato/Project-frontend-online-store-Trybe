@@ -10,11 +10,11 @@ class Products extends Component {
   productsList(products) {
     const { results } = products;
     return results.map((product) => (
-      <li data-testid="product" key={ product.id }>
-        {product.title}
-        <img src={ product.thumbnail } alt={ product.title } />
-        {product.price}
-      </li>
+      <div data-testid="product" className="product-card" key={ product.id }>
+        <p>{product.title}</p>
+        <p>{product.price}</p>
+        <img className="product-img" src={ product.thumbnail } alt={ product.title } />
+      </div>
     ));
   }
 

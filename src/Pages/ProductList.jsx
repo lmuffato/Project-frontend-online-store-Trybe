@@ -1,16 +1,18 @@
 // implement AddMovie component here
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import cartIcon from './ShoppinCart/cartIcon.png';
 import SearchProduct from '../components/SearchProducts';
 import CategoriesBar from '../components/CategoriesBar';
 
 class ProductList extends Component {
   render() {
-    // const { } = this.props;
     return (
       <div>
         <label htmlFor="searchText" data-testid="text-input-label">
           Inclui o texto
           <input
+            placeholder="Pesquisar produto..."
             data-testid="text-input"
             type="text"
             name="searchProduct"
@@ -24,6 +26,16 @@ class ProductList extends Component {
           </p>
           <SearchProduct />
         </div>
+        <Link
+          to="/ShoppingCart"
+        >
+          <img
+            alt="shopping-cart"
+            data-testid="shopping-cart-button"
+            className="shopping-cart-img"
+            src={ cartIcon }
+          />
+        </Link>
         <CategoriesBar />
       </div>
     );

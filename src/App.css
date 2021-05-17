@@ -3,3 +3,14 @@
   margin: 0;
   padding: 0;
 }
+
+.cart-button-container {
+  display: flex;
+}
+
+.shopping-cart-img {
+  display: flex;
+  flex-direction: row;
+  height: 50px;
+  width: 50px;
+}

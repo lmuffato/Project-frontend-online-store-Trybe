@@ -18,13 +18,15 @@ class ShoppingCart extends Component {
     const { products, quantity } = this.props;
     const reducedProducts = this.reduce(products);
 
-    // if (isLoading) {
-    //   return (
-    //     <p>Carregando...</p>
-    //   );
-    // }
-
-    if (products !== []) {
+    if (reducedProducts.length === 0) {
+      return (
+        <div>
+          <span>
+            <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
+          </span>
+        </div>
+      );
+    }else {
       return (
         <>
           {reducedProducts.map((product) => (
@@ -38,20 +40,13 @@ class ShoppingCart extends Component {
       );
     }
 
-    return (
-      <div>
-        <span>
-          <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
-
-        </span>
-      </div>
-    );
+    
   }
 }
 
 ShoppingCart.propTypes = {
-  products: PropTypes.string.isRequired,
-  quantity: PropTypes.number.isRequired,
+  products: PropTypes.arrayOf(PropTypes.string).isRequired,
+  quantity: PropTypes.object.isRequired,
 };
 
 export default ShoppingCart;

@@ -19,9 +19,11 @@ export default class Home extends Component {
     const { value, name } = event.target;
     this.setState({
       [name]: value,
+    }, () => {
+      if (name === 'category') {
+        this.handleClick();
+      }
     });
-
-    if (name === 'category') this.handleClick();
   }
 
   getProducts = async () => {
@@ -63,7 +65,7 @@ export default class Home extends Component {
           { !loading ? products.map((product, index) => (<Product
             key={ index }
             product={ product }
-          />)) : '' }
+          />)) : 'Carregando...' }
           { products ? <span>Nenhum produto foi encontrado</span> : '' }
         </section>
       </main>

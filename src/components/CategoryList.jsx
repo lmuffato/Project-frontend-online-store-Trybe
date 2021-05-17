@@ -18,7 +18,7 @@ export default class CategoryList extends React.Component {
 
   render() {
     const { categories } = this.state;
-    const { handleChange, checked } = this.props;
+    const { checked, request } = this.props;
     return (
       <div className="category-box">
         {categories.map((item) => (
@@ -29,11 +29,12 @@ export default class CategoryList extends React.Component {
             className="category"
           >
             <input
-              type="checkbox"
+              type="radio"
               checked={ checked }
-              name={ item.id }
+              name="category"
               value={ item.id }
-              onChange={ handleChange }
+              // onChange={ handleChange }
+              onClick={ request }
               className="category-checkbox"
             />
             {item.name}
@@ -46,4 +47,6 @@ export default class CategoryList extends React.Component {
 
 CategoryList.propTypes = {
   handleChange: PropTypes.func,
+  request: PropTypes.func,
+  checked: PropTypes.bool,
 }.isRequired;

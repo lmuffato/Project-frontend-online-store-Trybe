@@ -12,8 +12,8 @@ export default class Home extends React.Component {
 
     this.state = {
       input: undefined,
-      checkbox: [],
-      checked: false,
+      checkbox: '',
+      // checked: false,
       items: [],
       loading: true,
     };
@@ -39,17 +39,9 @@ export default class Home extends React.Component {
   }
 
   handleChangeCheckbox = async ({ target }) => {
-    await this.setState((prevState) => ({
-      checkbox: [...prevState.checkbox, target.value],
-      checked: target.checked,
+    await this.setState(() => ({
+      checkbox: target.value,
     }));
-    const { checked } = this.state;
-    if (checked === false) {
-      // console.log('ok');
-      this.setState((prevState) => ({
-        checkbox: prevState.checkbox.filter((id) => id !== target.value),
-      }));
-    }
   }
 
   handleArrayItems = (items) => {
@@ -102,6 +94,7 @@ export default class Home extends React.Component {
         <CategoryList
           className="product-list"
           handleChange={ this.handleChangeCheckbox }
+          request={ this.request }
         />
       </div>
     );

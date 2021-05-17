@@ -33,6 +33,7 @@ class Categories extends Component {
             key={ thisCategory.id }
             type="button"
             data-testid="category"
+            value={ thisCategory.id }
             onClick={ func }
           >
             {thisCategory.name}

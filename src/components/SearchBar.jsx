@@ -16,44 +16,44 @@ class SearchBar extends React.Component {
     this.handleFilterCategory = this.handleFilterCategory.bind(this);
   }
 
-  componentDidMount() {
-    this.handleFilter();
-  }
-
   async handleFilter() {
     const { filter, status } = this.state;
-    const { getQuery } = apiUrl;
+    // console.log('Status', status, 'Filtro', filter);
+    const { getProductsFromCategoryAndQuery } = apiUrl;
     if (status === true) {
-      const result = await getQuery(filter);
+      const result = await getProductsFromCategoryAndQuery('', filter);
+      console.log(result);
       this.setState({
         products: result.results,
+      }, () => {
+        // console.log('State', this.state.products);
       });
     }
   }
 
   async handleFilterCategory(event) {
-    const category = event.target.innerText;
-    console.log(category);
+    const category = event.target.value;
+    // console.log(category);
     const { getCategoryId } = apiUrl;
     const result = await getCategoryId(category);
-    console.log(result.results);
+    this.setState({ products: result.results });
   }
 
   products() {
     const { products } = this.state;
+    console.log(products);
     if (products.length === 0) {
       return <p>Nenhum produto foi encontrado</p>;
     }
+    console.log('Produts', products);
     return (
-      products.map((product) => {
-        return (
-          <div data-testid="product" key={ product.id }>
-            <img src={ product.thumbnail } alt={ product.id } />
-            <h6>{ product.title }</h6>
-            <p>{` R$ ${ product.price } `}</p>
-          </div>
-        );
-      })
+      products.map((product) => (
+        <div data-testid="product" key={ product.id }>
+          <img src={ product.thumbnail } alt={ product.id } />
+          <h6>{product.title}</h6>
+          <p>{` R$ ${product.price} `}</p>
+        </div>
+      ))
     );
   }
 
@@ -81,7 +81,7 @@ class SearchBar extends React.Component {
         <button type="button" data-testid="query-button" onClick={ this.handleFilter }>
           Search
         </button>
-        { this.products() }
+        { this.products()}
         <Categories func={ this.handleFilterCategory } />
       </div>
     );

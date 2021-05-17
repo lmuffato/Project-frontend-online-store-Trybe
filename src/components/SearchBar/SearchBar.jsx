@@ -3,11 +3,31 @@ import { Link } from 'react-router-dom';
 import './SearchBar.css';
 
 class SearchBar extends Component {
+  constructor() {
+    super();
+    this.handle = this.handle.bind(this);
+    this.state = {
+      inputValue: '',
+    };
+  }
+
+  handle({ target: value }) {
+    this.setState({ inputValue: value });
+  }
+
   render() {
+    const { onClick } = this.props;
+    const { value } = this.state;
+
     return (
       <section className="search">
         <label data-testid="home-initial-message" htmlFor="searchBar">
-          <input id="searchBar" type="search" />
+          <input
+            onChange={ this.handle }
+            data-testid="query-input"
+            id="searchBar"
+            type="search"
+          />
           <br />
           Digite algum termo de pesquisa ou escolha uma categoria.
         </label>
@@ -21,6 +41,13 @@ class SearchBar extends Component {
             alt="Carrinho de compras"
           />
         </Link>
+        <button
+          type="button"
+          onClick={() => onClick(value) }
+          data-testid="query-button"
+        >
+          PESQUISAR
+        </button>
       </section>
     );
   }

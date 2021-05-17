@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Categories from '../components/Categories';
 import SearchBar from '../components/SearchBar';
 import ProductList from '../components/ProductList';
+import ProductNotFound from '../components/ProductNotFound';
 import * as api from '../services/api';
 
 export default class Home extends Component {
@@ -10,6 +11,7 @@ export default class Home extends Component {
     this.state = {
       productsList: [],
       search: '',
+      message: true,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleFetchProducts = this.handleFetchProducts.bind(this);
@@ -29,12 +31,16 @@ export default class Home extends Component {
 
   async handleFetchProducts() {
     const { search } = this.state;
-    const result = await api.getProductsFromQuery(search);
-    return this.setState({ productsList: result.results, search: '' });
+    const result = await api.getProductsFromCategoryAndQuery('', search);
+    if (!result.results) {
+      this.setState({ productsList: [], message: true, search: '' });
+    } else {
+      this.setState({ productsList: result.results, search: '', message: false });
+    }
   }
 
   render() {
-    const { search, productsList } = this.state;
+    const { search, message, productsList } = this.state;
     return (
       <>
         <SearchBar
@@ -42,8 +48,10 @@ export default class Home extends Component {
           handleChange={ this.handleChange }
           handleClick={ this.handleClick }
         />
-        <Categories />
-        <ProductList products={ productsList } />
+        <aside>
+          <Categories />
+        </aside>
+        {message ? <ProductNotFound /> : <ProductList products={ productsList } /> }
       </>
     );
   }

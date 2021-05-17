@@ -1,44 +1,51 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { getProductsFromQuery } from '../../services/api';
+
+import { getProductsFromCategoryAndQuery } from '../../services/api';
 import CardProduct from './components/CardProduct';
 import Category from './components/Category';
 
-
-
 class Home extends React.Component {
   constructor() {
-    super()
+    super();
 
     this.state = {
-      resultado: [],
-      texto: '',
+      products: [],
+      searchedQuery: '',
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
   }
 
   async handleClick() {
-    const { texto } = this.state;
-    const request = await getProductsFromQuery(texto);
+    const { searchedQuery } = this.state;
+
+    const request = await getProductsFromCategoryAndQuery('', searchedQuery);
+
     this.setState({
-      resultado: request.results,
-    })
+      products: request.results,
+    });
   }
 
-  handleChange({target}) {
+  handleChange({ target }) {
     this.setState({
-      texto: target.value,
-    })
+      searchedQuery: target.value,
+    });
   }
 
   render() {
-    const { resultado } = this.state;
+    const { products } = this.state;
     return (
       <>
-        <input type="text" data-testid="query-input" onChange={this.handleChange} />
+        <input type="text" data-testid="query-input" onChange={ this.handleChange } />
 
-        <button data-testid="query-button" onClick={this.handleClick}>Pesquisa</button>
+        <button
+          data-testid="query-button"
+          onClick={ this.handleClick }
+          type="button"
+        >
+          Pesquisa
+        </button>
 
         <strong data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
@@ -47,7 +54,7 @@ class Home extends React.Component {
           <button type="button" data-testid="shopping-cart-button">Carrinho</button>
         </Link>
         <Category />
-        <CardProduct products={ resultado } />
+        <CardProduct products={ products } />
 
       </>
     );

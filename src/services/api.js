@@ -2,6 +2,7 @@ export async function getCategories() {
   // Implemente aqui
   const resolve = await fetch('https://api.mercadolibre.com/sites/MLB/categories');
   const data = await resolve.json();
+
   return data;
 }
 

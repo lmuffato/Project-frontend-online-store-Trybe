@@ -5,7 +5,7 @@ export async function getCategories() {
 }
 
 export async function getProductsFromCategoryAndQuery(...props) {
-  const { searchText, categoryId } = props;
+  const [searchText, categoryId] = props;
   if (searchText && categoryId) {
     return (
       await fetch(

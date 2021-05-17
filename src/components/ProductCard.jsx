@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 // import { getProductsFromCategoryAndQuery } from '../services/api';
 
 export default class ProductCard extends React.Component {

@@ -14,8 +14,9 @@ class Index extends Component {
 
     this.state = {
       categories: [],
+      categoryId: '',
       searchText: '',
-      products: [],
+      products: undefined, // inicia como undefined pra facilitar a condição do ternário em Products.jsx
     };
   }
 
@@ -30,8 +31,8 @@ class Index extends Component {
   }
 
   async fetchProducts() {
-    const { searchText } = this.state;
-    const products = await api.getProductsFromCategoryAndQuery(searchText);
+    const { searchText, categoryId } = this.state;
+    const products = await api.getProductsFromCategoryAndQuery(searchText, categoryId);
     this.setState({ products });
   }
 

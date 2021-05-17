@@ -4,8 +4,7 @@ export async function getCategories() {
   ).json();
 }
 
-export async function getProductsFromCategoryAndQuery(...props) {
-  const { searchText, categoryId } = props;
+export async function getProductsFromCategoryAndQuery(searchText, categoryId) {
   if (searchText && categoryId) {
     return (
       await fetch(

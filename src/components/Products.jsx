@@ -20,11 +20,12 @@ class Products extends Component {
 
   render() {
     const { products } = this.props;
+    console.log(products);
 
     return (
       <section>
         <ul>
-          {products.length === 0 ? 'loading...' : this.productsList(products)}
+          { products ? this.productsList(products) : 'loading...' }
         </ul>
       </section>
     );
@@ -32,13 +33,11 @@ class Products extends Component {
 }
 
 Products.propTypes = {
-  products: PropTypes.shape({
-    id: PropTypes.string,
-    title: PropTypes.string,
-    thumbnail: PropTypes.string,
-    price: PropTypes.number,
-    length: PropTypes.number,
-  }).isRequired,
+  products: PropTypes.objectOf(PropTypes.object),
+};
+
+Products.defaultProps = {
+  products: undefined,
 };
 
 export default Products;

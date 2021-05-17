@@ -37,10 +37,7 @@ class Categories extends Component {
 
 Categories.propTypes = {
   getData: PropTypes.func.isRequired,
-  categories: PropTypes.shape({
-    id: PropTypes.string,
-    name: PropTypes.string,
-  }).isRequired,
+  categories: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default Categories;

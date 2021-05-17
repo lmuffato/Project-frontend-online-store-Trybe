@@ -3,23 +3,23 @@ import PropTypes from 'prop-types';
 
 class CardItem extends Component {
   render() {
-    const { products } = this.props;
+    const { item: { title, price, thumbnail, id } } = this.props;
+
     return (
-      <div>
-        {products.map(({ title, price, thumbnail, id }) => (
-          <div data-testid="product" key={ id }>
-            <h2>{ title }</h2>
-            <span>{ price }</span>
-            <img src={ thumbnail } alt="alt" />
-          </div>
-        ))}
+      <div data-testid="product" key={ id }>
+        <h2>{ title }</h2>
+        <span>{ price }</span>
+        <img src={ thumbnail } alt="alt" />
       </div>
     );
   }
 }
 
 CardItem.propTypes = {
-  products: PropTypes.string,
+  title: PropTypes.string,
+  price: PropTypes.number,
+  thumbnail: PropTypes.string,
+  id: PropTypes.number,
 }.isRequired;
 
 export default CardItem;

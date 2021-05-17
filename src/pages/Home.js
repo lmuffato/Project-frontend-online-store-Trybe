@@ -1,8 +1,8 @@
 /* eslint-disable react/no-unused-state */
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import CardItem from '../components/CardItem';
 import { getProductsFromCategoryAndQuery, getCategories } from '../services/api';
+import CardItems from '../components/CardItems';
 
 export default class Home extends Component {
   constructor(props) {
@@ -14,7 +14,8 @@ export default class Home extends Component {
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.fetchCategories = this.fetchCategories.bind(this);
-}
+    this.fetchProducts = this.fetchProducts.bind(this);
+  }
 
   componentDidMount() {
     this.fetchCategories();
@@ -27,7 +28,7 @@ export default class Home extends Component {
     });
   }
 
-  fetchResponse = async () => {
+  fetchProducts = async () => {
     const { inputValue } = this.state;
     const data = await getProductsFromCategoryAndQuery(null, inputValue);
     this.setState({
@@ -36,9 +37,9 @@ export default class Home extends Component {
   };
 
   fetchCategories() {
-    getCategories().then((result) => this.setState({
-      categories: result,
-    }));
+    getCategories().then((result) => {
+      this.setState({ categories: result });
+    });
   }
 
   render() {
@@ -53,7 +54,7 @@ export default class Home extends Component {
         />
         <button
           type="button"
-          onClick={ this.fetchResponse }
+          onClick={ this.fetchProducts }
           data-testid="query-button"
         >
           Click
@@ -62,7 +63,6 @@ export default class Home extends Component {
         <p data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
-        <CardItem products={ products } />
         <ul>
           { categories
             .map(({ id, name }) => <li key={ id } data-testid="category">{ name }</li>) }
@@ -73,6 +73,7 @@ export default class Home extends Component {
         >
           Cart
         </Link>
+        <CardItems products={ products } />
       </div>
     );
   }

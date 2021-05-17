@@ -12,7 +12,7 @@ export default class Home extends React.Component {
 
     this.state = {
       input: undefined,
-      checkbox: undefined,
+      checkbox: [],
       checked: false,
       items: [],
       loading: true,
@@ -45,7 +45,7 @@ export default class Home extends React.Component {
     }));
     const { checked } = this.state;
     if (checked === false) {
-      console.log('ok');
+      // console.log('ok');
       this.setState((prevState) => ({
         checkbox: prevState.checkbox.filter((id) => id !== target.value),
       }));

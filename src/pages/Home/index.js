@@ -12,7 +12,11 @@ class Home extends React.Component {
   }
 
   render() {
-    const { onSearch, onFilterByCategory, onFilterByQuery, products } = this.props;
+    const {
+      onSearch, onFilterByCategory, onFilterByQuery,
+      products, setCart,
+    } = this.props;
+
     return (
       <>
         <input type="text" data-testid="query-input" onChange={ onFilterByQuery } />
@@ -32,8 +36,7 @@ class Home extends React.Component {
           <button type="button" data-testid="shopping-cart-button">Carrinho</button>
         </Link>
         <Category onCategorySelection={ onFilterByCategory } />
-        <CardProduct products={ products } />
-
+        <CardProduct products={ products } setCart={ setCart } />
       </>
     );
   }

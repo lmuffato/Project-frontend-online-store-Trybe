@@ -6,13 +6,32 @@ class CardProduct extends React.Component {
   constructor() {
     super();
 
-    this.state = { addedProducts: '', };
+    this.state = {
+      cart: [],
+      quantityCart: {},
+    };
 
     this.addProduct = this.addProduct.bind(this);
   }
 
   addProduct({ target }) {
-    this.setState({ addedProducts: target.id });
+    const { products, setCart } = this.props;
+    const { cart, quantityCart } = this.state;
+    const productFound = products.find((product) => product.id === target.id);
+    const updatedCart = [...cart, productFound];
+    const updatedQuantityCart = quantityCart[productFound.id] !== undefined
+      ? {
+        ...quantityCart,
+        [productFound.id]: quantityCart[productFound.id] + 1,
+      }
+      : {
+        ...quantityCart,
+        [productFound.id]: 1,
+      };
+    this.setState({
+      cart: updatedCart,
+    });
+    setCart(updatedCart, updatedQuantityCart);
   }
 
   render() {
@@ -28,7 +47,7 @@ class CardProduct extends React.Component {
               <p>{product.price}</p>
               <button
                 type="button"
-                data-testid="product-detail-add-to-cart"
+                data-testid="product-add-to-cart"
                 onClick={ this.addProduct }
                 id={ product.id }
               >

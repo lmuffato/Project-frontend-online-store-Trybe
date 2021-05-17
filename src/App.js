@@ -13,11 +13,14 @@ class App extends React.Component {
       products: [],
       selectedCategory: '',
       searchedQuery: '',
+      cart: [],
+      quantityCart: {},
     };
 
     this.handleClick = this.handleClick.bind(this);
     this.filterFromCategory = this.filterFromCategory.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.setCart = this.setCart.bind(this);
   }
 
   async handleClick() {
@@ -38,6 +41,13 @@ class App extends React.Component {
     });
   }
 
+  setCart(cart, quantityCart) {
+    this.setState({
+      cart,
+      quantityCart,
+    });
+  }
+
   async filterFromCategory(categoryId) {
     const { searchedQuery } = this.state;
     let products = await getProductsFromCategoryAndQuery(categoryId, searchedQuery);
@@ -49,7 +59,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { products } = this.state;
+    const { products, cart, quantityCart } = this.state;
     return (
       <BrowserRouter>
         <Switch>
@@ -59,9 +69,12 @@ class App extends React.Component {
               onFilterByCategory={ this.filterFromCategory }
               onFilterByQuery={ this.handleChange }
               products={ products }
+              setCart={ this.setCart }
             />
           </Route>
-          <Route path="/cart" component={ ShoppingCart } />
+          <Route path="/cart">
+            <ShoppingCart cart={ cart } quantityCart={ quantityCart } />
+          </Route>
         </Switch>
       </BrowserRouter>
     );

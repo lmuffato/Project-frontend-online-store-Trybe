@@ -3,12 +3,14 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import fetchProduct from '../services/itemApi';
 import shoppingCart from '../imagens/shoppingCart.svg';
+import Loading from './Loading';
 
 class ProductDetail extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       item: '',
+      loading: true,
     };
   }
 
@@ -22,11 +24,18 @@ class ProductDetail extends React.Component {
     const itemArray = await fetchProduct(params.id);
     this.setState({
       item: itemArray,
+      loading: false,
     });
   }
 
   render() {
-    const { item } = this.state;
+    const { item, loading } = this.state;
+    const loadingElement = <Loading />;
+
+    if (loading) {
+      return loadingElement;
+    }
+
     return (
       <div>
         <p data-testid="product-detail-name">{item.title}</p>

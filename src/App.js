@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import Home from './pages/Home';
-import CartItem from './pages/CartItem';
 import ProductDetails from './pages/ProductDetails';
 import Checkout from './pages/Checkout';
+import Cart from './pages/Cart';
 
 import './App.css';
 
@@ -41,32 +41,53 @@ class App extends Component {
     this.setState({ cartList: newCartList });
   }
 
-  render() {
-    const { cartList } = this.state;
-    return (
-      <Router>
-        <Route
-          path="/carrinho"
-          render={ (props) => (
-            <CartItem
-              { ...props }
-              cartList={ cartList }
-              changeQuantProductLength={ this.changeQuantProductLength }
-            />) }
-        />
-        <Route
-          exact
-          path="/"
-          render={ (props) => <Home { ...props } onClick={ this.handleClickAddCart } /> }
-        />
-        <Route
-          path="/details/:id"
-          component={ ProductDetails }
-        />
-        <Route path="/checkout" render={ (props) => <Checkout { ...props } /> } />
-      </Router>
-    );
-  }
+    handleDetailsToCart = async (product) => {
+      console.log(product);
+      this.setState((anterior) => ({
+        cartList: [...anterior.cartList, {
+          img: product.thumbnail,
+          title: product.title,
+          quant: 1,
+          price: product.price.toFixed(2),
+        }],
+      }));
+    }
+
+    render() {
+      const { cartList } = this.state;
+      return (
+        <Router>
+          <Route
+            path="/carrinho"
+            render={ (props) => (
+              <Cart
+                { ...props }
+                cartList={ cartList }
+                changeQuantProductLength={ this.changeQuantProductLength }
+              />) }
+          />
+          <Route
+            exact
+            path="/"
+            render={ (props) => (
+              <Home
+                { ...props }
+                onClick={ this.handleClickAddCart }
+              />
+            ) }
+          />
+          <Route
+            path="/details/:id"
+            render={ (props) => (
+              <ProductDetails
+                { ...props }
+                handleDetailsToCart={ this.handleDetailsToCart }
+              />) }
+          />
+          <Route path="/checkout" render={ (props) => <Checkout { ...props } /> } />
+        </Router>
+      );
+    }
 }
 
 export default App;

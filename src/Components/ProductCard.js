@@ -1,25 +1,24 @@
 import React from 'react';
 import * as api from '../services/api';
-import Search from './Search'
+// import Search from './Search'
 
 class ProductCard extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    const { productList } = this.props;
     this.state = {
-      text: ''
+      products: productList
     }
-    this.getQuery = this.getQuery.bind(this)
-  }
-  
-  getQuery(param) {
-    api.getProductsFromCategoryAndQuery()
-    return param
   }
 
   render() {
+    const { products } = this.state;
+    const { results } = products;
+    // console.log(results);
     return (
       <div>
-        <Search products = { this.getQuery } />
+        { results === undefined ? <h1>te</h1>: results.map((product) => <h1>{product.title}</h1>)}
+
       </div>
     )
   }

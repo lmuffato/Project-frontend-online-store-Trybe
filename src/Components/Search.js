@@ -1,6 +1,6 @@
 import React from 'react';
 import * as api from '../services/api';
-import ProductCard from './ProductCard'
+import ProductCard from './ProductCard';
 
 class Search extends React.Component {
   constructor(props) {
@@ -26,7 +26,7 @@ class Search extends React.Component {
     this.setState({ productList: query})
   }
   render() {
-
+    const { productList } = this.state;
   // const { products } = this.props
 
     return (
@@ -40,7 +40,7 @@ class Search extends React.Component {
             Digite algum termo de pesquisa ou escolha uma categoria.
 
           </h1>
-          <ProductCard productList = {}/>
+          <ProductCard productList = { productList }/>
         </div>
       </div>
     );

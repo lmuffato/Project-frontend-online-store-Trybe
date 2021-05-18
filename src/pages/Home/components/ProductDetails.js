@@ -39,8 +39,12 @@ class ProductDetails extends React.Component {
   }
 
   render() {
+    const { products } = this.props;
+    console.log(products);
     return (
-      <h1 data-testid="product-detail-name">Detalhes do Produto</h1>
+      <div>
+        <h1 data-testid="product-detail-name">Detalhes do Produto</h1>
+      </div>
     );
   }
 }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { oneOfType, objectOf, object, string, number } from 'prop-types';
+import { oneOfType, objectOf, object, string, number, bool, array } from 'prop-types';
 
 class ProductInfo extends Component {
   render() {
@@ -16,7 +16,7 @@ class ProductInfo extends Component {
 }
 
 ProductInfo.propTypes = {
-  product: objectOf(oneOfType([string, number, object])).isRequired,
-};
+  product: objectOf(oneOfType([string, number, object, bool, array])),
+}.isRequired;
 
 export default ProductInfo;

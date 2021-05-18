@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Category from './category_list';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import ShopCartButton from './ShopCartButton';
+import { Link } from 'react-router-dom';
 
 export default class ProductList extends Component {
   constructor() {
@@ -95,10 +96,13 @@ export default class ProductList extends Component {
     }
     return obj.map((item) => (
       <section data-testid="product" key={ item.id }>
-        <img src={ item.thumbnail } width="100px" alt="item.title" />
-        {item.title}
-        | PRICE:
-        {item.price}
+        <Link to={{pathname:`/product_details/${item.id}/${item.title}`, state:this.state }}>
+          {/* Solucao encontrada para passar parametros via link em https://medium.com/officialrajdeepsingh/how-to-pass-parameters-in-react-router-dom-link-7e8289574801 */}
+          <img src={ item.thumbnail } width="100px" alt="item.title" />
+          {item.title}
+          | PRICE:
+          {item.price}
+        </Link>
       </section>
     ));
   }

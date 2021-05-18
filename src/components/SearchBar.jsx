@@ -23,7 +23,6 @@ class SearchBar extends React.Component {
     const { getProductsFromCategoryAndQuery } = apiUrl;
     if (status === true) {
       const result = await getProductsFromCategoryAndQuery('', filter);
-      console.log(result);
       this.setState({
         products: result.results,
       }, () => {
@@ -35,23 +34,35 @@ class SearchBar extends React.Component {
   async handleFilterCategory(event) {
     const category = event.target.value;
     // console.log(category);
-    const { getCategoryId } = apiUrl;
-    const result = await getCategoryId(category);
-    this.setState({ products: result.results });
+    const { getProductsFromCategoryAndQuery } = apiUrl;
+    const result = await getProductsFromCategoryAndQuery(category, '');
+    const { results } = result;
+    this.setState({
+      products: results,
+    });
   }
 
   products() {
     const { products } = this.state;
-    console.log(products);
     if (products.length === 0) {
       return <p>Nenhum produto foi encontrado</p>;
     }
-    console.log('Produts', products);
     return (
-      products.map((product) => (
-        <div data-testid="product" key={ product.id }>
+      products.map((product, i) => (
+        <div
+          data-testid="product"
+          key={ product.id }
+        >
           <img src={ product.thumbnail } alt={ product.id } />
-          <h6>{product.title}</h6>
+          <Link
+            to={ {
+              pathname: `/Product-Details/${product.id}`,
+              state: { product: products[i] },
+            } }
+            data-testid="product-detail-link"
+          >
+            <h6>{product.title}</h6>
+          </Link>
           <p>{` R$ ${product.price} `}</p>
         </div>
       ))
@@ -83,7 +94,11 @@ class SearchBar extends React.Component {
           Search
         </button>
         <Link to="/cart" data-testid="shopping-cart-button">
-          <img src="https://image.flaticon.com/icons/png/512/126/126083.png" alt="Icone Cart" id="cart-image" />
+          <img
+            src="https://image.flaticon.com/icons/png/512/126/126083.png"
+            alt="Icone Cart"
+            id="cart-image"
+          />
         </Link>
         { this.products()}
         <Categories func={ this.handleFilterCategory } />
@@ -91,5 +106,7 @@ class SearchBar extends React.Component {
     );
   }
 }
+
+// vqv
 
 export default SearchBar;

@@ -16,17 +16,18 @@ class App extends Component {
   }
 
   handleButtonCartAdd = (event) => {
+    console.log(event.target);
     const { value } = event.target;
-    /* console.log(); */
+    const price = event.target.getAttribute('price');
     const { quantityCart } = this.state;
     if (quantityCart[value] === undefined) {
       this.setState((paststate) => ({
-        productsCart: [...paststate.productsCart, value],
+        productsCart: [...paststate.productsCart, { value, price }],
         quantityCart: { ...paststate.quantityCart, [value]: 1 },
       }));
     } else {
       this.setState((paststate) => ({
-        productsCart: [...paststate.productsCart, value],
+        productsCart: [...paststate.productsCart, { value, price }],
         quantityCart: { ...paststate.quantityCart,
           [value]: paststate.quantityCart[value] + 1 },
       }));
@@ -59,7 +60,7 @@ class App extends Component {
   handleExcludeButton = (event) => {
     const { value } = event.target;
     const { productsCart } = this.state;
-    const filtered = productsCart.filter((element) => element !== value);
+    const filtered = productsCart.filter((element) => element.value !== value);
     this.setState({
       productsCart: [...filtered],
     });

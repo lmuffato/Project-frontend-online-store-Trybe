@@ -4,7 +4,7 @@ import Item from './Item';
 
 class ListItems extends React.Component {
   render() {
-    const { arrayOfItems } = this.props;
+    const { arrayOfItems, func } = this.props;
     return (
       <>
         { arrayOfItems.map(
@@ -13,6 +13,7 @@ class ListItems extends React.Component {
             imagePath={ thumbnail }
             price={ price }
             key={ id }
+            func={ () => func({ title, price, thumbnail, id }) }
           />),
         )}
       </>

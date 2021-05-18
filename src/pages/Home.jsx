@@ -15,6 +15,7 @@ class Home extends React.Component {
     this.state = {
       categories: [],
       arrayOfItems: [],
+      cardProps: [],
     };
   }
 
@@ -29,6 +30,13 @@ class Home extends React.Component {
     });
   }
 
+  getPropsOfItem = (obj) => {
+    const { cardProps } = this.state;
+    this.setState({
+      cardProps: [...cardProps, obj],
+    });
+  }
+
   async fetchCategories() {
     const categories = await getCategories();
 
@@ -36,18 +44,24 @@ class Home extends React.Component {
   }
 
   render() {
-    const { categories, arrayOfItems } = this.state;
+    const { categories, arrayOfItems, cardProps } = this.state;
+    const location = {
+      pathname: '/Cart',
+      state: {
+        item: cardProps,
+      },
+    };
     return (
       <main>
         <CategoriesBar categories={ categories } />
         <section>
           <SearchBar func={ this.generateArray } />
           <Button>
-            <Link data-testid="shopping-cart-button" to="/Cart">Cart</Link>
+            <Link data-testid="shopping-cart-button" to={ location }>Cart</Link>
           </Button>
           {arrayOfItems.length === 0
             ? <p>Nenhum produto foi encontrado</p>
-            : <ListItems arrayOfItems={ arrayOfItems } />}
+            : <ListItems arrayOfItems={ arrayOfItems } func={ this.getPropsOfItem } />}
         </section>
       </main>
     );

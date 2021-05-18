@@ -7,7 +7,7 @@ function Routes() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/Cart" component={ Cart } />
+        <Route path="/Cart" render={ (props) => <Cart { ...props } /> } />
         <Route path="/" component={ Home } exact />
       </Switch>
     </BrowserRouter>

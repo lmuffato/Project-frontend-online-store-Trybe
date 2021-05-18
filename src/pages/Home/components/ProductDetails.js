@@ -9,21 +9,11 @@ class ProductDetails extends React.Component {
 
     this.state = {
       product: {},
-      addProduct: '',
     };
-    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
     this.loadProduct();
-  }
-
-  handleClick({ target }) {
-    this.setState({
-      addProduct: target.id,
-    });
-    const { setCart } = this.props;
-    setCart([target.id]);
   }
 
   async loadProduct() {
@@ -50,6 +40,7 @@ class ProductDetails extends React.Component {
 
   render() {
     const { product } = this.state;
+    const { setCart } = this.props;
 
     if (!product.attributes) return <h1>Loading...</h1>;
 
@@ -57,7 +48,7 @@ class ProductDetails extends React.Component {
       <div>
         <header>
           <Link to="/">Voltar</Link>
-          <Link to="/cart">Carrinho</Link>
+          <Link to="/cart" data-testid="shopping-cart-button">Carrinho</Link>
         </header>
         <h1 data-testid="product-detail-name">{ product.title }</h1>
         <span>{`R$ ${product.price}`}</span>
@@ -72,8 +63,9 @@ class ProductDetails extends React.Component {
         </ul>
         <button
           type="button"
-          onClick={ this.handleClick }
+          onClick={ setCart }
           id={ product.id }
+          data-testid="product-detail-add-to-cart"
         >
           Adicionar ao carrinho
         </button>

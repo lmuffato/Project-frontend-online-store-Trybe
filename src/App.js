@@ -41,9 +41,37 @@ class App extends React.Component {
     });
   }
 
-  setCart(cart) {
+  setCart({ target }) {
+    const { products, cart } = this.state;
+    let addedProduct = {};
+    let updatedCart = [];
+
+    const productFound = products.find((product) => product.id === target.id);
+
+    const foundInCart = cart.find((product) => product.data.id === target.id);
+
+    if (foundInCart) {
+      const increasedQuantity = foundInCart.quantity + 1;
+      addedProduct = {
+        ...foundInCart,
+        quantity: increasedQuantity,
+      };
+      updatedCart = cart.map((product) => {
+        if (product.data.id === target.id) {
+          product = addedProduct;
+        }
+        return product;
+      });
+    } else {
+      addedProduct = {
+        quantity: 1,
+        data: productFound,
+      };
+      updatedCart = [...cart, addedProduct];
+    }
+
     this.setState({
-      cart,
+      cart: updatedCart,
     });
   }
 

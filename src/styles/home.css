@@ -35,9 +35,9 @@
 
 .product {
   align-items: center;
+  border: 1px solid black;
   display: flex;
   flex-direction: column;
-  border: 1px solid black;
   margin: 2px;
   width: 300px;
 }
@@ -48,9 +48,9 @@
 }
 
 .detailsContainer {
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
 .imageProduct {

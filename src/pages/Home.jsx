@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import shoppingCart from '../imagens/shoppingCart.svg';
 import CategoryList from '../components/CategoryList';
-import ProductList from '../components/ProductCard';
+import ProductCard from '../components/ProductCard';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import Loading from './Loading';
 
@@ -88,7 +88,7 @@ export default class Home extends React.Component {
           </p>
           {loading
             ? <Loading />
-            : items.map((item) => <ProductList item={ item } key={ item.id } />)}
+            : items.map((item) => <ProductCard item={ item } key={ item.id } />)}
         </section>
         <CategoryList
           className="product-list"

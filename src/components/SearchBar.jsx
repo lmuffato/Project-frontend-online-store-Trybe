@@ -1,57 +1,23 @@
 import React from 'react';
-import { getProductsFromCategoryAndQuery } from '../services/api';
-import Card from './Card';
+import PropTypes from 'prop-types';
 import CartButton from './CartButton';
 import './styles/SearchBar.css';
 
 class SearchBar extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      text: '',
-      query: [],
-    };
-  }
-
-  handleChange = (event) => {
-    this.setState({ text: event.target.value });
-  };
-
-  handleClick = async (query) => {
-    const data = await getProductsFromCategoryAndQuery(null, query);
-    this.setState({ query: data });
-  };
-
-  cardsElements = () => {
-    const { query } = this.state;
-    const { results } = query;
-    return results.map((item) => (
-      <Card
-        title={ item.title }
-        image={ item.thumbnail }
-        price={ item.price }
-        key={ item.id }
-      />
-    ));
-  };
-
   render() {
-    const { text, query } = this.state;
-    const { results } = query;
-
+    const { getQuery, getProducts } = this.props;
     return (
       <div className="search-bar-container">
         <header className="search-bar">
           <input
             type="text"
             data-testid="query-input"
-            onChange={ this.handleChange }
-            value={ text }
+            onChange={ getQuery }
           />
           <button
             type="button"
             data-testid="query-button"
-            onClick={ () => this.handleClick(text) }
+            onClick={ getProducts }
           >
             Search
           </button>
@@ -60,12 +26,16 @@ class SearchBar extends React.Component {
             Digite algum termo de pesquisa ou escolha uma categoria.
           </h2>
         </header>
-        <section className="products-container">
-          {results === undefined ? null : this.cardsElements()}
-        </section>
       </div>
     );
   }
 }
+
+SearchBar.propTypes = {
+  props: PropTypes.shape({
+    getQuery: PropTypes.func,
+    getProducts: PropTypes.func,
+  }).isRequired,
+}.isRequired;
 
 export default SearchBar;

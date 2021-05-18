@@ -30,12 +30,16 @@ class App extends React.Component {
             price: clickedItemPrice,
             thumbnail: clickedItemThumbnail } },
         ),
-      }), () => console.log(this.state));
+      }));
     } else {
       const updatedCart = { ...cartList };
       updatedCart[clickedItemId].qty += 1;
       this.setState({ cartList: updatedCart });
     }
+  }
+
+  updateItemQtyInCart = (event) => {
+    console.log(event.target.getAttribute('value'));
   }
 
   render() {
@@ -54,7 +58,13 @@ class App extends React.Component {
           <Route
             exact
             path="/shopping-cart"
-            render={ (props) => <ShoppingCart { ...props } cartList={ cartList } /> }
+            render={ (props) => (
+              <ShoppingCart
+                { ...props }
+                cartList={ cartList }
+                updateItemQtyInCart={ this.updateItemQtyInCart }
+              />
+            ) }
           />
           <Route
             exact

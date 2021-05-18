@@ -4,7 +4,7 @@ import ShoppingCartItem from '../components/ShoppingCartItem';
 
 class ShoppingCart extends Component {
   render() {
-    const { cartList } = this.props;
+    const { cartList, updateItemQtyInCart } = this.props;
     return (
       <div>
         <div data-testid="shopping-cart-empty-message">
@@ -12,11 +12,12 @@ class ShoppingCart extends Component {
         </div>
         {Object.keys(cartList).map((item) => (
           <ShoppingCartItem
+            key={ [item] }
             title={ cartList[item].title }
             price={ cartList[item].price }
             qty={ cartList[item].qty }
             thumbnail={ cartList[item].thumbnail }
-            key={ item }
+            updateItemQtyInCart={ updateItemQtyInCart }
           />
         ))}
       </div>

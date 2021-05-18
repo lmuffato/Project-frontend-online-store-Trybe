@@ -102,7 +102,7 @@ class Evaluation extends React.Component {
           />
           <button
             type="button"
-            // onClick={ this.onButtonClick }
+            onClick={ this.onButtonClick }
           >
             Avaliar
           </button>

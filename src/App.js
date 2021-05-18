@@ -16,12 +16,13 @@ class App extends Component {
 
   handleClickAddCart = async (event) => {
     const elementos = [...event.target.parentNode.children];
+    const product = [...elementos[0].children];
     this.setState((anterior) => ({
       cartList: [...anterior.cartList, {
-        img: elementos[1].src,
-        title: elementos[0].innerHTML,
+        img: product[1].src,
+        title: product[0].innerHTML,
         quant: 1,
-        price: elementos[2].innerHTML,
+        price: product[2].innerHTML,
       }],
     }));
   };

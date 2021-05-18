@@ -24,7 +24,7 @@ class CartItem extends Component {
 }
 
 CartItem.propTypes = {
-  cartList: PropTypes.arrayOf().isRequired,
+  cartList: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 };
 
 export default CartItem;

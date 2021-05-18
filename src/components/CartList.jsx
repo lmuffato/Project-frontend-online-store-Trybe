@@ -18,8 +18,8 @@ class CartList extends Component {
 
 CartList.propTypes = {
   product: PropTypes.shape({
-    quant: PropTypes.string,
-    price: PropTypes.number,
+    quant: PropTypes.number,
+    price: PropTypes.string,
     title: PropTypes.string,
     img: PropTypes.string,
   }).isRequired,

@@ -5,7 +5,8 @@ import { Link } from 'react-router-dom';
 class Product extends Component {
   render() {
     const { product, key, addCart } = this.props;
-    const { title, thumbnail, price, id } = product;
+    const { title, thumbnail, price, id, shipping } = product;
+    const { free_shipping: freeShipping } = shipping;
     const category = product.category_id;
     return (
       <div className="productList">
@@ -45,6 +46,9 @@ Product.propTypes = {
     price: PropTypes.number,
     id: PropTypes.string,
     category_id: PropTypes.string,
+    shipping: PropTypes.shape({
+      free_shipping: PropTypes.bool,
+    }).isRequired,
   }).isRequired,
 };
 

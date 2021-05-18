@@ -75,7 +75,14 @@ class CartItem extends Component {
 }
 
 CartItem.propTypes = {
-  cartList: PropTypes.arrayOf().isRequired,
+  cartList: PropTypes.arrayOf(PropTypes.shape(
+    {
+      img: PropTypes.string,
+      price: PropTypes.string,
+      quant: PropTypes.number,
+      title: PropTypes.string,
+    },
+  )).isRequired,
 };
 
 export default CartItem;

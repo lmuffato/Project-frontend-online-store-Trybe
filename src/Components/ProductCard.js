@@ -18,11 +18,11 @@ class ProductCard extends React.Component {
 }
 
 ProductCard.propTypes = {
-  productList: PropTypes.shape({
+  productList: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string,
     price: PropTypes.number,
     thumbnail: PropTypes.string,
-  }).isRequired,
+  })).isRequired,
 };
 
 export default ProductCard;

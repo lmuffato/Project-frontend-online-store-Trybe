@@ -53,19 +53,19 @@ class Index extends Component {
   }
 
   addToCart(product) {
-    this.setState((previousState) => {
-      const { shoppingCart } = previousState;
-      const addQuantity = shoppingCart.find((productShoppingCart) => product.id === productShoppingCart.id);
-
-      if (addQuantity) {
-        this.setState({
-
-        });
-      }
-      ({
+    // https://pt.stackoverflow.com/questions/315806/alterar-atributo-de-um-array-de-objetos-no-estado-na-aplica%25C3%25A7%25C3%25A3o
+    const { shoppingCart } = this.state;
+    const addQuantity = shoppingCart
+      .find((productShoppingCart) => product.id === productShoppingCart.id);
+    if (addQuantity) {
+      const index = shoppingCart.indexOf(addQuantity);
+      shoppingCart[index].quantity += 1;
+      this.setState({ shoppingCart });
+    } else {
+      this.setState({
         shoppingCart: [...shoppingCart, product],
       });
-    });
+    }
   }
 
   render() {

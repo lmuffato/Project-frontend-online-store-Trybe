@@ -50,6 +50,7 @@ Products.propTypes = {
     PropTypes.string,
     PropTypes.object,
   ])),
+  addToCart: PropTypes.func.isRequired,
 };
 
 Products.defaultProps = {

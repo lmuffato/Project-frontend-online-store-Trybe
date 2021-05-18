@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { oneOfType, objectOf, object, array, string, number } from 'prop-types';
 
 class CartBasket extends Component {
   emptyCart = () => (
@@ -10,10 +11,10 @@ class CartBasket extends Component {
 
   cartList = (products) => products.map((product) => (
     <div key={ product.id }>
-      <p>{product.title}</p>
+      <p data-testid="shopping-cart-product-name">{product.title}</p>
       <p>{product.price}</p>
-      <p>{product.thumbnail}</p>
-    </div>))
+      <p data-testid="shopping-cart-product-quantity">{product.quantity}</p>
+    </div>));
 
   render() {
     const { location } = this.props;
@@ -25,5 +26,9 @@ class CartBasket extends Component {
     );
   }
 }
+
+CartBasket.propTypes = {
+  location: objectOf(oneOfType([string, number, object, array])).isRequired,
+};
 
 export default CartBasket;

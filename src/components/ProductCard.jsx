@@ -22,9 +22,12 @@ class ProductCard extends Component {
 }
 
 ProductCard.propTypes = {
-  title: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
-  thumbnail: PropTypes.string.isRequired,
-};
+  title: PropTypes.string,
+  price: PropTypes.number,
+  thumbnail: PropTypes.string,
+  path: PropTypes.string,
+  id: PropTypes.string,
+  addToCart: PropTypes.func,
+}.isRequired;
 
 export default ProductCard;

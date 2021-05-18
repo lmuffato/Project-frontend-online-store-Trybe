@@ -12,15 +12,17 @@ class ShoppingCart extends React.Component {
     };
 
     this.addProductToCart = this.addProductToCart.bind(this);
-    // this.getProducts = this.getProducts.bind(this);
+    this.getProducts = this.getProducts.bind(this);
     this.setProducts = this.setProducts.bind(this);
   }
 
   componentDidMount() {
     const { location } = this.props;
+    this.getProducts();
     if (!location.state) return; // tratando problema qnd clica no carrinho vazio
     const { product } = location.state;
     this.addProductToCart(product);
+    console.log('componentDidMount');
   }
 
   setProducts() {
@@ -30,8 +32,15 @@ class ShoppingCart extends React.Component {
     if (storageItems) {
       productsFromLS = JSON.parse(localStorage.getItem('products'));
     }
-    productsFromLS.push(cart);
+    productsFromLS.push(cart[0]);
     localStorage.setItem('products', JSON.stringify(productsFromLS));
+  }
+
+  getProducts() {
+    const get = localStorage.getItem('products');
+    if (get) {
+      this.setState({ cart: JSON.parse(get) });
+    }
   }
 
   addProductToCart(product) {

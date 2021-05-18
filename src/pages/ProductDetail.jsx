@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import UserForm from '../components/UserReview';
 import ProductInfo from '../components/ProductInfo';
 
@@ -11,6 +12,14 @@ class ProductDetail extends Component {
     return (
       <>
         <ProductInfo product={ product } />
+        <Link
+          to={ {
+            pathname: '/shopping-cart', state: { product },
+          } }
+          data-testid="product-detail-add-to-cart"
+        >
+          Adicionar ao carrinho
+        </Link>
         <UserForm />
         {/* // <AddToCart /> */}
       </>

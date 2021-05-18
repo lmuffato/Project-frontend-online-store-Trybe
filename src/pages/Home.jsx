@@ -100,7 +100,7 @@ export default class Home extends Component {
             handleClick={ this.handleCategoryEvent }
           />
         </aside>
-        {message ? <ProductNotFound /> : <ProductList products={ productsList } /> }
+        {message ? <ProductNotFound /> : <ProductList products={ productsList } />}
       </>
     );
   }

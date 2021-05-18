@@ -10,6 +10,9 @@ class ProductCard extends Component {
         <h4>{ item.title }</h4>
         <img src={ item.thumbnail } alt="imagem do produto" />
         <p>{ item.price }</p>
+        { !item.shipping.free_shipping
+          ? <p data-testid="free-shipping">Frete Grátis</p>
+          : <p>Calcule o Frete</p>}
         <Link
           to={ { pathname: `/products/${item.id}`, state: { product: item } } }
           data-testid="product-detail-link"
@@ -38,6 +41,9 @@ ProductCard.propTypes = {
     title: PropTypes.string,
     thumbnail: PropTypes.string,
     price: PropTypes.number,
+    shipping: {
+      free_shipped: PropTypes.boolean,
+    }.isRequired,
   }).isRequired,
   addItemToCart: PropTypes.func.isRequired,
 };

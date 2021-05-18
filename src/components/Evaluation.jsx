@@ -118,6 +118,6 @@ class Evaluation extends React.Component {
 //   evaluationText: PropTypes.string,
 //   rating: PropTypes.number,
 //   reviewList: PropTypes.array,
-// };
+// }.isRequired;
 
 export default Evaluation;

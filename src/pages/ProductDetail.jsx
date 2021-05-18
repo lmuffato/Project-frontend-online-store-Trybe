@@ -1,30 +1,58 @@
 import React from 'react';
-import { getProductsFromCategoryAndQuery } from '../services/api';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import fetchProduct from '../services/itemApi';
+import shoppingCart from '../imagens/shoppingCart.svg';
 
 class ProductDetail extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      props,
+      item: '',
     };
   }
 
-  request = () => {
-    const { props } = this.state;
-    const { params } = props.match;
-    getProductsFromCategoryAndQuery(params.id)
-      .then((finalData) => {
-        console.log(finalData.results);
-      });
+  componentDidMount() {
+    this.handleProduct();
+  }
+
+  handleProduct = async () => {
+    const { match } = this.props;
+    const { params } = match;
+    const itemArray = await fetchProduct(params.id);
+    this.setState({
+      item: itemArray,
+    });
   }
 
   render() {
-    const { props } = this.state;
-    const { params } = props.match;
+    const { item } = this.state;
     return (
-      <div>{params.id}</div>
+      <div>
+        <p data-testid="product-detail-name">{item.title}</p>
+        <img src={ item.thumbnail } alt={ item.thumbnail_id } width="100px" />
+        <p>
+          R$
+          {item.price}
+        </p>
+        <Link to="/ShoppingCart">
+          <img
+            src={ shoppingCart }
+            alt="Carrinho de compras"
+            className="shopping-cart-image"
+          />
+        </Link>
+      </div>
     );
   }
 }
 
 export default ProductDetail;
+
+ProductDetail.propTypes = {
+  item: PropTypes.shape({
+    title: PropTypes.string,
+    thumbnail: PropTypes.string,
+    price: PropTypes.number,
+  }),
+}.isRequired;

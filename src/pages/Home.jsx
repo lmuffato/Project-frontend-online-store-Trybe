@@ -51,7 +51,7 @@ export default class Home extends React.Component {
   }
 
   render() {
-    const { loading, items } = this.state;
+    const { input, loading, items } = this.state;
     return (
       <div className="content-container">
         <section className="search-and-products">

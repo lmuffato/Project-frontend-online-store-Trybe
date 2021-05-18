@@ -2,13 +2,6 @@ import React, { Component } from 'react';
 import Stars from './Stars';
 
 class Rating extends Component {
-  constructor() {
-    super();
-    this.state = {
-      ratings: {},
-    };
-  }
-
   render() {
     return (
       <div>

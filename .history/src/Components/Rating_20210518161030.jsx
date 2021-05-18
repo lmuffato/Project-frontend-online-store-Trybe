@@ -2,13 +2,6 @@ import React, { Component } from 'react';
 import Stars from './Stars';
 
 class Rating extends Component {
-  constructor() {
-    super();
-    this.state = {
-      ratings: {},
-    };
-  }
-
   render() {
     return (
       <div>
@@ -22,8 +15,8 @@ class Rating extends Component {
             Mensagem
             <textarea type="checkbox" id="mensagem" name="mensagem" />
           </label>
+          <input type="submit" value="Avaliar" />
         </form>
-        <input type="submit" value="Avaliar" />
       </div>
     );
   }

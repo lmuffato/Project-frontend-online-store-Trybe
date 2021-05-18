@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import RatingForm from '../components/RatingForm';
 
 class ProductDetail extends Component {
   render() {
@@ -22,6 +23,7 @@ class ProductDetail extends Component {
             </p>
           )) }
         </div>
+        <RatingForm />
       </div>
     );
   }

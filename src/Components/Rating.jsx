@@ -14,6 +14,10 @@ class Rating extends Component {
     };
   }
 
+  componentDidMount() {
+    this.getLocalStorage();
+  }
+
   getLocalStorage = () => {
     const email = localStorage.getItem('email');
     const textArea = localStorage.getItem('textArea');
@@ -25,13 +29,9 @@ class Rating extends Component {
   }
 
   handleChangeEmail = (event) => {
-    const mail = event.target.value;
-    this.setState({ email: mail });
-  }
-
-  handleChangeTextArea = (event) => {
-    const aval = event.target.value;
-    this.setState({ textArea: aval });
+    const key = event.target.name;
+    const valor = event.target.value;
+    this.setState({ [key]: valor });
   }
 
   handleClick = () => {
@@ -63,17 +63,17 @@ class Rating extends Component {
             <textarea
               data-testid="product-detail-evaluation"
               value={ textArea }
-              onChange={ this.handleChangeTextArea }
+              onChange={ this.handleChangeEmail }
               type="text"
               id="mensagem"
-              name="mensagem"
+              name="textArea"
             />
           </label>
         </form>
         <input type="submit" value="Avaliar" onClick={ this.handleClick } />
         <div className="rating">
-          <Stars />
           <h3>{emai}</h3>
+          <Stars />
           <p>{textAre}</p>
         </div>
       </div>

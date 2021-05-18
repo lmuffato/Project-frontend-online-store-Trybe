@@ -6,6 +6,7 @@ import ShoppingCart from './pages/ShoppingCart';
 import ProductDetails from './pages/Home/components/ProductDetails';
 import { getProductsFromCategoryAndQuery } from './services/api';
 import FinalizingPurchase from './pages/FinalizingPurchase'
+import PurchaseSummary from './pages/Home/components/PurchaseSummary';
 
 class App extends React.Component {
   constructor() {
@@ -80,7 +81,11 @@ class App extends React.Component {
             component={ ProductDetails }
             exact
           />
-          <Route path="/finalizingpurchase" component={ FinalizingPurchase } />
+          <Route
+            path="/finalizingpurchase"
+            component={ FinalizingPurchase }>
+            <PurchaseSummary cart={ cart } />
+          </Route>
         </Switch>
       </BrowserRouter>
     );

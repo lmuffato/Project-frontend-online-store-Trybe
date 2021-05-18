@@ -4,6 +4,7 @@ class BuyerInformation extends React.Component {
   render() {
     return (
       <div>
+        <h1>Informações do comprador</h1>
         <form>
           <label htmlFor="FullName">
             <input type="text" />

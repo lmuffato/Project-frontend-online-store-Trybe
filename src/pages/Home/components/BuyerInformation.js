@@ -4,49 +4,48 @@ class BuyerInformation extends React.Component {
   render() {
     return (
       <div>
-        <form>
-          <label htmlFor="FullName">
-            <input type="text" />
-          </label>
+        <label htmlFor="FullName">
+          <input type="text" />
+        </label>
 
-          <label htmlFor="Cep">
-            <input type="text" />
-          </label>
+        <label htmlFor="Cep">
+          <input type="text" />
+        </label>
 
-          <label htmlFor="Complement">
-            <input type="text" />
-          </label>
+        <label htmlFor="Complement">
+          <input type="text" />
+        </label>
 
-          <label htmlFor="CPF">
-            <input type="text" />
-          </label>
+        <label htmlFor="CPF">
+          <input type="text" />
+        </label>
 
-          <label htmlFor="Adress">
-            <input type="text" />
-          </label>
+        <label htmlFor="Adress">
+          <input type="text" />
+        </label>
 
-          <label htmlFor="Number">
-            <input type="text" />
-          </label>
+        <label htmlFor="Number">
+          <input type="text" />
+        </label>
 
-          <label htmlFor="E-mail">
-            <input type="text" />
-          </label>
+        <label htmlFor="E-mail">
+          <input type="text" />
+        </label>
 
-          <label htmlFor="Phone">
-            <input type="text" />
-          </label>
+        <label htmlFor="Phone">
+          <input type="text" />
+        </label>
 
-          <label htmlFor="City">
-            <input type="text" />
-          </label>
+        <label htmlFor="City">
+          <input type="text" />
+        </label>
 
-          <label htmlFor="State">
-            <select>
-              <option value="State">Estado</option>
-            </select>
-          </label>
-        </form>
+        <label htmlFor="State">
+          <select>
+            <option value="State">Estado</option>
+          </select>
+        </label>
+
       </div>
     );
   }

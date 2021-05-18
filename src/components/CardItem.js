@@ -5,8 +5,6 @@ import { Link } from 'react-router-dom';
 class CardItem extends Component {
   render() {
     const { item: { title, price, thumbnail, id } } = this.props;
-    /* const { match: { params: { id: productId } } } = this.props; */
-/*     console.log(this.props.match); */
     return (
       <div>
         <Link data-testid="product-detail-link" to={ `/product/${id}` }>

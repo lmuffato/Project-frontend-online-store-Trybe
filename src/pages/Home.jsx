@@ -69,7 +69,6 @@ export default class Home extends Component {
     this.setState({ categories: [] }, () => {
       api.getCategories().then((data) => {
         this.setState({ categories: data });
-        console.log(data);
       });
     });
   }

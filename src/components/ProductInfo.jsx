@@ -1,15 +1,27 @@
 import React, { Component } from 'react';
-// import * as api from '../services/api';
+import PropTypes from 'prop-types';
 
 class ProductInfo extends Component {
   render() {
-    // const { }
+    const { product } = this.props;
+    const { title, price, thumbnail } = product;
+
     return (
       <div>
-        <h1>Title</h1>
+        <h2 data-testid="product-detail-name">{ title }</h2>
+        <p>{ price }</p>
+        <img src={ thumbnail } alt={ title } />
       </div>
     );
   }
 }
+
+ProductInfo.propTypes = {
+  product: PropTypes.shape({
+    title: PropTypes.string,
+    price: PropTypes.number,
+    thumbnail: PropTypes.string,
+  }).isRequired,
+};
 
 export default ProductInfo;

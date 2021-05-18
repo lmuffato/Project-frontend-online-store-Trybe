@@ -58,7 +58,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { products, cart, quantitys } = this.state;
+    const { products, cart } = this.state;
     return (
       <BrowserRouter>
         <Switch>
@@ -72,7 +72,7 @@ class App extends React.Component {
             />
           </Route>
           <Route path="/cart">
-            <ShoppingCart cart={ cart } quantitys={ quantitys } />
+            <ShoppingCart cart={ cart } />
           </Route>
           <Route
             path="/product/:category/:id"

@@ -12,9 +12,9 @@ export const addToLocalStorage = (storageArray) => {
   localStorage.setItem('itens', myArrayStringfied);
 };
 
-export const getAll = async () => {
+export const getAll = () => {
   const element = localStorage.getItem('itens');
-  const elementArray = await JSON.parse(element);
+  const elementArray = JSON.parse(element);
   return elementArray;
 };
 

@@ -20,7 +20,7 @@ class Home extends React.Component {
     this.state = {
       categories: [],
       arrayOfItems: [],
-      query: '',
+      cardProps: [],
     };
   }
 
@@ -38,7 +38,13 @@ class Home extends React.Component {
     const array = await getProductsFromCategoryAndQuery(false, item);
     this.setState({
       arrayOfItems: array.results,
-      query: array.query,
+    });
+  }
+
+  getPropsOfItem = (obj) => {
+    const { cardProps } = this.state;
+    this.setState({
+      cardProps: [...cardProps, obj],
     });
   }
 
@@ -49,7 +55,13 @@ class Home extends React.Component {
   }
 
   render() {
-    const { categories, arrayOfItems, query } = this.state;
+    const { categories, arrayOfItems, cardProps } = this.state;
+    const location = {
+      pathname: '/Cart',
+      state: {
+        item: cardProps,
+      },
+    };
     return (
       <main id="home-page">
         <CategoriesBar
@@ -59,11 +71,11 @@ class Home extends React.Component {
         <section>
           <SearchBar func={ this.generateArray } />
           <Button>
-            <Link data-testid="shopping-cart-button" to="/Cart">Cart</Link>
+            <Link data-testid="shopping-cart-button" to={ location }>Cart</Link>
           </Button>
           {arrayOfItems.length === 0
             ? <p>Nenhum produto foi encontrado</p>
-            : <ListProducts arrayOfItems={ arrayOfItems } query={ query } />}
+            : <ListProducts arrayOfItems={ arrayOfItems } func={ this.getPropsOfItem } />}
         </section>
       </main>
     );

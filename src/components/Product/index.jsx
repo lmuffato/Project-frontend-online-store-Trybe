@@ -6,7 +6,7 @@ import './styles.css';
 
 class Product extends React.Component {
   render() {
-    const { title, imagePath, price, itemId, techSpecs } = this.props;
+    const { title, imagePath, price, itemId, techSpecs, func } = this.props;
 
     const location = {
       pathname: `/itemDetails/${itemId}`,
@@ -26,6 +26,14 @@ class Product extends React.Component {
             Ver detalhes
           </button>
         </Link>
+        <button
+          data-testid="product-add-to-cart"
+          type="button"
+          onClick={ () => func(this.props) }
+        >
+          add cart
+
+        </button>
       </div>
     );
   }

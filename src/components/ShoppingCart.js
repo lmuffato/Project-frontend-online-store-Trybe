@@ -63,8 +63,8 @@ class ShoppingCart extends Component {
             </li>
           ))}
         </ul>
-        <button type="button" data-testid="checkout-products">
-          <Link to="/checkout">Finalizar compras</Link>
+        <button type="button">
+          <Link to="/checkout" data-testid="checkout-products">Finalizar compras</Link>
         </button>
       </div>
     );

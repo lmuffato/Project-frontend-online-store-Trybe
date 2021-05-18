@@ -21,6 +21,7 @@ export default class Product extends Component {
       title,
       price,
       amount,
+      id,
     });
   };
 

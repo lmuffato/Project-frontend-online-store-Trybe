@@ -9,7 +9,7 @@ function StarIcon(props) {
 }
 
 StarIcon.propTypes = {
-  fill: PropTypes.number.isRequired,
+  fill: PropTypes.string.isRequired,
 };
 
 export default StarIcon;

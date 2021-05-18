@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import CartSize from '../Components/CartSize';
 
 class ShoppingCart extends Component {
   constructor(props) {
@@ -64,7 +63,6 @@ class ShoppingCart extends Component {
     }
     return (
       <>
-        <CartSize size={ products.length } />
         {reducedProducts.map((product) => (
           <div className="product-shopping-cart" key={ product }>
             <p data-testid="shopping-cart-product-name">{product}</p>

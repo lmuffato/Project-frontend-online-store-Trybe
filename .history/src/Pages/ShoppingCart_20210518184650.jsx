@@ -64,7 +64,7 @@ class ShoppingCart extends Component {
     }
     return (
       <>
-        <CartSize size={ products.length } />
+        <p>oi cleber</p>
         {reducedProducts.map((product) => (
           <div className="product-shopping-cart" key={ product }>
             <p data-testid="shopping-cart-product-name">{product}</p>

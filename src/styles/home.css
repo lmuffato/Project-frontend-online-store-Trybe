@@ -1,0 +1,28 @@
+.home-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.categories {
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 20px;
+  padding: 20px;
+}
+
+.produtcs {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.category {
+  margin: 15px 0;
+}
+
+.shopping-cart {
+  width: 30px;
+}

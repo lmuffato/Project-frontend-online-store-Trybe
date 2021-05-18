@@ -7,6 +7,8 @@ class ProductList extends Component {
     this.productDetails = this.productDetails.bind(this);
   }
 
+  messageRequest = () => <p>Nenhum produto foi encontrado</p>;
+
   productDetails(data) {
     return (
       <div>
@@ -20,11 +22,13 @@ class ProductList extends Component {
   }
 
   render() {
-    const { dataApi } = this.props;
+    const { dataApi, request } = this.props;
     return (
       <div>
         <ul>
-          { dataApi.map((data) => this.productDetails(data)) }
+          { request
+            ? this.messageRequest
+            : dataApi.map((data) => this.productDetails(data)) }
         </ul>
       </div>
     );
@@ -33,6 +37,7 @@ class ProductList extends Component {
 
 ProductList.propTypes = {
   dataApi: PropTypes.arrayOf.isRequired,
+  request: PropTypes.bool.isRequired,
 };
 
 export default ProductList;

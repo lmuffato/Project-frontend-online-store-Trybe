@@ -23,6 +23,15 @@ class SearchProducts extends Component {
     this.setState({ query: value });
   };
 
+  addProductInCart = ({ target }) => {
+    const { handle } = this.props;
+    console.log(target.value);
+    const product = target.value;
+    const productQuantity = target.parentElement.querySelector('.quantity').value;
+    // const title = target.parentElement.querySelector('.title-product').value;
+    handle(product, productQuantity);
+  }
+
   search = async () => {
     const { query } = this.state;
     const { getProductsFromCategoryAndQuery } = api;
@@ -48,13 +57,30 @@ class SearchProducts extends Component {
               const { price, thumbnail, title, id } = product;
               return (
                 <section className="product-conteiner" data-testid="product" key={ id }>
-                  <h3 className="title-product">{ title }</h3>
+                  <h3 className="title-product" value={ title }>{ title }</h3>
                   <img
                     className="image-product"
                     src={ thumbnail }
                     alt={ `Imagem-${title}` }
                   />
                   <p className="price-product">{ `R$ ${price.toFixed(2)}` }</p>
+                  <button
+                    type="button"
+                    data-testid="product-add-to-cart"
+                    onClick={ this.addProductInCart }
+                    value={ product.title }
+                  >
+                    Adicionar ao Carrinho
+                  </button>
+                  <label htmlFor="quantity">
+                    Quantidade:
+                    <input
+                      className="quantity"
+                      name="quantity"
+                      type="number"
+                      defaultValue={ 1 }
+                    />
+                  </label>
                   <Link
                     data-testid="product-detail-link"
                     to={ { pathname: '/item-details', state: { product } } }
@@ -94,6 +120,7 @@ class SearchProducts extends Component {
 
 SearchProducts.propTypes = {
   category: PropTypes.string.isRequired,
+  handle: PropTypes.func.isRequired,
 };
 
 export default SearchProducts;

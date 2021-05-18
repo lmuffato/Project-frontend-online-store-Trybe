@@ -85,3 +85,6 @@ ShoppingCart.propTypes = {
 };
 
 export default ShoppingCart;
+
+// Referências:
+// https://stackoverflow.com/questions/29995444/react-checker-is-not-a-function

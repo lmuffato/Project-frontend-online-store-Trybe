@@ -13,14 +13,6 @@ export default class CartProduct extends Component {
     };
   }
 
-  deleteItem = () => {
-    // const { id } = event.target;
-    // const { products } = this.state;
-    // const items = Array.from(products).find((item) => Object.keys(products) === id);
-    // console.log('sou eu', id);
-    // this.setState({ products: items });
-  }
-
   addPrice = () => {
     const { product: { price } } = this.props;
     this.setState(({ quantity }) => ({ quantity: quantity + 1 }));

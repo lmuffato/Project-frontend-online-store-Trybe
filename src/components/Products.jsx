@@ -8,7 +8,13 @@ class Products extends Component {
     // console.log(this.props);
     return (
       <section className="products-container">
-        {products.map((product) => <ProductCard key={ product.id } item={ product } addItemToCart={ addItemToCart } />)}
+        {products.map((product) => (
+          <ProductCard
+            key={ product.id }
+            item={ product }
+            addItemToCart={ addItemToCart }
+          />
+        ))}
       </section>
     );
   }
@@ -21,6 +27,7 @@ Products.propTypes = {
     thumbnail: PropTypes.string,
     price: PropTypes.string,
   })).isRequired,
+  addItemToCart: PropTypes.func.isRequired,
 };
 
 export default Products;

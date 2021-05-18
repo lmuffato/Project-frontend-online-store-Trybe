@@ -34,7 +34,7 @@ class App extends React.Component {
     } else {
       const updatedCart = { ...cartList };
       updatedCart[clickedItemId].qty += 1;
-      this.setState({ cartList: updatedCart }, () => console.log(this.state));
+      this.setState({ cartList: updatedCart });
     }
   }
 
@@ -47,7 +47,9 @@ class App extends React.Component {
           <Route
             exact
             path="/"
-            render={ (props) => <Home { ...props } addItemToCart={ this.addItemToCart } /> }
+            render={ (props) => (
+              <Home { ...props } addItemToCart={ this.addItemToCart } />
+            ) }
           />
           <Route
             exact

@@ -39,6 +39,7 @@ ProductCard.propTypes = {
     thumbnail: PropTypes.string,
     price: PropTypes.number,
   }).isRequired,
+  addItemToCart: PropTypes.func.isRequired,
 };
 
 export default ProductCard;

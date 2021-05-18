@@ -3,6 +3,7 @@ import './App.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import CartItem from './pages/CartItem';
+import ProductDetails from './pages/ProductDetails';
 
 class App extends Component {
   constructor() {
@@ -37,6 +38,10 @@ class App extends Component {
           exact
           path="/"
           render={ (props) => <Home { ...props } onClick={ this.handleClickAddCart } /> }
+        />
+        <Route
+          path="/details/:id"
+          component={ ProductDetails }
         />
       </Router>
     );

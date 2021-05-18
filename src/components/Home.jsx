@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import CategoriesList from './CategoriesList';
 import * as api from '../services/api';
 import ProductCard from './ProductCard';
@@ -42,6 +43,7 @@ class Home extends Component {
 
   render() {
     const { inputValue, products } = this.state;
+    const { cartItemMethod } = this.props;
     return (
       <div>
         <input
@@ -72,11 +74,16 @@ class Home extends Component {
               price={ item.price }
               id={ item.id }
               currItem={ item }
+              cartItemMethod={ cartItemMethod }
             />
           )) }
       </div>
     );
   }
 }
+
+Home.propTypes = {
+  cartItemMethod: PropTypes.func,
+}.isRequired;
 
 export default Home;

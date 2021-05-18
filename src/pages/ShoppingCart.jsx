@@ -24,13 +24,14 @@ class ShoppingCart extends React.Component {
   }
 
   setProducts() {
-    const { cart, totalPayment } = this.state;
-    localStorage.setItem('products', JSON.stringify(cart));
-    localStorage.setItem('totalPayment', JSON.stringify(totalPayment));
+    const { cart } = this.state;
     const storageItems = localStorage.getItem('products');
+    let productsFromLS = [];
     if (storageItems) {
-      localStorage.setItem('products', [storageItems + cart]);
+      productsFromLS = JSON.parse(localStorage.getItem('products'));
     }
+    productsFromLS.push(cart);
+    localStorage.setItem('products', JSON.stringify(productsFromLS));
   }
 
   addProductToCart(product) {

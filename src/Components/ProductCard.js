@@ -1,27 +1,28 @@
 import React from 'react';
-import * as api from '../services/api';
-// import Search from './Search'
+import PropTypes from 'prop-types';
 
 class ProductCard extends React.Component {
-  constructor(props) {
-    super(props);
-    const { productList } = this.props;
-    this.state = {
-      products: productList
-    }
-  }
-
   render() {
-    const { products } = this.state;
-    const { results } = products;
-    // console.log(results);
+    const { productList } = this.props;
     return (
       <div>
-        { results === undefined ? <h1>te</h1>: results.map((product) => <h1>{product.title}</h1>)}
-
+        { productList.map((product) => (
+          <div key={ product.id } data-testid="product">
+            <h1>{product.title}</h1>
+            <p>{product.price}</p>
+            <img src={ product.thumbnail } alt="imagem" />
+          </div>))}
       </div>
-    )
+    );
   }
 }
 
-export default ProductCard
+ProductCard.propTypes = {
+  productList: PropTypes.shape({
+    title: PropTypes.string,
+    price: PropTypes.number,
+    thumbnail: PropTypes.string,
+  }).isRequired,
+};
+
+export default ProductCard;

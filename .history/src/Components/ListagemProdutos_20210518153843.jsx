@@ -67,6 +67,7 @@ class ListagemProdutos extends Component {
 
     return (
       <div>
+        <Stars />
         <label htmlFor="query-input">
           <input
             data-testid="query-input"

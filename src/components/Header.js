@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import * as Api from '../services/api';
+import { getProductsFromCategoryAndQuery } from '../services/api';
 import ProductList from './ProductList';
 import SearchBar from './SearchBar';
+import ListCategories from './ListCategories';
 
 class Header extends Component {
   constructor() {
     super();
+
     this.state = {
       query: '',
       category: '',
@@ -23,17 +25,11 @@ class Header extends Component {
     });
   }
 
-  // handleClick = (event) => {
-  //   this.setState({
-  //     query: event.target.value,
-  //   });
-  // }
-
   fetchProducts = async () => {
     this.setState({ request: true },
       async () => {
         const { category, query } = this.state;
-        const dataProducts = await Api.getProductsFromCategoryAndQuery(category, query);
+        const dataProducts = await getProductsFromCategoryAndQuery(category, query);
         this.setState({
           dataApi: dataProducts.results,
           request: false,
@@ -41,14 +37,11 @@ class Header extends Component {
       });
   }
 
-  componentDidMount = async () => {
-    this.fetchProducts();
-  }
-
   render() {
     const { dataApi, query, request } = this.state;
     return (
       <div>
+        <ListCategories />
         <SearchBar
           query={ query }
           handleChange={ this.handleChange }

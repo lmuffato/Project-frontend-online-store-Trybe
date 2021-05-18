@@ -32,10 +32,11 @@ class CartList extends Component {
   changeProductQuantify = ({ target }) => {
     const symbol = target.innerHTML;
     const { product } = this.props;
+    const { title } = this.state;
 
     this.setState((oldState) => {
       const { quant } = oldState;
-      const { handleChangeTotalPrice } = this.props;
+      const { handleChangeTotalPrice, changeQuantProductLength } = this.props;
 
       const quantResult = this.getQuant(quant, symbol);
 
@@ -43,6 +44,7 @@ class CartList extends Component {
       const priceResult = this.getPrice(priceToNumber, quantResult);
 
       handleChangeTotalPrice(priceToNumber, symbol);
+      changeQuantProductLength(quantResult, title);
 
       return { quant: quantResult, price: `R$${priceResult}` };
     });
@@ -90,6 +92,7 @@ CartList.propTypes = {
     img: string,
   }).isRequired,
   handleChangeTotalPrice: func.isRequired,
+  changeQuantProductLength: func.isRequired,
 };
 
 export default CartList;

@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
-import './App.css';
+
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+
 import Home from './pages/Home';
 import CartItem from './pages/CartItem';
 import ProductDetails from './pages/ProductDetails';
+import Checkout from './pages/Checkout';
+
+import './App.css';
 
 class App extends Component {
   constructor() {
@@ -27,13 +31,28 @@ class App extends Component {
     }));
   };
 
+  changeQuantProductLength = (quant, productTitle) => {
+    const { cartList } = this.state;
+    const newCartList = cartList.map((product) => {
+      const checkTitle = product.title === productTitle;
+      return checkTitle ? { ...product, quant } : product;
+    });
+
+    this.setState({ cartList: newCartList });
+  }
+
   render() {
     const { cartList } = this.state;
     return (
       <Router>
         <Route
           path="/carrinho"
-          render={ (props) => <CartItem { ...props } cartList={ cartList } /> }
+          render={ (props) => (
+            <CartItem
+              { ...props }
+              cartList={ cartList }
+              changeQuantProductLength={ this.changeQuantProductLength }
+            />) }
         />
         <Route
           exact
@@ -44,6 +63,7 @@ class App extends Component {
           path="/details/:id"
           component={ ProductDetails }
         />
+        <Route path="/checkout" render={ (props) => <Checkout { ...props } /> } />
       </Router>
     );
   }

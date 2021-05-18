@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import { arrayOf, shape, string, number } from 'prop-types';
+import { arrayOf, shape, string, number, func } from 'prop-types';
 
 import CartList from '../components/CartList';
 
@@ -13,12 +13,11 @@ class CartItem extends Component {
 
     const { cartList } = props;
     const prices = cartList
-      .reduce((acc, { price }) => acc + Number(changePriceToNumber(price)), 0);
-
-    console.log(cartList);
+      .reduce((acc, { price }) => acc + changePriceToNumber(price), 0);
 
     this.state = {
       totalPrices: prices,
+      cartList,
     };
   }
 
@@ -27,6 +26,7 @@ class CartItem extends Component {
       '+': oldPrice + priceToHandle,
       '-': oldPrice - priceToHandle,
     };
+
     const newTotalPrice = sumOrSubtract[symbol];
 
     return newTotalPrice < 0 ? 0 : newTotalPrice;
@@ -47,7 +47,7 @@ class CartItem extends Component {
   }
 
   renderCartList = () => {
-    const { cartList } = this.props;
+    const { cartList, changeQuantProductLength } = this.props;
     const cartString = 'Seu carrinho está vazio';
     return cartList.length > 0
       ? cartList
@@ -56,19 +56,37 @@ class CartItem extends Component {
             key={ index }
             product={ product }
             handleChangeTotalPrice={ this.handleChangeTotalPrice }
+            changeQuantProductLength={ changeQuantProductLength }
           />
         ))
       : cartString;
   };
 
   render() {
-    const { totalPrices } = this.state;
+    const { totalPrices, cartList } = this.state;
+
+    const propsToCheckout = {
+      pathname: '/checkout',
+      state: { cartList, totalPrices },
+    };
 
     return (
       <section data-testid="shopping-cart-empty-message">
         <button type="button"><Link to="/">Home</Link></button>
+
         { this.renderCartList() }
-        <p>{`Valor Total da Compra ${totalPrices}`}</p>
+
+        <p>{`Valor Total da Compra ${totalPrices.toFixed(2)}`}</p>
+
+        <Link to={ { ...propsToCheckout } }>
+          <button
+            type="button"
+            data-testid="checkout-products"
+          >
+            Finalizar compra
+          </button>
+        </Link>
+
       </section>
     );
   }
@@ -83,6 +101,7 @@ CartItem.propTypes = {
       title: string,
     },
   )).isRequired,
+  changeQuantProductLength: func.isRequired,
 };
 
 export default CartItem;

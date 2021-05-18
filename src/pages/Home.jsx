@@ -110,3 +110,6 @@ Home.propTypes = {
 };
 
 export default Home;
+
+// CartList component is now >  CartItem
+// CartItem page is now >  Cart

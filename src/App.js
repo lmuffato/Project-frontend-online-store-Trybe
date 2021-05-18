@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Home from './pages/Home';
-import CartItem from './pages/CartItem';
+import Cart from './pages/Cart';
 import ProductDetails from './pages/ProductDetails';
 
 class App extends Component {
@@ -33,7 +33,7 @@ class App extends Component {
       <Router>
         <Route
           path="/carrinho"
-          render={ (props) => <CartItem { ...props } cartList={ cartList } /> }
+          render={ (props) => <Cart { ...props } cartList={ cartList } /> }
         />
         <Route
           exact

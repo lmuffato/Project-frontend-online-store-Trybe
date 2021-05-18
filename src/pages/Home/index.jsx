@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import Button from '../../components/Button';
-import CategoriesBar from '../../components/CategoriesBar';
-import ListItems from '../../components/ListItems';
+import Button from '../../components/Button/index';
+import CategoriesBar from '../../components/CategoriesBar/index';
+import ListProducts from '../../components/ListProducts';
 import SearchBar from '../../components/SearchBar';
 
 import { getCategories, getProductsFromCategoryAndQuery } from '../../services/api';
@@ -63,7 +63,7 @@ class Home extends React.Component {
           </Button>
           {arrayOfItems.length === 0
             ? <p>Nenhum produto foi encontrado</p>
-            : <ListItems arrayOfItems={ arrayOfItems } query={ query } />}
+            : <ListProducts arrayOfItems={ arrayOfItems } query={ query } />}
         </section>
       </main>
     );

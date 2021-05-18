@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import './styles.css';
 
-class Item extends React.Component {
+class Product extends React.Component {
   render() {
     const { title, imagePath, price, itemId, techSpecs } = this.props;
 
@@ -31,11 +31,11 @@ class Item extends React.Component {
   }
 }
 
-Item.propTypes = {
+Product.propTypes = {
   title: PropTypes.string,
   imagePath: PropTypes.string,
   price: PropTypes.number,
   itemId: PropTypes.string,
 }.isRequired;
 
-export default Item;
+export default Product;

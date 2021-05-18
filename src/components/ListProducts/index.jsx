@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Item from './Item';
+import Product from '../Product';
 
-class ListItems extends React.Component {
+class ListProducts extends React.Component {
   render() {
     const { arrayOfItems } = this.props;
     return (
       <>
         { arrayOfItems.map(
-          ({ title, price, thumbnail, id, attributes }) => (<Item
+          ({ title, price, thumbnail, id, attributes }) => (<Product
             title={ title }
             imagePath={ thumbnail }
             price={ price }
@@ -22,10 +22,10 @@ class ListItems extends React.Component {
   }
 }
 
-ListItems.propTypes = {
+ListProducts.propTypes = {
   arrayOfItems: PropTypes.arrayOf(
     PropTypes.object,
   ),
 }.isRequired;
 
-export default ListItems;
+export default ListProducts;

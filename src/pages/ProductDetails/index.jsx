@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-class ItemDetails extends React.Component {
+class ProductDetails extends React.Component {
   render() {
-    // const { item: { title, price, thumbnail } } = this.state;
     const { location: { state: { title, price, thumbnail, attributes } } } = this.props;
     return (
       <div>
@@ -23,8 +22,15 @@ class ItemDetails extends React.Component {
   }
 }
 
-ItemDetails.propTypes = {
-  itemId: PropTypes.string,
+ProductDetails.propTypes = {
+  location: PropTypes.shape({
+    state: PropTypes.shape({
+      title: PropTypes.string,
+      price: PropTypes.number,
+      thumbnail: PropTypes.string,
+      attributes: PropTypes.arrayOf(PropTypes.object),
+    }),
+  }),
 }.isRequired;
 
-export default ItemDetails;
+export default ProductDetails;

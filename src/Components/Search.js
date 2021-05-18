@@ -1,5 +1,6 @@
 import React from 'react';
 import * as api from '../services/api';
+import ProductCard from './ProductCard';
 
 class Search extends React.Component {
   constructor(props) {
@@ -21,17 +22,22 @@ class Search extends React.Component {
   }
 
   handleClick = async () => {
-    const query = await api.getProductsFromCategoryAndQuery('fadsfas', this.state.text);
-    this.setState({ productList: query });
+    const { text } = this.state;
+    const query = await api.getProductsFromCategoryAndQuery('fadsfas', text);
+    const { results } = query;
+    this.setState({ productList: results });
   }
 
   render() {
-    // const { products } = this.props
     const { productList } = this.state;
     return (
 
       <div>
-        <input type="text" data-testid="query-input" onChange={ this.handleText } />
+        <input
+          type="text"
+          data-testid="query-input"
+          onChange={ this.handleText }
+        />
         <button
           type="submit"
           data-testid="query-button"
@@ -39,8 +45,6 @@ class Search extends React.Component {
         >
           {' '}
           Buscar
-          {' '}
-
         </button>
         <div>
           <h1
@@ -49,7 +53,8 @@ class Search extends React.Component {
             Digite algum termo de pesquisa ou escolha uma categoria.
 
           </h1>
-
+          { productList.length ? <ProductCard productList={ productList } />
+            : <h1>Nenhum produto foi encontrado</h1>}
         </div>
       </div>
     );

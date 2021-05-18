@@ -1,27 +1,28 @@
 import React from 'react';
-import * as api from '../services/api';
+import PropTypes from 'prop-types';
 
 class ProductCard extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      text: '',
-    };
-    this.getQuery = this.getQuery.bind(this);
-  }
-
-  getQuery(param) {
-    api.getProductsFromCategoryAndQuery();
-    return param;
-  }
-
   render() {
+    const { productList } = this.props;
     return (
       <div>
-        teste
+        { productList.map((product) => (
+          <div key={ product.id } data-testid="product">
+            <h1>{product.title}</h1>
+            <p>{product.price}</p>
+            <img src={ product.thumbnail } alt="imagem" />
+          </div>))}
       </div>
     );
   }
 }
+
+ProductCard.propTypes = {
+  productList: PropTypes.arrayOf(PropTypes.shape({
+    title: PropTypes.string,
+    price: PropTypes.number,
+    thumbnail: PropTypes.string,
+  })).isRequired,
+};
 
 export default ProductCard;

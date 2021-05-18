@@ -8,8 +8,8 @@ class ProductList extends Component {
 
     return (
       <div>
-        {products.map((product) => (
-          <ProductCard key={ product.id } product={ product } />))}
+        {products.map((product) => (<ProductCard product={ product } key={ product.id } />
+        ))}
       </div>
     );
   }

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { oneOfType, objectOf, object, string, number } from 'prop-types';
+import ProductInfo from '../components/ProductInfo';
 
 class ProductDetails extends Component {
   render() {
@@ -7,11 +9,8 @@ class ProductDetails extends Component {
     const { state: product } = location;
     return (
       <section className="product-details">
-        <div data-testid="product-detail-name">
-          <p>{ product.title }</p>
-          <p>{ product.price.toFixed(2) }</p>
-          <img src={ product.thumbnail } alt={ product.title } />
-        </div>
+        <ProductInfo product={ product } />
+        <Link to="/">Voltar</Link>
       </section>
     );
   }

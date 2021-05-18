@@ -20,13 +20,17 @@ class Home extends Component {
   }
 
   chooseCategory(category) {
-    this.setState({ selectedCategory: category });
-    this.fetchProducts();
+    this.setState(
+      { selectedCategory: category },
+      () => this.fetchProducts(),
+    );
   }
 
   updateTextBoxValue(value) {
-    this.setState({ inputTextBox: value });
-    this.fetchProducts();
+    this.setState(
+      { inputTextBox: value },
+      () => this.fetchProducts(),
+    );
   }
 
   async fetchProducts() {
@@ -44,7 +48,7 @@ class Home extends Component {
       <>
         <SearchBar onClick={ this.updateTextBoxValue } />
         <Categories onClick={ this.chooseCategory } />
-        <Products mlItems={ requestedProducts } selected />
+        <Products mlItems={ requestedProducts } />
       </>
     );
   }

@@ -6,6 +6,7 @@ import * as api from '../services/api';
 
 import ProductCard from './ProductCard';
 import Categories from './Categories';
+import CartSize from './CartSize';
 
 class ListagemProdutos extends Component {
   constructor() {
@@ -56,7 +57,7 @@ class ListagemProdutos extends Component {
 
   render() {
     const { products, isLoading } = this.state;
-    const { addCart } = this.props;
+    const { addCart, size } = this.props;
 
     if (isLoading) {
       return (
@@ -66,6 +67,7 @@ class ListagemProdutos extends Component {
 
     return (
       <div>
+        <CartSize size={ size } />
         <label htmlFor="query-input">
           <input
             data-testid="query-input"
@@ -109,6 +111,7 @@ class ListagemProdutos extends Component {
 
 ListagemProdutos.propTypes = {
   addCart: PropTypes.func.isRequired,
+  size: PropTypes.number.isRequired,
 };
 
 export default ListagemProdutos;

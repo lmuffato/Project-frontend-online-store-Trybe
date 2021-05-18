@@ -54,6 +54,7 @@ class ShoppingCart extends Component {
   render() {
     const { products, quantity } = this.state;
     const reducedProducts = this.reduce(products);
+    const { size } = this.props;
 
     if (reducedProducts.length === 0) {
       return (
@@ -64,7 +65,8 @@ class ShoppingCart extends Component {
     }
     return (
       <>
-        <CartSize size={ products.length } />
+        {console.log(size)}
+        <CartSize size={ size } />
         {reducedProducts.map((product) => (
           <div className="product-shopping-cart" key={ product }>
             <p data-testid="shopping-cart-product-name">{product}</p>
@@ -109,6 +111,7 @@ class ShoppingCart extends Component {
 ShoppingCart.propTypes = {
   products: PropTypes.arrayOf(PropTypes.string).isRequired,
   quantity: PropTypes.objectOf(PropTypes.number).isRequired,
+  size: PropTypes.number.isRequired,
 };
 
 export default ShoppingCart;

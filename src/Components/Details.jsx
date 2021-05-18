@@ -2,16 +2,18 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Rating from './Rating';
+import CartSize from './CartSize';
 
 class Details extends Component {
   render() {
-    const { location } = this.props;
+    const { location, size } = this.props;
     const { state } = location;
     const { productDetail } = state;
     const { title, id, price, thumbnail, condition } = productDetail;
     const { addCart } = this.props;
     return (
       <div>
+        <CartSize size={ size } />
         <img src={ thumbnail } alt="imagem do produto" />
         <h1 data-testid="product-detail-name">{title}</h1>
         <p>
@@ -52,6 +54,7 @@ Details.propTypes = {
     state: PropTypes.objectOf(PropTypes.object),
   }).isRequired,
   addCart: PropTypes.func.isRequired,
+  size: PropTypes.number.isRequired,
 };
 
 export default Details;

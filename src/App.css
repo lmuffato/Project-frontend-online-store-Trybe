@@ -26,9 +26,9 @@ button:hover {
 
 .searchInput {
   border-radius: 10px;
+  margin: 5px;
   padding: 4px;
   width: 70%;
-  margin: 5px;
 }
 
 p {
@@ -40,9 +40,9 @@ a {
 }
 
 .productList {
+  align-items: center;
   display: flex;
   flex-flow: row nowrap;
-  align-items: center;
 }
 
 .products {
@@ -56,44 +56,44 @@ a {
 }
 
 .div-checkout {
-  text-align: justify;
-  width: 90%;
   margin-left: auto;
   margin-right: auto;
+  text-align: justify;
+  width: 90%;
 }
 
 .div-review-order {
+  border: 2px solid grey;
   margin: 10px 2px;
   padding: 5px 10px;
-  border: 2px solid grey;
 }
 
 .quantity-order {
-  font-weight: bold;
+  font-weight: 600;
   margin-left: 5px;
 }
 
 .form-checkout {
-  margin-bottom: 10px;
+  align-items: flex-start;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  margin-bottom: 10px;
 }
 
 .form-checkout div {
-  width: 100%;
-  margin: 5px 0;
   display: flex;
   justify-content: space-between;
+  margin: 5px 0;
+  width: 100%;
 }
 
 .form-checkout div input {
-  padding: 5px 3px;
   border: 0.5px solid grey;
   border-radius: 5px;
   margin-right: 3px;
+  padding: 5px 3px;
 }
 
-.form-checkout div input:nth-of-type(1) {
+.form-checkout div input:nth-of-type( 1 ) {
   flex-grow: 1;
 }

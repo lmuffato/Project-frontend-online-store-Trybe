@@ -4,6 +4,7 @@ import './App.css';
 import InputSearch from './components/InputSearch';
 import ShoppingCart from './components/ShoppingCart';
 import ProductDetails from './components/ProductDetails';
+import Checkout from './components/Checkout';
 
 class App extends Component {
   constructor() {
@@ -16,6 +17,7 @@ class App extends Component {
 
   handleButtonCartAdd = (event) => {
     const { value } = event.target;
+    /* console.log(); */
     const { quantityCart } = this.state;
     if (quantityCart[value] === undefined) {
       this.setState((paststate) => ({
@@ -28,8 +30,39 @@ class App extends Component {
         quantityCart: { ...paststate.quantityCart,
           [value]: paststate.quantityCart[value] + 1 },
       }));
-      console.log('oi');
     }
+  }
+
+  handleSubtractButton = (event) => {
+    const { quantityCart } = this.state;
+    const { value } = event.target;
+    if (quantityCart[value] > 1) {
+      this.setState((paststate) => ({
+        quantityCart: {
+          ...paststate.quantityCart,
+          [value]: paststate.quantityCart[value] - 1,
+        },
+      }));
+    }
+  }
+
+  handleAddButton = (event) => {
+    const { value } = event.target;
+    this.setState((paststate) => ({
+      quantityCart: {
+        ...paststate.quantityCart,
+        [value]: paststate.quantityCart[value] + 1,
+      },
+    }));
+  }
+
+  handleExcludeButton = (event) => {
+    const { value } = event.target;
+    const { productsCart } = this.state;
+    const filtered = productsCart.filter((element) => element !== value);
+    this.setState({
+      productsCart: [...filtered],
+    });
   }
 
   render() {
@@ -50,6 +83,17 @@ class App extends Component {
               exact
               path="/cart-shopping"
               render={ () => (<ShoppingCart
+                products={ productsCart }
+                quantity={ quantityCart }
+                handleSubtractButton={ this.handleSubtractButton }
+                handleAddButton={ this.handleAddButton }
+                handleExcludeButton={ this.handleExcludeButton }
+              />) }
+            />
+            <Route
+              exact
+              path="/checkout"
+              render={ () => (<Checkout
                 products={ productsCart }
                 quantity={ quantityCart }
               />) }

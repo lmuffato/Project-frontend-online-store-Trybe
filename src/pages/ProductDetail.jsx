@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import fetchProduct from '../services/itemApi';
 import shoppingCart from '../imagens/shoppingCart.svg';
 import Loading from './Loading';
+import '../styles/ProductDetail.css';
 
 class ProductDetail extends React.Component {
   constructor(props) {
@@ -38,12 +39,25 @@ class ProductDetail extends React.Component {
 
     return (
       <div>
-        <p data-testid="product-detail-name">{item.title}</p>
-        <img src={ item.thumbnail } alt={ item.thumbnail_id } width="100px" />
-        <p>
-          R$
-          {item.price}
-        </p>
+        <div className="product-detail">
+          <div className="product-show">
+            <p data-testid="product-detail-name">{item.title}</p>
+            <img src={ item.thumbnail } alt={ item.thumbnail_id } width="100px" />
+            <p>
+              R$
+              {item.price}
+            </p>
+          </div>
+          <div className="specifications">
+            Especificações Técnicas:
+            {
+              item.attributes.map((attribute) => (
+                <p key={ attribute.id }>{`${attribute.name}: ${attribute.value_name}`}</p>
+              ))
+            }
+          </div>
+          {console.log(item.attributes)}
+        </div>
         <Link to="/ShoppingCart">
           <img
             src={ shoppingCart }

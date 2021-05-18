@@ -4,10 +4,8 @@ import ProductCard from '../components/ProductCard';
 
 class ProductDetails extends React.Component {
   render() {
-    const { match: { params: { id } } } = this.props;
-    console.log(id);
     return (
-      <ProductCard id={ id } />
+      <ProductCard props={ this.props } />
     );
   }
 }

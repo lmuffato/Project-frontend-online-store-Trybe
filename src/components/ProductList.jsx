@@ -9,14 +9,17 @@ class ProductList extends React.Component {
     if (products === 'none') return <p>Nenhum produto foi encontrado</p>;
     return (
       <div>
-        { products.map(({ title, price, thumbnail, id }) => (
-          <div data-testid="product" key={ id }>
-            <h1>{ title }</h1>
-            <img src={ thumbnail } alt={ title } />
-            <span>{ price }</span>
+        { products.map((product) => (
+          <div data-testid="product" key={ product.id }>
+            <h1>{ product.title }</h1>
+            <img src={ product.thumbnail } alt={ product.title } />
+            <span>{ product.price }</span>
             <Link
               data-testid="product-detail-link"
-              to={ `/produto/${id}` }
+              to={ {
+                pathname: `/produto/${product.id}`,
+                state: { product },
+              } }
             >
               Saiba mais
             </Link>

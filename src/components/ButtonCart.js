@@ -21,9 +21,13 @@ export default class ButtonCart extends Component {
   }
 }
 
+ButtonCart.defaultProps = {
+  cart: {},
+};
+
 ButtonCart.propTypes = {
   cart: PropTypes.shape({
     title: PropTypes.string,
     price: PropTypes.number,
-  }).isRequired,
+  }),
 };

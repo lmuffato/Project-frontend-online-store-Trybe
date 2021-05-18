@@ -6,7 +6,7 @@ import ButtonCart from '../components/ButtonCart';
 export default class ProductDetails extends Component {
   render() {
     const { location: { state: { product } } } = this.props;
-    console.log(product);
+
     return (
       <section>
         <div>

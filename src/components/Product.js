@@ -48,7 +48,7 @@ export default class Product extends Component {
         </div>
         <Link
           data-testid="product-detail-link"
-          to={ { pathname: { title }, state: { product } } }
+          to={ { pathname: title, state: { product } } }
         >
           Ver detalhes
         </Link>

@@ -69,12 +69,12 @@ export default class Home extends Component {
         <SideBar handleChange={ this.handleChange } />
         <ButtonCart cart={ cartItems } />
         <section>
+          { products.length ? '' : <span>Nenhum produto foi encontrado</span> }
           { !loading ? products.map((product, index) => (<Product
             key={ index }
             product={ product }
             addToCart={ this.addToCart }
           />)) : 'Carregando...' }
-          { products ? <span>Nenhum produto foi encontrado</span> : '' }
         </section>
       </main>
     );

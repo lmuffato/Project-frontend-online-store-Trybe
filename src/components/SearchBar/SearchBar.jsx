@@ -33,7 +33,7 @@ class SearchBar extends Component {
           Digite algum termo de pesquisa ou escolha uma categoria.
         </label>
         <Link
-          to="/CartContent"
+          to="/cartContent"
           data-testid="shopping-cart-button"
         >
           <img

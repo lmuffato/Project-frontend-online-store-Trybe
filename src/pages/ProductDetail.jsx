@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import fetchProduct from '../services/itemApi';
 import shoppingCart from '../imagens/shoppingCart.svg';
 import Loading from './Loading';
+import ReviewForm from '../components/ReviewForm';
 
 class ProductDetail extends React.Component {
   constructor(props) {
@@ -51,6 +52,8 @@ class ProductDetail extends React.Component {
             className="shopping-cart-image"
           />
         </Link>
+        <h3>Avaliações</h3>
+        <ReviewForm />
       </div>
     );
   }

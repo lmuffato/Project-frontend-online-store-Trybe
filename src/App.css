@@ -39,3 +39,37 @@
 .category {
   margin-top: 8px;
 }
+
+.review-form {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px;
+  width: 1200px;
+}
+
+.email-input {
+  margin-right: 20px;
+  margin-bottom: 20px;
+  height: 24px;
+  width: 250px;
+}
+
+.icon {
+  margin-right: 10px;
+}
+
+.text-area {
+  resize: none;
+  min-height: 80px;
+  width: 440px;
+  font-family: Helvetica, Arial, sans-serif
+}
+
+.review-btn {
+  margin-top: 20px;
+  height:30px;
+  width: 80px;
+}

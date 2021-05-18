@@ -8,18 +8,23 @@ import ProductDetails from './pages/ProductDetails';
 class App extends React.Component {
   constructor() {
     super();
-    this.state = {cartList: []};
+    this.state = {cartList: {}};
   }
 
   addItemToCart = (event) => {
     const { cartList } = this.state;
 
     const clickedItemId = event.target.value;
-    const currentItemsinCart = cartList.map((obj) => obj.id);
+    const currentItemsinCart = Object.keys(cartList);
+
     if (!currentItemsinCart.includes(clickedItemId)) {
       this.setState((prevState) => ({
-        cartList: [...prevState.cartList, { id: clickedItemId, quantity: 1 }],
-      }));
+        cartList: Object.assign(prevState.cartList, { [clickedItemId]: 1 }),
+      }), () => console.log(this.state));
+    } else {
+      const updatedCart = {...cartList};
+      updatedCart[clickedItemId] += 1;
+      this.setState({ cartList: updatedCart }, () => console.log(this.state));
     }
   }
 

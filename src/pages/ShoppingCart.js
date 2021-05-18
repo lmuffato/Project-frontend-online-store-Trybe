@@ -3,22 +3,37 @@ import PropTypes from 'prop-types';
 import CartProduct from '../components/CartProduct';
 
 export default class ShoppingCart extends Component {
+  constructor(props) {
+    super(props);
 
-  deleteItem = (event) => {
-    const { id } = event.target;
-    const { products } = this.state;
-    // const items = Array.from(products).find((item) => Object.keys(products) === id);
-    console.log('sou eu', id);
-    // this.setState({ products: items });
-  }
-
-  validateCart = () => {
     const {
       location: { cartItems = {} },
     } = this.props;
 
+    this.state = {
+      cartItems,
+    };
+  }
+
+  deleteItem = (event) => {
+    const { name } = event.target;
+    const { cartItems } = this.state;
+
+    delete cartItems[name];
+    this.setState({ cartItems });
+  }
+
+  validateCart = () => {
+    const { cartItems } = this.state;
+
     if (Object.keys(cartItems).length) {
-      return Object.entries(cartItems).map((product, i) => <CartProduct key={ i } product={ product[1] } deleteItem={ this.deleteItem } id={ product.id } />);
+      return Object.entries(cartItems)
+        .map((product, i) => (<CartProduct
+          key={ i }
+          product={ product[1] }
+          deleteItem={ this.deleteItem }
+          cart={ cartItems }
+        />));
     }
 
     return (

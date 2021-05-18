@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Product from '../components/Product';
 import SideBar from '../components/SideBar';
+import Product from '../components/Product';
 import ButtonCart from '../components/ButtonCart';
 import * as api from '../services/api';
 
@@ -12,6 +12,7 @@ export default class Home extends Component {
       products: [],
       loading: false,
       category: 'all',
+      cartItems: {},
     };
   }
 
@@ -19,9 +20,11 @@ export default class Home extends Component {
     const { value, name } = event.target;
     this.setState({
       [name]: value,
+    }, () => {
+      if (name === 'category') {
+        this.handleClick();
+      }
     });
-    this.handleClick();
-    this.forceUpdate();
   }
 
   getProducts = async () => {
@@ -32,15 +35,23 @@ export default class Home extends Component {
 
   handleClick = () => {
     this.getProducts().then((response) => {
-      this.setState({
-        products: response,
-        loading: true,
+      this.setState({ loading: true }, () => {
+        this.setState({
+          products: response,
+          loading: false,
+        });
       });
     });
   }
 
+  addToCart = (id, productInfo) => {
+    this.setState(({ cartItems }) => ({
+      cartItems: { ...cartItems, [id]: productInfo },
+    }));
+  }
+
   render() {
-    const { products, loading } = this.state;
+    const { products, loading, cartItems } = this.state;
     return (
       <main>
         <label data-testid="home-initial-message" htmlFor="search">
@@ -56,12 +67,14 @@ export default class Home extends Component {
           </button>
         </label>
         <SideBar handleChange={ this.handleChange } />
-        <ButtonCart />
+        <ButtonCart cart={ cartItems } />
         <section>
-          { loading ? products.map((product, index) => (<Product
+          { products.length ? '' : <span>Nenhum produto foi encontrado</span> }
+          { !loading ? products.map((product, index) => (<Product
             key={ index }
             product={ product }
-          />)) : <span>Nenhum produto foi encontrado</span> }
+            addToCart={ this.addToCart }
+          />)) : 'Carregando...' }
         </section>
       </main>
     );

@@ -1,5 +1,5 @@
 import React from 'react';
-// import { getProductsFromCategoryAndQuery } from '../services/api';
+import PropTypes from 'prop-types';
 
 export default class ProductList extends React.Component {
   render() {
@@ -17,3 +17,7 @@ export default class ProductList extends React.Component {
     );
   }
 }
+
+ProductList.propTypes = {
+  item: PropTypes.string,
+}.isRequired;

@@ -12,18 +12,16 @@ export default class Home extends React.Component {
 
     this.state = {
       input: undefined,
-      checkbox: [],
-      checked: false,
+      radio: '',
       items: [],
       loading: true,
     };
   }
 
   request = () => {
-    const { input, checkbox } = this.state;
-    getProductsFromCategoryAndQuery(checkbox, input)
+    const { input, radio } = this.state;
+    getProductsFromCategoryAndQuery(radio, input)
       .then((finalData) => {
-        console.log(finalData.results);
         this.setState({
           loading: false,
           items: finalData.results,
@@ -39,17 +37,10 @@ export default class Home extends React.Component {
   }
 
   handleChangeCheckbox = async ({ target }) => {
-    await this.setState((prevState) => ({
-      checkbox: [...prevState.checkbox, target.value],
-      checked: target.checked,
-    }));
-    const { checked } = this.state;
-    if (checked === false) {
-      // console.log('ok');
-      this.setState((prevState) => ({
-        checkbox: prevState.checkbox.filter((id) => id !== target.value),
-      }));
-    }
+    await this.setState({
+      radio: target.value,
+    });
+    this.request();
   }
 
   handleArrayItems = (items) => {
@@ -60,7 +51,7 @@ export default class Home extends React.Component {
   }
 
   render() {
-    const { input, loading, items } = this.state;
+    const { loading, items } = this.state;
     return (
       <div className="content-container">
         <section className="search-and-products">
@@ -101,7 +92,8 @@ export default class Home extends React.Component {
         </section>
         <CategoryList
           className="product-list"
-          handleChange={ this.handleChangeCheckbox }
+          handleChangeCheckbox={ this.handleChangeCheckbox }
+          request={ this.request }
         />
       </div>
     );

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import cartIcon from './ShoppinCart/cartIcon.png';
+import ReviewForm from '../components/ReviewForm';
 
 class ItemDetails extends Component {
   render() {
@@ -15,6 +16,7 @@ class ItemDetails extends Component {
           <p>{ `R$ ${price.toFixed(2)}` }</p>
           <p>detalhes do item</p>
         </div>
+        <ReviewForm product={ product } />
         <Link to="/">Voltar</Link>
         <Link
           to="/ShoppingCart"

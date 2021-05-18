@@ -10,6 +10,10 @@ export default class Routers extends Component {
       <Switch>
         <Route path="/shopping-cart" component={ ShoppingCart } />
         <Route
+          path="/shopping-cart/:id"
+          render={ (props) => <ShoppingCart { ...props } /> }
+        />
+        <Route
           exact
           path="/product/:id"
           render={ (props) => <ProductDetail { ...props } /> }

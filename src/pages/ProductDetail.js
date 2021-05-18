@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import getProductById from '../services/api2';
 import Loading from '../components/Loading';
 
@@ -32,7 +33,8 @@ export default class ProductDetail extends Component {
   }
 
   render() {
-    const { productInfo: { title, thumbnail, price, attributes } } = this.state;
+    // const { productInfo: { title, thumbnail, price, attributes } } = this.state;
+    const { productInfo } = this.state;
     const { loading } = this.state;
     return (
       <div>
@@ -40,17 +42,18 @@ export default class ProductDetail extends Component {
           ? <Loading />
           : (
             <>
-              <h1 data-testid="product-detail-name">{title}</h1>
-              <h1>{`R$${price}`}</h1>
-              <img src={ thumbnail } alt="product" width="500px" />
+              <h1 data-testid="product-detail-name">{productInfo.title}</h1>
+              <h1>{`R$${productInfo.price}`}</h1>
+              <img src={ productInfo.thumbnail } alt="product" width="500px" />
               <ul>
-                {attributes
+                {productInfo.attributes
                   .map((attribute, index) => (
                     <li key={ index }>
                       {`${attribute.name}:
                    ${attribute.value_name}`}
                     </li>))}
               </ul>
+              <Link to={ { pathname: '/shopping-cart', search: '?sort=name', state: { productInfo } } }>Adicionar ao Carrinho</Link>
             </>
           )}
       </div>

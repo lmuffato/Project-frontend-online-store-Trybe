@@ -14,11 +14,10 @@
 }
 
 .produtcs {
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
   width: 100%;
-  
 }
 
 .category {
@@ -30,17 +29,17 @@
 }
 
 .back {
-  width: 30px;
   height: 18px;
+  width: 30px;
 }
 
 .product {
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
   border: 1px solid black;
-  width: 300px;
   margin: 2px;
+  width: 300px;
 }
 
 .botoes {

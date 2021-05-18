@@ -23,7 +23,7 @@ class ProductDetails extends React.Component {
       item: productData[0],
     });
   }
-  
+
   render() {
     const { item } = this.state;
     console.log(item);

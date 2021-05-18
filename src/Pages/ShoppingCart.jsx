@@ -65,7 +65,6 @@ class ShoppingCart extends Component {
     }
     return (
       <>
-        {console.log(size)}
         <CartSize size={ size } />
         {reducedProducts.map((product) => (
           <div className="product-shopping-cart" key={ product }>

@@ -44,6 +44,7 @@ class App extends Component {
               <ShoppingCart
                 products={ productsCart }
                 quantity={ quantityCart }
+                size={ productsCart.length }
               />
             ) }
           />

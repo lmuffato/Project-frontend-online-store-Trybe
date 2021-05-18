@@ -15,7 +15,6 @@ function App() {
         <Route path="/CartShopPage" component={ CartShopPage } />
         <CartButton />
         <CategorieList />
-        <ProductCard />
       </div>
     </BrowserRouter>
   );

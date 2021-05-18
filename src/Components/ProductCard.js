@@ -12,7 +12,7 @@ class ProductCard extends React.Component {
   }
   
   getQuery(param) {
-    // api.getProductsFromCategoryAndQuery()
+    api.getProductsFromCategoryAndQuery()
     return param
   }
 

@@ -12,7 +12,6 @@ export default class Home extends Component {
       products: [],
       loading: false,
       category: 'all',
-      categoryId: '',
     };
   }
 
@@ -20,9 +19,11 @@ export default class Home extends Component {
     const { value, name } = event.target;
     this.setState({
       [name]: value,
+    }, () => {
+      if (name === 'category') {
+        this.handleClick();
+      }
     });
-    this.handleClick();
-    this.forceUpdate();
   }
 
   getProducts = async () => {
@@ -33,9 +34,11 @@ export default class Home extends Component {
 
   handleClick = () => {
     this.getProducts().then((response) => {
-      this.setState({
-        products: response,
-        loading: true,
+      this.setState({ loading: true }, () => {
+        this.setState({
+          products: response,
+          loading: false,
+        });
       });
     });
   }
@@ -59,10 +62,11 @@ export default class Home extends Component {
         <SideBar handleChange={ this.handleChange } />
         <ButtonCart />
         <section>
-          { loading ? products.map((product, index) => (<Product
+          { !loading ? products.map((product, index) => (<Product
             key={ index }
             product={ product }
-          />)) : <span>Nenhum produto foi encontrado</span> }
+          />)) : 'Carregando...' }
+          { products ? <span>Nenhum produto foi encontrado</span> : '' }
         </section>
       </main>
     );

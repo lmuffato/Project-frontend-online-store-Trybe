@@ -8,6 +8,7 @@ class Product extends Component {
     const { title, thumbnail, price, id, shipping } = product;
     const { free_shipping: freeShipping } = shipping;
     const category = product.category_id;
+    const isFreeShipping = <span data-testid="free-shipping">Frete Gratis!</span>;
     return (
       <div className="productList">
         <div key={ key } data-testid="product" className="products">
@@ -23,6 +24,7 @@ class Product extends Component {
           >
             Detalhes
           </Link>
+          { (freeShipping) ? isFreeShipping : '' }
           <button
             type="button"
             onClick={ addCart }

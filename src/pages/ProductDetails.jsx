@@ -11,7 +11,9 @@ class ProductDetails extends Component {
       <section className="product-details">
         <ProductInfo product={ product } />
         <Link to="/">Voltar</Link>
-        <AddToCartButton cartProduct={ cartProduct } addToCart={ addToCart } />
+        <AddToCartButton dataTestid="product-detail-add-to-cart" cartProduct={ cartProduct } addToCart={ addToCart } />
+        Adicionar ao Carrinho
+      </button>
       </section>
     );
   }

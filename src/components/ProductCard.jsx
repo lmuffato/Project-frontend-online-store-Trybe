@@ -15,7 +15,7 @@ class ProductCard extends Component {
           <p>{`R$ ${price.toFixed(2)}` }</p>
           <img className="card-img" src={ thumbnail } alt={ title } />
         </Link>
-        <AddToCartButton cartProduct={ cartProduct } addToCart={ addToCart } />
+        <AddToCartButton data-testid="product-add-to-cart" cartProduct={ cartProduct } addToCart={ addToCart } />
       </div>
     );
   }

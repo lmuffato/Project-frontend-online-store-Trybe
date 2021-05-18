@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Categories from '../components/Categories';
 import SearchBar from '../components/SearchBar';
 import ProductList from '../components/ProductList';
+// import UserForm from '../components/UserReview';
 import ProductNotFound from '../components/ProductNotFound';
 import * as api from '../services/api';
 import UserForm from '../components/UserForm';
@@ -22,9 +23,13 @@ export default class Home extends Component {
     this.handleCategoryEvent = this.handleCategoryEvent.bind(this);
   }
 
+  // Requisito 4 - Exibe as categorias buscadas pela função handleFetchCategories
+
   componentDidMount() {
     this.handleFetchCategories();
   }
+
+  // Requisito 5 - captura/controla o value digitado no input
 
   handleChange({ target }) {
     this.setState({
@@ -32,10 +37,15 @@ export default class Home extends Component {
     });
   }
 
+  // Requisito 5 - função que dispara a chamada à API, após clique
+  // no botão Pesquisar de SearchBar
+
   handleClick(event) {
     event.preventDefault();
     this.handleFetchProducts();
   }
+
+  // Requisito 5 - Função que faz o fetch dos produtos por busca no input
 
   async handleFetchProducts() {
     const { search } = this.state;
@@ -47,19 +57,25 @@ export default class Home extends Component {
     }
   }
 
+  // Requisito 6 - Função que faz pega o id uma categoria e atribui à função
+  // que faz o fetch de produtos por categoria
+
   handleCategoryEvent(event) {
-    const id = event.target.getAttribute('data-id');
+    const id = event.target.getAttribute('id');
     this.handleFetchFromCategory(id);
   }
+
+  // Requisito 4 - Função que faz o fetch das categorias na API
 
   async handleFetchCategories() {
     this.setState({ categories: [] }, () => {
       api.getCategories().then((data) => {
         this.setState({ categories: data });
-        console.log(data);
       });
     });
   }
+
+  // Requisito 6 - Função que faz o fetch dos produtos por categoria
 
   async handleFetchFromCategory(id) {
     const request = await api.getProductsFromCategoryAndQuery(id, '');
@@ -90,3 +106,6 @@ export default class Home extends Component {
     );
   }
 }
+
+// Referências:
+// getAttribute: https://developer.mozilla.org/pt-BR/docs/Web/API/Element/getAttribute

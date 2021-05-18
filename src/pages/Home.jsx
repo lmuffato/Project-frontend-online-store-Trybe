@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import shoppingCart from '../imagens/shoppingCart.svg';
 import CategoryList from '../components/CategoryList';
-import ProductList from '../components/ProductList';
+import ProductCard from '../components/ProductCard';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import Loading from './Loading';
 
@@ -12,22 +12,22 @@ export default class Home extends React.Component {
 
     this.state = {
       input: undefined,
-      radio: '',
+      checkbox: '',
+      // checked: false,
       items: [],
       loading: true,
     };
   }
 
   request = () => {
-    const { input, radio } = this.state;
-    getProductsFromCategoryAndQuery(radio, input)
+    const { input, checkbox } = this.state;
+    getProductsFromCategoryAndQuery(checkbox, input)
       .then((finalData) => {
         this.setState({
           loading: false,
           items: finalData.results,
         });
       });
-    // results.price, results.thumbnail, results.title
   }
 
   handleChangeInput = ({ target }) => {
@@ -37,9 +37,9 @@ export default class Home extends React.Component {
   }
 
   handleChangeCheckbox = async ({ target }) => {
-    await this.setState({
-      radio: target.value,
-    });
+    await this.setState(() => ({
+      checkbox: target.value,
+    }));
     this.request();
   }
 
@@ -88,12 +88,12 @@ export default class Home extends React.Component {
           </p>
           {loading
             ? <Loading />
-            : items.map((item) => <ProductList item={ item } key={ item.id } />)}
+            : items.map((item) => <ProductCard item={ item } key={ item.id } />)}
         </section>
         <CategoryList
           className="product-list"
-          handleChangeCheckbox={ this.handleChangeCheckbox }
-          request={ this.request }
+          handleChange={ this.handleChangeCheckbox }
+          // request={ this.request }
         />
       </div>
     );

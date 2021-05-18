@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import fetchProduct from '../services/itemApi';
 import shoppingCart from '../imagens/shoppingCart.svg';
 import Loading from './Loading';
+import Button from '../components/Button';
 import '../styles/ProductDetail.css';
 
 class ProductDetail extends React.Component {
@@ -31,7 +32,6 @@ class ProductDetail extends React.Component {
 
   render() {
     const { item, loading } = this.state;
-    const { addToCart } = this.props;
     const loadingElement = <Loading />;
 
     if (loading) {
@@ -50,14 +50,7 @@ class ProductDetail extends React.Component {
               R$
               {item.price}
             </p>
-            <button
-              type="submit"
-              data-testid="product-detail-add-to-cart"
-              className="add-to-cart"
-              onClick={ () => addToCart(item) }
-            >
-              Adicionar ao carrinho
-            </button>
+            <Button item={ item } />
           </div>
           <div className="specifications">
             Especificações Técnicas:

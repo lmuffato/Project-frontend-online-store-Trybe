@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
-import './App.css';
+
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+
 import Home from './pages/Home';
-import Cart from './pages/Cart';
 import ProductDetails from './pages/ProductDetails';
+import Checkout from './pages/Checkout';
+import Cart from './pages/Cart';
+
+import './App.css';
 
 class App extends Component {
   constructor() {
@@ -27,42 +31,63 @@ class App extends Component {
     }));
   };
 
-  handleDetailsToCart = async (product) => {
-    console.log(product);
-    this.setState((anterior) => ({
-      cartList: [...anterior.cartList, {
-        img: product.thumbnail,
-        title: product.title,
-        quant: 1,
-        price: product.price.toFixed(2),
-      }],
-    }));
+  changeQuantProductLength = (quant, productTitle) => {
+    const { cartList } = this.state;
+    const newCartList = cartList.map((product) => {
+      const checkTitle = product.title === productTitle;
+      return checkTitle ? { ...product, quant } : product;
+    });
+
+    this.setState({ cartList: newCartList });
   }
 
-  render() {
-    const { cartList } = this.state;
-    return (
-      <Router>
-        <Route
-          path="/carrinho"
-          render={ (props) => <Cart { ...props } cartList={ cartList } /> }
-        />
-        <Route
-          exact
-          path="/"
-          render={ (props) => <Home { ...props } onClick={ this.handleClickAddCart } /> }
-        />
-        <Route
-          path="/details/:id"
-          render={ (props) => (
-            <ProductDetails
-              { ...props }
-              handleDetailsToCart={ this.handleDetailsToCart }
-            />) }
-        />
-      </Router>
-    );
-  }
+    handleDetailsToCart = async (product) => {
+      console.log(product);
+      this.setState((anterior) => ({
+        cartList: [...anterior.cartList, {
+          img: product.thumbnail,
+          title: product.title,
+          quant: 1,
+          price: product.price.toFixed(2),
+        }],
+      }));
+    }
+
+    render() {
+      const { cartList } = this.state;
+      return (
+        <Router>
+          <Route
+            path="/carrinho"
+            render={ (props) => (
+              <Cart
+                { ...props }
+                cartList={ cartList }
+                changeQuantProductLength={ this.changeQuantProductLength }
+              />) }
+          />
+          <Route
+            exact
+            path="/"
+            render={ (props) => (
+              <Home
+                { ...props }
+                onClick={ this.handleClickAddCart }
+              />
+            ) }
+          />
+          <Route
+            path="/details/:id"
+            render={ (props) => (
+              <ProductDetails
+                { ...props }
+                handleDetailsToCart={ this.handleDetailsToCart }
+              />) }
+          />
+          <Route path="/checkout" render={ (props) => <Checkout { ...props } /> } />
+        </Router>
+      );
+    }
 }
 
 export default App;

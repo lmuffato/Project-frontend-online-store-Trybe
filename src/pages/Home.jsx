@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Categories from '../components/Categories';
 import SearchBar from '../components/SearchBar';
 import ProductList from '../components/ProductList';
+// import UserForm from '../components/UserReview';
 import ProductNotFound from '../components/ProductNotFound';
 import * as api from '../services/api';
 

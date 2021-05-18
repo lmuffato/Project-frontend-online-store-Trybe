@@ -27,6 +27,11 @@ class ProductDetails extends Component {
         </Link>
         <h1 data-testid="product-detail-name">{ product.title }</h1>
         <p>{ product.price }</p>
+        <p>
+          { !product.shipping.free_shipping
+            ? <h3>Frete Grátis</h3>
+            : <h3>Calcule o Frete</h3> }
+        </p>
         <img src={ product.thumbnail } alt="imagem do produto" />
         <h2>Específicações Técnicas</h2>
         <button

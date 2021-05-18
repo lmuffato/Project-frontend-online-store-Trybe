@@ -9,17 +9,29 @@ class HomeCart extends React.Component {
       products: [],
       counter: 1,
     };
-    this.productsCart = this.productsCart.bind(this);
+  }
+
+  componentDidMount() {
+    this.handleProducts();
+    this.setStorage();
   }
 
   handleProducts = () => {
     const { location: { state: { product } } } = this.props;
     this.setState((prevState) => ({
-      products: [...prevState.products] + [product],
+      products: [...prevState.products, product],
     }));
   }
 
-  productsCart() {
+  setStorage = () => {
+    const { location: { state: { product } } } = this.props;
+    localStorage.setItem(`${product.id}`, JSON.stringify(product));
+    
+  }
+
+  
+
+  productsCart = () => {
     const { products, counter } = this.state;
     if (products.length === 0) {
       return <h2 data-testid="shopping-cart-empty-message">Seu carrinho está vazio</h2>;

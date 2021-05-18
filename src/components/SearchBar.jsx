@@ -11,6 +11,7 @@ class SearchBar extends React.Component {
       status: false,
       products: [],
     };
+
     this.eventFilter = this.eventFilter.bind(this);
     this.handleFilter = this.handleFilter.bind(this);
     this.products = this.products.bind(this);
@@ -74,6 +75,8 @@ class SearchBar extends React.Component {
             <button
               type="button"
               data-testid="product-add-to-cart"
+              onClick={ this.clickSet }
+              value={ product }
             >
               Adicionar ao carrinho
             </button>

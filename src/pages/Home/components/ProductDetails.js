@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getProductsFromCategory } from '../../../services/api';
 import { Link } from 'react-router-dom';
+import { getProductsFromCategory } from '../../../services/api';
 
 class ProductDetails extends React.Component {
   constructor() {

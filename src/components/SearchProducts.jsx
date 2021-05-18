@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import * as api from '../services/api';
 import './SearchProducts.css';
 
@@ -54,6 +55,12 @@ class SearchProducts extends Component {
                     alt={ `Imagem-${title}` }
                   />
                   <p className="price-product">{ `R$ ${price.toFixed(2)}` }</p>
+                  <Link
+                    data-testid="product-detail-link"
+                    to={ { pathname: '/item-details', state: { product } } }
+                  >
+                    Detalhes
+                  </Link>
                 </section>
               );
             })

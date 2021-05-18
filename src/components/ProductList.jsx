@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 
 class ProductList extends React.Component {
   render() {
-    const { products, isClicked } = this.props;
+    const { products } = this.props;
 
-    if (products.length === 0 && isClicked) return <p>Nenhum produto foi encontrado</p>;
+    if (products === 'none') return <p>Nenhum produto foi encontrado</p>;
     return (
       <div>
         { products.map(({ title, price, thumbnail, id }) => (

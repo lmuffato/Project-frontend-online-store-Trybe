@@ -12,7 +12,6 @@ class Home extends React.Component {
       loading: false,
       input: '',
       products: [],
-      isClicked: false,
       radio: '',
     };
   }
@@ -28,13 +27,11 @@ class Home extends React.Component {
 
   handleProductsList = () => {
     const { input, radio } = this.state;
-    this.setState({ loading: true }, async () => {
+    this.setState({ loading: true, products: [] }, async () => {
       const { results } = await api.getProductsFromCategoryAndQuery(radio, input);
-      this.setState({
-        loading: false,
-        products: results,
-        isClicked: true,
-      });
+      if (results.length === 0) this.setState({ products: 'none' });
+      else this.setState({ products: results });
+      this.setState({ loading: false });
     });
   }
 
@@ -45,7 +42,6 @@ class Home extends React.Component {
 
   render() {
     const { products, loading, isClicked, input } = this.state;
-    if (loading) return (<p>Carregando...</p>);
     return (
       <>
         <SearchBar
@@ -54,6 +50,7 @@ class Home extends React.Component {
           onChange={ this.handleOnChange }
         />
         <Categories onClick={ this.handleRadio } />
+        { loading && '...carregando' }
         <ProductList products={ products } isClicked={ isClicked } />
         <CartButton data-testid="shopping-cart-button" />
       </>

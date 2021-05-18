@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Home from './pages/Home';
 import ShoppingCart from './pages/ShoppingCart';
+import ProductDetails from './pages/Home/components/ProductDetails';
 import { getProductsFromCategoryAndQuery } from './services/api';
 
 class App extends React.Component {
@@ -14,8 +15,6 @@ class App extends React.Component {
       selectedCategory: '',
       searchedQuery: '',
       cart: [],
-      quantity: {},
-      quantitys: {},
     };
 
     this.handleClick = this.handleClick.bind(this);
@@ -42,11 +41,9 @@ class App extends React.Component {
     });
   }
 
-  setCart(cart, quantity) {
+  setCart(cart) {
     this.setState({
       cart,
-      quantity,
-      quantitys: ([].concat(this.state.quantity, this.state.quantitys)),
     });
   }
 
@@ -77,6 +74,11 @@ class App extends React.Component {
           <Route path="/cart">
             <ShoppingCart cart={ cart } quantitys={ quantitys } />
           </Route>
+          <Route
+            path="/product/:category/:id"
+            component={ ProductDetails }
+            exact
+          />
         </Switch>
       </BrowserRouter>
     );

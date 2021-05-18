@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import NotFound from '../NotFound';
 
 class CardProduct extends React.Component {
@@ -16,10 +17,38 @@ class CardProduct extends React.Component {
   addProduct({ target }) {
     const { products, setCart } = this.props;
     const { cart } = this.state;
+    let addedProduct = {};
+    let updatedCart = [];
+
     const productFound = products.find((product) => product.id === target.id);
-    const updatedCart = [...cart, productFound];
-    const updatedQuantityOfProduct = { [productFound.id]: 1 };
-    setCart(updatedCart, updatedQuantityOfProduct);
+
+    const foundInCart = cart.find((product) => product.data.id === target.id);
+
+    if (foundInCart) {
+      const increasedQuantity = foundInCart.quantity + 1;
+      addedProduct = {
+        ...foundInCart,
+        quantity: increasedQuantity,
+      };
+      updatedCart = cart.map((product) => {
+        if (product.data.id === target.id) {
+          product = addedProduct;
+        }
+        return product;
+      });
+    } else {
+      addedProduct = {
+        quantity: 1,
+        data: productFound,
+      };
+      updatedCart = [...cart, addedProduct];
+    }
+
+    this.setState({
+      cart: updatedCart,
+    });
+
+    setCart(updatedCart);
   }
 
   render() {
@@ -30,9 +59,17 @@ class CardProduct extends React.Component {
         {products.length === 0 ? <NotFound />
           : products.map((product) => (
             <div key={ product.id } data-testid="product">
-              <p>{product.title}</p>
-              <img src={ product.thumbnail } alt={ product.title } />
-              <p>{product.price}</p>
+              <Link
+                to={ {
+                  pathname: `/product/${product.category_id}/${product.id}`,
+                  state: { products },
+                } }
+                data-testid="product-detail-link"
+              >
+                <p>{product.title}</p>
+                <img src={ product.thumbnail } alt={ product.title } />
+                <p>{product.price}</p>
+              </Link>
               <button
                 type="button"
                 data-testid="product-add-to-cart"

@@ -3,6 +3,20 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 class Checkout extends Component {
+  constructor(props) {
+    super(props);
+    const { products, quantity } = this.props;
+    this.state = {
+      products,
+      quantity,
+      totalPrice: 0,
+    };
+  }
+
+  componentDidMount() {
+    this.sumTotal();
+  }
+
   verifyCheckout = () => {
     const { products } = this.props;
     if (products.length === 0) {
@@ -12,8 +26,22 @@ class Checkout extends Component {
     }
   }
 
-  render() {
+  sumTotal = () => {
+    // const price = event.target.getAttribute('data-price');
     const { products, quantity } = this.props;
+    let newValue = 0;
+    products.forEach((element) => {
+      newValue += (parseFloat(element.price) * quantity[element.value]);
+    });
+    console.log(newValue);
+    this.setState({
+      totalPrice: newValue.toFixed(2),
+    });
+  }
+
+  render() {
+    /* const { products, quantity } = this.props; */
+    const { products, quantity, totalPrice } = this.state;
     return (
       <div className="div-checkout">
         <button type="button">
@@ -26,15 +54,17 @@ class Checkout extends Component {
             <ul>
               {products.map((element, index) => (
                 <li key={ index }>
-                  {element}
-                  <span className="quantity-order">{ `(${quantity[element]})`}</span>
+                  {element.value}
+                  <span className="quantity-order">
+                    { `(${quantity[element.value]})`}
+                  </span>
                 </li>))}
             </ul>
           </div>
           <p>
             Total: R$
             <span className="total-order">
-              0,0
+              { totalPrice }
             </span>
           </p>
         </div>

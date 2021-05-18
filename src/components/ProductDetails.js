@@ -65,6 +65,7 @@ class ProductDetails extends Component {
           type="button"
           onClick={ AddCart }
           value={ title }
+          price={ price }
           data-testid="product-detail-add-to-cart"
         >
           Adicionar ao carrinho

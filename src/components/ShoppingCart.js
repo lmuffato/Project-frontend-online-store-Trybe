@@ -6,8 +6,8 @@ class ShoppingCart extends Component {
   reduce = (arr) => {
     const reduced = [];
     arr.forEach((element) => {
-      if (!reduced.includes(element)) {
-        reduced.push(element);
+      if (!reduced.includes(element.value)) {
+        reduced.push(element.value);
       }
     });
     return reduced;
@@ -36,7 +36,9 @@ class ShoppingCart extends Component {
           { reducedProducts.map((element) => (
             <li key={ element }>
               <h1 data-testid="shopping-cart-product-name">{element}</h1>
-              <h2 data-testid="shopping-cart-product-quantity">{quantity[element]}</h2>
+              <h2 data-testid="shopping-cart-product-quantity">
+                {quantity[element]}
+              </h2>
               <button
                 type="button"
                 value={ element }

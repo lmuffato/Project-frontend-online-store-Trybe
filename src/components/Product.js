@@ -28,6 +28,7 @@ class Product extends Component {
             type="button"
             onClick={ addCart }
             value={ title }
+            price={ price }
             data-testid="product-add-to-cart"
           >
             Adicionar ao carrinho

@@ -32,11 +32,9 @@ class Home extends Component {
       () => this.fetchProducts(),
     );
   }
-  // TODO: fetchProducts not working correct
 
   async fetchProducts() {
     const { selectedCategory, inputTextBox } = this.state;
-    console.warn(`Fetch chamado com parametros ${selectedCategory} e ${inputTextBox}`);
     const response = await getProductsFromCategoryAndQuery(
       selectedCategory, inputTextBox,
     );
@@ -50,7 +48,7 @@ class Home extends Component {
       <>
         <SearchBar onClick={ this.updateTextBoxValue } />
         <Categories onClick={ this.chooseCategory } />
-        <Products mlItems={ requestedProducts } selected />
+        <Products mlItems={ requestedProducts } />
       </>
     );
   }

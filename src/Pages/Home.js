@@ -16,7 +16,6 @@ class Home extends Component {
       query: '',
       categoryId: '',
       isCategoriesLoading: true,
-      isProdutcsLoading: true,
     };
   }
 
@@ -34,8 +33,8 @@ class Home extends Component {
 
   newStateCategoryAndQuery = ({ target }) => {
     const { name, value } = target;
-    this.setState({
-      [name]: value,
+    this.setState({ [name]: value }, () => {
+      this.fetchItem();
     });
   }
 
@@ -44,7 +43,6 @@ class Home extends Component {
     const data = await api.getProductsFromCategoryAndQuery(categoryId, query);
     this.setState({
       products: data.results,
-      isProdutcsLoading: false,
     });
   }
 
@@ -53,7 +51,6 @@ class Home extends Component {
       categories,
       products,
       isCategoriesLoading,
-      isProdutcsLoading,
     } = this.state;
 
     return (
@@ -74,9 +71,6 @@ class Home extends Component {
         </aside>
 
         <main className="produtcs">
-          <h3 data-testid="home-initial-message">
-            Digite algum termo de pesquisa ou escolha uma categoria.
-          </h3>
 
           <label htmlFor="myInput">
             <input
@@ -94,7 +88,10 @@ class Home extends Component {
               Pesquisar
             </button>
           </label>
-
+          <h3 data-testid="home-initial-message">
+            Digite algum termo de pesquisa ou escolha uma categoria.
+          </h3>
+          <br />
           <button type="button">
             <Link to="/shopping-cart" data-testid="shopping-cart-button">
               <img
@@ -107,12 +104,9 @@ class Home extends Component {
 
           <section>
             <ul className="products">
-              {
-                isProdutcsLoading ? <Loading />
-                  : products.map((product) => (
-                    <CardItem key={ product.id } { ...product } />
-                  ))
-              }
+              {products.map((product) => (
+                <CardItem key={ product.id } { ...product } />
+              ))}
             </ul>
           </section>
         </main>

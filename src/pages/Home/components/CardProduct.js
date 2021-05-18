@@ -8,7 +8,6 @@ class CardProduct extends React.Component {
 
     this.state = {
       cart: [],
-      quantityCart: {},
     };
 
     this.addProduct = this.addProduct.bind(this);
@@ -16,22 +15,11 @@ class CardProduct extends React.Component {
 
   addProduct({ target }) {
     const { products, setCart } = this.props;
-    const { cart, quantityCart } = this.state;
+    const { cart } = this.state;
     const productFound = products.find((product) => product.id === target.id);
     const updatedCart = [...cart, productFound];
-    const updatedQuantityCart = quantityCart[productFound.id] !== undefined
-      ? {
-        ...quantityCart,
-        [productFound.id]: quantityCart[productFound.id] + 1,
-      }
-      : {
-        ...quantityCart,
-        [productFound.id]: 1,
-      };
-    this.setState({
-      cart: updatedCart,
-    });
-    setCart(updatedCart, updatedQuantityCart);
+    const updatedQuantityOfProduct = { [productFound.id]: 1 };
+    setCart(updatedCart, updatedQuantityOfProduct);
   }
 
   render() {

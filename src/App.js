@@ -14,7 +14,8 @@ class App extends React.Component {
       selectedCategory: '',
       searchedQuery: '',
       cart: [],
-      quantityCart: {},
+      quantity: {},
+      quantitys: {},
     };
 
     this.handleClick = this.handleClick.bind(this);
@@ -41,10 +42,11 @@ class App extends React.Component {
     });
   }
 
-  setCart(cart, quantityCart) {
+  setCart(cart, quantity) {
     this.setState({
       cart,
-      quantityCart,
+      quantity,
+      quantitys: ([].concat(this.state.quantity, this.state.quantitys)),
     });
   }
 
@@ -59,7 +61,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { products, cart, quantityCart } = this.state;
+    const { products, cart, quantitys } = this.state;
     return (
       <BrowserRouter>
         <Switch>
@@ -73,7 +75,7 @@ class App extends React.Component {
             />
           </Route>
           <Route path="/cart">
-            <ShoppingCart cart={ cart } quantityCart={ quantityCart } />
+            <ShoppingCart cart={ cart } quantitys={ quantitys } />
           </Route>
         </Switch>
       </BrowserRouter>

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 class ShoppingCart extends React.Component {
   render() {
-    const { cart, quantityCart } = this.props;
+    const { cart, quantitys } = this.props;
     return (
       <div>
         {
@@ -14,7 +14,7 @@ class ShoppingCart extends React.Component {
                 <li key={ product.id }>
                   <h2 data-testid="shopping-cart-product-name">{product.title}</h2>
                   <h4 data-testid="shopping-cart-product-quantity">
-                    { quantityCart[product.id] }
+                    { quantitys[product.id] }
                   </h4>
                 </li>
               )) }

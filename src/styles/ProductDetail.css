@@ -5,7 +5,8 @@
   padding: 10px;
 }
 
-.product-show {
+.product-show, .specifications, .add-to-cart {
+  align-items: center;
   border: 1px solid rgba(59, 59, 59, 0.459);
   border-radius: 10px;
   display: flex;
@@ -16,8 +17,6 @@
 }
 
 .specifications {
-  border: 1px solid rgba(59, 59, 59, 0.459);
-  border-radius: 10px;
+  align-items: flex-start;
   font-size: 10pt;
-  padding: 10px;
 }

@@ -31,11 +31,14 @@ class ProductDetail extends React.Component {
 
   render() {
     const { item, loading } = this.state;
+    const { addToCart } = this.props;
     const loadingElement = <Loading />;
 
     if (loading) {
       return loadingElement;
     }
+
+    console.log(item.attributes);
 
     return (
       <div>
@@ -47,6 +50,14 @@ class ProductDetail extends React.Component {
               R$
               {item.price}
             </p>
+            <button
+              type="submit"
+              data-testid="product-detail-add-to-cart"
+              className="add-to-cart"
+              onClick={ () => addToCart(item) }
+            >
+              Adicionar ao carrinho
+            </button>
           </div>
           <div className="specifications">
             Especificações Técnicas:
@@ -56,9 +67,11 @@ class ProductDetail extends React.Component {
               ))
             }
           </div>
-          {console.log(item.attributes)}
         </div>
-        <Link to="/ShoppingCart">
+        <Link
+          to="/ShoppingCart"
+          data-testid="shopping-cart-button"
+        >
           <img
             src={ shoppingCart }
             alt="Carrinho de compras"

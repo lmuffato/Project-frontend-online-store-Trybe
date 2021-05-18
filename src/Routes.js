@@ -1,7 +1,8 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import Cart from './pages/Cart';
-import Home from './pages/Home';
+import ProductDetails from './pages/ProductDetails/index';
+import Cart from './pages/Cart/index';
+import Home from './pages/Home/index';
 
 function Routes() {
   return (
@@ -9,6 +10,10 @@ function Routes() {
       <Switch>
         <Route path="/Cart" render={ (props) => <Cart { ...props } /> } />
         <Route path="/" component={ Home } exact />
+        <Route
+          path="/itemDetails/:itemId"
+          render={ (props) => <ProductDetails { ...props } /> }
+        />
       </Switch>
     </BrowserRouter>
   );

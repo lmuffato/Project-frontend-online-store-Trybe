@@ -46,8 +46,8 @@ ProductDetail.propTypes = {
     state: {
       product: PropTypes.shape({
         title: PropTypes.string,
-        price: PropTypes.string,
-        thumnail: PropTypes.string,
+        price: PropTypes.number,
+        thumbnail: PropTypes.string,
       }),
     },
   }).isRequired,

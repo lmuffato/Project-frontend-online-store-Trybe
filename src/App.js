@@ -76,7 +76,12 @@ class App extends React.Component {
           </Route>
           <Route
             path="/product/:category/:id"
-            component={ ProductDetails }
+            component={
+              (props) => (<ProductDetails
+                setCart={ this.setCart }
+                { ...props }
+              />)
+            }
             exact
           />
         </Switch>

@@ -17,6 +17,7 @@ class ShoppingCart extends Component {
 
   showProductsInCart = () => {
     const { productsInCart } = this.props;
+    console.log(productsInCart);
     const emptyMessage = 'Seu carrinho está vazio';
     const dataTestid = 'shopping-cart-empty-message';
     let showProductsInCartFunc = '';
@@ -28,11 +29,12 @@ class ShoppingCart extends Component {
       );
     } else {
       showProductsInCartFunc = productsInCart
-        .map(({ title, ProductId, productQuantity }) => (
-          <p key={ ProductId }>
-            <p data-testid="shopping-cart-product-name">{title}</p>
-            <p data-testid="shopping-cart-product-quantity">{productQuantity}</p>
-          </p>));
+        .map(({ product, productQuantity }) => (
+          <div key={ product }>
+            {console.log(product)}
+            <div data-testid="shopping-cart-product-name">{product}</div>
+            <div data-testid="shopping-cart-product-quantity">{productQuantity}</div>
+          </div>));
     }
     return (
       <section className="productListContainer">
@@ -45,16 +47,6 @@ class ShoppingCart extends Component {
     return (
       <section>
         {this.showProductsInCart()}
-        <section>
-          <button
-            name="botao"
-            type="button"
-            data-testid="product-add-to-cart"
-            onClick={ this.testarComponente }
-          >
-            Imprimir itens no console
-          </button>
-        </section>
       </section>
     );
   }

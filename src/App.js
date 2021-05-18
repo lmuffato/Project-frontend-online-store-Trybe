@@ -13,9 +13,9 @@ class App extends Component {
     };
   }
 
-  handle = (title, ProductId, productQuantity) => {
+  handle = (product, productQuantity) => {
     this.setState(({ productsInCart }) => ({
-      productsInCart: [...productsInCart, { title, ProductId, productQuantity }],
+      productsInCart: [...productsInCart, { product, productQuantity }],
     }), () => {
       const { productsInCart } = this.state;
       console.log(productsInCart);

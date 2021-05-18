@@ -26,10 +26,10 @@ class SearchProducts extends Component {
   addProductInCart = ({ target }) => {
     const { handle } = this.props;
     console.log(target.value);
-    const ProductId = target.value;
+    const product = target.value;
     const productQuantity = target.parentElement.querySelector('.quantity').value;
-    const title = target.parentElement.querySelector('.title-product').innerText;
-    handle(title, ProductId, productQuantity);
+    // const title = target.parentElement.querySelector('.title-product').value;
+    handle(product, productQuantity);
   }
 
   search = async () => {
@@ -57,7 +57,7 @@ class SearchProducts extends Component {
               const { price, thumbnail, title, id } = product;
               return (
                 <section className="product-conteiner" data-testid="product" key={ id }>
-                  <h3 className="title-product">{ title }</h3>
+                  <h3 className="title-product" value={ title }>{ title }</h3>
                   <img
                     className="image-product"
                     src={ thumbnail }
@@ -68,15 +68,15 @@ class SearchProducts extends Component {
                     type="button"
                     data-testid="product-add-to-cart"
                     onClick={ this.addProductInCart }
-                    value={ id }
+                    value={ product.title }
                   >
                     Adicionar ao Carrinho
                   </button>
-                  <label>
+                  <label htmlFor="quantity">
                     Quantidade:
                     <input
                       className="quantity"
-                      name="idade"
+                      name="quantity"
                       type="number"
                       defaultValue={ 1 }
                     />
@@ -120,6 +120,7 @@ class SearchProducts extends Component {
 
 SearchProducts.propTypes = {
   category: PropTypes.string.isRequired,
+  handle: PropTypes.func.isRequired,
 };
 
 export default SearchProducts;

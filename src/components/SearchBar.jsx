@@ -23,7 +23,6 @@ class SearchBar extends React.Component {
     const { getProductsFromCategoryAndQuery } = apiUrl;
     if (status === true) {
       const result = await getProductsFromCategoryAndQuery('', filter);
-      console.log(result);
       this.setState({
         products: result.results,
       }, () => {
@@ -45,16 +44,25 @@ class SearchBar extends React.Component {
 
   products() {
     const { products } = this.state;
-    console.log(products);
     if (products.length === 0) {
       return <p>Nenhum produto foi encontrado</p>;
     }
-    console.log('Produts', products);
     return (
-      products.map((product) => (
-        <div data-testid="product" key={ product.id }>
+      products.map((product, i) => (
+        <div
+          data-testid="product"
+          key={ product.id }
+        >
           <img src={ product.thumbnail } alt={ product.id } />
-          <h6>{product.title}</h6>
+          <Link
+            to={ {
+              pathname: `/Product-Details/${product.id}`,
+              state: { product: products[i] },
+            } }
+            data-testid="product-detail-link"
+          >
+            <h6>{product.title}</h6>
+          </Link>
           <p>{` R$ ${product.price} `}</p>
         </div>
       ))

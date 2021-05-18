@@ -41,9 +41,9 @@
 }
 
 .review-form {
+  border: 1px solid black;
   display: flex;
   flex-direction: column;
-  border: 1px solid black;
   margin-left: auto;
   margin-right: auto;
   padding: 20px;
@@ -51,9 +51,9 @@
 }
 
 .email-input {
-  margin-right: 20px;
-  margin-bottom: 20px;
   height: 24px;
+  margin-bottom: 20px;
+  margin-right: 20px;
   width: 250px;
 }
 
@@ -62,14 +62,14 @@
 }
 
 .text-area {
-  resize: none;
+  font-family: Helvetica , Arial , sans-serif;
   min-height: 80px;
+  resize: none;
   width: 440px;
-  font-family: Helvetica, Arial, sans-serif
 }
 
 .review-btn {
+  height: 30px;
   margin-top: 20px;
-  height:30px;
   width: 80px;
 }

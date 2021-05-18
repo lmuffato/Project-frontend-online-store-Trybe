@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link as Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ItemOfCart from '../components/ItemOfCart';
 
@@ -11,14 +12,35 @@ class ShoppingCart extends React.Component {
     };
 
     this.addProductToCart = this.addProductToCart.bind(this);
+    this.getProducts = this.getProducts.bind(this);
+    this.setProducts = this.setProducts.bind(this);
   }
 
   componentDidMount() {
     const { location } = this.props;
+    this.getProducts();
     if (!location.state) return; // tratando problema qnd clica no carrinho vazio
     const { product } = location.state;
-    console.log(product);
     this.addProductToCart(product);
+    console.log('componentDidMount');
+  }
+
+  setProducts() {
+    const { cart } = this.state;
+    const storageItems = localStorage.getItem('products');
+    let productsFromLS = [];
+    if (storageItems) {
+      productsFromLS = JSON.parse(localStorage.getItem('products'));
+    }
+    productsFromLS.push(cart[0]);
+    localStorage.setItem('products', JSON.stringify(productsFromLS));
+  }
+
+  getProducts() {
+    const get = localStorage.getItem('products');
+    if (get) {
+      this.setState({ cart: JSON.parse(get) });
+    }
   }
 
   addProductToCart(product) {
@@ -27,7 +49,7 @@ class ShoppingCart extends React.Component {
     this.setState({
       cart: [...cart, product],
       totalPayment: totalPayment + price,
-    });
+    }, () => this.setProducts());
   }
 
   render() {
@@ -40,10 +62,13 @@ class ShoppingCart extends React.Component {
       );
     }
     return (
-      <ol>
-        {cart.map((item) => (
-          <ItemOfCart key={ item.id } product={ item } />))}
-      </ol>
+      <>
+        <ol>
+          {cart.map((item) => (
+            <ItemOfCart key={ item.id } product={ item } />))}
+        </ol>
+        <Redirect to="/">Home</Redirect>
+      </>
     );
   }
 }

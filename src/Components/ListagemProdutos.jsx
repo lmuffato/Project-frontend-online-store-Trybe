@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import Stars from './Stars';
 
 import * as api from '../services/api';
 
@@ -66,6 +67,7 @@ class ListagemProdutos extends Component {
 
     return (
       <div>
+        <Stars />
         <label htmlFor="query-input">
           <input
             data-testid="query-input"

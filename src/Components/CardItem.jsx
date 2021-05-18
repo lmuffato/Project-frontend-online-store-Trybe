@@ -1,16 +1,24 @@
 import React, { Component } from 'react';
 import { string, number } from 'prop-types';
+import { Link } from 'react-router-dom';
 
 class cardItem extends Component {
   render() {
-    const { title, thumbnail, price } = this.props;
-    console.log(this.props);
+    const { title, thumbnail, price, id } = this.props;
     return (
-      <div data-testid="product">
-        <h3>{ title }</h3>
-        <img src={ thumbnail } alt="produto" />
-        <span>{ price }</span>
-      </div>
+      <Link
+        to={ {
+          pathname: `/productDetails/${id}`,
+          state: { thumbnail, title, price },
+        } }
+        data-testid="product-detail-link"
+      >
+        <div data-testid="product" className="product">
+          <img src={ thumbnail } alt="produto" />
+          <h3>{title}</h3>
+          <span>{`R$ ${price}`}</span>
+        </div>
+      </Link>
     );
   }
 }

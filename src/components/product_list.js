@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import Category from './category_list';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import ShopCartButton from './ShopCartButton';
@@ -95,10 +96,16 @@ export default class ProductList extends Component {
     }
     return obj.map((item) => (
       <section data-testid="product" key={ item.id }>
-        <img src={ item.thumbnail } width="100px" alt="item.title" />
-        {item.title}
-        | PRICE:
-        {item.price}
+        <Link
+          to={ `/product_details/${item.id}/${item.title}` }
+          data-testid="product-detail-link"
+        >
+          {/* Solucao encontrada para passar parametros via link em https://medium.com/officialrajdeepsingh/how-to-pass-parameters-in-react-router-dom-link-7e8289574801 */}
+          <img src={ item.thumbnail } width="100px" alt="item.title" />
+          {item.title}
+          | PRICE:
+          {item.price}
+        </Link>
       </section>
     ));
   }

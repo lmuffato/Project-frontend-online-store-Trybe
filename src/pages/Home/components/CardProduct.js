@@ -12,7 +12,12 @@ class CardProduct extends React.Component {
         {products.length === 0 ? <NotFound />
           : products.map((product) => (
             <div key={ product.id } data-testid="product">
-              <Link to="/ProductDetails">
+              <Link
+                to={ {
+                  pathname: `/product/${product.category_id}/${product.id}`,
+                  state: { products },
+                } }
+              >
                 <div data-testid="product-detail-link">
                   <p>{product.title}</p>
                   <img src={ product.thumbnail } alt={ product.title } />
@@ -25,7 +30,6 @@ class CardProduct extends React.Component {
     );
   }
 }
-// import { formatters } from 'stylelint';
 
 CardProduct.propTypes = {
   products: PropTypes.array,

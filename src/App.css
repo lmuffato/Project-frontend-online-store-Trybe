@@ -1,3 +1,11 @@
+* {
+  list-style: none;
+}
+
+*:focus {
+  outline: none;
+}
+
 body {
   align-items: center;
   display: flex;
@@ -6,12 +14,13 @@ body {
   text-align: center;
 }
 
+
 .home-initial-message {
   border: solid black 1.2px;
   border-radius: 20px;
   margin-top: 10px;
   padding: 5px;
-  width: 1200px;
+  width: 1000px;
 }
 
 .container-searchBar {
@@ -22,5 +31,17 @@ body {
 
 .cart {
   margin-left: 10px;
+  margin-top: 10px;
+}
+
+.bars {
+  margin-right: 10px;
+  margin-top: 15px;
+}
+
+.btn-search {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
   margin-top: 10px;
 }

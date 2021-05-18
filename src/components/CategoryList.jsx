@@ -27,7 +27,9 @@ render() {
     <div>
       <ul>
         {categories
-          .map(({ name, id }) => <li data-testid="category" key={ id }>{name}</li>)}
+          .map(({ name, id }) => (
+            <li data-testid="category" key={ id }>{name}</li>
+          ))}
       </ul>
     </div>
   );

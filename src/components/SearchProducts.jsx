@@ -8,7 +8,6 @@ class SearchProducts extends Component {
     this.state = {
       query: '',
       productsList: [],
-      
     };
   }
 
@@ -20,6 +19,15 @@ class SearchProducts extends Component {
     this.setState({ query: value });
   };
 
+  addProductInCart = ({ target }) => {
+    const { handle } = this.props;
+    console.log(target.value);
+    const ProductId = target.value;
+    const productQuantity = target.parentElement.querySelector('.quantity').value;
+    const title = target.parentElement.querySelector('.title-product').innerText;
+    handle(title, ProductId, productQuantity);
+  }
+
   search = async () => {
     const { query } = this.state;
     const { getProductsFromCategoryAndQuery } = api;
@@ -30,7 +38,7 @@ class SearchProducts extends Component {
       const { results } = request;
       productsList = results;
     }
-    console.log(productsList);
+    // console.log(productsList);
     this.setState({ productsList });
   };
 
@@ -53,6 +61,23 @@ class SearchProducts extends Component {
                     alt={ `Imagem-${title}` }
                   />
                   <p className="price-product">{ `R$ ${price.toFixed(2)}` }</p>
+                  <button
+                    type="button"
+                    data-testid="product-add-to-cart"
+                    onClick={ this.addProductInCart }
+                    value={ id }
+                  >
+                    Adicionar ao Carrinho
+                  </button>
+                  <label>
+                    Quantidade:
+                    <input
+                      className="quantity"
+                      name="idade"
+                      type="number"
+                      defaultValue={ 1 }
+                    />
+                  </label>
                 </section>
               );
             })

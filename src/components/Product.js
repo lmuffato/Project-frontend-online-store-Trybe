@@ -8,28 +8,29 @@ class Product extends Component {
     const { title, thumbnail, price, id } = product;
     const category = product.category_id;
     return (
-      <div key={ key } data-testid="product">
-        <img src={ thumbnail } alt={ title } />
-        <h3>{ title }</h3>
-        <p>
-          R$
-          { price }
-          {console.log(this.props)}
-        </p>
-        <Link
-          to={ `/details/${id}/${category}` }
-          data-testid="product-detail-link"
-        >
-          Detalhes
-        </Link>
-        <button
-          type="button"
-          onClick={ addCart }
-          value={ title }
-          data-testid="product-add-to-cart"
-        >
-          Adicionar ao carrinho
-        </button>
+      <div className="productList">
+        <div key={ key } data-testid="product" className="products">
+          <img src={ thumbnail } alt={ title } />
+          <h3>{title}</h3>
+          <p>
+            R$
+            {price}
+          </p>
+          <Link
+            to={ `/details/${id}/${category}` }
+            data-testid="product-detail-link"
+          >
+            Detalhes
+          </Link>
+          <button
+            type="button"
+            onClick={ addCart }
+            value={ title }
+            data-testid="product-add-to-cart"
+          >
+            Adicionar ao carrinho
+          </button>
+        </div>
       </div>
     );
   }

@@ -1,63 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 class ShoppingCart extends Component {
-  constructor(props) {
-    super(props);
-    const { products, quantity } = this.props;
-    this.state = {
-      empty: true,
-      products,
-      quantity,
-    };
-  }
-
-  componentDidMount() {
-    this.changeEmpty();
-  }
-
-  handleSubtractButton = (event) => {
-    const { quantity } = this.state;
-    const { value } = event.target;
-    if (quantity[value] > 1) {
-      this.setState((paststate) => ({
-        quantity: {
-          ...paststate.quantity,
-          [value]: paststate.quantity[value] - 1,
-        },
-      }));
-    }
-  }
-
-  handleAddButton = (event) => {
-    const { value } = event.target;
-    this.setState((paststate) => ({
-      quantity: {
-        ...paststate.quantity,
-        [value]: paststate.quantity[value] + 1,
-      },
-    }));
-  }
-
-  handleExcludeButton = (event) => {
-    const { value } = event.target;
-    const { products } = this.state;
-    const filtered = products.filter((element) => element !== value);
-    this.setState({
-      products: [...filtered],
-      empty: true,
-    });
-  }
-
-  changeEmpty = () => {
-    const { products } = this.state;
-    if (products.length > 0) {
-      this.setState({
-        empty: false,
-      });
-    }
-  }
-
   reduce = (arr) => {
     const reduced = [];
     arr.forEach((element) => {
@@ -69,20 +14,24 @@ class ShoppingCart extends Component {
   }
 
   conditionalEmpty = () => {
-    const { empty } = this.state;
-    if (empty) {
+    const { products } = this.props;
+    if (products.length === 0) {
       return (
-        <h1 data-testid="shopping-cart-empty-message">Seu carrinho está vazio</h1>
+        <h2 data-testid="shopping-cart-empty-message">Seu carrinho está vazio</h2>
       );
     }
   }
 
   render() {
-    const { products, quantity } = this.state;
+    const { products, quantity, handleAddButton,
+      handleSubtractButton, handleExcludeButton } = this.props;
     const reducedProducts = this.reduce(products);
     return (
       <div>
-        {this.conditionalEmpty()}
+        <button type="button">
+          <Link to="/">Voltar</Link>
+        </button>
+        { this.conditionalEmpty() }
         <ul>
           { reducedProducts.map((element) => (
             <li key={ element }>
@@ -91,7 +40,7 @@ class ShoppingCart extends Component {
               <button
                 type="button"
                 value={ element }
-                onClick={ this.handleSubtractButton }
+                onClick={ handleSubtractButton }
                 data-testid="product-decrease-quantity"
               >
                 -
@@ -99,7 +48,7 @@ class ShoppingCart extends Component {
               <button
                 type="button"
                 value={ element }
-                onClick={ this.handleAddButton }
+                onClick={ handleAddButton }
                 data-testid="product-increase-quantity"
               >
                 +
@@ -107,13 +56,16 @@ class ShoppingCart extends Component {
               <button
                 type="button"
                 value={ element }
-                onClick={ this.handleExcludeButton }
+                onClick={ handleExcludeButton }
               >
                 Excluir
               </button>
             </li>
           ))}
         </ul>
+        <button type="button">
+          <Link to="/checkout" data-testid="checkout-products">Finalizar compras</Link>
+        </button>
       </div>
     );
   }
@@ -122,6 +74,9 @@ class ShoppingCart extends Component {
 ShoppingCart.propTypes = {
   products: PropTypes.arrayOf(PropTypes.object).isRequired,
   quantity: PropTypes.objectOf(PropTypes.string).isRequired,
+  handleAddButton: PropTypes.func.isRequired,
+  handleSubtractButton: PropTypes.func.isRequired,
+  handleExcludeButton: PropTypes.func.isRequired,
 };
 
 export default ShoppingCart;

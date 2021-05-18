@@ -59,10 +59,12 @@ class InputSearch extends Component {
           ype="search"
           onChange={ this.handleInput }
           value={ inputValue }
+          className="searchInput"
+          placeHolder="🔎"
         />
-        <h2 data-testid="home-initial-message">
+        <p data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
-        </h2>
+        </p>
         <button
           data-testid="query-button"
           type="button"

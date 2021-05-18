@@ -1,5 +1,5 @@
 body {
-  background-image: linear-gradient(#49f2c2, #00bd87);
+  background-image: linear-gradient(#5afacd, #00ffb7);
 }
 
 .App {
@@ -14,7 +14,7 @@ body {
 
 button {
   background-color: #00bd87;
-  border-radius: 25%;
+  border-radius: 20px;
   cursor: pointer;
   padding: 8px;
 }
@@ -22,4 +22,78 @@ button {
 button:hover {
   background-color: #22705a;
   border: 2px solid #00291d;
+}
+
+.searchInput {
+  border-radius: 10px;
+  margin: 5px;
+  padding: 4px;
+  width: 70%;
+}
+
+p {
+  margin-top: 2px;
+}
+
+a {
+  text-decoration: none;
+}
+
+.productList {
+  align-items: center;
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.products {
+  border: solid 2px #39a385;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  margin: 4px;
+  padding: 10px;
+  width: 300px;
+}
+
+.div-checkout {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: justify;
+  width: 90%;
+}
+
+.div-review-order {
+  border: 2px solid grey;
+  margin: 10px 2px;
+  padding: 5px 10px;
+}
+
+.quantity-order {
+  font-weight: 600;
+  margin-left: 5px;
+}
+
+.form-checkout {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.form-checkout div {
+  display: flex;
+  justify-content: space-between;
+  margin: 5px 0;
+  width: 100%;
+}
+
+.form-checkout div input {
+  border: 0.5px solid grey;
+  border-radius: 5px;
+  margin-right: 3px;
+  padding: 5px 3px;
+}
+
+.form-checkout div input:nth-of-type( 1 ) {
+  flex-grow: 1;
 }

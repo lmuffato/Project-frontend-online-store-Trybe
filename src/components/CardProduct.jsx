@@ -7,7 +7,10 @@ class CardProduct extends Component {
     const { product } = this.props;
     const { title, thumbnail, price, id } = product;
     return (
-      <Link data-testid="product-detail-link" to={ { pathname: `/details/${id}`, state: { product } } }>
+      <Link
+        data-testid="product-detail-link"
+        to={ { pathname: `/details/${id}`, state: { product } } }
+      >
         <section data-testid="product">
           <span>{ title }</span>
           <img src={ thumbnail } alt={ title } />
@@ -22,6 +25,7 @@ CardProduct.propTypes = {
     title: PropTypes.string,
     thumbnail: PropTypes.string,
     price: PropTypes.number,
+    id: PropTypes.string,
   }).isRequired,
 };
 

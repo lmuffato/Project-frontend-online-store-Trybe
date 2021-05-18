@@ -15,6 +15,7 @@ class ShoppingCart extends React.Component {
 
   componentDidMount() {
     const { location } = this.props;
+    if (!location.state) return; // tratando problema qnd clica no carrinho vazio
     const { product } = location.state;
     console.log(product);
     this.addProductToCart(product);
@@ -22,10 +23,10 @@ class ShoppingCart extends React.Component {
 
   addProductToCart(product) {
     const { cart, totalPayment } = this.state;
-    const { priceAdd } = product;
+    const { price } = product;
     this.setState({
       cart: [...cart, product],
-      totalPayment: totalPayment + priceAdd,
+      totalPayment: totalPayment + price,
     });
   }
 

@@ -120,6 +120,7 @@ class SearchProducts extends Component {
 
 SearchProducts.propTypes = {
   category: PropTypes.string.isRequired,
+  handle: PropTypes.func.isRequired,
 };
 
 export default SearchProducts;

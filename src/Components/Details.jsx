@@ -8,6 +8,7 @@ class Details extends Component {
     const { state } = location;
     const { productDetail } = state;
     const { title, id, price, thumbnail, condition } = productDetail;
+    const { addCart } = this.props;
     return (
       <div>
         <img src={ thumbnail } alt="imagem do produto" />
@@ -24,7 +25,15 @@ class Details extends Component {
           Condição atual do Produto:
           {condition}
         </p>
-        <Link to="/cart">
+        <button
+          data-testid="product-detail-add-to-cart"
+          type="button"
+          value={ title }
+          onClick={ addCart }
+        >
+          Adicionar ao carrinho
+        </button>
+        <Link to="/cart" data-testid="shopping-cart-button">
           <button type="button">Cart</button>
         </Link>
       </div>
@@ -40,6 +49,7 @@ Details.propTypes = {
     search: PropTypes.string.isRequired,
     state: PropTypes.objectOf(PropTypes.object),
   }).isRequired,
+  addCart: PropTypes.func.isRequired,
 };
 
 export default Details;

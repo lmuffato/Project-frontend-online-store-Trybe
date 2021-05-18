@@ -56,7 +56,13 @@ class App extends Component {
               />
             ) }
           />
-          <Route path="/details/:id" render={ (props) => <Details { ...props } /> } />
+          <Route
+            path="/details/:id"
+            render={ (props) => (<Details
+              addCart={ this.handleAddToCart }
+              { ...props }
+            />) }
+          />
         </Switch>
       </BrowserRouter>
     );

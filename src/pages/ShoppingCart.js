@@ -22,6 +22,7 @@ class ShoppingCart extends React.Component {
               </ul>
             )
         }
+        <button type="button">Finalizar Compra</button>
       </div>
     );
   }

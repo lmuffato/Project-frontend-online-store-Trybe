@@ -27,6 +27,18 @@ class App extends Component {
     }));
   };
 
+  handleDetailsToCart = async (product) => {
+    console.log(product);
+    this.setState((anterior) => ({
+      cartList: [...anterior.cartList, {
+        img: product.thumbnail,
+        title: product.title,
+        quant: 1,
+        price: product.price.toFixed(2),
+      }],
+    }));
+  }
+
   render() {
     const { cartList } = this.state;
     return (
@@ -42,7 +54,11 @@ class App extends Component {
         />
         <Route
           path="/details/:id"
-          component={ ProductDetails }
+          render={ (props) => (
+            <ProductDetails
+              { ...props }
+              handleDetailsToCart={ this.handleDetailsToCart }
+            />) }
         />
       </Router>
     );

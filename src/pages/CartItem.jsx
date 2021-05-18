@@ -48,7 +48,7 @@ class CartItem extends Component {
 
   renderCartList = () => {
     const { cartList } = this.props;
-    const string = 'Seu carrinho está vazio';
+    const cartString = 'Seu carrinho está vazio';
     return cartList.length > 0
       ? cartList
         .map((product, index) => (
@@ -58,7 +58,7 @@ class CartItem extends Component {
             handleChangeTotalPrice={ this.handleChangeTotalPrice }
           />
         ))
-      : string;
+      : cartString;
   };
 
   render() {

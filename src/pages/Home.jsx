@@ -47,6 +47,8 @@ class Home extends Component {
 
   render() {
     const { inputSearch, products } = this.state;
+    const { addItemToCart } = this.props;
+
     return (
       <section className="container-home">
         <CategoriesList onClick={ this.selectCategory } />
@@ -57,7 +59,7 @@ class Home extends Component {
             inputSearch={ inputSearch }
           />
           <main>
-            <Products products={ products } />
+            <Products products={ products } addItemToCart={ addItemToCart } />
           </main>
         </section>
       </section>

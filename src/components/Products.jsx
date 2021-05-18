@@ -4,11 +4,11 @@ import ProductCard from './ProductCard';
 
 class Products extends Component {
   render() {
-    const { products } = this.props;
+    const { products, addItemToCart } = this.props;
     // console.log(this.props);
     return (
       <section className="products-container">
-        {products.map((product) => <ProductCard key={ product.id } item={ product } />)}
+        {products.map((product) => <ProductCard key={ product.id } item={ product } addItemToCart={ addItemToCart } />)}
       </section>
     );
   }

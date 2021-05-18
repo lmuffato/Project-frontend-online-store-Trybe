@@ -61,9 +61,13 @@ class App extends Component {
     const { value } = event.target;
     const { productsCart } = this.state;
     const filtered = productsCart.filter((element) => element.value !== value);
-    this.setState({
+    this.setState((paststate) => ({
       productsCart: [...filtered],
-    });
+      quantityCart: {
+        ...paststate.quantityCart,
+        [value]: 0,
+      },
+    }));
   }
 
   render() {

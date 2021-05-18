@@ -7,7 +7,7 @@ class ShoppingCart extends Component {
     const reduced = [];
     arr.forEach((element) => {
       if (!reduced.includes(element.value)) {
-        reduced.push(element);
+        reduced.push(element.value);
       }
     });
     return reduced;
@@ -34,14 +34,14 @@ class ShoppingCart extends Component {
         { this.conditionalEmpty() }
         <ul>
           { reducedProducts.map((element) => (
-            <li key={ element.value }>
-              <h1 data-testid="shopping-cart-product-name">{element.value}</h1>
+            <li key={ element }>
+              <h1 data-testid="shopping-cart-product-name">{element}</h1>
               <h2 data-testid="shopping-cart-product-quantity">
-                {quantity[element.value]}
+                {quantity[element]}
               </h2>
               <button
                 type="button"
-                value={ element.value }
+                value={ element }
                 onClick={ handleSubtractButton }
                 data-testid="product-decrease-quantity"
               >
@@ -49,7 +49,7 @@ class ShoppingCart extends Component {
               </button>
               <button
                 type="button"
-                value={ element.value }
+                value={ element }
                 onClick={ handleAddButton }
                 data-testid="product-increase-quantity"
               >
@@ -57,7 +57,7 @@ class ShoppingCart extends Component {
               </button>
               <button
                 type="button"
-                value={ element.value }
+                value={ element }
                 onClick={ handleExcludeButton }
               >
                 Excluir

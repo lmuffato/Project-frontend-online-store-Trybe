@@ -64,6 +64,20 @@ class SearchBar extends React.Component {
             <h6>{product.title}</h6>
           </Link>
           <p>{` R$ ${product.price} `}</p>
+          <Link
+            to={ {
+              pathname: '/cart',
+              state: { product: products[i] },
+            } }
+            key={ product.id }
+          >
+            <button
+              type="button"
+              data-testid="product-add-to-cart"
+            >
+              Adicionar ao carrinho
+            </button>
+          </Link>
         </div>
       ))
     );

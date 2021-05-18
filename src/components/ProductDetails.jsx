@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 export default class ProductDetails extends Component {
   render() {
     const { location: { state: { product } } } = this.props;
-    console.log(this.props);
     return (
       <div>
         <img src={ product.thumbnail } alt={ product.id } />

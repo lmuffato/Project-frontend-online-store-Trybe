@@ -8,6 +8,7 @@ class ShoppingCart extends React.Component {
 
     this.state = {
       total: 0,
+      increaseButtonDisabled: false,
     };
 
     this.loadResult = this.loadResult.bind(this);
@@ -45,6 +46,12 @@ class ShoppingCart extends React.Component {
     const foundProduct = cart.find((product) => product.data.id === id);
     const { price } = foundProduct.data;
 
+    if (foundProduct.quantity <= foundProduct.data.available_quantity) {
+      this.setState({
+        increaseButtonDisabled: false,
+      });
+    }
+
     const updatedCart = cart.map((product) => {
       if (product.data.id === id) {
         product.quantity -= 1;
@@ -73,9 +80,18 @@ class ShoppingCart extends React.Component {
     const { price } = foundProduct.data;
     total += price;
 
+    if (foundProduct.quantity === foundProduct.data.available_quantity - 1) {
+      this.setState({
+        increaseButtonDisabled: true,
+      });
+    }
+
     const updatedCart = cart.map((product) => {
       if (product.data.id === id) {
         product.quantity += 1;
+      }
+      if (product.quantity > product.data.available_quantity) {
+        product.quantity -= 1;
       }
       return product;
     });
@@ -104,7 +120,7 @@ class ShoppingCart extends React.Component {
   }
 
   render() {
-    const { total } = this.state;
+    const { total, increaseButtonDisabled } = this.state;
     const { cart } = this.props;
     const cartIsEmpty = cart.length < 1;
     return (
@@ -144,6 +160,7 @@ class ShoppingCart extends React.Component {
                   id={ product.data.id }
                   onClick={ this.increaseQuantity }
                   data-testid="product-increase-quantity"
+                  disabled={ increaseButtonDisabled }
                 >
                   +
                 </button>

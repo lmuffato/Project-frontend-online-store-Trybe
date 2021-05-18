@@ -12,7 +12,8 @@ class ShoppingCart extends Component {
         </div>
         {Object.keys(cartList).map((item) => (
           <ShoppingCartItem
-            key={ [item] }
+            key={ Math.random() }
+            id={ item }
             title={ cartList[item].title }
             price={ cartList[item].price }
             qty={ cartList[item].qty }

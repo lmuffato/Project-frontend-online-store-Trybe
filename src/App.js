@@ -39,7 +39,8 @@ class App extends React.Component {
   }
 
   updateItemQtyInCart = (event) => {
-    console.log(event.target.getAttribute('value'));
+    console.log(event.target.getAttribute('operation'));
+    console.log(event.target.getAttribute('data-id'));
   }
 
   render() {

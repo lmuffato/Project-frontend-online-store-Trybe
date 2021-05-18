@@ -44,11 +44,15 @@ class Home extends Component {
 
   render() {
     const { requestedProducts } = this.state;
+    const { callBack } = this.props;
     return (
       <>
         <SearchBar onClick={ this.updateTextBoxValue } />
         <Categories onClick={ this.chooseCategory } />
-        <Products mlItems={ requestedProducts } />
+        <Products
+          callBack={ callBack }
+          mlItems={ requestedProducts }
+        />
       </>
     );
   }

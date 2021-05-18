@@ -12,9 +12,14 @@ class ShoppingCart extends Component {
     };
   }
 
-  componentDidMount() {
+  /* componentDidMount() {
     this.changeEmpty();
+  } */
+
+  /* componentDidUpdate() {
+    this.conditionalEmpty();
   }
+ */
 
   handleSubtractButton = (event) => {
     const { quantity } = this.state;
@@ -45,18 +50,21 @@ class ShoppingCart extends Component {
     const filtered = products.filter((element) => element !== value);
     this.setState({
       products: [...filtered],
-      empty: true,
+      empty: () => {
+        if (products.length > 0) return false;
+        return true;
+      },
     });
   }
 
-  changeEmpty = () => {
+  /* changeEmpty = () => {
     const { products } = this.state;
     if (products.length > 0) {
       this.setState({
         empty: false,
       });
     }
-  }
+  } */
 
   reduce = (arr) => {
     const reduced = [];
@@ -68,21 +76,25 @@ class ShoppingCart extends Component {
     return reduced;
   }
 
-  conditionalEmpty = () => {
+  /* conditionalEmpty = () => {
     const { empty } = this.state;
     if (empty) {
       return (
         <h1 data-testid="shopping-cart-empty-message">Seu carrinho está vazio</h1>
       );
     }
-  }
+  } */
 
   render() {
-    const { products, quantity } = this.state;
+    const { products, quantity, empty } = this.state;
     const reducedProducts = this.reduce(products);
+    if (empty) {
+      return (
+        <h1 data-testid="shopping-cart-empty-message">Seu carrinho está vazio</h1>
+      );
+    }
     return (
       <div>
-        {this.conditionalEmpty()}
         <ul>
           { reducedProducts.map((element) => (
             <li key={ element }>

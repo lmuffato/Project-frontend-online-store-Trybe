@@ -14,7 +14,6 @@ class Product extends Component {
         <p>
           R$
           { price }
-          {console.log(this.props)}
         </p>
         <Link
           to={ `/details/${id}/${category}` }

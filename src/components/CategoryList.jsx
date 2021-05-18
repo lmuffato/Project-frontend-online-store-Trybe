@@ -18,7 +18,7 @@ export default class CategoryList extends React.Component {
 
   render() {
     const { categories } = this.state;
-    const { handleChange } = this.props;
+    const { handleChange, checked } = this.props;
     return (
       <div className="category-box">
         {categories.map((item) => (

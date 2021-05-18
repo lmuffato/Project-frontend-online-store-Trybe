@@ -1,9 +1,9 @@
-
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import './App.css';
 import ProductList from './Pages/ProductList';
 import ShoppingCart from './Pages/ShoppingCart';
+import ItemDetails from './Pages/ItemDetails';
 
 class App extends Component {
   constructor() {
@@ -34,6 +34,7 @@ class App extends Component {
           <Route path="/shoppingcart">
             <ShoppingCart productsInCart={ productsInCart } />
           </Route>
+          <Route path="/item-details" component={ ItemDetails } />
         </BrowserRouter>
       </section>
     );

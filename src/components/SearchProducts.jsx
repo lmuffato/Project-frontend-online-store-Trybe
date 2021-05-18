@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import * as api from '../services/api';
 import './SearchProducts.css';
 
@@ -11,8 +13,10 @@ class SearchProducts extends Component {
     };
   }
 
-  componentWillReceiveProps() {
-    this.search();
+  componentDidUpdate(prevProps) {
+    const { category: categoryPrevious } = prevProps;
+    const { category } = this.props;
+    if (category !== categoryPrevious) this.search();
   }
 
   handle = ({ target: { value } }) => {
@@ -38,7 +42,6 @@ class SearchProducts extends Component {
       const { results } = request;
       productsList = results;
     }
-    // console.log(productsList);
     this.setState({ productsList });
   };
 
@@ -78,6 +81,12 @@ class SearchProducts extends Component {
                       defaultValue={ 1 }
                     />
                   </label>
+                  <Link
+                    data-testid="product-detail-link"
+                    to={ { pathname: '/item-details', state: { product } } }
+                  >
+                    Detalhes
+                  </Link>
                 </section>
               );
             })
@@ -108,5 +117,9 @@ class SearchProducts extends Component {
     );
   }
 }
+
+SearchProducts.propTypes = {
+  category: PropTypes.string.isRequired,
+};
 
 export default SearchProducts;

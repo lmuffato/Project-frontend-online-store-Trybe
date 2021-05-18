@@ -30,12 +30,8 @@ class ShoppingCart extends Component {
       showProductsInCartFunc = productsInCart
         .map(({ title, ProductId, productQuantity }) => (
           <p key={ ProductId }>
-            <span data-testid="shopping-cart-product-name">
-              <p>{`${title}`}</p>
-            </span>
-            <span data-testid="shopping-cart-product-quantity">
-              <p>{`${productQuantity}`}</p>
-            </span>
+            <p data-testid="shopping-cart-product-name">{title}</p>
+            <p data-testid="shopping-cart-product-quantity">{productQuantity}</p>
           </p>));
     }
     return (

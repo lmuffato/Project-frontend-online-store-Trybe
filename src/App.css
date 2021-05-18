@@ -22,3 +22,16 @@
   position: relative;
   z-index: -1;
 }
+
+/**
+ ** Rating CSS
+ */
+
+.rating-component {
+  cursor: pointer;
+}
+
+.rating-icon {
+  height: 50px;
+  width: 50px;
+}

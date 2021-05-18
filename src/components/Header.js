@@ -10,7 +10,7 @@ class Header extends Component {
       query: '',
       category: '',
       dataApi: [],
-      // resquest: false,
+      request: false,
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -30,12 +30,15 @@ class Header extends Component {
   // }
 
   fetchProducts = async () => {
-    const { category, query } = this.state;
-    const dataProducts = await Api.getProductsFromCategoryAndQuery(category, query);
-    console.log(dataProducts);
-    this.setState({
-      dataApi: dataProducts.results,
-    });
+    this.setState({ request: true },
+      async () => {
+        const { category, query } = this.state;
+        const dataProducts = await Api.getProductsFromCategoryAndQuery(category, query);
+        this.setState({
+          dataApi: dataProducts.results,
+          request: false,
+        });
+      });
   }
 
   componentDidMount = async () => {
@@ -43,7 +46,7 @@ class Header extends Component {
   }
 
   render() {
-    const { dataApi, query } = this.state;
+    const { dataApi, query, request } = this.state;
     return (
       <div>
         <SearchBar
@@ -51,7 +54,7 @@ class Header extends Component {
           handleChange={ this.handleChange }
           handleClick={ this.fetchProducts }
         />
-        <ProductList dataApi={ dataApi } />
+        <ProductList dataApi={ dataApi } request={ request } />
       </div>
     );
   }

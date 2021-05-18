@@ -5,7 +5,8 @@ import { Link } from 'react-router-dom';
 class Product extends Component {
   render() {
     const { product, key, addCart } = this.props;
-    const { title, thumbnail, price, id } = product;
+    const { title, thumbnail, price, id, shipping } = product;
+    const isFreeShipping = <span data-testid="free-shipping">Frete Gratis!</span>;
     const category = product.category_id;
     return (
       <div className="productList">
@@ -22,6 +23,7 @@ class Product extends Component {
           >
             Detalhes
           </Link>
+          { (shipping.free_shipping) ? isFreeShipping : '' }
           <button
             type="button"
             onClick={ addCart }
@@ -45,6 +47,9 @@ Product.propTypes = {
     price: PropTypes.number,
     id: PropTypes.string,
     category_id: PropTypes.string,
+    shipping: PropTypes.shape({
+      free_shipping: PropTypes.bool,
+    }).isRequired,
   }).isRequired,
 };
 

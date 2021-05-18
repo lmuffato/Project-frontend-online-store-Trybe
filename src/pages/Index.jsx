@@ -4,6 +4,7 @@ import Categories from '../components/Categories';
 import * as api from '../services/api';
 import Products from '../components/Products';
 import Loading from '../components/Loading';
+import CartButton from '../components/CartButton';
 
 class Index extends Component {
   constructor() {
@@ -13,12 +14,14 @@ class Index extends Component {
     this.fetchProducts = this.fetchProducts.bind(this);
     this.handleSearchInput = this.handleSearchInput.bind(this);
     this.selectCategory = this.selectCategory.bind(this);
+    this.addToCart = this.addToCart.bind(this);
 
     this.state = {
       loading: false,
       categories: [],
       categoryId: '',
       searchText: '',
+      shoppingCart: [],
       products: undefined, // inicia como undefined pra facilitar a condição do ternário em Products.jsx
     };
   }
@@ -49,8 +52,24 @@ class Index extends Component {
     });
   }
 
+  addToCart(product) {
+    this.setState((previousState) => {
+      const { shoppingCart } = previousState;
+      const addQuantity = shoppingCart.find((productShoppingCart) => product.id === productShoppingCart.id);
+
+      if (addQuantity) {
+        this.setState({
+
+        });
+      }
+      ({
+        shoppingCart: [...shoppingCart, product],
+      });
+    });
+  }
+
   render() {
-    const { categories, searchText, products, loading } = this.state;
+    const { categories, searchText, products, loading, shoppingCart } = this.state;
     return (
       <main>
         <SearchBar
@@ -58,13 +77,14 @@ class Index extends Component {
           onChange={ this.handleSearchInput }
           onClick={ this.fetchProducts }
         />
+        <CartButton shoppingCart={ shoppingCart } />
         <Categories
           onClick={ this.selectCategory }
           categories={ categories }
           getData={ this.fetchCategories }
         />
         { loading && <Loading /> }
-        { products && <Products products={ products } /> }
+        { products && <Products products={ products } addToCart={ this.addToCart } /> }
       </main>
     );
   }

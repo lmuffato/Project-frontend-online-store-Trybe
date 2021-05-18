@@ -4,8 +4,12 @@ import { ReactComponent as CartImage } from '../image/CartIcon.svg';
 
 class CartButton extends Component {
   render() {
+    const { shoppingCart } = this.props;
     return (
-      <Link to="/cart-basket" data-testid="shopping-cart-button">
+      <Link
+        to={ { pathname: '/cart-basket', state: shoppingCart } }
+        data-testid="shopping-cart-button"
+      >
         <CartImage />
       </Link>
     );

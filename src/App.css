@@ -39,3 +39,9 @@
 .category {
   margin-top: 8px;
 }
+
+.products-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}

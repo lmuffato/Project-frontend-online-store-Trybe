@@ -1,0 +1,22 @@
+.product-detail {
+  display: flex;
+  justify-content: space-around;
+  margin: auto;
+  padding: 10px;
+}
+
+.product-show, .specifications, .add-to-cart {
+  align-items: center;
+  border: 1px solid rgba(59, 59, 59, 0.459);
+  border-radius: 10px;
+  display: flex;
+  flex-flow: column wrap;
+  height: fit-content;
+  padding: 10px;
+  width: 40%;
+}
+
+.specifications {
+  align-items: flex-start;
+  font-size: 10pt;
+}

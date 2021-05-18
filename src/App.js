@@ -1,29 +1,43 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-// import { getCategories, getProductsFromCategoryAndQuery } from './services/api';
+import { addToLocalStorage } from './services/shoppingCart';
 import Home from './pages/Home';
 import ShoppingCart from './pages/ShoppingCart';
 import ProductDetail from './pages/ProductDetail';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <Router>
-        <Switch>
-          <Route exact path="/" component={ Home } />
-          {/* Adição do componente nas routes */}
-          <Route path="/ShoppingCart" component={ ShoppingCart } />
-          <Route
-            path="/:id"
-            render={
-              (props) => <ProductDetail { ...props } />
-            }
-          />
-        </Switch>
-      </Router>
-    </div>
-  );
+class App extends React.Component {
+  render() {
+    return (
+      <div className="App">
+        <Router>
+          <Switch>
+            <Route exact path="/" component={ Home } />
+            {/* Adição do componente nas routes */}
+            <Route
+              path="/ShoppingCart"
+              render={
+                (props) => (<ShoppingCart
+                  { ...props }
+                  cartInfo={ addToLocalStorage }
+                  // buyQuantity={ this.quantityProduct }
+                />)
+              }
+            />
+            <Route
+              path="/:id"
+              render={
+                (props) => (<ProductDetail
+                  { ...props }
+                  // addToCart={ this.addToCart }
+                />)
+              }
+            />
+          </Switch>
+        </Router>
+      </div>
+    );
+  }
 }
 
 export default App;

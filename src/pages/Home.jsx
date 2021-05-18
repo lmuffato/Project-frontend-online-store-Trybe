@@ -93,9 +93,11 @@ export default class Home extends React.Component {
           <p data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
-          {loading
-            ? <Loading />
-            : items.map((item) => <ProductCard item={ item } key={ item.id } />)}
+          <div className="products-list">
+            {loading
+              ? <Loading />
+              : items.map((item) => <ProductCard item={ item } key={ item.id } />)}
+          </div>
         </section>
         <CategoryList
           className="product-list"

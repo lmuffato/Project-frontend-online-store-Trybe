@@ -10,13 +10,15 @@
   justify-content: flex-start;
   margin: 20px;
   padding: 20px;
+  width: 250px;
 }
 
 .produtcs {
-  align-items: center;
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 100%;
+  
 }
 
 .category {
@@ -25,4 +27,33 @@
 
 .shopping-cart {
   width: 30px;
+}
+
+.back {
+  width: 30px;
+  height: 18px;
+}
+
+.product {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid black;
+  width: 300px;
+  margin: 2px;
+}
+
+.botoes {
+  display: flex;
+  justify-content: space-around;
+}
+
+.detailsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.imageProduct {
+  width: 250px;
 }

@@ -5,47 +5,34 @@ class BuyerInformation extends React.Component {
     return (
       <div>
         <label htmlFor="FullName">
-          <input type="text" />
+          Nome completo
+          <input type="text" data-testid="checkout-fullname" />
         </label>
-
-        <label htmlFor="Cep">
-          <input type="text" />
+        <br />
+        <label htmlFor="Email">
+          Email
+          <input type="text" data-testid="checkout-email" />
         </label>
-
-        <label htmlFor="Complement">
-          <input type="text" />
-        </label>
-
+        <br />
         <label htmlFor="CPF">
-          <input type="text" />
+          CPF
+          <input type="text" data-testid="checkout-cpf" />
         </label>
-
-        <label htmlFor="Adress">
-          <input type="text" />
-        </label>
-
-        <label htmlFor="Number">
-          <input type="text" />
-        </label>
-
-        <label htmlFor="E-mail">
-          <input type="text" />
-        </label>
-
+        <br />
         <label htmlFor="Phone">
-          <input type="text" />
+          Telefane
+          <input type="text" data-testid="checkout-phone" />
         </label>
-
-        <label htmlFor="City">
-          <input type="text" />
+        <br />
+        <label htmlFor="CEP">
+          CEP
+          <input type="text" data-testid="checkout-cep" />
         </label>
-
-        <label htmlFor="State">
-          <select>
-            <option value="State">Estado</option>
-          </select>
+        <br />
+        <label htmlFor="Adress">
+          Endereço
+          <input type="text" data-testid="checkout-address" />
         </label>
-
       </div>
     );
   }

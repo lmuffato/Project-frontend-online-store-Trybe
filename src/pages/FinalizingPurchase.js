@@ -11,7 +11,7 @@ class FinalizingPurchase extends React.Component {
           <PurchaseSummary />
           <BuyerInformation />
           <Payment />
-          <butto type="submit">Comprar</butto>
+          <button type="submit">Comprar</button>
         </form>
       </div>
     );

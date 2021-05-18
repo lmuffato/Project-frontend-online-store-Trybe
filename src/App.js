@@ -5,7 +5,7 @@ import Home from './pages/Home';
 import ShoppingCart from './pages/ShoppingCart';
 import ProductDetails from './pages/Home/components/ProductDetails';
 import { getProductsFromCategoryAndQuery } from './services/api';
-import FinalizingPurchase from './pages/FinalizingPurchase'
+import FinalizingPurchase from './pages/FinalizingPurchase';
 
 class App extends React.Component {
   constructor() {

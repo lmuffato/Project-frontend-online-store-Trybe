@@ -1,11 +1,24 @@
-.product-card {
+.product-list {
   display: flex;
-  width: 300px;
-  height: 300px;
-  margin: 10px;
-  border: 1px solid black;
+  flex-wrap: wrap;
+  width: 80%;
 }
 
-.product-img  {
-  width: 100px;
+.product-card {
+  align-items: center;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+  margin: 10px;
+  width: 300px;
+}
+
+.card-text {
+  width: 200px;
+}
+
+.card-img {
+  text-align: center;
+  width: 150px;
 }

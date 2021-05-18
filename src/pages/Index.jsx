@@ -64,7 +64,7 @@ class Index extends Component {
           getData={ this.fetchCategories }
         />
         { loading && <Loading /> }
-        {products && <Products products={ products } />}
+        { products && <Products products={ products } /> }
       </main>
     );
   }

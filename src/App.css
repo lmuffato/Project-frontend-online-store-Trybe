@@ -40,3 +40,16 @@
     transform: rotate(360deg);
   }
 }
+
+/**
+ ** Rating CSS
+ */
+
+.rating-component {
+  cursor: pointer;
+}
+
+.rating-icon {
+  height: 50px;
+  width: 50px;
+}

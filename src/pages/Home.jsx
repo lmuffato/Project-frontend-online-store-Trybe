@@ -4,6 +4,7 @@ import SearchBar from '../components/SearchBar';
 import ProductList from '../components/ProductList';
 import ProductNotFound from '../components/ProductNotFound';
 import * as api from '../services/api';
+import UserForm from '../components/UserForm';
 
 export default class Home extends Component {
   constructor() {

@@ -1,12 +1,21 @@
 // Criação do componente
 import React from 'react';
-import { getAll } from '../services/shoppingCart';
+import { getAll, quantityProduct } from '../services/shoppingCart';
 
 export default class ShoppingCart extends React.Component {
+  constructor() {
+    super();
+
+    this.state = { value: 1 };
+  }
+
+  changeQuantity = ({ target }) => { this.setState({ value: target.value }); }
+
   render() {
+    const { value } = this.state;
     const storageCheck = () => getAll();
     const storage = storageCheck();
-    if (storage.length === 0) {
+    if (storage === null) {
       return (
         <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
       );
@@ -21,16 +30,20 @@ export default class ShoppingCart extends React.Component {
               <img src={ item.thumbnail } alt={ item.thumbnailId } width="100px" />
               <p>
                 R$
-                {item.price}
+                {item.price.toFixed(2)}
               </p>
               <label htmlFor={ item.title }>
                 Quantidade:
                 <input
                   type="number"
-                  min={ 0 }
+                  min={ 1 }
                   max={ item.availableQuantity }
+                  defaultValue={ item.buyQuantity }
                   data-testid="shopping-cart-product-quantity"
-                  // onChange={ buyQuantity }
+                  onChange={ (event) => {
+                    quantityProduct(event);
+                    this.changeQuantity(event);
+                  } }
                   id={ item.title }
                 />
               </label>

@@ -1,6 +1,7 @@
 // implement AddMovie component here
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import cartIcon from './ShoppinCart/cartIcon.png';
 import SearchProduct from '../components/SearchProducts';
 import CategoriesBar from '../components/CategoriesBar';
@@ -52,5 +53,9 @@ class ProductList extends Component {
     );
   }
 }
+
+ProductList.propTypes = {
+  handle: PropTypes.func.isRequired,
+};
 
 export default ProductList;

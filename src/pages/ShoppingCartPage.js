@@ -1,10 +1,11 @@
 import React from 'react';
+import CartEmpty from '../components/CartEmpty';
+import ShoppingCartList from '../components/shoppingCartList';
+import serviceCart from '../services/products';
 
 class ShoppingCartPage extends React.Component {
   render() {
-    return (
-      <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
-    );
+    return (serviceCart.products.length === 0 ? <CartEmpty /> : <ShoppingCartList />);
   }
 }
 

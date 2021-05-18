@@ -22,6 +22,7 @@ class ProductCard extends Component {
           data-id={ item.id }
           data-title={ item.title }
           data-price={ item.price }
+          data-thumbnail={ item.thumbnail }
           data-testid="product-add-to-cart"
         >
           Adicionar ao carrinho

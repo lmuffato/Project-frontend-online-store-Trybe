@@ -12,7 +12,7 @@ class ShoppingCart extends React.Component {
             : (
               <ul>
                 { cart.map((product) => (
-                  <li key={product.data.id}>
+                  <li key={ product.data.id }>
                     <h2 data-testid="shopping-cart-product-name">{product.data.title}</h2>
                     <h4 data-testid="shopping-cart-product-quantity">
                       {product.quantity}

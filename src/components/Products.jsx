@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import ProductCard from './ProductCard';
 
 class Products extends Component {
@@ -16,19 +15,19 @@ class Products extends Component {
 
   productsList(products) {
     const { results } = products;
+    const { addToCart } = this.props;
     return results.map((product) => (
       <div data-testid="product" className="product-card" key={ product.id }>
-        {/* função define o link de cada product e passa o obj para a nova página */}
-        <Link
-          data-testid="product-detail-link"
-          to={ () => this.productDetailResource(product) }
-        >
-          <ProductCard
-            title={ product.title }
-            price={ product.price }
-            thumbnail={ product.thumbnail }
-          />
-        </Link>
+
+        <ProductCard
+          path={ this.productDetailResource(product) }
+          id={ product.id }
+          title={ product.title }
+          price={ product.price }
+          thumbnail={ product.thumbnail }
+          addToCart={ addToCart }
+        />
+
       </div>
     ));
   }
@@ -51,6 +50,7 @@ Products.propTypes = {
     PropTypes.string,
     PropTypes.object,
   ])),
+  addToCart: PropTypes.func.isRequired,
 };
 
 Products.defaultProps = {

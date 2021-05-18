@@ -27,14 +27,6 @@ export default class ShoppingCart extends Component {
     const { cartItems } = this.state;
 
     if (Object.keys(cartItems).length) {
-<<<<<<< HEAD
-      return Object.entries(cartItems).map((product, i) => {
-        const { title, price, amount } = product[1];
-        return (
-          <CartProduct key={ i } product={ product[1] } />
-        );
-      });
-=======
       return Object.entries(cartItems)
         .map((product, i) => (<CartProduct
           key={ i }
@@ -42,7 +34,6 @@ export default class ShoppingCart extends Component {
           deleteItem={ this.deleteItem }
           cart={ cartItems }
         />));
->>>>>>> main-group-1-requisito-10
     }
 
     return (

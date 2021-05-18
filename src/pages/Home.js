@@ -42,7 +42,6 @@ export default class Home extends Component {
 
   render() {
     const { products, loading } = this.state;
-    console.log(this.state);
     return (
       <main>
         <label data-testid="home-initial-message" htmlFor="search">

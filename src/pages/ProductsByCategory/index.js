@@ -10,6 +10,7 @@ class ProductsByCategory extends React.Component {
     const { id } = this.props;
 
     this.state = {
+      loading: true,
       category: id,
       products: [],
     };
@@ -25,22 +26,35 @@ class ProductsByCategory extends React.Component {
 
   fetchProducts(products) {
     this.setState({
-      products,
+      loading: true,
+    }, () => {
+      this.setState({
+        loading: false,
+        products,
+      });
     });
   }
 
   render() {
-    const { products } = this.state;
+    const { loading, products } = this.state;
+
+    if (loading) {
+      return 'Carregando...';
+    }
+
     return (
       <div>
         <ul>
-          { products.map(({ title, price, thumbnail, id }) => (
-            <ProductCard
-              key={ id }
-              title={ title }
-              price={ price }
-              imagePath={ thumbnail }
-            />
+          { products.map(({ title, thumbnail, price, id, attributes }, index) => (
+            <li key={ index }>
+              <ProductCard
+                id={ id }
+                title={ title }
+                imagePath={ thumbnail }
+                price={ price }
+                attributes={ attributes }
+              />
+            </li>
           )) }
         </ul>
       </div>

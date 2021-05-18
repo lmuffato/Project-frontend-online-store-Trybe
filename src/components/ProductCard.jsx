@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import AddToCartButton from './AddToCartButton'
 
 class ProductCard extends Component {
   render() {
     const { item } = this.props;
-    console.log(item);
     return (
       <div data-testid="product">
         <h4>{ item.title }</h4>
@@ -17,6 +17,7 @@ class ProductCard extends Component {
         >
           Ver Detalhes
         </Link>
+        <AddToCartButton />
       </div>
     );
   }

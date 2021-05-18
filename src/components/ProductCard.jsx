@@ -19,7 +19,9 @@ class ProductCard extends Component {
         <button
           type="button"
           onClick={ addItemToCart }
-          value={ item.id }
+          data-id={ item.id }
+          data-title={ item.title }
+          data-price={ item.price }
           data-testid="product-add-to-cart"
         >
           Adicionar ao carrinho

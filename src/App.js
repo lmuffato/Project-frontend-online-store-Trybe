@@ -14,16 +14,17 @@ class App extends React.Component {
   addItemToCart = (event) => {
     const { cartList } = this.state;
 
-    const clickedItemId = event.target.value;
+    const clickedItemId = event.target.getAttribute('data-id');
+    const clickedItemTitle = event.target.getAttribute('data-title');
     const currentItemsinCart = Object.keys(cartList);
 
     if (!currentItemsinCart.includes(clickedItemId)) {
       this.setState((prevState) => ({
-        cartList: Object.assign(prevState.cartList, { [clickedItemId]: 1 }),
+        cartList: Object.assign(prevState.cartList, { [clickedItemId]: { qty: 1, title: clickedItemTitle } }),
       }), () => console.log(this.state));
     } else {
       const updatedCart = {...cartList};
-      updatedCart[clickedItemId] += 1;
+      updatedCart[clickedItemId].qty += 1;
       this.setState({ cartList: updatedCart }, () => console.log(this.state));
     }
   }

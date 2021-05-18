@@ -36,7 +36,11 @@ class ProductDetails extends Component {
           <form action="">
             <input type="text" name="email" placeholder="E-mail" />
             <div>estrelas</div>
-            <textarea name="mensage" placeholder="Mensagem (Opcional)" />
+            <textarea
+              data-testid="product-detail-evaluation"
+              name="mensage"
+              placeholder="Mensagem (Opcional)"
+            />
             <button type="button">Avaliar</button>
           </form>
         </div>

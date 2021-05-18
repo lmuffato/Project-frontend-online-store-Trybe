@@ -71,9 +71,6 @@ class Home extends Component {
         </aside>
 
         <main className="produtcs">
-          <h3 data-testid="home-initial-message">
-            Digite algum termo de pesquisa ou escolha uma categoria.
-          </h3>
 
           <label htmlFor="myInput">
             <input
@@ -91,7 +88,10 @@ class Home extends Component {
               Pesquisar
             </button>
           </label>
-
+          <h3 data-testid="home-initial-message">
+            Digite algum termo de pesquisa ou escolha uma categoria.
+          </h3>
+          <br />
           <button type="button">
             <Link to="/shopping-cart" data-testid="shopping-cart-button">
               <img

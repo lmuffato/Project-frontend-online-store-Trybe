@@ -10,6 +10,7 @@
   justify-content: flex-start;
   margin: 20px;
   padding: 20px;
+  width: 250px;
 }
 
 .produtcs {
@@ -25,4 +26,33 @@
 
 .shopping-cart {
   width: 30px;
+}
+
+.back {
+  height: 18px;
+  width: 30px;
+}
+
+.product {
+  align-items: center;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  margin: 2px;
+  width: 300px;
+}
+
+.botoes {
+  display: flex;
+  justify-content: space-around;
+}
+
+.detailsContainer {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.imageProduct {
+  width: 250px;
 }

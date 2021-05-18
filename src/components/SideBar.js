@@ -7,12 +7,14 @@ export default class SideBar extends Component {
   constructor() {
     super();
 
-    this.categoriesApi = this.categoriesApi.bind(this);
-    this.categoriesApi();
-
     this.state = {
       categories: [],
     };
+  }
+
+  componentDidMount() {
+    this.categoriesApi = this.categoriesApi.bind(this);
+    this.categoriesApi().then();
   }
 
   async categoriesApi() {

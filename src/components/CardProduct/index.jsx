@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+
+import PropTypes from 'prop-types';
+
+import styles from './styles.module.css';
 
 class CardProduct extends Component {
   render() {
     const { product, onClick } = this.props;
     const { title, thumbnail, price, id } = product;
     return (
-      <section data-testid="product">
+      <section className={ styles.teste } data-testid="product">
         <Link
           data-testid="product-detail-link"
           to={ { pathname: `/details/${id}`, state: { product } } }

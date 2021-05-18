@@ -1,37 +1,39 @@
 import React from 'react';
-import getProductsFromCategoryAndQuery from '../services/api';
-
+import PropTypes from 'prop-types';
+import { getProductsFromCategoryAndQuery } from '../services/api';
 class ProductDetails extends React.Component {
-
-  constructor(){
+  constructor() {
     super();
+    this.state = {
+      item: '',
+    };
     this.fetchProduct = this.fetchProduct.bind(this);
-    this.listProductById = this.listProductById.bind(this);
   }
-
   componentDidMount() {
     this.fetchProduct();
-   }  
-
+  }
   async fetchProduct() {
-    const { match: { params: { id } } } = this.props;
-    const productData = await getProductsFromCategoryAndQuery(1, id );
-    console.log('product Data: ', productData);
+    const { match: { params: { id, title } } } = this.props;
+    const productsData = await getProductsFromCategoryAndQuery(1, title);
+    const productData = productsData.results.filter((product) => product.id === id);
+    return this.setState({
+      item: productData[0],
+    });
   }
-
-  listProductById() {
-    const { match: { params: { id } } } = this.props;
-    const { location: { state: { obj } } } = this.props;
-    const filteredProduct = obj.filter((product) => product.id === id)
-    console.log('Produto filtrado', filteredProduct);
-  }
-
   render() {
-    this.listProductById();
+    const { item } = this.state;
+    console.log(item);
     return (
-      <div>Hello World</div>
-    )
+      <div data-testid="product-detail-name">{item.title}</div>
+    );
   }
 }
-
 export default ProductDetails;
+ProductDetails.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string,
+      title: PropTypes.string,
+    }).isRequired,
+  }).isRequired,
+};

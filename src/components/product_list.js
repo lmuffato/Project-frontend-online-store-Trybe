@@ -96,7 +96,10 @@ export default class ProductList extends Component {
     }
     return obj.map((item) => (
       <section data-testid="product" key={ item.id }>
-        <Link to={{pathname:`/product_details/${item.id}/${item.title}`, state:this.state }}>
+        <Link
+          to={ `/product_details/${item.id}/${item.title}` }
+          data-testid="product-detail-link"
+        >
           {/* Solucao encontrada para passar parametros via link em https://medium.com/officialrajdeepsingh/how-to-pass-parameters-in-react-router-dom-link-7e8289574801 */}
           <img src={ item.thumbnail } width="100px" alt="item.title" />
           {item.title}

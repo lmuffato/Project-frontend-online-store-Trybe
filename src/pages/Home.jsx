@@ -20,17 +20,23 @@ class Home extends Component {
   }
 
   chooseCategory(category) {
-    this.setState({ selectedCategory: category });
-    this.fetchProducts();
+    this.setState(
+      { selectedCategory: category },
+      () => this.fetchProducts(),
+    );
   }
 
   updateTextBoxValue(value) {
-    this.setState({ inputTextBox: value });
-    this.fetchProducts();
+    this.setState(
+      { inputTextBox: value },
+      () => this.fetchProducts(),
+    );
   }
+  // TODO: fetchProducts not working correct
 
   async fetchProducts() {
     const { selectedCategory, inputTextBox } = this.state;
+    console.warn(`Fetch chamado com parametros ${selectedCategory} e ${inputTextBox}`);
     const response = await getProductsFromCategoryAndQuery(
       selectedCategory, inputTextBox,
     );

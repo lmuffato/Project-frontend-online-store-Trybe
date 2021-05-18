@@ -16,7 +16,7 @@ class ItemDetails extends Component {
           <p>{ `R$ ${price.toFixed(2)}` }</p>
           <p>detalhes do item</p>
         </div>
-        <ReviewForm />
+        <ReviewForm product={ product } />
         <Link to="/">Voltar</Link>
         <Link
           to="/ShoppingCart"

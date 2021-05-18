@@ -4,17 +4,17 @@ import Item from './Item';
 
 class ListItems extends React.Component {
   render() {
-    const { arrayOfItems, query } = this.props;
+    const { arrayOfItems } = this.props;
     return (
       <>
         { arrayOfItems.map(
-          ({ title, price, thumbnail, id }) => (<Item
+          ({ title, price, thumbnail, id, attributes }) => (<Item
             title={ title }
             imagePath={ thumbnail }
             price={ price }
             key={ id }
             itemId={ id }
-            query={ query }
+            techSpecs={ { title, price, thumbnail, attributes } }
           />),
         )}
       </>

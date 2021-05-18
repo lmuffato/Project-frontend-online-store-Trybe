@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import CategoriesList from '../components/CategoriesList';
 import Products from '../components/Products';
 import Header from '../components/Header';
@@ -47,6 +48,8 @@ class Home extends Component {
 
   render() {
     const { inputSearch, products } = this.state;
+    const { addItemToCart } = this.props;
+
     return (
       <section className="container-home">
         <CategoriesList onClick={ this.selectCategory } />
@@ -57,12 +60,16 @@ class Home extends Component {
             inputSearch={ inputSearch }
           />
           <main>
-            <Products products={ products } />
+            <Products products={ products } addItemToCart={ addItemToCart } />
           </main>
         </section>
       </section>
     );
   }
 }
+
+Home.propTypes = {
+  addItemToCart: PropTypes.func.isRequired,
+};
 
 export default Home;

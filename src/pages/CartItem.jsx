@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import PropTypes from 'prop-types';
+import { arrayOf, shape, string, number } from 'prop-types';
 
 import CartList from '../components/CartList';
 
@@ -75,12 +75,12 @@ class CartItem extends Component {
 }
 
 CartItem.propTypes = {
-  cartList: PropTypes.arrayOf(PropTypes.shape(
+  cartList: arrayOf(shape(
     {
-      img: PropTypes.string,
-      price: PropTypes.string,
-      quant: PropTypes.number,
-      title: PropTypes.string,
+      img: string,
+      price: string,
+      quant: number,
+      title: string,
     },
   )).isRequired,
 };

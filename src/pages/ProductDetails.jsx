@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 class ProductDetails extends Component {
   render() {
-    const { location } = this.props;
+    const { location, handleDetailsToCart } = this.props;
     const { state: { product } } = location;
     const { title, thumbnail, price } = product;
     return (
@@ -14,9 +14,21 @@ class ProductDetails extends Component {
             <span data-testid="product-detail-name">{ title }</span>
             <img src={ thumbnail } alt={ title } />
             <span>{`R$${price}`}</span>
+            <button
+              type="button"
+              onClick={ () => handleDetailsToCart(product) }
+              data-testid="product-detail-add-to-cart"
+            >
+              Adicionar ao Carrinho
+            </button>
           </section>
           <Link to="/carrinho">
-            <button type="button">Ir para o Carrinho</button>
+            <button
+              data-testid="shopping-cart-button"
+              type="button"
+            >
+              Ir para o Carrinho
+            </button>
           </Link>
         </div>
         <div>pagamento</div>
@@ -48,6 +60,7 @@ ProductDetails.propTypes = {
       }),
     }),
   }).isRequired,
+  handleDetailsToCart: PropTypes.func.isRequired,
 };
 
 export default ProductDetails;

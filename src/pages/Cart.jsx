@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 
 import { arrayOf, shape, string, number } from 'prop-types';
 
-import CartList from '../components/CartList';
+import CartItem from '../components/CartItem';
 
 import changePriceToNumber from '../utils/functions';
 
-class CartItem extends Component {
+class Cart extends Component {
   constructor(props) {
     super(props);
 
@@ -52,7 +52,7 @@ class CartItem extends Component {
     return cartList.length > 0
       ? cartList
         .map((product, index) => (
-          <CartList
+          <CartItem
             key={ index }
             product={ product }
             handleChangeTotalPrice={ this.handleChangeTotalPrice }
@@ -74,7 +74,7 @@ class CartItem extends Component {
   }
 }
 
-CartItem.propTypes = {
+Cart.propTypes = {
   cartList: arrayOf(shape(
     {
       img: string,
@@ -85,4 +85,4 @@ CartItem.propTypes = {
   )).isRequired,
 };
 
-export default CartItem;
+export default Cart;

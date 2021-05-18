@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Home from './pages/Home';
-import CartItem from './pages/CartItem';
+import Cart from './pages/Cart';
 import ProductDetails from './pages/ProductDetails';
 
 class App extends Component {
@@ -27,13 +27,25 @@ class App extends Component {
     }));
   };
 
+  handleDetailsToCart = async (product) => {
+    console.log(product);
+    this.setState((anterior) => ({
+      cartList: [...anterior.cartList, {
+        img: product.thumbnail,
+        title: product.title,
+        quant: 1,
+        price: product.price.toFixed(2),
+      }],
+    }));
+  }
+
   render() {
     const { cartList } = this.state;
     return (
       <Router>
         <Route
           path="/carrinho"
-          render={ (props) => <CartItem { ...props } cartList={ cartList } /> }
+          render={ (props) => <Cart { ...props } cartList={ cartList } /> }
         />
         <Route
           exact
@@ -42,7 +54,11 @@ class App extends Component {
         />
         <Route
           path="/details/:id"
-          component={ ProductDetails }
+          render={ (props) => (
+            <ProductDetails
+              { ...props }
+              handleDetailsToCart={ this.handleDetailsToCart }
+            />) }
         />
       </Router>
     );

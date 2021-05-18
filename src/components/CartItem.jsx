@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { shape, number, string, func } from 'prop-types';
 import changePriceToNumber from '../utils/functions';
 
-class CartList extends Component {
+class CartItem extends Component {
   constructor(props) {
     super(props);
 
@@ -82,7 +82,7 @@ class CartList extends Component {
   }
 }
 
-CartList.propTypes = {
+CartItem.propTypes = {
   product: shape({
     quant: number,
     price: string,
@@ -92,4 +92,4 @@ CartList.propTypes = {
   handleChangeTotalPrice: func.isRequired,
 };
 
-export default CartList;
+export default CartItem;

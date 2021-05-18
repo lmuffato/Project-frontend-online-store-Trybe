@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import { getProductById } from '../services/api';
+import PropTypes from 'prop-types';
+import getProductById from '../services/api2';
+import Loading from '../components/Loading';
 
 export default class ProductDetail extends Component {
   constructor() {
     super();
     this.state = {
       productInfo: '',
-      /*  attributes: [], */
       loading: true,
     };
     this.fetchProduct = this.fetchProduct.bind(this);
@@ -22,7 +23,6 @@ export default class ProductDetail extends Component {
       { loading: true },
       async () => {
         const product = await getProductById(productId);
-        console.log(product);
         this.setState({
           productInfo: product,
           loading: false,
@@ -32,14 +32,12 @@ export default class ProductDetail extends Component {
   }
 
   render() {
-    const { productInfo: { title, thumbnail, price, id, attributes } } = this.state;
+    const { productInfo: { title, thumbnail, price, attributes } } = this.state;
     const { loading } = this.state;
-    const { loadingElement } = <span>Loading...</span>;
-
     return (
       <div>
         {loading
-          ? loadingElement
+          ? <Loading />
           : (
             <>
               <h1 data-testid="product-detail-name">{title}</h1>
@@ -47,8 +45,8 @@ export default class ProductDetail extends Component {
               <img src={ thumbnail } alt="product" width="500px" />
               <ul>
                 {attributes
-                  .map((attribute) => (
-                    <li key={ id }>
+                  .map((attribute, index) => (
+                    <li key={ index }>
                       {`${attribute.name}:
                    ${attribute.value_name}`}
                     </li>))}
@@ -59,3 +57,11 @@ export default class ProductDetail extends Component {
     );
   }
 }
+
+ProductDetail.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string,
+    }).isRequired,
+  }).isRequired,
+};

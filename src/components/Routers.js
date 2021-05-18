@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Home from '../pages/Home';
-import CardItem from './CardItem';
 import ShoppingCart from '../pages/ShoppingCart';
 import ProductDetail from '../pages/ProductDetail';
 

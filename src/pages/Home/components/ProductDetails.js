@@ -17,30 +17,27 @@ class ProductDetails extends React.Component {
 
   async loadProduct() {
     const { location, match } = this.props;
-    const { category, id } = match.params;
-    let products = [];
-    let productFound = {};
+    if (location && match) {
+      const { category, id } = match.params;
+      let products = [];
+      let productFound = {};
+      if (location.state) {
+        const { products: productsState } = location.state;
+        products = productsState;
+      } else {
+        products = await getProductsFromCategory(category);
+        products = products.results;
+      }
 
-    if (location.state) {
-      const { products: productsState } = location.state;
-      products = productsState;
-      console.log('não foi feita nenhuma requisição');
-    } else {
-      products = await getProductsFromCategory(category);
-      products = products.results;
-      console.log('foi feita requisição');
+      productFound = products.find((product) => product.id === id);
+
+      this.setState({
+        product: productFound,
+      });
     }
-
-    productFound = products.find((product) => product.id === id);
-
-    this.setState({
-      product: productFound,
-    });
   }
 
   render() {
-    const { products } = this.props;
-    console.log(products);
     return (
       <div>
         <h1 data-testid="product-detail-name">Detalhes do Produto</h1>

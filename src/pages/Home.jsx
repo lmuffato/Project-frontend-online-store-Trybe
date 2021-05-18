@@ -10,25 +10,41 @@ class Home extends Component {
     super();
 
     this.state = {
+      inputTextBox: '',
       requestedProducts: [],
+      selectedCategory: '',
     };
+    this.updateTextBoxValue = this.updateTextBoxValue.bind(this);
+    this.chooseCategory = this.chooseCategory.bind(this);
     this.fetchProducts = this.fetchProducts.bind(this);
   }
 
-  async fetchProducts(requestedProduct) {
-    const response = await getProductsFromCategoryAndQuery(requestedProduct);
+  chooseCategory(category) {
+    this.setState({ selectedCategory: category });
+    this.fetchProducts();
+  }
+
+  updateTextBoxValue(value) {
+    this.setState({ inputTextBox: value });
+    this.fetchProducts();
+  }
+
+  async fetchProducts() {
+    const { selectedCategory, inputTextBox } = this.state;
+    const response = await getProductsFromCategoryAndQuery(
+      selectedCategory, inputTextBox,
+    );
     const { results } = response;
     this.setState({ requestedProducts: results });
-    console.log(response.results);
   }
 
   render() {
     const { requestedProducts } = this.state;
     return (
       <>
-        <Products mlItems={ requestedProducts } />
-        <SearchBar onClick={ this.fetchProducts } />
-        <Categories />
+        <SearchBar onClick={ this.updateTextBoxValue } />
+        <Categories onClick={ this.chooseCategory } />
+        <Products mlItems={ requestedProducts } selected />
       </>
     );
   }

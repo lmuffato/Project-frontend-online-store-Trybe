@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import Home from './Home';
 import ShoppingCart from './ShoppingCart';
 import CategoryList from './CategoryList';
-import Products from './Products';
+// import Products from './Products';
 
 class Routes extends Component {
   render() {
@@ -12,7 +12,7 @@ class Routes extends Component {
         <Route exact path="/" component={ Home } />
         <Route path="/ShoppingCart" component={ ShoppingCart } />
         <Route path="/CategoryList" component={ CategoryList } />
-        <Route path="/Products" component={ Products } />
+        {/* <Route path="/Products" component={ Products } /> */}
       </Switch>
     );
   }

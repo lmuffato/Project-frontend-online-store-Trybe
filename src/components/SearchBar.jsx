@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { FaShoppingCart, FaSearch, FaBars } from 'react-icons/fa';
 import { getProductsFromCategoryAndQuery } from '../services/api';
+import ProductCard from './ProductCard';
 
 // import ShoppingCart from './ShoppingCart';
 
@@ -10,31 +11,71 @@ class SearchBar extends Component {
     super();
 
     this.state = {
-      search: '',
       products: [],
+      loading: false,
+      query: '',
+      category: '',
     };
   }
+  // Funções feitas baseadas no code review do grupo 24
 
-  componentDidMount() {
-    this.fetchProducts();
+  fetchAPI = () => {
+    const { query, category } = this.state;
+    this.setState(
+      { loading: true },
+      async () => {
+        const { results } = await getProductsFromCategoryAndQuery(category, query);
+        this.setState({
+          products: results,
+          loading: false,
+        });
+      },
+    );
   }
 
-  fetchProducts = async () => {
-    const { search } = this.state;
-    const response = await getProductsFromCategoryAndQuery(search);
-    console.log(response);
+  renderInput = () => {
+    const { query } = this.state;
+    return (
+      <input
+        data-testid="query-input"
+        className="home-initial-message"
+        id="home-initial-message"
+        type="search"
+        onChange={ this.handleChangeInput }
+        value={ query }
+        placeholder="Digite algum termo de pesquisa ou escolha uma categoria."
+      />
+    );
+  }
+
+  handleChangeInput = ({ target }) => {
     this.setState({
-      products: response,
+      query: target.value,
     });
   }
 
-  onSearchTextChange = (event) => {
-    const { value } = event.target;
-    this.setState({ search: value });
+  renderButton = () => {
+    const api = this.fetchAPI;
+    return (
+      <button
+        className="btn-search"
+        type="button"
+        data-testid="query-button"
+        onClick={ api }
+      >
+        <FaSearch color="#3BC18C" size="1rem" />
+      </button>
+    );
   }
 
   render() {
-    const { search } = this.state;
+    const { products, loading } = this.state;
+
+    if (loading) {
+      return (
+        <p>Carregando...</p>
+      );
+    }
     return (
       <div data-testid="home-initial-message">
         <div className="container-searchBar">
@@ -45,18 +86,8 @@ class SearchBar extends Component {
               size="1rem"
             />
           </Link>
-          <input
-            data-testid="query-input"
-            className="home-initial-message"
-            id="home-initial-message"
-            type="search"
-            onChange={ this.onSearchTextChange }
-            value={ search }
-            placeholder="Digite algum termo de pesquisa ou escolha uma categoria."
-          />
-          <button className="btn-search" type="button" data-testid="query-button">
-            <FaSearch color="#3BC18C" size="1rem" />
-          </button>
+          {this.renderInput()}
+          {this.renderButton()}
           <Link to="./ShoppingCart">
             <FaShoppingCart
               className="cart"
@@ -68,6 +99,21 @@ class SearchBar extends Component {
         </div>
 
         <p>Digite algum termo de pesquisa ou escolha uma categoria.</p>
+        <div className="product-list">
+          { products === []
+            ? (<p>Nenhum produto foi encontrado</p>)
+            : products.map((product) => (
+              <ProductCard
+                product={ product }
+                id={ product.id }
+                key={ product.id }
+                title={ product.title }
+                price={ product.price }
+                imagePath={ product.thumbnail_id }
+                // onClick={ addCart }
+              />
+            ))}
+        </div>
       </div>
     );
   }

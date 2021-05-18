@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Product from '../components/Product';
 import SideBar from '../components/SideBar';
+import Product from '../components/Product';
 import ButtonCart from '../components/ButtonCart';
 import * as api from '../services/api';
 
@@ -12,6 +12,7 @@ export default class Home extends Component {
       products: [],
       loading: false,
       category: 'all',
+      cartItems: {},
     };
   }
 
@@ -43,8 +44,14 @@ export default class Home extends Component {
     });
   }
 
+  addToCart = (id, productInfo) => {
+    this.setState(({ cartItems }) => ({
+      cartItems: { ...cartItems, [id]: productInfo },
+    }));
+  }
+
   render() {
-    const { products, loading } = this.state;
+    const { products, loading, cartItems } = this.state;
     return (
       <main>
         <label data-testid="home-initial-message" htmlFor="search">
@@ -60,13 +67,14 @@ export default class Home extends Component {
           </button>
         </label>
         <SideBar handleChange={ this.handleChange } />
-        <ButtonCart />
+        <ButtonCart cart={ cartItems } />
         <section>
+          { products.length ? '' : <span>Nenhum produto foi encontrado</span> }
           { !loading ? products.map((product, index) => (<Product
             key={ index }
             product={ product }
+            addToCart={ this.addToCart }
           />)) : 'Carregando...' }
-          { products ? <span>Nenhum produto foi encontrado</span> : '' }
         </section>
       </main>
     );

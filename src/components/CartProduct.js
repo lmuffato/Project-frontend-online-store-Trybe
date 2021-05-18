@@ -1,40 +1,42 @@
 import React, { Component } from 'react';
 
 export default class CartProduct extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+
+    const { product: { price, amount } } = this.props
 
     this.state = {
-      valueProduct: 0,
-      quantity: 1,
+      valueProduct: price,
+      quantity: amount,
     };
   }
 
   addPrice = () => {
     const { valueProduct, quantity } = this.state;
-    const { products: { value } } = this.props;
-    this.setState({ valueProduct: quantity * value });
+    const { product: { price } } = this.props;
+    this.setState({ valueProduct: quantity * price });
     this.setState({ quantity: quantity + 1 });
   }
 
   decreasePrice = () => {
     const { valueProduct, quantity } = this.state;
-    const { products: { value } } = this.props;
-    this.setState({ valueProduct: quantity * value });
+    const { product: { price } } = this.props;
+    this.setState({ valueProduct: quantity * price });
     if (quantity > 0) { this.setState({ quantity: quantity - 1 }); }
   }
 
   render() {
-    const { products: { name, value, imgPath } } = this.props;
+    const { product: { title, thumbnail } } = this.props;
     const { valueProduct } = this.state;
     console.log(valueProduct);
     console.log(this.props);
     return (
       <div>
         <h2>
-          { name }
+          { title }
         </h2>
-        <image src={ imgPath } alt="Imagem Produto" />
+        <image src={ thumbnail } alt="Imagem Produto" />
         <h3>
           { valueProduct }
         </h3>

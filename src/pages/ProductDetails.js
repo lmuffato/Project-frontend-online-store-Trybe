@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import ButtonCart from '../components/ButtonCart';
+import ProductEvaluationForm from '../components/comment/ProductEvaluationForm';
 
 export default class ProductDetails extends Component {
   render() {
     const { location: { state: { product } } } = this.props;
-    console.log(product);
+
     return (
       <section>
         <div>
@@ -17,6 +18,7 @@ export default class ProductDetails extends Component {
           <h2 data-testid="product-detail-name">{ product.title }</h2>
           <img src={ product.thumbnail } alt="Imagem do produto" />
         </div>
+        <ProductEvaluationForm />
       </section>
     );
   }

@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import InitialMessage from "../components/InitialMessage";
-import SearchBar from "../components/SearchBar";
-import IconCart from "../components/IconCart";
-import Categories from "../components/Categories";
-import ProductCard from "../components/ProductCard";
-import * as API from "../services/api";
+import React, { Component } from 'react';
+import InitialMessage from '../components/InitialMessage';
+import SearchBar from '../components/SearchBar';
+import IconCart from '../components/IconCart';
+import Categories from '../components/Categories';
+import ProductCard from '../components/ProductCard';
+import * as API from '../services/api';
 
 export default class Landing extends Component {
   constructor() {
@@ -12,7 +12,7 @@ export default class Landing extends Component {
     this.state = {
       products: [],
       // categories: '',
-      searchInput: "",
+      searchInput: '',
     };
     // this.handleSearchBarChange = this.handleSearchBarChange.bind(this);
     // this.handleCategories = this.handleCategories.bind(this);
@@ -20,7 +20,7 @@ export default class Landing extends Component {
     // this.renderProducts = this.renderProducts.bind(this);
   }
 
-  async componentDidMount() {
+  componentDidUpdate() {
     this.fetchProducts();
   }
 
@@ -40,11 +40,10 @@ export default class Landing extends Component {
 
   async fetchProducts() {
     const { searchInput, selectedCategory } = this.state;
-    const response = await API.getProductsFromCategoryAndQuery(
-      selectedCategory,
-      searchInput
-    );
+    const response = await API
+      .getProductsFromCategoryAndQuery(selectedCategory, searchInput);
     console.log(response.results);
+    this.setState({ products: response.results });
     return response.results;
   }
 
@@ -63,8 +62,9 @@ export default class Landing extends Component {
   // }
 
   render() {
+    const { products } = this.state;
     console.log('render');
-    const arrayResultsProducts = this.fetchProducts();
+    // const arrayResultsProducts = this.fetchProducts();
     return (
       <div>
         <IconCart />
@@ -73,8 +73,8 @@ export default class Landing extends Component {
         <aside>
           <Categories onChange={ this.handleChange } />
         </aside>
-        {arrayResultsProducts.length > 0 ? (
-          arrayResultsProducts.map((product) => (
+        {products.length > 0 ? (
+          products.map((product) => (
             <ProductCard
               key={ product.id }
               title={ product.title }

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { getProductsFromCategoryAndQuery } from '../services/api';
+
 class ProductDetails extends React.Component {
   constructor() {
     super();
@@ -9,9 +10,11 @@ class ProductDetails extends React.Component {
     };
     this.fetchProduct = this.fetchProduct.bind(this);
   }
+
   componentDidMount() {
     this.fetchProduct();
   }
+
   async fetchProduct() {
     const { match: { params: { id, title } } } = this.props;
     const productsData = await getProductsFromCategoryAndQuery(1, title);
@@ -20,6 +23,7 @@ class ProductDetails extends React.Component {
       item: productData[0],
     });
   }
+  
   render() {
     const { item } = this.state;
     console.log(item);

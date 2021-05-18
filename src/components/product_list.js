@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import Category from './category_list';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import ShopCartButton from './ShopCartButton';
-import { Link } from 'react-router-dom';
 
 export default class ProductList extends Component {
   constructor() {

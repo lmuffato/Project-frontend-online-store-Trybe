@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 
 class ProductList extends React.Component {
   render() {
-    const { products, isClicked } = this.props;
+    const { products } = this.props;
 
-    if (products.length === 0 && isClicked) return <p>Nenhum produto foi encontrado</p>;
+    if (products === 'none') return <p>Nenhum produto foi encontrado</p>;
     return (
       <div>
-        { products.map(({ title, price, thumbnail }) => (
-          <div data-testid="product" key={ title }>
+        { products.map(({ title, price, thumbnail, id }) => (
+          <div data-testid="product" key={ id }>
             <h1>{title}</h1>
             <img src={ thumbnail } alt={ title } />
             <span>{price}</span>

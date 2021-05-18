@@ -56,7 +56,13 @@ class App extends React.Component {
             path="/shopping-cart"
             render={ (props) => <ShoppingCart { ...props } cartList={ cartList } /> }
           />
-          <Route exact path="/products/:id" component={ ProductDetails } />
+          <Route
+            exact
+            path="/products/:id"
+            render={ (props) => (
+              <ProductDetails { ...props } addItemToCart={ this.addItemToCart } />
+            ) }
+          />
         </Switch>
       </BrowserRouter>
     );

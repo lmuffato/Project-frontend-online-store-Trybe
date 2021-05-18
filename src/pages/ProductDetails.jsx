@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Evaluation from '../components/Evaluation';
 
@@ -13,12 +14,32 @@ class ProductDetails extends Component {
 
   render() {
     const { product } = this.state;
+    const { addItemToCart } = this.props;
+
     return (
       <section>
+        <Link to="/shopping-cart" data-testid="shopping-cart-button">
+          <img
+            className="shopping-cart-img"
+            src="../images/shopping-basket.jpg"
+            alt="Ícone de carrinho de compras"
+          />
+        </Link>
         <h1 data-testid="product-detail-name">{ product.title }</h1>
         <p>{ product.price }</p>
         <img src={ product.thumbnail } alt="imagem do produto" />
         <h2>Específicações Técnicas</h2>
+        <button
+          type="button"
+          onClick={ addItemToCart }
+          data-id={ product.id }
+          data-title={ product.title }
+          data-price={ product.price }
+          data-thumbnail={ product.thumbnail }
+          data-testid="product-detail-add-to-cart"
+        >
+          Adicionar ao carrinho
+        </button>
         <Evaluation />
       </section>
     );
@@ -38,6 +59,7 @@ ProductDetails.propTypes = {
       }),
     }),
   }).isRequired,
+  addItemToCart: PropTypes.func.isRequired,
 };
 
 export default ProductDetails;

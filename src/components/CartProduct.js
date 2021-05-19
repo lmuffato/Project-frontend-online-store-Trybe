@@ -5,25 +5,22 @@ export default class CartProduct extends Component {
   constructor(props) {
     super(props);
 
-    const { product: { price, amount, available_quantity } } = this.props;
+    const { product: { price, amount, availableQuantity } } = this.props;
 
     this.state = {
       valueProduct: price,
       quantity: amount,
-      storageQuantity: available_quantity,
+      storageQuantity: availableQuantity,
     };
   }
 
   addPrice = () => {
     const { quantity, storageQuantity } = this.state;
     const { product: { price } } = this.props;
-    if (quantity < storageQuantity) { 
+    if (quantity < storageQuantity) {
       this.setState((prev) => ({ quantity: prev.quantity + 1 }));
     }
     this.setState((prev) => ({ valueProduct: prev.quantity * price }));
-
-    // this.setState(({ quantity }) => ({ quantity: quantity + 1 }));
-    // this.setState(({ quantity }) => ({ valueProduct: quantity * price }));
   }
 
   decreasePrice = () => {

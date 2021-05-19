@@ -10,7 +10,13 @@ export default class Product extends Component {
 
   handleClick = () => {
     const { product, addToCart } = this.props;
-    const { title, price, id, thumbnail, available_quantity } = product;
+    const {
+      title,
+      price,
+      id,
+      thumbnail,
+      available_quantity: availableQuantity,
+    } = product;
     const { amount } = this.state;
 
     this.setState((prevState) => ({
@@ -23,7 +29,7 @@ export default class Product extends Component {
       amount,
       id,
       thumbnail,
-      available_quantity,
+      availableQuantity,
     });
   };
 

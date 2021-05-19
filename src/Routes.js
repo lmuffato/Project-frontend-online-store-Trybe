@@ -45,8 +45,12 @@ class Routes extends React.Component {
   }
 }
 
+Routes.defaultProps = {
+  cartProducts: [],
+};
+
 Routes.propTypes = {
-  cartProducts: PropTypes.arrayOf(PropTypes.array).isRequired,
+  cartProducts: PropTypes.arrayOf(PropTypes.array),
 };
 
 export default Routes;

@@ -7,7 +7,8 @@ import Rating from '../../components/Rating';
 class ProductDetails extends React.Component {
   render() {
     const { location: { state: { title, price, thumbnail, attributes } } } = this.props;
-    
+    const { func } = this.props;
+
     return (
       <div>
         <h1 data-testid="product-detail-name">{ title }</h1>

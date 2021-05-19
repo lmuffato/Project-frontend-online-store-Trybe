@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import Button from '../../components/Button/index';
@@ -57,13 +56,7 @@ class Home extends React.Component {
   }
 
   render() {
-    const { categories, productsList, productsInCart } = this.state;
-    const location = {
-      pathname: '/Cart',
-      state: {
-        item: productsInCart,
-      },
-    };
+    const { categories, productsList } = this.state;
 
     return (
       <main id="home-page">
@@ -91,9 +84,5 @@ class Home extends React.Component {
     );
   }
 }
-
-Home.propTypes = {
-  func: PropTypes.func.isRequired,
-};
 
 export default Home;

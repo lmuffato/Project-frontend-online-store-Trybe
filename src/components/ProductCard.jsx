@@ -2,26 +2,30 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import '../styles/ProductCard.css';
+import Button from './Button';
 // import { getProductsFromCategoryAndQuery } from '../services/api';
 
 export default class ProductCard extends React.Component {
   render() {
     const { item } = this.props;
     return (
-      <Link
-        to={ `/${item.id}` }
-        data-testid="product-detail-link"
-        className="product-detail-link"
-      >
-        <div data-testid="product" className="product">
-          <h3>{item.title}</h3>
-          <img src={ item.thumbnail } alt={ item.title } width="120px" />
-          <p>
-            Price:
-            {item.price}
-          </p>
-        </div>
-      </Link>
+      <div>
+        <Link
+          to={ `/${item.id}` }
+          data-testid="product-detail-link"
+          className="product-detail-link"
+        >
+          <div data-testid="product" className="product">
+            <h3>{item.title}</h3>
+            <img src={ item.thumbnail } alt={ item.title } width="120px" />
+            <p>
+              Price:
+              {item.price}
+            </p>
+          </div>
+        </Link>
+        <Button item={ item } data-testid="product-add-to-cart" />
+      </div>
     );
   }
 }

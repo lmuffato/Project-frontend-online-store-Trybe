@@ -50,6 +50,10 @@ export default class ShoppingCart extends React.Component {
             </div>
           ))
         }
+        <p data-testid="shopping-cart-product-quantity">
+          Quantidade de items no carrinho:
+          {storage.length}
+        </p>
       </div>
     );
   }

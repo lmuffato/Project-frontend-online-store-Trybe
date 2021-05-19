@@ -1,6 +1,6 @@
 import React from 'react';
-import FilterCategory from '../components/FilterCategory';
 import { Link } from 'react-router-dom';
+import FilterCategory from '../components/FilterCategory';
 import shoppingCart from '../imagens/shoppingCart.svg';
 import CategoryList from '../components/CategoryList';
 import ProductCard from '../components/ProductCard';
@@ -54,14 +54,16 @@ export default class Home extends React.Component {
   render() {
     const { input, loading, items } = this.state;
     return (
-      <div>
-        <input type="text" />
-        <p data-testid="home-initial-message">
-          Digite algum termo de pesquisa ou escolha uma categoria.
-        </p>
+      <main>
+        <div>
+          <input type="text" />
+          <p data-testid="home-initial-message">
+            Digite algum termo de pesquisa ou escolha uma categoria.
+          </p>
+        </div>
         <FilterCategory />
-      <div className="content-container">
-        <section className="search-and-products">
+        <div className="content-container">
+          {/* {  <section className="search-and-products">} */}
           <div className="searchbar-container">
             <button
               type="submit"
@@ -98,13 +100,15 @@ export default class Home extends React.Component {
               ? <Loading />
               : items.map((item) => <ProductCard item={ item } key={ item.id } />)}
           </div>
-        </section>
-        <CategoryList
-          className="product-list"
-          handleChange={ this.handleChangeCheckbox }
+          {/*  </section> */}
+          <CategoryList
+            className="product-list"
+            handleChange={ this.handleChangeCheckbox }
           // request={ this.request }
-        />
-      </div>
+          />
+        </div>
+      </main>
+
     );
   }
 }

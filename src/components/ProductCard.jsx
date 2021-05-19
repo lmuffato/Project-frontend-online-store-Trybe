@@ -5,7 +5,7 @@ export default class ProductCard extends Component {
   render() {
     const { title, price, img } = this.props;
     return (
-      <div>
+      <div data-testid="product">
         <h2>{title}</h2>
         <img src={ img } alt={ title } />
         <p>{price}</p>

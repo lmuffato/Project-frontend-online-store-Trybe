@@ -7,7 +7,12 @@ export default class SearchBar extends Component {
     return (
       <div>
         <label htmlFor="search-bar">
-          <input name="searchBar" onChange={ onChange } id="search-bar" />
+          <input
+            name="searchInput"
+            onChange={ onChange }
+            id="search-bar"
+            data-testid="query-input"
+          />
         </label>
       </div>
     );

@@ -1,30 +1,28 @@
-import React, { Component } from "react";
-import InitialMessage from "../components/InitialMessage";
-import SearchBar from "../components/SearchBar";
-import IconCart from "../components/IconCart";
-import Categories from "../components/Categories";
-import ProductCard from "../components/ProductCard";
-import * as API from "../services/api";
-import Button from "../components/Button";
+import React, { Component } from 'react';
+import InitialMessage from '../components/InitialMessage';
+import SearchBar from '../components/SearchBar';
+import IconCart from '../components/IconCart';
+import Categories from '../components/Categories';
+import ProductCard from '../components/ProductCard';
+import * as API from '../services/api';
+import Button from '../components/Button';
 
 export default class Landing extends Component {
   constructor() {
     super();
     this.state = {
       products: [],
-      selectedCategory: "",
-      searchInput: "",
+      selectedCategory: '',
+      searchInput: '',
     };
     this.handleChange = this.handleChange.bind(this);
+    this.fetchProductsOnClick = this.fetchProductsOnClick.bind(this);
   }
 
   componentDidUpdate(_prevProps, prevState) {
-    const { selectedCategory, searchInput } = this.state;
+    const { selectedCategory } = this.state;
     if (prevState.selectedCategory !== selectedCategory) {
-      return this.fetchProducts();
-    }
-    if (prevState.searchInput !== searchInput ) {
-      return this.fetchProducts();
+      return this.fetchProductsByCategory();
     }
   }
 
@@ -33,29 +31,33 @@ export default class Landing extends Component {
     this.setState({ [name]: value });
   }
 
-  async fetchProducts(event) {
-    // event.preventDefault();
-    const { searchInput, selectedCategory } = this.state;
+  async fetchProductsByCategory() {
+    const { selectedCategory } = this.state;
     const response = await API
-      .getProductsFromCategoryAndQuery(selectedCategory, searchInput);
+      .getProductsFromCategoryAndQuery(selectedCategory);
     console.log(response.results);
     this.setState({ products: response.results });
-    //  return response.results;
   }
 
-  filterButton() {
-    const { searchInput, products } = this.state;
-    products.filter((product) => product.title.includes(searchInput));
+  async fetchProductsOnClick(category, query) {
+    const response = await API
+      .getProductsFromCategoryAndQuery(category, query);
+    console.log(response.results);
+    this.setState({ products: response.results });
   }
 
   render() {
-    const { products } = this.state;
+    const { products, selectedCategory, searchInput } = this.state;
     console.log('render');
     return (
       <div>
         <IconCart />
         <SearchBar onChange={ this.handleChange } />
-        <Button onClick={ this.fetchProducts } />
+        <Button
+          onClick={ this.fetchProductsOnClick }
+          searchInput={ searchInput }
+          selectedCategory={ selectedCategory }
+        />
         <InitialMessage />
         <aside>
           <Categories onChange={ this.handleChange } />

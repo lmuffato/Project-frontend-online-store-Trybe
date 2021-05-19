@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 
 export default class Button extends Component {
   render() {
-    const { onClick } = this.props;
+    const { onClick, searchInput, selectedCategory } = this.props;
     return (
       <div>
         <label htmlFor="button-submit">
           <input
             data-testid="query-button"
             name="button-submit"
-            onClick={ onClick }
+            onClick={ () => onClick(selectedCategory, searchInput) }
             type="submit"
           />
         </label>
@@ -20,5 +20,7 @@ export default class Button extends Component {
 }
 
 Button.propTypes = {
-  onClick: PropTypes.func.isRequired,
-};
+  onClick: PropTypes.func,
+  selectedCategory: PropTypes.string,
+  searchInput: PropTypes.string,
+}.isRequired;

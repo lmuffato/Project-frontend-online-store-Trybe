@@ -48,7 +48,7 @@ class ProductDetails extends React.Component {
             <label htmlFor="product-detail-evaluation">
               <textarea
                 data-testid="product-detail-evaluation"
-                value={ this.state.value }
+                // value={ this.state.value }
                 onChange={ this.handleChange }
               />
             </label>

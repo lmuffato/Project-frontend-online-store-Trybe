@@ -18,6 +18,7 @@ class Product extends React.Component {
         <img src={ imagePath } alt={ title } />
         <h1>{ title }</h1>
         <p>{ price }</p>
+
         <Link to={ location }>
           <button
             type="button"
@@ -26,6 +27,7 @@ class Product extends React.Component {
             Ver detalhes
           </button>
         </Link>
+
         <button
           data-testid="product-add-to-cart"
           type="button"

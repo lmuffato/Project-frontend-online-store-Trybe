@@ -19,8 +19,8 @@ class Home extends React.Component {
 
     this.state = {
       categories: [],
-      arrayOfItems: [],
-      cardProps: [],
+      productsList: [],
+      productsInCart: [],
     };
   }
 
@@ -31,20 +31,21 @@ class Home extends React.Component {
   async getProductsFromCategory(categoryId) {
     const response = await getProductsFromCategoryAndQuery(categoryId);
 
-    this.setState({ arrayOfItems: response.results });
+    this.setState({ productsList: response.results });
   }
 
   generateArray = async (item) => {
     const array = await getProductsFromCategoryAndQuery(false, item);
     this.setState({
-      arrayOfItems: array.results,
+      productsList: array.results,
     });
   }
 
-  getPropsOfItem = (obj) => {
-    const { cardProps } = this.state;
+  addProductToCart = (obj) => {
+    const { productsInCart } = this.state;
+
     this.setState({
-      cardProps: [...cardProps, obj],
+      productsInCart: [...productsInCart, obj],
     });
   }
 
@@ -55,27 +56,35 @@ class Home extends React.Component {
   }
 
   render() {
-    const { categories, arrayOfItems, cardProps } = this.state;
+    const { categories, productsList, productsInCart } = this.state;
     const location = {
       pathname: '/Cart',
       state: {
-        item: cardProps,
+        item: productsInCart,
       },
     };
+
     return (
       <main id="home-page">
         <CategoriesBar
           categories={ categories }
           onClick={ this.getProductsFromCategory }
         />
+
         <section>
           <SearchBar func={ this.generateArray } />
+
           <Button>
             <Link data-testid="shopping-cart-button" to={ location }>Cart</Link>
           </Button>
-          {arrayOfItems.length === 0
+
+          {productsList.length === 0
             ? <p>Nenhum produto foi encontrado</p>
-            : <ListProducts arrayOfItems={ arrayOfItems } func={ this.getPropsOfItem } />}
+            : (
+              <ListProducts
+                productsList={ productsList }
+                addProductToCart={ this.addProductToCart }
+              />)}
         </section>
       </main>
     );

@@ -1,0 +1,24 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+
+  --text-color-black-800: rgb(29, 29, 29);
+
+  --text-color-black-600: rgb(51, 51, 51);
+
+  --text-color-black-400: rgb(102, 102, 102);
+}
+
+body {
+  background-color: rgb(240, 242, 245);
+}
+
+h1, h3, h4, h5, h6 {
+  color: var(--text-color-black-600);
+  font-family: Cabin , sans-serif;
+  font-size: 2rem;
+}

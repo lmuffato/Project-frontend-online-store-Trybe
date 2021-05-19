@@ -8,6 +8,7 @@ import Checkout from './pages/Checkout';
 import Cart from './pages/Cart';
 
 import './App.css';
+import './styles/globals.css';
 
 class App extends Component {
   constructor() {

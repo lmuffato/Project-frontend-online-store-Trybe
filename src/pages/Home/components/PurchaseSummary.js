@@ -4,8 +4,24 @@ import BuyerInformation from './BuyerInformation';
 import Payment from './Payment';
 
 class PurchaseSummary extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      totalPrice: {},
+    };
+  }
+
+  TotalPrice() {
+    const { location: { state: { total } } } = this.props;
+    this.setState = {
+      totalPrice: total,
+    };
+  }
+
   render() {
     const { cart } = this.props;
+    const { totalPrice } = this.state;
     if (!cart) return <h1>Loading...</h1>;
 
     return (
@@ -25,6 +41,7 @@ class PurchaseSummary extends React.Component {
                       {product.quantity}
                     </h5>
                     <h5>{product.data.price}</h5>
+                    <h5>{ totalPrice }</h5>
                   </li>
                 ))}
               </ul>

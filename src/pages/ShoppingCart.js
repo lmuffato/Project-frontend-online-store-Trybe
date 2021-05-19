@@ -169,7 +169,12 @@ class ShoppingCart extends React.Component {
             ))}
             <strong>Valor total da compra:</strong>
             <span>{`R$${total}`}</span>
-            <Link to="/finalizingpurchase">
+            <Link
+              to={ {
+                pathname: '/cart/checkout',
+                state: { total },
+              } }
+            >
               <button type="button" data-testid="checkout-products">
                 Finalizar Compra
               </button>

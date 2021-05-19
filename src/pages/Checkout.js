@@ -3,7 +3,7 @@ import BuyerInformation from './Home/components/BuyerInformation';
 import PurchaseSummary from './Home/components/PurchaseSummary';
 import Payment from './Home/components/Payment';
 
-class FinalizingPurchase extends React.Component {
+class Checkout extends React.Component {
   render() {
     return (
       <div>
@@ -18,4 +18,4 @@ class FinalizingPurchase extends React.Component {
   }
 }
 
-export default FinalizingPurchase;
+export default Checkout;

@@ -5,7 +5,7 @@ import Home from './pages/Home';
 import ShoppingCart from './pages/ShoppingCart';
 import ProductDetails from './pages/ProductDetails';
 import { getProductsFromCategoryAndQuery } from './services/api';
-import FinalizingPurchase from './pages/FinalizingPurchase';
+import Checkout from './pages/Checkout';
 import PurchaseSummary from './pages/Home/components/PurchaseSummary';
 
 class App extends React.Component {
@@ -145,7 +145,13 @@ class App extends React.Component {
               addToCart={ this.addToCart }
             />
           </Route>
-          <Route path="/cart">
+          <Route
+            path="/cart/checkout"
+            component={ Checkout }
+          >
+            <PurchaseSummary cart={ cart } />
+          </Route>
+          <Route path="/cart" exact>
             <ShoppingCart
               cart={ cart }
               removeFromCart={ this.removeFromCart }
@@ -164,12 +170,6 @@ class App extends React.Component {
             }
             exact
           />
-          <Route
-            path="/finalizingpurchase"
-            component={ FinalizingPurchase }
-          >
-            <PurchaseSummary cart={ cart } />
-          </Route>
         </Switch>
       </BrowserRouter>
     );

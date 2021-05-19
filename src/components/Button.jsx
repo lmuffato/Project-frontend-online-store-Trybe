@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { creatObject } from '../services/shoppingCart';
+import { creatObject } from '../services/localStorage';
 
 export default class Button extends React.Component {
   render() {

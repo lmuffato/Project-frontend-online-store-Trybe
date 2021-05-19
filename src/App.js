@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { addToLocalStorage } from './services/shoppingCart';
+import { addToLocalStorage } from './services/localStorage';
 import Home from './pages/Home';
 import ShoppingCart from './pages/ShoppingCart';
 import ProductDetail from './pages/ProductDetail';

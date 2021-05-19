@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+// import { Link } from 'react-router-dom';
 import getProductById from '../services/api2';
+import LinkToCart from '../components/LinkToCart';
 import Loading from '../components/Loading';
 
 export default class ProductDetail extends Component {
@@ -34,6 +36,7 @@ export default class ProductDetail extends Component {
   render() {
     const { productInfo: { title, thumbnail, price, attributes } } = this.state;
     const { loading } = this.state;
+    const { addToCart, quantity } = this.props;
     return (
       <div>
         {loading
@@ -51,6 +54,18 @@ export default class ProductDetail extends Component {
                    ${attribute.value_name}`}
                     </li>))}
               </ul>
+              <button
+                type="button"
+                data-testid="product-detail-add-to-cart"
+                // data-testid="shopping-cart-button"
+                onClick={ () => addToCart({ title, thumbnail, price, attributes }) }
+              >
+                Adicionar ao Carrinho
+              </button>
+              {/* <Link to="/shopping-cart">Carrinho de Compras</Link> */}
+              <LinkToCart
+                quantity={ quantity }
+              />
             </>
           )}
       </div>
@@ -64,4 +79,6 @@ ProductDetail.propTypes = {
       id: PropTypes.string,
     }).isRequired,
   }).isRequired,
+  addToCart: PropTypes.func.isRequired,
+  quantity: PropTypes.number.isRequired,
 };

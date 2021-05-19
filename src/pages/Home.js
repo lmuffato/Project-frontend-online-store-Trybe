@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
+// import PropTypes from 'prop-types';
 import { getProductsFromCategoryAndQuery, getCategories } from '../services/api';
 import CardItems from '../components/CardItems';
 import CategoriesList from '../components/CategoriesList';
+import LinkToCart from '../components/LinkToCart';
 
 export default class Home extends Component {
   constructor(props) {
@@ -52,6 +54,7 @@ export default class Home extends Component {
 
   render() {
     const { inputValue, products, categories } = this.state;
+    // const { quantity } = this.props;
     return (
       <div>
         <input
@@ -77,14 +80,24 @@ export default class Home extends Component {
           categories={ categories }
           onClick={ this.fetchProductsByCategory }
         />
-        <Link
+        {/* <Link
           to="/shopping-cart"
           data-testid="shopping-cart-button"
         >
           Cart
-        </Link>
+        </Link> */}
+        {/* <LinkToCart quantity={ quantity } /> */}
+        <LinkToCart />
         <CardItems products={ products } />
       </div>
     );
   }
 }
+
+// Home.propTypes = {
+//   quantity: PropTypes.number,
+// };
+
+// Home.defaultProps = {
+//   quantity: '',
+// };

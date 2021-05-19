@@ -38,7 +38,7 @@ class SearchBar extends Component {
         >
           <img
             style={ { width: '40px' } }
-            src="./images/shoppingCart.png"
+            src="/images/shoppingCart.png"
             alt="Carrinho de compras"
           />
         </Link>

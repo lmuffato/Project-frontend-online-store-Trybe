@@ -13,6 +13,7 @@ class App extends Component {
   }
 
   addItem(selectedItem) {
+    console.log(selectedItem);
     this.setState((previousState) => (
       {
         items: [...previousState.items, selectedItem],
@@ -25,7 +26,14 @@ class App extends Component {
 
     return (
       <Router>
-        <Route exact path="/product/:id" component={ ProductDetails } />
+        <Route
+          exact
+          path="/product/:id"
+          render={ (routeProps) => (<ProductDetails
+            { ...routeProps }
+            callBack={ this.addItem }
+          />) }
+        />
         <Route
           exact
           path="/cartContent"

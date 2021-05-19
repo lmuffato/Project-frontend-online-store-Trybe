@@ -13,6 +13,8 @@ class ListagemProdutos extends Component {
 
     this.state = {
       products: [],
+      productsOnCart: [],
+      productsQuantity: {},
       isLoading: false,
       query: '',
       category: '',
@@ -46,17 +48,36 @@ class ListagemProdutos extends Component {
     );
   }
 
-  // handleAddProductToCart = (product) => {
-  //   return (
-  //     <Link to="/cart">
-  //       <button type="button" data-testid="shopping-cart-button">Cart</button>
-  //     </Link>
-  //   );
-  // }
+  handleAddToCart = ({title, id, price}) => {
+    const { productsQuantity } = this.state;
+    console.log(title, id, price)
+    if (productsQuantity[title] === undefined) {
+      this.setState((prevState) => ({
+        productsOnCart: [...prevState.productsOnCart, {
+          title,
+          id,
+          price
+        }],
+        productsQuantity: { 
+          ...prevState.productsQuantity,
+          [title]: 1
+        },
+      }));
+    } else {
+      this.setState((prevState) => ({
+        productsOnCart: [...prevState.productsOnCart, {
+          title,
+          id,
+          price
+        }],
+        productsQuantity: { ...prevState.productsQuantity,
+          [title]: prevState.productsQuantity[title] + 1 },
+      }));
+    }
+  }
 
   render() {
-    const { products, isLoading } = this.state;
-    const { addCart } = this.props;
+    const { products, productsOnCart, productsQuantity, isLoading } = this.state;
 
     if (isLoading) {
       return (
@@ -79,7 +100,17 @@ class ListagemProdutos extends Component {
 
         <Categories onClick={ this.handleChangeCategory } />
         <aside>
-          <Link to="/cart">
+          <Link 
+            to={{
+              pathname: "/cart",
+              search: '',
+              hash: '',
+              state: {
+                products: productsOnCart,
+                productsQuantity
+              }
+            }}
+          >
             <button type="button" data-testid="shopping-cart-button">Cart</button>
           </Link>
         </aside>
@@ -98,7 +129,7 @@ class ListagemProdutos extends Component {
               title={ product.title }
               price={ product.price }
               imagePath={ product.thumbnail }
-              onClick={ addCart }
+              onClick={ this.handleAddToCart }
             />
           ))}
 
@@ -106,9 +137,5 @@ class ListagemProdutos extends Component {
     );
   }
 }
-
-ListagemProdutos.propTypes = {
-  addCart: PropTypes.func.isRequired,
-};
 
 export default ListagemProdutos;

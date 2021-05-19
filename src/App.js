@@ -18,7 +18,6 @@ class App extends Component {
         items: [...previousState.items, selectedItem],
       }
     ));
-    console.log(selectedItem);
   }
 
   render() {

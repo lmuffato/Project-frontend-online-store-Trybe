@@ -23,7 +23,6 @@ class ProductDetail extends Component {
           >
             Add To Cart
           </button>
-          )
           <Link data-testid="shopping-cart-button" to="/cart">Go To Cart</Link>
           <img src={ state.thumbnail } alt="Imagem do Produto" />
         </div>

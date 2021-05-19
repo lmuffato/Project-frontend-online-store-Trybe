@@ -77,9 +77,19 @@ class ListagemProdutos extends Component {
     }
   }
 
+  getQuantity = () => {
+    const { productsQuantity } = this.state;
+    const quantityArr = Object.values(productsQuantity);
+    if (quantityArr.length !== 0) {
+      const totalItems = quantityArr.reduce((acc, cur) => acc + cur);
+      return totalItems;
+    }
+  }
+
   render() {
-    const { size } = this.props;
     const { products, productsOnCart, productsQuantity, isLoading } = this.state;
+    const quantityItems = this.getQuantity();
+
     if (isLoading) {
       return (
         <p>Carregando...</p>
@@ -88,7 +98,7 @@ class ListagemProdutos extends Component {
 
     return (
       <div>
-        <CartSize size={ size } />
+        <CartSize size={ quantityItems } />
         <label htmlFor="query-input">
           <input
             data-testid="query-input"

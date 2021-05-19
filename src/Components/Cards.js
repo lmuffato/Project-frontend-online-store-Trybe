@@ -3,28 +3,15 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 class Cards extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      title: '',
-      price: 0,
-      thumbnail: '',
-    };
-    this.handleData = this.handleData.bind(this);
-  }
-
-  handleData() {
-    console.log(target);
-  }
-
   render() {
     const { product } = this.props;
     const { title, price, thumbnail, id } = product;
     return (
       <div className="products-cards">
         <Link
+          data-testid="product-detail-link"
           onClick={ this.handleData }
-          to={ { pathname: `/detailsPage/${id}`, state: this.state.product } }
+          to={ { pathname: `/detailsPage/${id}`, state: [title, price, thumbnail] } }
         >
           <div data-testid="product">
             <p>{title}</p>

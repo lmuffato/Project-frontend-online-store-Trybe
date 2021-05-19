@@ -13,13 +13,14 @@ function App() {
       <BrowserRouter>
 
         <Switch>
-          <Route path="/CartShopPage" component={ CartShopPage } />
+          <Route path="/" exact component={ Search } />
           <Route
             path="/detailsPage/:id"
             render={ (props) => <DetailsPage { ...props } /> }
           />
+          <Route path="/CartShopPage" component={ CartShopPage } />
         </Switch>
-        <Search />
+
         <CartButton />
         <CategorieList />
       </BrowserRouter>

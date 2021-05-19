@@ -10,10 +10,41 @@ class App extends Component {
     super();
 
     this.addToCart = this.addToCart.bind(this);
+    this.increaseQuantity = this.increaseQuantity.bind(this);
+    this.decreaseQuantity = this.decreaseQuantity.bind(this);
+    this.removeCartItem = this.removeCartItem.bind(this);
 
     this.state = {
       shoppingCart: [],
     };
+  }
+
+  increaseQuantity(id) {
+    const { shoppingCart } = this.state;
+    const addQuantity = shoppingCart
+      .find((productShoppingCart) => id === productShoppingCart.id);
+    const index = shoppingCart.indexOf(addQuantity);
+    shoppingCart[index].quantity += 1;
+    this.setState({ shoppingCart });
+  }
+
+  decreaseQuantity(id) {
+    console.log(this.state);
+    const { shoppingCart } = this.state;
+    const subtractQuantity = shoppingCart
+      .find((productShoppingCart) => id === productShoppingCart.id);
+    const index = shoppingCart.indexOf(subtractQuantity);
+    if (shoppingCart[index].quantity > 0) {
+      shoppingCart[index].quantity -= 1;
+    }
+    this.setState({ shoppingCart });
+  }
+
+  removeCartItem(id) {
+    const { shoppingCart } = this.state;
+    const updatedCart = shoppingCart
+      .filter((productShoppingCart) => id !== productShoppingCart.id);
+    this.setState({ shoppingCart: updatedCart });
   }
 
   addToCart(product) {
@@ -37,7 +68,16 @@ class App extends Component {
     return (
       <BrowserRouter>
         <Switch>
-          <Route path="/cart-basket" component={ CartBasket } />
+          <Route
+            path="/cart-basket"
+            render={ (props) => (<CartBasket
+              { ...props }
+              increaseQuantity={ this.increaseQuantity }
+              decreaseQuantity={ this.decreaseQuantity }
+              removeCartItem={ this.removeCartItem }
+              shoppingCart={ shoppingCart }
+            />) }
+          />
           <Route
             path="/product-details/:id"
             render={ (props) => (

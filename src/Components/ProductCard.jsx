@@ -5,6 +5,11 @@ import { Link } from 'react-router-dom';
 class ProductCard extends Component {
   render() {
     const { product, title, price, imagePath, id, onClick } = this.props;
+    const myObj = {
+      title,
+      id,
+      price
+    }
 
     return (
       <div data-testid="product">
@@ -23,8 +28,8 @@ class ProductCard extends Component {
           Mais Detalhes
         </Link>
         <button
-          onClick={ onClick }
-          value={ title }
+          onClick={ () => onClick(myObj) }
+          //value={ myObj }
           type="button"
           data-testid="product-add-to-cart"
         >

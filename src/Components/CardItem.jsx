@@ -5,7 +5,9 @@ import AddCart from './AddCart';
 
 class cardItem extends Component {
   render() {
-    const { title, thumbnail, price, id, cart } = this.props;
+    const { product, productToCart } = this.props;
+    const { title, thumbnail, price, id } = product;
+
     return (
       <>
         <Link
@@ -22,7 +24,7 @@ class cardItem extends Component {
             <br />
           </div>
         </Link>
-        <AddCart id={ id } { ...this.props } cart={ cart } />
+        <AddCart id={ id } product={ { ...product } } productToCart={ productToCart } />
       </>
     );
   }

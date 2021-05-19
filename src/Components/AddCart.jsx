@@ -3,13 +3,12 @@ import PropTypes from 'prop-types';
 
 class AddCart extends Component {
   render() {
-    const { cart, id } = this.props;
+    const { productToCart, product } = this.props;
     return (
       <button
-        id={ id }
         type="submit"
         data-testid="product-add-to-cart"
-        onClick={ () => cart(this.props) }
+        onClick={ () => productToCart(product) }
       >
         Add in Cart
       </button>
@@ -18,8 +17,7 @@ class AddCart extends Component {
 }
 
 AddCart.propTypes = {
-  id: PropTypes.string.isRequired,
-  cart: PropTypes.func.isRequired,
+  productToCart: PropTypes.func.isRequired,
 };
 
 export default AddCart;

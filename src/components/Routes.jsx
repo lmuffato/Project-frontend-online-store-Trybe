@@ -1,19 +1,22 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Home from './Home';
-import ShoppingCart from './ShoppingCart';
-import CategoryList from './CategoryList';
-// import Products from './Products';
+import Cart from './Cart';
+import ProductDetails from './ProductDetails';
 
 class Routes extends Component {
   render() {
     return (
-      <Switch>
-        <Route exact path="/" component={ Home } />
-        <Route path="/ShoppingCart" component={ ShoppingCart } />
-        <Route path="/CategoryList" component={ CategoryList } />
-        {/* <Route path="/Products" component={ Products } /> */}
-      </Switch>
+      <div>
+        <Switch>
+          <Route exact path="/" component={ Home } />
+          <Route path="/Cart" component={ Cart } />
+          <Route
+            path="/Products/:id"
+            render={ (props) => <ProductDetails { ...props } /> }
+          />
+        </Switch>
+      </div>
     );
   }
 }

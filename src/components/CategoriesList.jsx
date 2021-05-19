@@ -26,8 +26,8 @@ class CategoriesList extends Component {
       <div>
         <h3>Categorias:</h3>
         {categories.map((categoria) => (
-          <>
-            <label key={ categoria.id } htmlFor={ categoria.id }>
+          <div key={ categoria.id }>
+            <label htmlFor={ categoria.id }>
               {categoria.name}
               <input
                 data-testid="category"
@@ -39,7 +39,7 @@ class CategoriesList extends Component {
               />
             </label>
             <br />
-          </>))}
+          </div>))}
       </div>
     );
   }
@@ -48,5 +48,4 @@ class CategoriesList extends Component {
 CategoriesList.propTypes = {
   filterCategory: PropTypes.func.isRequired,
 };
-
 export default CategoriesList;

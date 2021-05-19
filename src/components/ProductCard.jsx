@@ -1,6 +1,6 @@
 import React from 'react';
 import { string } from 'prop-types';
-import AddToCartProductDetails from './AddToCartProductDetails';
+import AddToCart from './AddToCart';
 
 class ProductCard extends React.Component {
   render() {
@@ -26,7 +26,7 @@ class ProductCard extends React.Component {
             </li>
           )) }
         </ul>
-        <AddToCartProductDetails product={ product } />
+        <AddToCart product={ product } testId="product-detail-add-to-cart" />
       </div>
     );
   }

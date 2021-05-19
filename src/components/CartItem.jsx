@@ -9,8 +9,8 @@ class CartItem extends React.Component {
       <div>
         <img src={ thumbnail } alt={ title } />
         <p data-testid="shopping-cart-product-name">{ title }</p>
-        <span data-testid="shopping-cart-product-quantity">1</span>
-        <span>{ price }</span>
+        <p data-testid="shopping-cart-product-quantity">1</p>
+        <p>{ price }</p>
       </div>
 
     );

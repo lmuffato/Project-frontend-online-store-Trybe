@@ -55,6 +55,11 @@ class App extends React.Component {
     this.setState({ cartList: updatedCart });
   }
 
+  returnTotalCartItemQty = () => {
+    const { cartList } = this.state;
+    return Object.values(cartList).reduce((accum, currItem) => accum + currItem.qty, 0);
+  }
+
   render() {
     const { cartList } = this.state;
 

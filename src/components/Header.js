@@ -25,23 +25,25 @@ class Header extends Component {
     });
   }
 
-  fetchProducts = async () => {
-    this.setState({ request: true },
+  fetchProducts = async (id) => {
+    const { query, category } = this.state;
+    this.setState({ request: true, category: id },
       async () => {
-        const { category, query } = this.state;
         const dataProducts = await getProductsFromCategoryAndQuery(category, query);
         this.setState({
           dataApi: dataProducts.results,
           request: false,
+          query: '',
         });
       });
   }
 
   render() {
     const { dataApi, query, request } = this.state;
+    console.log(dataApi);
     return (
       <div>
-        <ListCategories />
+        <ListCategories fetchProducts={ this.fetchProducts } />
         <SearchBar
           query={ query }
           handleChange={ this.handleChange }

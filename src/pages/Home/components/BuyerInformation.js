@@ -21,7 +21,7 @@ class BuyerInformation extends React.Component {
         </label>
         <br />
         <label htmlFor="Phone">
-          Telefane
+          Telefone
           <input type="text" data-testid="checkout-phone" />
         </label>
         <br />

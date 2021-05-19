@@ -4,7 +4,7 @@ import ShoppingCartItem from '../components/ShoppingCartItem';
 
 class ShoppingCart extends Component {
   render() {
-    const { cartList } = this.props;
+    const { cartList, updateItemQtyInCart } = this.props;
     return (
       <div>
         <div data-testid="shopping-cart-empty-message">
@@ -12,11 +12,13 @@ class ShoppingCart extends Component {
         </div>
         {Object.keys(cartList).map((item) => (
           <ShoppingCartItem
+            key={ Math.random() }
+            id={ item }
             title={ cartList[item].title }
             price={ cartList[item].price }
             qty={ cartList[item].qty }
             thumbnail={ cartList[item].thumbnail }
-            key={ item }
+            updateItemQtyInCart={ updateItemQtyInCart }
           />
         ))}
       </div>
@@ -26,6 +28,7 @@ class ShoppingCart extends Component {
 
 ShoppingCart.propTypes = {
   cartList: PropTypes.shape({}).isRequired,
+  updateItemQtyInCart: PropTypes.func.isRequired,
 };
 
 export default ShoppingCart;

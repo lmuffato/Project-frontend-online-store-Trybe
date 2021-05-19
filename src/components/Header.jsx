@@ -5,7 +5,7 @@ import SearchBar from './SearchBar';
 
 class Header extends Component {
   render() {
-    const { handleInput, handleProductsByQuery, inputSearch } = this.props;
+    const { handleInput, handleProductsByQuery, inputSearch, totalItemQty } = this.props;
     return (
       <header>
         <SearchBar
@@ -19,6 +19,7 @@ class Header extends Component {
             src="../images/shopping-basket.jpg"
             alt="Ícone de carrinho de compras"
           />
+          <span data-testid="shopping-cart-size">{totalItemQty}</span>
         </Link>
       </header>
     );
@@ -29,6 +30,7 @@ Header.propTypes = {
   handleInput: PropTypes.func.isRequired,
   handleProductsByQuery: PropTypes.func.isRequired,
   inputSearch: PropTypes.string.isRequired,
+  totalItemQty: PropTypes.number.isRequired,
 };
 
 export default Header;

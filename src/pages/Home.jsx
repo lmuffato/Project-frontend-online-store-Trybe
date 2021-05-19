@@ -17,10 +17,6 @@ class Home extends Component {
     this.searchFunction = this.searchFunction.bind(this);
   }
 
-  componentDidMount() {
-
-  }
-
   handleInput = ({ target: { value } }) => {
     this.setState({
       inputSearch: value,
@@ -48,7 +44,7 @@ class Home extends Component {
 
   render() {
     const { inputSearch, products } = this.state;
-    const { addItemToCart } = this.props;
+    const { addItemToCart, totalItemQty } = this.props;
 
     return (
       <section className="container-home">
@@ -58,6 +54,7 @@ class Home extends Component {
             handleInput={ this.handleInput }
             handleProductsByQuery={ this.handleProductsByQuery }
             inputSearch={ inputSearch }
+            totalItemQty={ totalItemQty }
           />
           <main>
             <Products products={ products } addItemToCart={ addItemToCart } />
@@ -70,6 +67,7 @@ class Home extends Component {
 
 Home.propTypes = {
   addItemToCart: PropTypes.func.isRequired,
+  totalItemQty: PropTypes.number.isRequired,
 };
 
 export default Home;

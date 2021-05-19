@@ -57,7 +57,9 @@ class ProductDetails extends React.Component {
       thumbnail: item.thumbnail,
       qtd: 1,
     };
-    const avaliacoes = (JSON.parse(localStorage.getItem(id))) ? (JSON.parse(localStorage.getItem(id))).map((avaliacao) => <p>{ avaliacao }</p>) : '';
+    const avaliacoes = (JSON.parse(localStorage.getItem(id)))
+      ? (JSON.parse(localStorage.getItem(id, index)))
+        .map((avaliacao) => <p key={ index }>{ avaliacao }</p>) : '';
     return (
       <div data-testid="product-detail-name">
         {item.title}

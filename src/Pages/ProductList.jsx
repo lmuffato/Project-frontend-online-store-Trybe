@@ -39,7 +39,7 @@ class ProductList extends Component {
   };
 
   render() {
-    const { handle } = this.props;
+    const { handle, productsInCart } = this.props;
     const { query, productsList } = this.state;
     return (
       <main className="conteiner-main">
@@ -79,6 +79,7 @@ class ProductList extends Component {
             query={ query }
             handle={ handle }
             productsList={ productsList }
+            productsInCart={ productsInCart }
           />
         </section>
 

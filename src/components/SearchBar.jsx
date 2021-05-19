@@ -50,7 +50,7 @@ class SearchBar extends Component {
         <div className="container-searchBar">
           {this.renderInput()}
           {this.renderButton()}
-          <Link to="./ShoppingCart">
+          <Link to="./Cart">
             <FaShoppingCart
               className="cart"
               color="#3BC18C"

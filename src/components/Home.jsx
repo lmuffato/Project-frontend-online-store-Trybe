@@ -51,6 +51,7 @@ class Home extends Component {
 
   render() {
     const { query, products, loading } = this.state;
+
     return (
       <div className="container">
         <CategoryList

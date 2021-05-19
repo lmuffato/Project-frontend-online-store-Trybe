@@ -5,7 +5,7 @@ import ProductCard from './ProductCard';
 class Products extends Component {
   render() {
     const { products } = this.props;
-
+    console.log(products);
     return (
       <div>
         <div className="product-list">

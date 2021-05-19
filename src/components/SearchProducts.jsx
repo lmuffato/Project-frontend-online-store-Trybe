@@ -23,10 +23,12 @@ class SearchProducts extends Component {
           list.length === 0
             ? <h1 data-testid="product">{ message }</h1>
             : list.map((product) => {
-              const { price, thumbnail, title, id } = product;
+              const { price, thumbnail, title, id, shipping } = product;
               return (
                 <section className="product-conteiner" data-testid="product" key={ id }>
                   <h3 className="title-product" value={ title }>{ title }</h3>
+                  { shipping.free_shipping
+                    ? <span data-testid="free-shipping">Frete Grátis</span> : '' }
                   <img
                     className="image-product"
                     src={ thumbnail }

@@ -6,6 +6,7 @@ import shoppingCart from '../imagens/shoppingCart.svg';
 import Loading from './Loading';
 import Button from '../components/Button';
 import '../styles/ProductDetail.css';
+import ReviewForm from '../components/ReviewForm';
 
 class ProductDetail extends React.Component {
   constructor(props) {
@@ -74,6 +75,8 @@ class ProductDetail extends React.Component {
             }
           </div>
         </div>
+        <h3>Avaliações</h3>
+        <ReviewForm />
       </div>
     );
   }

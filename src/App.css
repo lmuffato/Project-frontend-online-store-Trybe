@@ -1,0 +1,75 @@
+.content-container {
+  display: flex;
+  justify-content: space-around;
+  padding: 2%;
+}
+
+.search-and-products {
+  order: 1;
+}
+
+.searchbar-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 1%;
+  width: 500px;
+
+}
+
+.searchbar {
+  border: 1px black solid;
+  border-radius: 5px;
+  width: 90%;
+}
+
+.shopping-cart-image {
+  width: 25px;
+}
+
+.category-box {
+  border: 1px solid black;
+  border-radius: 10px;
+  display: flex;
+  flex-flow: column wrap;
+  margin-left: 10px;
+  padding: 2%;
+  width: 200px;
+}
+
+.category {
+  margin-top: 8px;
+}
+
+.review-form {
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px;
+  width: 1200px;
+}
+
+.email-input {
+  height: 24px;
+  margin-bottom: 20px;
+  margin-right: 20px;
+  width: 250px;
+}
+
+.icon {
+  margin-right: 10px;
+}
+
+.text-area {
+  font-family: Helvetica , Arial , sans-serif;
+  min-height: 80px;
+  resize: none;
+  width: 440px;
+}
+
+.review-btn {
+  height: 30px;
+  margin-top: 20px;
+  width: 80px;
+}

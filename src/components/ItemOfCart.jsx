@@ -57,7 +57,7 @@ class ItemOfCart extends React.Component {
         <button
           type="button"
           data-type="decrease"
-          data-testid="product-decreate-quantity"
+          data-testid="product-decrease-quantity"
           onClick={ this.onClickAdd }
         >
           Diminuir

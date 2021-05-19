@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 class Cart extends Component {
   constructor() {
@@ -43,6 +44,9 @@ class Cart extends Component {
             </p>
           </div>
         ))}
+        <Link to="/checkout">
+          <button type="button" data-testid="checkout-products">Finalizar Compra</button>
+        </Link>
       </div>
     );
   }
@@ -50,4 +54,5 @@ class Cart extends Component {
 Cart.propTypes = {
   items: PropTypes.object,
 }.isRequired;
+
 export default Cart;

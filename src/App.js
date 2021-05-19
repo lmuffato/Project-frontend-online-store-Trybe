@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from './components/Home';
 import Cart from './pages/Cart';
 import ProductDetail from './pages/ProductDetail';
+import Checkout from './pages/Checkout';
 
 class App extends Component {
   constructor() {
@@ -68,6 +69,13 @@ class App extends Component {
               render={ (props) => (<Home
                 { ...props }
                 cartItemMethod={ this.addCartItem }
+              />) }
+            />
+            <Route
+              path="/checkout"
+              render={ (props) => (<Checkout
+                { ...props }
+                cartList={ cartList }
               />) }
             />
           </Switch>

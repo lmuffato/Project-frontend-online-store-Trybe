@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import './styles/Card.css';
 
 class Card extends React.Component {
-
   render() {
     const product = this.props;
     const { title, price, image, onclick } = product;

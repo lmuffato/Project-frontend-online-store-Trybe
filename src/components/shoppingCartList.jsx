@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import CartItem from './CartItem';
 
 class ShoppingCartList extends Component {
@@ -11,5 +12,13 @@ class ShoppingCartList extends Component {
     );
   }
 }
+
+ShoppingCartList.propTypes = {
+  carts: PropTypes.arrayOf(Object),
+};
+
+ShoppingCartList.defaultProps = {
+  carts: [],
+};
 
 export default ShoppingCartList;

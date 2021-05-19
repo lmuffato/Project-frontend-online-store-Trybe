@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 class CartButton extends React.Component {
   render() {
@@ -19,5 +20,15 @@ class CartButton extends React.Component {
     );
   }
 }
+
+CartButton.propTypes = {
+  data: PropTypes.arrayOf(Object),
+  newCartItemId: PropTypes.string,
+};
+
+CartButton.defaultProps = {
+  data: [],
+  newCartItemId: '',
+};
 
 export default CartButton;

@@ -16,6 +16,7 @@ class Home extends Component {
       query: '',
       categoryId: '',
       isCategoriesLoading: true,
+      cart: [],
     };
   }
 
@@ -44,6 +45,12 @@ class Home extends Component {
     this.setState({
       products: data.results,
     });
+  }
+
+  cartId = (id) => {
+    this.setState(({ cart }) => ({
+      cart: [...cart, id],
+    }));
   }
 
   render() {
@@ -105,7 +112,7 @@ class Home extends Component {
           <section>
             <ul className="products">
               {products.map((product) => (
-                <CardItem key={ product.id } { ...product } />
+                <CardItem cart={ this.cartId } key={ product.id } { ...product } />
               ))}
             </ul>
           </section>

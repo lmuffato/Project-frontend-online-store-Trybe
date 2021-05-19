@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom'
 
 export default class ShoppingCart extends Component {
   constructor() {
@@ -89,6 +90,9 @@ export default class ShoppingCart extends Component {
         </section>
         { cartArray
           ? <h3>{`Valor total da Compra: ${this.totalValue(cartArray)}`}</h3> : ''}
+          <div>
+          <Link to="/ShoppingCart/Checkout">Finalizar Compra</Link>
+          </div>
       </div>
     );
   }

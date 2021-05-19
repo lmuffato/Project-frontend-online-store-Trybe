@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import Category from './category_list';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import ShopCartButton from './ShopCartButton';
@@ -96,11 +97,16 @@ export default class ProductList extends Component {
     }
     return obj.map((item) => (
       <section data-testid="product" key={ item.id }>
-        <img src={ item.thumbnail } width="100px" alt="item.title" />
-        {item.title}
-        | PRICE:
-        {item.price}
         <Button obj={ item } />
+        <Link
+          to={ `/product_details/${item.id}/${item.title}` }
+          data-testid="product-detail-link"
+        >
+          <img src={ item.thumbnail } width="100px" alt="item.title" />
+          {item.title}
+          | PRICE:
+          {item.price}
+        </Link>
       </section>
     ));
   }

@@ -19,3 +19,5 @@ export async function getProductsFromCategoryAndQuery(categoryId, query) {
   const categories = await data.json();
   return categories;
 }
+
+export default getProductsFromCategoryAndQuery;

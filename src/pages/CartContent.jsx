@@ -25,7 +25,7 @@ class CartContent extends Component {
   createObjectIDsAndQuantities(items) {
     const uniqueIDsCollection = [];
     const IDsAndQuantities = {};
-    let IDsCollection = items.map((item) => item.id);
+    const IDsCollection = items.map((item) => item.id);
     uniqueIDsCollection.push(IDsCollection[0]);
     IDsCollection.forEach((ID) => {
       let repeatedID = 0;

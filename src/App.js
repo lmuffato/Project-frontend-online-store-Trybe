@@ -23,6 +23,8 @@ class App extends React.Component {
     this.filterFromCategory = this.filterFromCategory.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.setCart = this.setCart.bind(this);
+    this.addToCart = this.addToCart.bind(this);
+    this.removeFromCart = this.removeFromCart.bind(this);
   }
 
   async handleClick() {
@@ -49,6 +51,48 @@ class App extends React.Component {
     });
   }
 
+  addToCart({ target }) {
+    const { products, cart } = this.state;
+    let addedProduct = {};
+    let updatedCart = [];
+
+    const productFound = products.find((product) => product.id === target.id);
+
+    const foundInCart = cart.find((product) => product.data.id === target.id);
+
+    if (foundInCart) {
+      const increasedQuantity = foundInCart.quantity + 1;
+      addedProduct = {
+        ...foundInCart,
+        quantity: increasedQuantity,
+      };
+      updatedCart = cart.map((product) => {
+        if (product.data.id === target.id) {
+          product = addedProduct;
+        }
+        return product;
+      });
+    } else {
+      addedProduct = {
+        quantity: 1,
+        data: productFound,
+      };
+      updatedCart = [...cart, addedProduct];
+    }
+
+    this.setState({
+      cart: updatedCart,
+    });
+  }
+
+  removeFromCart(id) {
+    const { cart } = this.state;
+    const updatedCart = cart.filter((product) => product.data.id !== id);
+    this.setState({
+      cart: updatedCart,
+    });
+  }
+
   async filterFromCategory(categoryId) {
     const { searchedQuery } = this.state;
     let products = await getProductsFromCategoryAndQuery(categoryId, searchedQuery);
@@ -70,15 +114,24 @@ class App extends React.Component {
               onFilterByCategory={ this.filterFromCategory }
               onFilterByQuery={ this.handleChange }
               products={ products }
-              setCart={ this.setCart }
+              addToCart={ this.addToCart }
             />
           </Route>
           <Route path="/cart">
-            <ShoppingCart cart={ cart } />
+            <ShoppingCart
+              cart={ cart }
+              removeFromCart={ this.removeFromCart }
+              setCart={ this.setCart }
+            />
           </Route>
           <Route
             path="/product/:category/:id"
-            component={ ProductDetails }
+            component={
+              (props) => (<ProductDetails
+                addToCart={ this.addToCart }
+                { ...props }
+              />)
+            }
             exact
           />
           <Route

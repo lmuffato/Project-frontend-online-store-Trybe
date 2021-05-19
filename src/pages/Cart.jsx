@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 class Cart extends Component {
   constructor() {
@@ -59,12 +60,17 @@ class Cart extends Component {
             </button>
           </div>
         ))}
+        <Link to="/checkout">
+          <button type="button" data-testid="checkout-products">Finalizar Compra</button>
+        </Link>
       </div>
     );
   }
 }
+
 Cart.propTypes = {
   items: PropTypes.object,
   cartItemMethod: PropTypes.func,
 }.isRequired;
+
 export default Cart;

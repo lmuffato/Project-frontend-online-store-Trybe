@@ -93,4 +93,5 @@ class Home extends Component {
 Home.propTypes = {
   cartItemMethod: PropTypes.func,
 }.isRequired;
+
 export default Home;

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import getProductById from '../services/api2';
+import getProductById, { cartStorage } from '../services/api2';
 import Loading from '../components/Loading';
 
 export default class ProductDetail extends Component {
@@ -33,6 +33,7 @@ export default class ProductDetail extends Component {
 
   render() {
     const { productInfo: { title, thumbnail, price, attributes } } = this.state;
+    const { productInfo } = this.state;
     const { loading } = this.state;
     return (
       <div>
@@ -43,6 +44,13 @@ export default class ProductDetail extends Component {
               <h1 data-testid="product-detail-name">{title}</h1>
               <h1>{`R$${price}`}</h1>
               <img src={ thumbnail } alt="product" width="500px" />
+              <button
+                type="button"
+                onClick={ cartStorage(productInfo) }
+                data-testid="product-detail-add-to-cart"
+              >
+                Adicionar ao carrinho
+              </button>
               <ul>
                 {attributes
                   .map((attribute, index) => (

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { getProductsFromCategoryAndQuery, getCategories } from '../services/api';
 import CardItems from '../components/CardItems';
 import CategoriesList from '../components/CategoriesList';
@@ -77,12 +76,6 @@ export default class Home extends Component {
           categories={ categories }
           onClick={ this.fetchProductsByCategory }
         />
-        <Link
-          to="/shopping-cart"
-          data-testid="shopping-cart-button"
-        >
-          Cart
-        </Link>
         <CardItems products={ products } />
       </div>
     );

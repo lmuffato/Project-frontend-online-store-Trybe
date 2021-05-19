@@ -34,7 +34,7 @@ class App extends React.Component {
     } else {
       const updatedCart = { ...cartList };
       updatedCart[clickedItemId].qty += 1;
-      this.setState({ cartList: updatedCart });
+      this.setState({ cartList: updatedCart }, () => this.saveCartToLocalStorage());
     }
   }
 
@@ -50,14 +50,30 @@ class App extends React.Component {
       updatedCart[itemId].qty -= 1;
     }
 
-    console.log(updatedCart);
-
-    this.setState({ cartList: updatedCart });
+    this.setState({ cartList: updatedCart }, () => this.saveCartToLocalStorage());
   }
 
   returnTotalCartItemQty = () => {
     const { cartList } = this.state;
     return Object.values(cartList).reduce((accum, currItem) => accum + currItem.qty, 0);
+  }
+
+  saveCartToLocalStorage = () => {
+    const { cartList } = this.state;
+    localStorage.setItem('cartList', JSON.stringify(cartList));
+  }
+
+  pushLocalStoragetoState = () => {
+    const LSCartList = JSON.parse(localStorage.getItem('cartList'));
+    this.setState({ cartList: { ...LSCartList } });
+  }
+
+  componentDidMount = () => {
+    this.pushLocalStoragetoState();
+  }
+
+  componentWillUnmount = () => {
+    this.saveCartToLocalStorage();
   }
 
   render() {

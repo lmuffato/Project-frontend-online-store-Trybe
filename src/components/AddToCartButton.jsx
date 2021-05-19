@@ -3,11 +3,11 @@ import { number, string, objectOf, oneOfType, func } from 'prop-types';
 
 class AddToCartButton extends Component {
   render() {
-    const { cartProduct, addToCart } = this.props;
+    const { cartProduct, addToCart, testid } = this.props;
     return (
-      <button
+      <button // usado em ProductDetails e ProductCard
         type="button"
-        data-testid="product-add-to-cart"
+        data-testid={ testid }
         onClick={ () => addToCart(cartProduct) }
       >
         Adicionar ao Carrinho

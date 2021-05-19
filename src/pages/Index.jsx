@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { func, arrayOf, objectOf, oneOfType, string, number } from 'prop-types';
 import SearchBar from '../components/SearchBar';
 import Categories from '../components/Categories';
 import * as api from '../services/api';
@@ -14,14 +15,12 @@ class Index extends Component {
     this.fetchProducts = this.fetchProducts.bind(this);
     this.handleSearchInput = this.handleSearchInput.bind(this);
     this.selectCategory = this.selectCategory.bind(this);
-    this.addToCart = this.addToCart.bind(this);
 
     this.state = {
       loading: false,
       categories: [],
       categoryId: '',
       searchText: '',
-      shoppingCart: [],
       products: undefined, // inicia como undefined pra facilitar a condição do ternário em Products.jsx
     };
   }
@@ -52,24 +51,9 @@ class Index extends Component {
     });
   }
 
-  addToCart(product) {
-    // https://pt.stackoverflow.com/questions/315806/alterar-atributo-de-um-array-de-objetos-no-estado-na-aplica%25C3%25A7%25C3%25A3o
-    const { shoppingCart } = this.state;
-    const addQuantity = shoppingCart
-      .find((productShoppingCart) => product.id === productShoppingCart.id);
-    if (addQuantity) {
-      const index = shoppingCart.indexOf(addQuantity);
-      shoppingCart[index].quantity += 1;
-      this.setState({ shoppingCart });
-    } else {
-      this.setState({
-        shoppingCart: [...shoppingCart, product],
-      });
-    }
-  }
-
   render() {
-    const { categories, searchText, products, loading, shoppingCart } = this.state;
+    const { categories, searchText, products, loading } = this.state;
+    const { addToCart, shoppingCart } = this.props;
     return (
       <main>
         <SearchBar
@@ -84,10 +68,15 @@ class Index extends Component {
           getData={ this.fetchCategories }
         />
         { loading && <Loading /> }
-        { products && <Products products={ products } addToCart={ this.addToCart } /> }
+        { products && <Products products={ products } addToCart={ addToCart } /> }
       </main>
     );
   }
 }
+
+Index.propTypes = {
+  addToCart: func,
+  shoppingCart: arrayOf(objectOf(oneOfType([string, number]))),
+}.isRequired;
 
 export default Index;

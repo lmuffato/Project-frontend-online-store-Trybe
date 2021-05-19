@@ -5,17 +5,21 @@ import AddToCartButton from './AddToCartButton';
 
 class ProductCard extends Component {
   render() {
-    const { path, id, title, price, thumbnail, addToCart } = this.props;
+    const { path, id, title, price, thumbnail, addToCart } = this.props; // passado por Products.jsx
     const cartProduct = { id, title, price, thumbnail, quantity: 1 };
     return (
 
       <div className="card-text" data-testid="product-detail-name">
         <Link data-testid="product-detail-link" to={ path }>
           <p>{ title }</p>
-          <p>{`R$ ${price.toFixed(2)}` }</p>
+          <p>{`R$ ${price.toFixed(2)}`}</p>
           <img className="card-img" src={ thumbnail } alt={ title } />
         </Link>
-        <AddToCartButton data-testid="product-add-to-cart" cartProduct={ cartProduct } addToCart={ addToCart } />
+        <AddToCartButton
+          cartProduct={ cartProduct }
+          addToCart={ addToCart }
+          testid="product-add-to-cart"
+        />
       </div>
     );
   }

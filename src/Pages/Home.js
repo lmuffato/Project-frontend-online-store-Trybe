@@ -61,8 +61,6 @@ class Home extends Component {
       cart,
     } = this.state;
 
-    console.log(cart);
-
     return (
       <div className="home-container">
         <aside>

@@ -22,7 +22,14 @@ class cardItem extends Component {
             <br />
           </div>
         </Link>
-        <AddCart id={ id } { ...this.props } cart={ cart } />
+        <AddCart
+          id={ id }
+          title={ title }
+          thumbnail={ thumbnail }
+          price={ price }
+          { ...this.props }
+          cart={ cart }
+        />
       </>
     );
   }

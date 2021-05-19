@@ -10,7 +10,19 @@ class ShoppingCart extends React.Component {
     }
     return (
       <ul>
-        {cart.map((prod) => <li key={ prod.id }>{prod.title}</li>)}
+        { cart.map((prod) => (
+          <li
+            className="detailsContainer"
+            key={ prod[0] }
+            data-testid="product-add-to-cart"
+          >
+            <img src={ prod[1] } alt="imagem" className="imageProduct" />
+            <div data-testid="shopping-cart-product-name">{ prod[2] }</div>
+            <div>{ `R$ ${prod[3]}` }</div>
+            <div data-testid="shopping-cart-product-quantity"> Qtd </div>
+            <br />
+            <br />
+          </li>)) }
       </ul>
     );
   }

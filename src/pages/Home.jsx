@@ -17,10 +17,6 @@ class Home extends Component {
     this.searchFunction = this.searchFunction.bind(this);
   }
 
-  componentDidMount() {
-
-  }
-
   handleInput = ({ target: { value } }) => {
     this.setState({
       inputSearch: value,

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import getProductById, { cartStorage } from '../services/api2';
 import Loading from '../components/Loading';
+import Form from '../components/Form/Form';
 
 export default class ProductDetail extends Component {
   constructor() {
@@ -59,6 +60,7 @@ export default class ProductDetail extends Component {
                    ${attribute.value_name}`}
                     </li>))}
               </ul>
+              <Form />
             </>
           )}
       </div>

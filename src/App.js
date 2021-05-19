@@ -9,17 +9,33 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      productsInCart: [],
+      productsInCart: {},
     };
   }
 
-  handle = (product, productQuantity) => {
-    this.setState(({ productsInCart }) => ({
-      productsInCart: [...productsInCart, { product, productQuantity }],
-    }), () => {
-      const { productsInCart } = this.state;
-      console.log(productsInCart);
-    });
+  handle = (product, addQuantity, del = false) => {
+    if (del) {
+      this.setState(({ productsInCart }) => {
+        delete productsInCart[product.id];
+        return ({ productsInCart: { ...productsInCart } });
+      });
+    } else {
+      this.setState(({ productsInCart }) => {
+        const productQuantity = (product.id in productsInCart)
+          ? productsInCart[product.id].productQuantity + addQuantity
+          : addQuantity;
+        return ({
+          productsInCart:
+            {
+              ...productsInCart,
+              [product.id]: { ...product, productQuantity },
+            },
+        });
+      }, () => {
+        const { productsInCart } = this.state;
+        console.log(productsInCart);
+      });
+    }
   };
 
   render() {
@@ -32,7 +48,7 @@ class App extends Component {
           </Route>
 
           <Route path="/shoppingcart">
-            <ShoppingCart productsInCart={ productsInCart } />
+            <ShoppingCart productsInCart={ productsInCart } handle={ this.handle } />
           </Route>
           {/* <Route path="/item-details" component={ ItemDetails } /> */}
           <Route path="/item-details">

@@ -48,6 +48,7 @@ ProductDetails.propTypes = {
         thumbnail: PropTypes.string,
       }),
     }),
-  }).isRequired,
-};
+  }),
+  callBack: PropTypes.func,
+}.isRequired;
 export default ProductDetails;

@@ -25,7 +25,8 @@ class App extends Component {
 
   findIndexByID(givenID) {
     const { items } = this.state;
-    const itemIndex = items.indexOf(items.find(({ id }) => id === givenID));
+    const reversedArray = [...items].reverse();
+    const itemIndex = items.indexOf(reversedArray.find(({ id }) => id === givenID));
     return itemIndex;
   }
 

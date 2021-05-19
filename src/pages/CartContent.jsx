@@ -26,8 +26,6 @@ class CartContent extends Component {
     const uniqueIDsCollection = [];
     const IDsAndQuantities = {};
     let IDsCollection = items.map((item) => item.id);
-    IDsCollection = IDsCollection.sort();
-    console.log(IDsCollection);
     uniqueIDsCollection.push(IDsCollection[0]);
     IDsCollection.forEach((ID) => {
       let repeatedID = 0;

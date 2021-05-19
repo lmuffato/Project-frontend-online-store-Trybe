@@ -30,6 +30,7 @@ Header.propTypes = {
   handleInput: PropTypes.func.isRequired,
   handleProductsByQuery: PropTypes.func.isRequired,
   inputSearch: PropTypes.string.isRequired,
+  totalItemQty: PropTypes.number.isRequired,
 };
 
 export default Header;

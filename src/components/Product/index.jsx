@@ -6,17 +6,24 @@ import './styles.css';
 
 class Product extends React.Component {
   render() {
-    const { title, imagePath, price, itemId, techSpecs, func } = this.props;
+    const { title, imagePath, price, itemId, techSpecs, addToCart } = this.props;
 
     const location = {
       pathname: `/itemDetails/${itemId}`,
       state: techSpecs,
     };
 
+    const product = {
+      id: itemId,
+      title,
+      thumbnail: imagePath,
+      price,
+    };
+
     return (
       <div data-testid="product" className="product-card">
         <img src={ imagePath } alt={ title } />
-        <h1>{title}</h1>
+        <h1 data-testid="addProductToCart">{title}</h1>
         <p>{price}</p>
         <Link to={ location }>
           <button
@@ -30,7 +37,7 @@ class Product extends React.Component {
         <button
           data-testid="product-add-to-cart"
           type="button"
-          onClick={ () => func(this.props) }
+          onClick={ () => addToCart(product) }
         >
           add cart
         </button>

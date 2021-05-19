@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import PropTypes from 'prop-types';
 import Button from '../../components/Button/index';
 import CategoriesBar from '../../components/CategoriesBar/index';
 import ListProducts from '../../components/ListProducts';
@@ -20,7 +21,6 @@ class Home extends React.Component {
     this.state = {
       categories: [],
       productsList: [],
-      productsInCart: [],
     };
   }
 
@@ -41,14 +41,6 @@ class Home extends React.Component {
     });
   }
 
-  addProductToCart = (obj) => {
-    const { productsInCart } = this.state;
-
-    this.setState({
-      productsInCart: [...productsInCart, obj],
-    });
-  }
-
   async fetchCategories() {
     const categories = await getCategories();
 
@@ -57,6 +49,7 @@ class Home extends React.Component {
 
   render() {
     const { categories, productsList } = this.state;
+    const { addToCart } = this.props;
 
     return (
       <main id="home-page">
@@ -77,12 +70,16 @@ class Home extends React.Component {
             : (
               <ListProducts
                 productsList={ productsList }
-                addProductToCart={ this.addProductToCart }
+                addToCart={ addToCart }
               />)}
         </section>
       </main>
     );
   }
 }
+
+Home.propTypes = {
+  addToCart: PropTypes.func.isRequired,
+};
 
 export default Home;

@@ -33,11 +33,14 @@ class Routes extends React.Component {
           <Route
             exact
             path="/"
-            render={ (props) => <Home { ...props } func={ this.addToCart } /> }
+            render={ (props) => <Home { ...props } addToCart={ this.addToCart } /> }
           />
           <Route
             path="/itemDetails/:itemId"
-            render={ (props) => <ProductDetails { ...props } func={ this.addToCart } /> }
+            render={ (props) => (<ProductDetails
+              { ...props }
+              addToCart={ this.addToCart }
+            />) }
           />
         </Switch>
       </BrowserRouter>

@@ -7,7 +7,7 @@ import Rating from '../../components/Rating';
 class ProductDetails extends React.Component {
   render() {
     const { location: { state: { title, price, thumbnail, attributes } } } = this.props;
-    const { func } = this.props;
+    const { addToCart } = this.props;
 
     return (
       <div>
@@ -25,7 +25,7 @@ class ProductDetails extends React.Component {
         <button
           type="button"
           data-testid="product-detail-add-to-cart"
-          onClick={ () => func({ title, price, thumbnail, id: '' }) }
+          onClick={ () => addToCart({ title, price, thumbnail, id: '' }) }
         >
           Adionar ao carrinho
         </button>

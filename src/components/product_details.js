@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getProductsFromCategoryAndQuery } from '../services/api';
 import Button from './button';
 import ShopCartButton from './ShopCartButton';
 
@@ -17,12 +16,18 @@ class ProductDetails extends React.Component {
     this.fetchProduct();
   }
 
+  async getProductsById(id) {
+    const url = `https://api.mercadolibre.com/items?ids=${id}`;
+    const data = await fetch(url);
+    const item = await data.json();
+    return item[0].body;
+  }
+
   async fetchProduct() {
-    const { match: { params: { id, title } } } = this.props;
-    const productsData = await getProductsFromCategoryAndQuery(1, title);
-    const productData = productsData.results.filter((product) => product.id === id);
+    const { match: { params: { id } } } = this.props;
+    const productData = await this.getProductsById(id);
     return this.setState({
-      item: productData[0],
+      item: productData,
     });
   }
 
@@ -35,7 +40,6 @@ class ProductDetails extends React.Component {
       thumbnail: item.thumbnail,
       qtd: 1,
     };
-    console.log(item);
     return (
       <div data-testid="product-detail-name">
         {item.title}

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Category from './category_list';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import ShopCartButton from './ShopCartButton';
+import Button from './button';
 
 export default class ProductList extends Component {
   constructor() {
@@ -15,7 +16,6 @@ export default class ProductList extends Component {
 
     this.state = {
       searchText: '',
-      // checkFilter: '',
       objText: [],
       objCategory: [],
       obj: [],
@@ -39,6 +39,7 @@ export default class ProductList extends Component {
         title: item.title,
         price: item.price,
         thumbnail: item.thumbnail,
+        qtd: 1,
       };
       ArrayCategory.push(newObjCategory);
       return this.setState({
@@ -99,6 +100,7 @@ export default class ProductList extends Component {
         {item.title}
         | PRICE:
         {item.price}
+        <Button obj={ item } />
       </section>
     ));
   }

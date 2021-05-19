@@ -6,12 +6,6 @@ import Category from './components/Category';
 import ProductNumber from '../../components/ProductNumber';
 
 class Home extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {};
-  }
-
   render() {
     const {
       onSearch, onFilterByCategory, onFilterByQuery,

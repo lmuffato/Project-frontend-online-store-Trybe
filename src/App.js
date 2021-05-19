@@ -77,14 +77,18 @@ class App extends React.Component {
     });
   }
 
-  addToCart({ target }) {
-    const { products, cart } = this.state;
+  addToCart({ target }, product) {
+    const { cart, products } = this.state;
     let addedProduct = {};
     let updatedCart = [];
 
-    const productFound = products.find((product) => product.id === target.id);
+    if (!product) {
+      product = products.find((productState) => productState.id === target.id);
+    }
 
-    const foundInCart = cart.find((product) => product.data.id === target.id);
+    const foundInCart = cart.find(
+      (productInCart) => productInCart.data.id === product.id,
+    );
 
     if (foundInCart) {
       const increasedQuantity = foundInCart.quantity + 1;
@@ -92,8 +96,8 @@ class App extends React.Component {
         ...foundInCart,
         quantity: increasedQuantity,
       };
-      updatedCart = cart.map((product) => {
-        if (product.data.id === target.id) {
+      updatedCart = cart.map((productInCart) => {
+        if (productInCart.data.id === product.id) {
           product = addedProduct;
         }
         return product;
@@ -101,7 +105,7 @@ class App extends React.Component {
     } else {
       addedProduct = {
         quantity: 1,
-        data: productFound,
+        data: product,
       };
       updatedCart = [...cart, addedProduct];
     }
@@ -157,9 +161,9 @@ class App extends React.Component {
               (props) => (<ProductDetails
                 addToCart={ this.addToCart }
                 allReviews={ allReviews }
-                cart={ cart }
                 setReviews={ this.setReviews }
                 { ...props }
+                cart={ cart }
               />)
             }
             exact

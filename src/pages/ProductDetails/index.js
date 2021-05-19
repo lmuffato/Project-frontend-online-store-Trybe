@@ -106,7 +106,7 @@ class ProductDetails extends React.Component {
           </ul>
           <button
             type="button"
-            onClick={ addToCart }
+            onClick={ (event) => addToCart(event, product) }
             id={ product.id }
             data-testid="product-detail-add-to-cart"
           >

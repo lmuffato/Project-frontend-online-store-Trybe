@@ -28,6 +28,36 @@ export default class ProductDetails extends Component {
     </button>
   )
 
+  formStructure() {
+    return (
+      <form>
+        <div>
+          <input type="email" placeholder="E-mail" required />
+          <select required>
+            <option value="5">
+              5
+            </option>
+            <option value="4">
+              4
+            </option>
+            <option value="3">
+              3
+            </option>
+            <option value="2">
+              2
+            </option>
+            <option value="1">
+              1
+            </option>
+          </select>
+        </div>
+        <div>
+          <textarea rows="5" cols="30" data-testid="product-detail-evaluation" />
+        </div>
+      </form>
+    );
+  }
+
   render() {
     const { buyList } = this.state;
     const { location: { state: { product } } } = this.props;
@@ -50,6 +80,7 @@ export default class ProductDetails extends Component {
         <h6 data-testid="product-detail-name">{product.title}</h6>
         <p>{` R$ ${product.price} `}</p>
         { this.renderButtonAdd(JSON.stringify(product)) }
+        {this.formStructure()}
       </div>
     );
   }

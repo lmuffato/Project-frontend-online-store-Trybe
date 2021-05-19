@@ -4,49 +4,45 @@ import PropTypes from 'prop-types';
 class CartContent extends Component {
   constructor() {
     super();
-    this.Map = this.Map.bind(this);
-    this.lastFilter = this.lastFilter.bind(this);
+    this.createObjectIDsAndQuantities = this.createObjectIDsAndQuantities.bind(this);
+    this.filteredItems = this.filterItems.bind(this);
   }
 
-  lastFilter(items) {
-    const firstFilter = [];
-    firstFilter.push(items[0]);
-    items.forEach((itm) => {
-      let n = 0;
-      firstFilter.forEach((content) => {
-        if (content.id === itm.id) n += 1;
-        // console.log(firstFilter, 'filter');
+  filterItems(items) {
+    const uniqueItems = [];
+    uniqueItems.push(items[0]);
+    items.forEach((item) => {
+      let repeatedItem = 0;
+      uniqueItems.forEach((uniqueItem) => {
+        if (uniqueItem.id === item.id) repeatedItem += 1;
       });
-      if (n === 0) firstFilter.push(itm); // id não repetidos
+      if (repeatedItem === 0) uniqueItems.push(item);
     });
-    return firstFilter;
+    return uniqueItems;
   }
 
-  Map(items) {
-    const firstFilter = [];
-    const secondFilter = {};
-    let result = items.map((item) => item.id);
-    result = result.sort();
-    firstFilter.push(result[0]);
-    result.forEach((itm) => {
-      let n = 0;
-      firstFilter.forEach((content) => {
-        if (content === itm) n += 1;
-        // console.log(firstFilter, 'filter');
+  createObjectIDsAndQuantities(items) {
+    const uniqueIdsCollection = [];
+    const idsAndQuantities = {};
+    const idsCollection = items.map((item) => item.id);
+    uniqueIdsCollection.push(idsCollection[0]);
+    idsCollection.forEach((ID) => {
+      let repeatedID = 0;
+      uniqueIdsCollection.forEach((uniqueID) => {
+        if (uniqueID === ID) repeatedID += 1;
       });
-      if (n === 0) firstFilter.push(itm); // id não repetidos
+      if (repeatedID === 0) uniqueIdsCollection.push(ID);
     });
-    firstFilter.forEach((content) => {
-      let n = 0;
-      result.forEach((itm) => {
-        if (content === itm) {
-          n += 1;
+    uniqueIdsCollection.forEach((uniqueID) => {
+      let repeatedID = 0;
+      idsCollection.forEach((ID) => {
+        if (uniqueID === ID) {
+          repeatedID += 1;
         }
       });
-      secondFilter[content] = n;
-      // console.log(secondFilter, '2filter'); objeto comtendo o valor de repetições do respectivo id
+      idsAndQuantities[uniqueID] = repeatedID;
     });
-    return secondFilter;
+    return idsAndQuantities;
   }
 
   cartItems(finalItems, theAmount) {
@@ -64,7 +60,7 @@ class CartContent extends Component {
           alt={ `Produto ${item.title}` }
         />
         <h2>
-          {item.price}
+          {theAmount[item.id] * item.price}
         </h2>
         <p
           data-testid="shopping-cart-product-quantity"
@@ -90,23 +86,22 @@ class CartContent extends Component {
       </section>);
 
     const { items } = this.props;
-    console.log(/* items */this.Map(items), 'nº elementos');
-    const theAmount = this.Map(items);
-    // console.log(this.state);
-    console.log(this.lastFilter(items), 'last filter');
-    const finalItems = this.lastFilter(items);
-    console.log(finalItems, 'final items');
-    return finalItems[0] ? this.cartItems(finalItems, theAmount) : emptyCart;
+    // console.log(this.createObjectIDsAndQuantities(items), 'nº elementos');
+    const theAmount = this.createObjectIDsAndQuantities(items);
+    // console.log(this.filterItems(items), 'last filter');
+    const filteredItems = this.filterItems(items);
+    // console.log(filteredItems, 'final items');
+    return filteredItems[0] ? this.cartItems(filteredItems, theAmount) : emptyCart;
   }
 }
 
 CartContent.propTypes = {
-  items: PropTypes.shape({
+  items: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string,
     price: PropTypes.number,
     title: PropTypes.string,
     thumbnail: PropTypes.string,
-  }).isRequired,
+  })).isRequired,
 };
 
 export default CartContent;

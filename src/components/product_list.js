@@ -100,7 +100,7 @@ export default class ProductList extends Component {
       <section data-testid="product" key={ item.id }>
         <Button obj={ item } dataTestId="product-add-to-cart" />
         <Link
-          to={ `/product_details/${item.id}/${item.title}` }
+          to={ `/product_details/${item.id}` }
           data-testid="product-detail-link"
         >
           <img src={ item.thumbnail } width="100px" alt="item.title" />

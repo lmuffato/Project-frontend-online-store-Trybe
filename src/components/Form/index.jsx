@@ -18,6 +18,7 @@ class Form extends React.Component {
         adress: '',
         adressNum: '',
         comp: '',
+        payMode: '',
       },
     };
   }
@@ -32,6 +33,8 @@ class Form extends React.Component {
 
   render() {
     const { formInfos } = this.state;
+    const payModes = ['Boleto', 'Visa', 'Mastercard', 'Elo'];
+
     return (
       <div>
         <h1>Informações do Comprador</h1>
@@ -49,6 +52,21 @@ class Form extends React.Component {
               value={ formInfos.name }
             />
           ))}
+          <fieldset>
+            Método de Pagamento
+            {payModes.map((payMode, index) => (
+              <label htmlFor={ index } key={ index }>
+                <input
+                  type="radio"
+                  value={ payMode }
+                  name="payMode"
+                  id={ index }
+                  onClick={ this.handleChange }
+                />
+                { payMode }
+              </label>
+            ))}
+          </fieldset>
         </form>
       </div>
     );

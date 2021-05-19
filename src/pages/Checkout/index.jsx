@@ -5,17 +5,19 @@ import CartResume from '../../components/CartResume';
 import Form from '../../components/Form';
 
 class Checkout extends React.Component {
-  super() {
+  render() {
     const { cardProducts, totalPrice } = this.props;
     return (
-      <>
-        <Form />
+      <div>
         <CartResume
           cardProducts={ cardProducts }
           totalPrice={ totalPrice }
         />
-        <p>Testing</p>
-      </>
+        <Form />
+        <button type="button">
+          Finalizar Compra
+        </button>
+      </div>
     );
   }
 }

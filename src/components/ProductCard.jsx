@@ -1,5 +1,6 @@
 import React from 'react';
 import { string } from 'prop-types';
+import AddToCartProductDetails from './AddToCartProductDetails';
 
 class ProductCard extends React.Component {
   render() {
@@ -11,6 +12,7 @@ class ProductCard extends React.Component {
         available_quantity: avq,
         attributes,
       } } } } } = this.props;
+    const { props: { location: { state: { product } } } } = this.props;
     return (
       <div>
         <img src={ thumbnail } alt={ title } />
@@ -24,6 +26,7 @@ class ProductCard extends React.Component {
             </li>
           )) }
         </ul>
+        <AddToCartProductDetails product={ product } />
       </div>
     );
   }

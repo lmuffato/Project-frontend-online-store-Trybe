@@ -52,7 +52,7 @@ class Home extends React.Component {
         <Categories onClick={ this.handleRadio } />
         { loading && '...carregando' }
         <ProductList products={ products } />
-        <CartButton data-testid="shopping-cart-button" />
+        <CartButton />
       </>
     );
   }

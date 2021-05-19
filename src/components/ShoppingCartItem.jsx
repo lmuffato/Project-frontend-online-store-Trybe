@@ -15,6 +15,7 @@ class ShoppingCartItem extends React.Component {
           onClick={ updateItemQtyInCart }
           operation="+"
           data-id={ id }
+          data-testid="product-increase-quantity"
         >
           +1
         </button>
@@ -23,6 +24,7 @@ class ShoppingCartItem extends React.Component {
           onClick={ updateItemQtyInCart }
           operation="-"
           data-id={ id }
+          data-testid="product-decrease-quantity"
         >
           -1
         </button>

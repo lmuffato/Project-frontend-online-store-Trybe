@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getProductsFromCategoryAndQuery } from '../services/api';
+import Button from './button';
+import ShopCartButton from './ShopCartButton';
 
 class ProductDetails extends React.Component {
   constructor() {
@@ -29,19 +30,31 @@ class ProductDetails extends React.Component {
     localStorage
       .setItem('productSubmit', JSON.stringify([...evaluationUpdate, productEvaluation]));
   }
+  
+  async getProductsById(id) {
+    const url = `https://api.mercadolibre.com/items?ids=${id}`;
+    const data = await fetch(url);
+    const item = await data.json();
+    return item[0].body;
+  }
 
   async fetchProduct() {
-    const { match: { params: { id, title } } } = this.props;
-    const productsData = await getProductsFromCategoryAndQuery(1, title);
-    const productData = productsData.results.filter((product) => product.id === id);
+    const { match: { params: { id } } } = this.props;
+    const productData = await this.getProductsById(id);
     return this.setState({
-      item: productData[0],
+      item: productData,
     });
   }
 
   render() {
     const { item } = this.state;
-    console.log(item);
+    const newObj = {
+      id: item.id,
+      title: item.title,
+      price: item.price,
+      thumbnail: item.thumbnail,
+      qtd: 1,
+    };
     return (
       <div data-testid="product-detail-name">
         {item.title}
@@ -63,6 +76,8 @@ class ProductDetails extends React.Component {
           </label>
           <input onClick={ () => this.handleSubmit() } type="submit" value="Enviar" />
         </form>
+        <Button obj={ newObj } dataTestId="product-detail-add-to-cart" />
+        <ShopCartButton />
       </div>
     );
   }

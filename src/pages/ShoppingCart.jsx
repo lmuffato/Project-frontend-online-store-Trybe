@@ -14,6 +14,8 @@ class ShoppingCart extends React.Component {
     this.addProductToCart = this.addProductToCart.bind(this);
     this.getProducts = this.getProducts.bind(this);
     this.setProducts = this.setProducts.bind(this);
+    // this.setTotalPayment = this.setTotalPayment.bind(this);
+    // this.addPrice = this.addPrice.bind(this);
   }
 
   componentDidMount() {
@@ -22,24 +24,34 @@ class ShoppingCart extends React.Component {
     if (!location.state) return; // tratando problema qnd clica no carrinho vazio
     const { product } = location.state;
     this.addProductToCart(product);
-    console.log('componentDidMount');
   }
 
   setProducts() {
-    const { cart } = this.state;
+    const { cart, totalPayment } = this.state;
     const storageItems = localStorage.getItem('products');
+    const storagePrice = localStorage.getItem('total');
     let productsFromLS = [];
+    let amount = 0;
     if (storageItems) {
       productsFromLS = JSON.parse(localStorage.getItem('products'));
     }
+    if (storagePrice) {
+      amount = JSON.parse(localStorage.getItem('total'));
+    }
     productsFromLS.push(cart[0]);
+    amount += totalPayment;
     localStorage.setItem('products', JSON.stringify(productsFromLS));
+    localStorage.setItem('total', JSON.stringify(amount));
   }
 
   getProducts() {
     const get = localStorage.getItem('products');
+    const getPrice = localStorage.getItem('total');
     if (get) {
       this.setState({ cart: JSON.parse(get) });
+    }
+    if (getPrice) {
+      this.setState({ totalPayment: JSON.parse(getPrice) });
     }
   }
 
@@ -53,7 +65,7 @@ class ShoppingCart extends React.Component {
   }
 
   render() {
-    const { cart } = this.state;
+    const { cart, totalPayment } = this.state;
     if (cart.length === 0) {
       return (
         <div>
@@ -67,6 +79,12 @@ class ShoppingCart extends React.Component {
           {cart.map((item) => (
             <ItemOfCart key={ item.id } product={ item } />))}
         </ol>
+        <p>
+          { new Intl.NumberFormat('pt-BR', {
+            style: 'currency',
+            currency: 'BRL',
+          }).format(totalPayment) }
+        </p>
         <Redirect to="/">Home</Redirect>
       </>
     );
@@ -75,14 +93,20 @@ class ShoppingCart extends React.Component {
 
 ShoppingCart.propTypes = {
   location: PropTypes.shape({
-    state: {
+    state: PropTypes.shape({
       product: PropTypes.shape({
         title: PropTypes.string,
         price: PropTypes.number,
         thumbnail: PropTypes.string,
       }),
-    },
+    }),
   }).isRequired,
 };
 
 export default ShoppingCart;
+
+// Referências:
+// Formatação de números:
+// --> https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat
+// Correção do erro nas proptypes/checker:
+// --> https://stackoverflow.com/questions/29995444/react-checker-is-not-a-function

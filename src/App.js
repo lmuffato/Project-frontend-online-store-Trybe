@@ -12,8 +12,41 @@ class App extends Component {
     this.state = {
       productsCart: [],
       quantityCart: {},
+      quantityTotal: 0,
     };
   }
+
+  componentDidMount() {
+    this.conditionalLocalStorage();
+  }
+
+  componentDidUpdate() {
+    this.saveQuantity();
+  }
+
+  conditionalLocalStorage = () => {
+    const saved = localStorage.getItem('quantity');
+    if (saved) {
+      this.setState({
+        quantityTotal: Number(saved),
+      });
+    }
+  }
+
+  saveQuantity = () => {
+    const { quantityTotal } = this.state;
+    localStorage.setItem('quantity', `${quantityTotal}`);
+  }
+
+  // sumQuantity = () => {
+  //   const { quantityCart, quantityTotal } = this.state;
+  //   const arrQuantity = Object.values(quantityCart);
+  //   const total = arrQuantity.reduce((acc, actual) => acc + actual, 0);
+  //   console.log(total);
+  //   this.setState(() => ({
+  //     quantityTotal: total,
+  //   }));
+  // }
 
   handleButtonCartAdd = (event) => {
     console.log(event.target);
@@ -24,12 +57,14 @@ class App extends Component {
       this.setState((paststate) => ({
         productsCart: [...paststate.productsCart, { value, price }],
         quantityCart: { ...paststate.quantityCart, [value]: 1 },
+        quantityTotal: paststate.quantityTotal + 1,
       }));
     } else {
       this.setState((paststate) => ({
         productsCart: [...paststate.productsCart, { value, price }],
         quantityCart: { ...paststate.quantityCart,
           [value]: paststate.quantityCart[value] + 1 },
+        quantityTotal: paststate.quantityTotal + 1,
       }));
     }
   }
@@ -43,6 +78,7 @@ class App extends Component {
           ...paststate.quantityCart,
           [value]: paststate.quantityCart[value] - 1,
         },
+        quantityTotal: paststate.quantityTotal - 1,
       }));
     }
   }
@@ -54,6 +90,7 @@ class App extends Component {
         ...paststate.quantityCart,
         [value]: paststate.quantityCart[value] + 1,
       },
+      quantityTotal: paststate.quantityTotal + 1,
     }));
   }
 
@@ -71,7 +108,7 @@ class App extends Component {
   }
 
   render() {
-    const { productsCart, quantityCart } = this.state;
+    const { productsCart, quantityCart, quantityTotal } = this.state;
     return (
       <div className="App">
         <BrowserRouter>
@@ -82,6 +119,7 @@ class App extends Component {
               render={ (props) => (<ProductDetails
                 { ...props }
                 AddCart={ this.handleButtonCartAdd }
+                quantityTotal={ quantityTotal }
               />) }
             />
             <Route
@@ -109,6 +147,7 @@ class App extends Component {
               render={ () => (
                 <InputSearch
                   AddCart={ this.handleButtonCartAdd }
+                  quantityTotal={ quantityTotal }
                 />
               ) }
             />

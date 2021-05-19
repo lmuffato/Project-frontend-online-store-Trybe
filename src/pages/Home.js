@@ -77,12 +77,6 @@ export default class Home extends Component {
           categories={ categories }
           onClick={ this.fetchProductsByCategory }
         />
-        <Link
-          to="/shopping-cart"
-          data-testid="shopping-cart-button"
-        >
-          Cart
-        </Link>
         <CardItems products={ products } />
       </div>
     );

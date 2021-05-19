@@ -21,6 +21,8 @@ class App extends React.Component {
     this.filterFromCategory = this.filterFromCategory.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.setCart = this.setCart.bind(this);
+    this.addToCart = this.addToCart.bind(this);
+    this.removeFromCart = this.removeFromCart.bind(this);
   }
 
   async handleClick() {
@@ -41,7 +43,13 @@ class App extends React.Component {
     });
   }
 
-  setCart({ target }) {
+  setCart(cart) {
+    this.setState({
+      cart,
+    });
+  }
+
+  addToCart({ target }) {
     const { products, cart } = this.state;
     let addedProduct = {};
     let updatedCart = [];
@@ -75,6 +83,14 @@ class App extends React.Component {
     });
   }
 
+  removeFromCart(id) {
+    const { cart } = this.state;
+    const updatedCart = cart.filter((product) => product.data.id !== id);
+    this.setState({
+      cart: updatedCart,
+    });
+  }
+
   async filterFromCategory(categoryId) {
     const { searchedQuery } = this.state;
     let products = await getProductsFromCategoryAndQuery(categoryId, searchedQuery);
@@ -96,17 +112,21 @@ class App extends React.Component {
               onFilterByCategory={ this.filterFromCategory }
               onFilterByQuery={ this.handleChange }
               products={ products }
-              setCart={ this.setCart }
+              addToCart={ this.addToCart }
             />
           </Route>
           <Route path="/cart">
-            <ShoppingCart cart={ cart } />
+            <ShoppingCart
+              cart={ cart }
+              removeFromCart={ this.removeFromCart }
+              setCart={ this.setCart }
+            />
           </Route>
           <Route
             path="/product/:category/:id"
             component={
               (props) => (<ProductDetails
-                setCart={ this.setCart }
+                addToCart={ this.addToCart }
                 { ...props }
               />)
             }

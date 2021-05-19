@@ -5,7 +5,7 @@ import NotFound from '../NotFound';
 
 class CardProduct extends React.Component {
   render() {
-    const { products, setCart } = this.props;
+    const { products, addToCart } = this.props;
 
     return (
       <div>
@@ -26,7 +26,7 @@ class CardProduct extends React.Component {
               <button
                 type="button"
                 data-testid="product-add-to-cart"
-                onClick={ setCart }
+                onClick={ addToCart }
                 id={ product.id }
               >
                 Adicionar ao carrinho

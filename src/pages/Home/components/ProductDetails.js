@@ -40,9 +40,9 @@ class ProductDetails extends React.Component {
 
   render() {
     const { product } = this.state;
-    const { setCart } = this.props;
+    const { addToCart } = this.props;
 
-    if (!product.attributes) return <h1>Loading...</h1>;
+    if (!product || !product.attributes) return <h1>Loading...</h1>;
 
     return (
       <div>
@@ -63,7 +63,7 @@ class ProductDetails extends React.Component {
         </ul>
         <button
           type="button"
-          onClick={ setCart }
+          onClick={ addToCart }
           id={ product.id }
           data-testid="product-detail-add-to-cart"
         >

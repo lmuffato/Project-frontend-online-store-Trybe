@@ -5,10 +5,12 @@ import { Link } from 'react-router-dom';
 class ShoppingCart extends Component {
   constructor(props) {
     super(props);
-    const { products, quantity } = this.props;
+    const { location } = this.props;
+    const { state } = location;
+    const { products, productsQuantity } = state;
     this.state = {
       products,
-      quantity,
+      quantity: productsQuantity,
     };
   }
 
@@ -22,7 +24,6 @@ class ShoppingCart extends Component {
 
   handleIncrease = ({ target }) => {
     const { value } = target;
-    console.log(value);
     this.setState((prevState) => ({
       quantity: { ...prevState.quantity,
         [value]: prevState.quantity[value] + 1 },
@@ -33,7 +34,8 @@ class ShoppingCart extends Component {
     const { value } = target;
     const { products, quantity } = this.state;
     delete quantity[value];
-    const filteredProducts = products.filter((prod) => prod !== value);
+    const filteredProducts = products.filter(({title}) =>
+      title !== value);
 
     this.setState({
       products: [...filteredProducts],
@@ -42,12 +44,14 @@ class ShoppingCart extends Component {
 
   reduce = (arr) => {
     const reduced = [];
+    const newArray = [];
     arr.forEach((element) => {
-      if (!reduced.includes(element)) {
-        reduced.push(element);
+      if (!reduced.includes(element.title)) {
+        reduced.push(element.title);
+        newArray.push(element);
       }
     });
-    return reduced;
+    return newArray;
   }
 
   render() {
@@ -63,25 +67,25 @@ class ShoppingCart extends Component {
     }
     return (
       <>
-        {reducedProducts.map((product) => (
-          <div className="product-shopping-cart" key={ product }>
-            <p data-testid="shopping-cart-product-name">{product}</p>
+        {reducedProducts.map(({title, id}) => (
+          <div className="product-shopping-cart" key={ id }>
+            <p data-testid="shopping-cart-product-name">{title}</p>
             <section
               className="product-quantity-manipulation"
               style={ { display: 'flex', flexDirection: 'row' } }
             >
               <button
                 type="button"
-                value={ product }
+                value={ title }
                 onClick={ this.handleDecrease }
                 data-testid="product-decrease-quantity"
               >
                 -
               </button>
-              <p data-testid="shopping-cart-product-quantity">{quantity[product]}</p>
+              <p data-testid="shopping-cart-product-quantity">{quantity[title]}</p>
               <button
                 type="button"
-                value={ product }
+                value={ title }
                 onClick={ this.handleIncrease }
                 data-testid="product-increase-quantity"
               >
@@ -89,7 +93,7 @@ class ShoppingCart extends Component {
               </button>
               <button
                 type="button"
-                value={ product }
+                value={ title }
                 onClick={ this.handleDelete }
                 data-testid="product-delete"
               >
@@ -99,14 +103,36 @@ class ShoppingCart extends Component {
           </div>
         ))}
         <Link to="/">VOLTAR</Link>
+        <Link 
+          data-testid="checkout-products"
+          to={ {
+            pathname: `/checkout`,
+            search: '',
+            hash: '',
+            state: { products: reducedProducts, quantity },
+          } }
+        >
+          Finalizar compra
+        </Link>
       </>
     );
   }
 }
 
 ShoppingCart.propTypes = {
-  products: PropTypes.arrayOf(PropTypes.string).isRequired,
+  products: PropTypes.arrayOf(PropTypes.objectOf({
+    title: PropTypes.string,
+    id: PropTypes.number
+  })).isRequired,
   quantity: PropTypes.objectOf(PropTypes.number).isRequired,
+  location: PropTypes.shape({
+    hash: PropTypes.string.isRequired,
+    key: PropTypes.string.isRequired,
+    pathname: PropTypes.string.isRequired,
+    search: PropTypes.string.isRequired,
+    state: PropTypes.objectOf(PropTypes.object),
+  }).isRequired,
+  addCart: PropTypes.func.isRequired,
 };
 
 export default ShoppingCart;

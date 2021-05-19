@@ -49,7 +49,6 @@ class ListagemProdutos extends Component {
 
   handleAddToCart = ({ title, id, price }) => {
     const { productsQuantity } = this.state;
-    console.log(title, id, price);
     if (productsQuantity[title] === undefined) {
       this.setState((prevState) => ({
         productsOnCart: [...prevState.productsOnCart, {

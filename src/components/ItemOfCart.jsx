@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 
 class ItemOfCart extends React.Component {
   constructor() {
@@ -9,6 +8,21 @@ class ItemOfCart extends React.Component {
       quantity: 1,
     };
     this.altQuantity = this.altQuantity.bind(this);
+    this.onClickAdd = this.onClickAdd.bind(this);
+  }
+
+  onClickAdd(event) {
+    const type = event.target.getAttribute('data-type');
+    const { quantity } = this.state;
+    // const { product } = this.props;
+    // const { price } = product;
+
+    if (type === 'increase') {
+      return this.setState({ quantity: quantity + 1 });
+    }
+    if (type === 'decrease' && quantity > 1) {
+      return this.setState({ quantity: quantity - 1 });
+    }
   }
 
   altQuantity(event) {
@@ -25,10 +39,29 @@ class ItemOfCart extends React.Component {
     return (
       <div>
         <h3 data-testid="shopping-cart-product-name">{title}</h3>
-        <h4>{price}</h4>
+        <h4>
+          { new Intl.NumberFormat('pt-BR', {
+            style: 'currency',
+            currency: 'BRL',
+          }).format(price) }
+        </h4>
         <p data-testid="shopping-cart-product-quantity">{quantity}</p>
-        <input min="1" defaultValue="1" type="number" onChange={ this.altQuantity } />
-        <Link data-testid="shopping-cart-button" to="/shopping-cart">Carrinho</Link>
+        <button
+          type="button"
+          data-type="increase"
+          data-testid="product-increase-quantity"
+          onClick={ this.onClickAdd }
+        >
+          Aumentar
+        </button>
+        <button
+          type="button"
+          data-type="decrease"
+          data-testid="product-decreate-quantity"
+          onClick={ this.onClickAdd }
+        >
+          Diminuir
+        </button>
       </div>
     );
   }

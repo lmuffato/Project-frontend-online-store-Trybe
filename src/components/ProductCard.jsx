@@ -1,12 +1,22 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import * as shoppingCartService from '../services/shoppingCartService';
 
 class ProductCard extends Component {
+  constructor() {
+    super();
+    this.onClickTest = this.onClickTest.bind(this);
+  }
+
+  onClickTest() {
+    const { product } = this.props;
+    shoppingCartService.setProducts(product);
+  }
+
   render() {
     const { product } = this.props;
     const { id, title, price, thumbnail } = product;
-
     return (
       <div data-testid="product">
         <h3>{title}</h3>
@@ -20,14 +30,14 @@ class ProductCard extends Component {
           Mostrar detalhes
         </Link>
         <br />
-        <Link
-          to={ {
-            pathname: '/shopping-cart', state: { product },
-          } }
+        <button
+          type="button"
+          // data-props={ product }
           data-testid="product-add-to-cart"
+          onClick={ this.onClickTest }
         >
           Adicionar ao carrinho
-        </Link>
+        </button>
       </div>
     );
   }

@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link as Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import Header from '../components/Header';
 import ItemOfCart from '../components/ItemOfCart';
+// import * as shoppingCartService from '../services/shoppingCartService';
 
 class ShoppingCart extends React.Component {
   constructor() {
@@ -11,38 +13,36 @@ class ShoppingCart extends React.Component {
       totalPayment: 0,
     };
 
-    this.addProductToCart = this.addProductToCart.bind(this);
+    // this.addProductToCart = this.addProductToCart.bind(this);
     this.getProducts = this.getProducts.bind(this);
-    this.setProducts = this.setProducts.bind(this);
-    // this.setTotalPayment = this.setTotalPayment.bind(this);
-    // this.addPrice = this.addPrice.bind(this);
+    // this.setProducts = this.setProducts.bind(this);
   }
 
   componentDidMount() {
-    const { location } = this.props;
+  //   const { location } = this.props;
     this.getProducts();
-    if (!location.state) return; // tratando problema qnd clica no carrinho vazio
-    const { product } = location.state;
-    this.addProductToCart(product);
+  //   if (!location.state) return; // tratando problema qnd clica no carrinho vazio
+  //   const { product } = location.state;
+  //   this.addProductToCart(product);
   }
 
-  setProducts() {
-    const { cart, totalPayment } = this.state;
-    const storageItems = localStorage.getItem('products');
-    const storagePrice = localStorage.getItem('total');
-    let productsFromLS = [];
-    let amount = 0;
-    if (storageItems) {
-      productsFromLS = JSON.parse(localStorage.getItem('products'));
-    }
-    if (storagePrice) {
-      amount = JSON.parse(localStorage.getItem('total'));
-    }
-    productsFromLS.push(cart[0]);
-    amount += totalPayment;
-    localStorage.setItem('products', JSON.stringify(productsFromLS));
-    localStorage.setItem('total', JSON.stringify(amount));
-  }
+  // setProducts() {
+  //   const { cart, totalPayment } = this.state; // vai virar parâmetro da função // cart = product
+  //   const storageItems = localStorage.getItem('products');
+  //   const storagePrice = localStorage.getItem('total');
+  //   let productsFromLS = [];
+  //   let amount = 0;
+  //   if (storageItems) {
+  //     productsFromLS = JSON.parse(localStorage.getItem('products'));
+  //   }
+  //   if (storagePrice) {
+  //     amount = JSON.parse(localStorage.getItem('total'));
+  //   }
+  //   productsFromLS.push(cart[0]);
+  //   amount += totalPayment; // price, de product
+  //   localStorage.setItem('products', JSON.stringify(productsFromLS));
+  //   localStorage.setItem('total', JSON.stringify(amount));
+  // }
 
   getProducts() {
     const get = localStorage.getItem('products');
@@ -55,14 +55,14 @@ class ShoppingCart extends React.Component {
     }
   }
 
-  addProductToCart(product) {
-    const { cart, totalPayment } = this.state;
-    const { price } = product;
-    this.setState({
-      cart: [...cart, product],
-      totalPayment: totalPayment + price,
-    }, () => this.setProducts());
-  }
+  // addProductToCart(product) {
+  //   const { cart, totalPayment } = this.state;
+  //   const { price } = product;
+  //   this.setState({
+  //     cart: [...cart, product],
+  //     totalPayment: totalPayment + price,
+  //   }, () => this.setProducts());
+  // }
 
   render() {
     const { cart, totalPayment } = this.state;
@@ -75,10 +75,11 @@ class ShoppingCart extends React.Component {
     }
     return (
       <>
-        <ol>
+        <Header />
+        <section>
           {cart.map((item) => (
             <ItemOfCart key={ item.id } product={ item } />))}
-        </ol>
+        </section>
         <p>
           { new Intl.NumberFormat('pt-BR', {
             style: 'currency',

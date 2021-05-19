@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Categories from '../components/Categories';
 import SearchBar from '../components/SearchBar';
 import ProductList from '../components/ProductList';
-// import UserForm from '../components/UserReview';
+import Header from '../components/Header';
 import ProductNotFound from '../components/ProductNotFound';
 import * as api from '../services/api';
 
@@ -89,6 +89,7 @@ export default class Home extends Component {
     const { search, message, productsList, categories } = this.state;
     return (
       <>
+        <Header />
         <SearchBar
           search={ search }
           handleChange={ this.handleChange }

@@ -42,9 +42,8 @@ class Products extends Component {
 }
 
 Products.propTypes = {
-  mlItems: PropTypes
-    .arrayOf(PropTypes.object)
-    .isRequired,
-};
+  mlItems: PropTypes.arrayOf(PropTypes.object),
+  callBack: PropTypes.func,
+}.isRequired;
 
 export default Products;

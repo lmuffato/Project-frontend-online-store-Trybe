@@ -23,13 +23,14 @@ class Cart extends Component {
 
   getNewTotalPrice({ oldPrice, priceToHandle, symbol }) {
     const sumOrSubtract = {
-      '+': oldPrice + priceToHandle,
-      '-': oldPrice - priceToHandle,
+      // ALERTA GAMBIARRA
+      '+': (oldPrice + priceToHandle) - (priceToHandle / 2),
+      '-': (oldPrice - priceToHandle) + (priceToHandle / 2),
     };
 
     const newTotalPrice = sumOrSubtract[symbol];
 
-    return newTotalPrice < 0 ? 0 : newTotalPrice;
+    return newTotalPrice;
   }
 
   handleChangeTotalPrice = (priceToHandle, symbol) => {
@@ -70,13 +71,22 @@ class Cart extends Component {
       state: { cartList, totalPrices },
     };
 
+    const totalPriceMessage = {
+      withPrice: `Valor total R$${totalPrices.toFixed(2)}`,
+      withoutPrice: 'Carrinho vazio',
+    };
+
     return (
       <section data-testid="shopping-cart-empty-message">
         <button type="button"><Link to="/">Home</Link></button>
 
         { this.renderCartList() }
 
-        <p>{`Valor Total da Compra ${totalPrices.toFixed(2)}`}</p>
+        <p>
+          {cartList.length
+            ? totalPriceMessage.withPrice
+            : totalPriceMessage.withoutPrice}
+        </p>
 
         <Link to={ { ...propsToCheckout } }>
           <button

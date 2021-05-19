@@ -55,6 +55,7 @@ class CartItem extends Component {
 
     return (
       <div>
+        <p>X</p>
         <img src={ img } alt={ title } />
         <p data-testid="shopping-cart-product-name">{ title }</p>
 

@@ -15,6 +15,16 @@ class Button extends React.Component {
 
     if (previousObj) {
       previousObj = [...previousObj, newObj];
+
+      for (let i = 0; i < previousObj.length; i += 1) {
+        for (let index = 0; index < previousObj.length; index += 1) {
+          if (previousObj[i].id === previousObj[index].id && i !== index) {
+            previousObj[i].qtd += 1;
+            previousObj.splice(index);
+          }
+        }
+      }
+
       localStorage.setItem('cartItems', JSON.stringify(previousObj));
     } else {
       localStorage.setItem('cartItems', JSON.stringify([newObj]));

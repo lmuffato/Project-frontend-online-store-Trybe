@@ -20,7 +20,8 @@ class Home extends React.Component {
 
     this.state = {
       categories: [],
-      arrayOfItems: [],
+      productsList: [],
+      productsInCart: [],
     };
   }
 
@@ -31,13 +32,21 @@ class Home extends React.Component {
   async getProductsFromCategory(categoryId) {
     const response = await getProductsFromCategoryAndQuery(categoryId);
 
-    this.setState({ arrayOfItems: response.results });
+    this.setState({ productsList: response.results });
   }
 
   generateArray = async (item) => {
     const array = await getProductsFromCategoryAndQuery(false, item);
     this.setState({
-      arrayOfItems: array.results,
+      productsList: array.results,
+    });
+  }
+
+  addProductToCart = (obj) => {
+    const { productsInCart } = this.state;
+
+    this.setState({
+      productsInCart: [...productsInCart, obj],
     });
   }
 
@@ -48,22 +57,35 @@ class Home extends React.Component {
   }
 
   render() {
-    const { categories, arrayOfItems } = this.state;
-    const { func } = this.props;
+    const { categories, productsList, productsInCart } = this.state;
+    const location = {
+      pathname: '/Cart',
+      state: {
+        item: productsInCart,
+      },
+    };
+
     return (
       <main id="home-page">
         <CategoriesBar
           categories={ categories }
           onClick={ this.getProductsFromCategory }
         />
+
         <section>
           <SearchBar func={ this.generateArray } />
+
           <Button>
             <Link data-testid="shopping-cart-button" to="/Cart">Cart</Link>
           </Button>
-          {arrayOfItems.length === 0
+
+          {productsList.length === 0
             ? <p>Nenhum produto foi encontrado</p>
-            : <ListProducts arrayOfItems={ arrayOfItems } func={ func } />}
+            : (
+              <ListProducts
+                productsList={ productsList }
+                addProductToCart={ this.addProductToCart }
+              />)}
         </section>
       </main>
     );

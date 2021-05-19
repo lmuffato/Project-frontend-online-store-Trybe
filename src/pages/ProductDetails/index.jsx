@@ -2,10 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
+import Rating from '../../components/Rating';
+
 class ProductDetails extends React.Component {
   render() {
-    const { location:
-      { state: { title, price, thumbnail, attributes } }, func } = this.props;
+    const { location: { state: { title, price, thumbnail, attributes } } } = this.props;
+    
     return (
       <div>
         <h1 data-testid="product-detail-name">{ title }</h1>
@@ -29,6 +31,18 @@ class ProductDetails extends React.Component {
         <Link to="/Cart" data-testid="shopping-cart-button">
           <button type="button">Cart</button>
         </Link>
+        <div id="evaluate-container">
+          <input type="email" placeholder="mail@mail.com" />
+          <Rating />
+          <textarea
+            name="message"
+            id="input-message"
+            cols="30"
+            rows="10"
+            data-testid="product-detail-evaluation"
+          />
+          <button id="button-evaluate" type="button">Avaliar produto</button>
+        </div>
       </div>
     );
   }

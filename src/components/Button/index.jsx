@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 
 class Button extends React.Component {
   render() {
-    const { dataId, children } = this.props;
+    const { testId, children } = this.props;
     return (
       <button
         type="button"
-        data-testid={ dataId }
+        data-testid={ testId }
       >
         {children}
       </button>
@@ -16,12 +16,12 @@ class Button extends React.Component {
 }
 
 Button.defaultProps = {
-  dataId: 'test',
+  testId: 'test',
 };
 
 Button.propTypes = {
   children: PropTypes.node.isRequired,
-  dataId: PropTypes.string,
+  testId: PropTypes.string,
 };
 
 export default Button;

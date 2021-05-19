@@ -26,6 +26,7 @@ class Product extends React.Component {
             Ver detalhes
           </button>
         </Link>
+
         <button
           data-testid="product-add-to-cart"
           type="button"

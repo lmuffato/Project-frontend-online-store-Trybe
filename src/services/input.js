@@ -24,7 +24,7 @@ class Input extends React.Component {
       this.setState(
         { loading: true },
         async () => {
-          const { results } = await api.getProductsFromCategoryAndQuery(input);
+          const { results } = await api.getProductsFromCategoryAndQuery(false, input);
           this.setState({
             products: results,
             loading: false,

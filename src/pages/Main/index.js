@@ -23,7 +23,7 @@ class Main extends React.Component {
     });
   }
 
-  setCategorySelected(value) {
+  async setCategorySelected(value) {
     this.setState({
       categories: [],
       categorySelected: value,

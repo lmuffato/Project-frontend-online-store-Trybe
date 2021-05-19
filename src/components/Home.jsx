@@ -20,8 +20,12 @@ class Home extends Component {
     const { id } = event.target;
     const { searchedProducts } = this.state;
     const currCatergory = await api.getProductsFromCategoryAndQuery(id, searchedProducts);
+    const arrProducts = currCatergory.results.map((product) => ({
+      quant: 1,
+      ...product,
+    }));
     this.setState({
-      products: currCatergory.results,
+      products: arrProducts,
       filteredCategory: id,
     });
   }
@@ -35,8 +39,12 @@ class Home extends Component {
     const { inputValue, filteredCategory } = this.state;
     const productsList = await
     api.getProductsFromCategoryAndQuery(filteredCategory, inputValue);
+    const arrProducts = productsList.results.map((product) => ({
+      quant: 1,
+      ...product,
+    }));
     this.setState({
-      products: productsList.results,
+      products: arrProducts,
       searchedProducts: inputValue,
     });
   }
@@ -85,5 +93,4 @@ class Home extends Component {
 Home.propTypes = {
   cartItemMethod: PropTypes.func,
 }.isRequired;
-
 export default Home;

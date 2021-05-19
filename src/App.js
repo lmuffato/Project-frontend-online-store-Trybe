@@ -13,36 +13,64 @@ class App extends Component {
     };
   }
 
+  checkIds = (currProduct) => {
+    let result = currProduct.quant;
+    const { cartList } = this.state;
+    cartList.forEach((product) => {
+      if (product.id === currProduct.id) {
+        result += 1;
+      }
+      return result;
+    });
+    return result;
+  }
+
   addCartItem = (newCartProduct) => {
-    this.setState((previousState) => ({
-      cartList: [...previousState.cartList, newCartProduct],
-    }));
+    const { cartList } = this.state;
+    const check = this.checkIds(newCartProduct);
+    if (check < 2) {
+      this.setState((previousState) => ({
+        cartList: [...previousState.cartList, newCartProduct],
+      }));
+    } else {
+      const currObj = newCartProduct;
+      const indexId = cartList.indexOf(currObj);
+      const newObject = cartList[indexId];
+      newObject.quant = check;
+      const previousCartList = cartList.filter((product) => product.id !== newObject.id);
+      this.setState(() => ({
+        cartList: [...previousCartList, newObject],
+      }));
+    }
   }
 
   render() {
+    const { cartList } = this.state;
+
     return (
       <BrowserRouter>
-        <Switch>
-          <Route
-            path="/cart"
-            render={ (props) => <Cart { ...props } /> }
-          />
-          <Route
-            path="/productdetails/:id"
-            render={ (props) => <ProductDetail { ...props } /> }
-          />
-          <Route
-            exact
-            path="/"
-            render={ (props) => (<Home
-              { ...props }
-              cartItemMethod={ this.addCartItem }
-            />) }
-          />
-        </Switch>
+        <div className="App">
+          <Switch>
+            <Route
+              path="/cart"
+              render={ (props) => <Cart { ...props } items={ cartList } /> }
+            />
+            <Route
+              path="/productdetails/:id"
+              render={ (props) => <ProductDetail { ...props } /> }
+            />
+            <Route
+              exact
+              path="/"
+              render={ (props) => (<Home
+                { ...props }
+                cartItemMethod={ this.addCartItem }
+              />) }
+            />
+          </Switch>
+        </div>
       </BrowserRouter>
     );
   }
 }
-
 export default App;

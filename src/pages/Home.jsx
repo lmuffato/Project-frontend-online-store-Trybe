@@ -44,7 +44,7 @@ class Home extends Component {
 
   render() {
     const { inputSearch, products } = this.state;
-    const { addItemToCart } = this.props;
+    const { addItemToCart, totalItemQty } = this.props;
 
     return (
       <section className="container-home">
@@ -54,6 +54,7 @@ class Home extends Component {
             handleInput={ this.handleInput }
             handleProductsByQuery={ this.handleProductsByQuery }
             inputSearch={ inputSearch }
+            totalItemQty={ totalItemQty }
           />
           <main>
             <Products products={ products } addItemToCart={ addItemToCart } />

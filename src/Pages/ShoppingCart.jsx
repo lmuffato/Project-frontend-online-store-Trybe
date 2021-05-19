@@ -12,12 +12,11 @@ class ShoppingCart extends Component {
       productsOnCart: products || [],
       quantity: productsQuantity,
       addedProduct,
-      quantityAdded
+      quantityAdded,
     };
   }
 
-  componentDidMount = () => {
-    
+  updateProperties = () => {
     const { addedProduct, quantityAdded, productsOnCart } = this.state;
     console.log(productsOnCart);
     if (addedProduct) {
@@ -26,13 +25,17 @@ class ShoppingCart extends Component {
         productsOnCart: [...prevState.productsOnCart, {
           title,
           id,
-          price
+          price,
         }],
-        productsQuantity: {...prevState.productsQuantity, 
-          [title]: quantityAdded
-        }
-      }))
+        productsQuantity: { ...prevState.productsQuantity,
+          [title]: quantityAdded,
+        },
+      }));
     }
+  }
+
+  componentDidMount = () => {
+    this.updateProperties();
   }
 
   handleDecrease = ({ target }) => {
@@ -66,8 +69,8 @@ class ShoppingCart extends Component {
     const reduced = [];
     const newArray = [];
     const { addedProduct } = this.state;
-    
-    if(arr) {
+
+    if (arr) {
       arr.forEach((element) => {
         if (!reduced.includes(element.title)) {
           reduced.push(element.title);
@@ -76,12 +79,12 @@ class ShoppingCart extends Component {
       });
       return newArray;
     }
-    newArray.push(addedProduct)
+    newArray.push(addedProduct);
     return newArray;
   }
 
   render() {
-    const { productsOnCart, quantity, addedProduct } = this.state;
+    const { productsOnCart, quantity } = this.state;
     const reducedProducts = this.reduce(productsOnCart);
 
     if (reducedProducts.length === 0) {
@@ -92,21 +95,22 @@ class ShoppingCart extends Component {
       );
     }
 
-    if(reducedProducts.length === 1) {
-      let idProd, titleProd, quantityProd;
-      const { addedProduct, quantityAdded, quantity } = this.state;
+    if (reducedProducts.length === 1) {
+      let idProd; let titleProd; let
+        quantityProd;
+      const { addedProduct, quantityAdded } = this.state;
       idProd = productsOnCart[0].id;
       titleProd = productsOnCart[0].title;
-      if (typeof(quantity) !== 'undefined') {
+      if (typeof (quantity) !== 'undefined') {
         quantityProd = quantity[titleProd];
       }
       if (addedProduct) {
-        const {id, title} = addedProduct;
+        const { id, title } = addedProduct;
         idProd = id;
         titleProd = title;
         quantityProd = quantityAdded;
       }
-      return(
+      return (
         <>
           <div className="product-shopping-cart" key={ idProd }>
             <p data-testid="shopping-cart-product-name">{titleProd}</p>
@@ -154,7 +158,7 @@ class ShoppingCart extends Component {
             Finalizar compra
           </Link>
         </>
-      )
+      );
     }
 
     return (
@@ -212,10 +216,6 @@ class ShoppingCart extends Component {
 }
 
 ShoppingCart.propTypes = {
-  productsOnCart: PropTypes.arrayOf(PropTypes.objectOf({
-    title: PropTypes.string,
-    id: PropTypes.number,
-  })).isRequired,
   location: PropTypes.shape({
     hash: PropTypes.string.isRequired,
     key: PropTypes.string.isRequired,

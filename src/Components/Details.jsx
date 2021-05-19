@@ -8,7 +8,7 @@ class Details extends Component {
 
     this.state = {
       productQuantity: 0,
-    }
+    };
   }
 
   handleQuantity = () => {
@@ -47,16 +47,16 @@ class Details extends Component {
         >
           Adicionar ao carrinho
         </button>
-        <Link 
-          to={{
-            pathname: "/cart",
+        <Link
+          to={ {
+            pathname: '/cart',
             hash: '',
             search: '',
             state: {
               addedProduct: productDetail,
-              quantityAdded: productQuantity
-            }
-          }}
+              quantityAdded: productQuantity,
+            },
+          } }
           data-testid="shopping-cart-button"
         >
           <button type="button">Cart</button>
@@ -74,7 +74,6 @@ Details.propTypes = {
     search: PropTypes.string.isRequired,
     state: PropTypes.objectOf(PropTypes.object),
   }).isRequired,
-  addCart: PropTypes.func.isRequired,
 };
 
 export default Details;

@@ -1,10 +1,37 @@
 import React, { Component } from 'react';
+import '../styles/ProductDetails.css';
 import { Link } from 'react-router-dom';
 import { number, string } from 'prop-types';
+import Star from '../Components/Star';
 
 class ProductDetails extends Component {
+  constructor() {
+    super();
+    const whiteStar = 'https://img-premium.flaticon.com/png/512/16/16078.png?token=exp=1621369569~hmac=4bd5c4cf7438fdd55983efcab05fac42';
+    const yellowStar = 'https://img-premium.flaticon.com/png/512/1820/1820006.png?token=exp=1621370572~hmac=7b6b1b98c1f083de5e7bbc39c2d56a47';
+    this.state = {
+      white: whiteStar,
+      // rating: 0,
+      arrayStars: [whiteStar, whiteStar, whiteStar, whiteStar, whiteStar],
+      yellow: yellowStar,
+    };
+  }
+
+  changeStar = (id) => {
+    const { arrayStars, white, yellow } = this.state;
+    const newStars = arrayStars.map((src, index) => {
+      if (index + 1 <= id) return yellow;
+      return white;
+    });
+    this.setState(({
+      // rating: id,
+      arrayStars: newStars,
+    }));
+  }
+
   render() {
     const { location: { state: { title, price, thumbnail } } } = this.props;
+    const { arrayStars } = this.state;
     return (
       <>
         <div className="detailsContainer">
@@ -33,6 +60,33 @@ class ProductDetails extends Component {
             </Link>
           </button>
         </section>
+        <form>
+          <fieldset>
+            <legend>Avaliações</legend>
+            <label htmlFor="comentarios">
+              <input
+                className="assessments"
+                type="text"
+                placeholder="Email"
+              />
+            </label>
+            <textarea
+              placeholder="Mensagem (opcional)"
+              data-testid="product-detail-evaluation"
+            />
+            <div>
+              {arrayStars.map((src, index) => (
+                <Star
+                  key={ index }
+                  id={ index + 1 }
+                  src={ src }
+                  onClick={ this.changeStar }
+                />))}
+            </div>
+            <button className="submit" type="button">Avaliaçao</button>
+          </fieldset>
+        </form>
+
       </>
     );
   }

@@ -30,7 +30,7 @@ class ProductDetails extends React.Component {
     localStorage
       .setItem('productSubmit', JSON.stringify([...evaluationUpdate, productEvaluation]));
   }
-  
+
   async getProductsById(id) {
     const url = `https://api.mercadolibre.com/items?ids=${id}`;
     const data = await fetch(url);

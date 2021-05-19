@@ -14,7 +14,6 @@ export default class ShoppingCart extends Component {
   }
 
   render() {
-    console.log(this.getStorage());
     return (
       <div>
         { !this.getStorage()
@@ -34,12 +33,15 @@ export default class ShoppingCart extends Component {
             ))
           )}
         <Link to="/">Voltar</Link>
-        <button
-          type="button"
+        <Link
+          to={ {
+            pathname: '/checkout',
+            products: this.getStorage(),
+          } }
           data-testid="checkout-products"
         >
           Checkout
-        </button>
+        </Link>
       </div>
     );
   }

@@ -39,7 +39,7 @@ class ProductList extends Component {
   };
 
   render() {
-    const { handle } = this.props;
+    const { handle, productsInCart } = this.props;
     const { query, productsList } = this.state;
     return (
       <main className="conteiner-main">
@@ -79,6 +79,7 @@ class ProductList extends Component {
             query={ query }
             handle={ handle }
             productsList={ productsList }
+            productsInCart={ productsInCart }
           />
         </section>
 
@@ -89,6 +90,13 @@ class ProductList extends Component {
 
 ProductList.propTypes = {
   handle: PropTypes.func.isRequired,
+  productsInCart: PropTypes.objectOf(PropTypes.shape({
+    productQuantity: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    thumbnail: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
+  })).isRequired,
 };
 
 export default ProductList;

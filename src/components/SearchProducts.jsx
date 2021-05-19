@@ -5,6 +5,7 @@ import './SearchProducts.css';
 
 class SearchProducts extends Component {
   addProductInCart = ({ target }) => {
+    console.log(target);
     const { handle, productsList } = this.props;
     const id = target.value;
     const product = productsList.find((item) => item.id === id);
@@ -14,7 +15,7 @@ class SearchProducts extends Component {
   }
 
   productsCards = (list) => {
-    const { query } = this.props;
+    const { query, handle /* , productsInCart */ } = this.props;
     const message = query === '' ? '' : 'Nenhum produto foi encontrado';
     return (
       <section className="search-conteiner">
@@ -51,7 +52,14 @@ class SearchProducts extends Component {
                   </label>
                   <Link
                     data-testid="product-detail-link"
-                    to={ { pathname: '/item-details', state: { product } } }
+                    to={ {
+                      pathname: '/item-details',
+                      state: {
+                        product,
+                        // productsInCartQuantity: Object.keys(productsInCart).length,
+                      },
+                      handle,
+                    } }
                   >
                     Detalhes
                   </Link>

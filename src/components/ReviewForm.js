@@ -17,7 +17,6 @@ class ReviewForm extends React.Component {
 
   render() {
     const { review } = this.state;
-    console.log(this.state);
     return (
       <form>
         <textarea

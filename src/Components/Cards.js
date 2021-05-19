@@ -6,15 +6,15 @@ class Cards extends React.Component {
   constructor() {
     super();
     this.state = {
-      product: [],
+      title: '',
+      price: 0,
+      thumbnail: '',
     };
     this.handleData = this.handleData.bind(this);
   }
 
   handleData() {
-    this.setState({
-      product: 
-    })
+    console.log(target);
   }
 
   render() {
@@ -22,7 +22,10 @@ class Cards extends React.Component {
     const { title, price, thumbnail, id } = product;
     return (
       <div className="products-cards">
-        <Link onClick={ this.handleData } to={ `/detailsPage/${id}` }>
+        <Link
+          onClick={ this.handleData }
+          to={ { pathname: `/detailsPage/${id}`, state: this.state.product } }
+        >
           <div data-testid="product">
             <p>{title}</p>
             <p>{price}</p>

@@ -47,9 +47,9 @@ class Home extends Component {
     });
   }
 
-  cartId = (id) => {
+  cartId = (productObj) => {
     this.setState(({ cart }) => ({
-      cart: [...cart, id],
+      cart: [...cart, productObj],
     }));
   }
 

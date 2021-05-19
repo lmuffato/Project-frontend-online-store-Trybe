@@ -10,7 +10,7 @@ class AddCart extends Component {
         id={ id }
         type="submit"
         data-testid="product-add-to-cart"
-        onClick={ () => cart(id) }
+        onClick={ () => cart(this.props) }
       >
         Add in Cart
       </button>

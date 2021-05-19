@@ -39,8 +39,20 @@ class App extends React.Component {
   }
 
   updateItemQtyInCart = (event) => {
-    console.log(event.target.getAttribute('operation'));
-    console.log(event.target.getAttribute('data-id'));
+    const operation = event.target.getAttribute('operation');
+    const itemId = event.target.getAttribute('data-id');
+    const { cartList } = this.state;
+    const updatedCart = { ...cartList };
+
+    if (operation === '+') {
+      updatedCart[itemId].qty += 1;
+    } else {
+      updatedCart[itemId].qty -= 1;
+    }
+
+    console.log(updatedCart);
+
+    this.setState({ cartList: updatedCart });
   }
 
   render() {

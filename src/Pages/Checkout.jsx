@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class Checkout extends Component {
   render() {
@@ -6,65 +7,69 @@ class Checkout extends Component {
     const { state } = location;
     const { products, quantity } = state;
     let total = 0;
-    return(
+    return (
       <div>
         <h2>Revise seus Produtos</h2>
-        
-        {products.map(({title, id, price}) => {
+
+        {products.map(({ title, id, price }) => {
           total += price * quantity[title];
           return (
-            <section key={id}>
+            <section key={ id }>
               <p>{title}</p>
               <span>
-                R$ {quantity[title] * price}
+                R$
+                {' '}
+                {quantity[title] * price}
               </span>
             </section>
-          )
+          );
         })}
         <p>
-          Total: R$ {total}
+          Total: R$
+          {' '}
+          {total}
         </p>
 
         <form>
           <label htmlFor="checkout-fullname">
             Nome Completo
-            <input data-testid="checkout-fullname"/>
+            <input data-testid="checkout-fullname" />
           </label>
-          <label>
+          <label htmlFor="checkout-email">
             E-mail
-            <input data-testid="checkout-email"/>
+            <input data-testid="checkout-email" />
           </label>
-          <label >
+          <label htmlFor="checkout-cpf">
             CPF
-            <input data-testid="checkout-cpf"/>
+            <input data-testid="checkout-cpf" />
           </label>
-          <label >
+          <label htmlFor="checkout-phone">
             Telefone
-            <input data-testid="checkout-phone"/>
+            <input data-testid="checkout-phone" />
           </label>
-          <label >
+          <label htmlFor="checkout-cep">
             CEP
-            <input data-testid="checkout-cep"/>
+            <input data-testid="checkout-cep" />
           </label>
-          <label >
+          <label htmlFor="checkout-address">
             Endereço
-            <input data-testid="checkout-address"/>
+            <input data-testid="checkout-address" />
           </label>
-          <label >
+          <label htmlFor="checkout-city">
             Cidade
-            <input/>
+            <input id="checkout-city" />
           </label>
-          <label >
+          <label htmlFor="checkout-complement">
             Complemento
-            <input/>
+            <input id="checkout-complement" />
           </label>
-          <label >
+          <label htmlFor="checkout-number">
             Número
-            <input/>
+            <input id="checkout-number" />
           </label>
-          <label >
+          <label htmlFor="checkout-state">
             Estado
-            <select>
+            <select id="checkout-state">
               <option>BA</option>
               <option>SP</option>
               <option>RO</option>
@@ -75,5 +80,15 @@ class Checkout extends Component {
     );
   }
 }
+
+Checkout.propTypes = {
+  location: PropTypes.shape({
+    hash: PropTypes.string.isRequired,
+    key: PropTypes.string.isRequired,
+    pathname: PropTypes.string.isRequired,
+    search: PropTypes.string.isRequired,
+    state: PropTypes.objectOf(PropTypes.object),
+  }).isRequired,
+};
 
 export default Checkout;

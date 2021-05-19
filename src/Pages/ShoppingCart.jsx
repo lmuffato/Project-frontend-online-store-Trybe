@@ -34,8 +34,7 @@ class ShoppingCart extends Component {
     const { value } = target;
     const { products, quantity } = this.state;
     delete quantity[value];
-    const filteredProducts = products.filter(({title}) =>
-      title !== value);
+    const filteredProducts = products.filter(({ title }) => title !== value);
 
     this.setState({
       products: [...filteredProducts],
@@ -67,7 +66,7 @@ class ShoppingCart extends Component {
     }
     return (
       <>
-        {reducedProducts.map(({title, id}) => (
+        {reducedProducts.map(({ title, id }) => (
           <div className="product-shopping-cart" key={ id }>
             <p data-testid="shopping-cart-product-name">{title}</p>
             <section
@@ -103,10 +102,10 @@ class ShoppingCart extends Component {
           </div>
         ))}
         <Link to="/">VOLTAR</Link>
-        <Link 
+        <Link
           data-testid="checkout-products"
           to={ {
-            pathname: `/checkout`,
+            pathname: '/checkout',
             search: '',
             hash: '',
             state: { products: reducedProducts, quantity },
@@ -122,9 +121,8 @@ class ShoppingCart extends Component {
 ShoppingCart.propTypes = {
   products: PropTypes.arrayOf(PropTypes.objectOf({
     title: PropTypes.string,
-    id: PropTypes.number
+    id: PropTypes.number,
   })).isRequired,
-  quantity: PropTypes.objectOf(PropTypes.number).isRequired,
   location: PropTypes.shape({
     hash: PropTypes.string.isRequired,
     key: PropTypes.string.isRequired,
@@ -132,7 +130,6 @@ ShoppingCart.propTypes = {
     search: PropTypes.string.isRequired,
     state: PropTypes.objectOf(PropTypes.object),
   }).isRequired,
-  addCart: PropTypes.func.isRequired,
 };
 
 export default ShoppingCart;

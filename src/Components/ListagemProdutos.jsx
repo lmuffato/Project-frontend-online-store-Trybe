@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import * as api from '../services/api';
@@ -48,19 +47,19 @@ class ListagemProdutos extends Component {
     );
   }
 
-  handleAddToCart = ({title, id, price}) => {
+  handleAddToCart = ({ title, id, price }) => {
     const { productsQuantity } = this.state;
-    console.log(title, id, price)
+    console.log(title, id, price);
     if (productsQuantity[title] === undefined) {
       this.setState((prevState) => ({
         productsOnCart: [...prevState.productsOnCart, {
           title,
           id,
-          price
+          price,
         }],
-        productsQuantity: { 
+        productsQuantity: {
           ...prevState.productsQuantity,
-          [title]: 1
+          [title]: 1,
         },
       }));
     } else {
@@ -68,7 +67,7 @@ class ListagemProdutos extends Component {
         productsOnCart: [...prevState.productsOnCart, {
           title,
           id,
-          price
+          price,
         }],
         productsQuantity: { ...prevState.productsQuantity,
           [title]: prevState.productsQuantity[title] + 1 },
@@ -100,16 +99,16 @@ class ListagemProdutos extends Component {
 
         <Categories onClick={ this.handleChangeCategory } />
         <aside>
-          <Link 
-            to={{
-              pathname: "/cart",
+          <Link
+            to={ {
+              pathname: '/cart',
               search: '',
               hash: '',
               state: {
                 products: productsOnCart,
-                productsQuantity
-              }
-            }}
+                productsQuantity,
+              },
+            } }
           >
             <button type="button" data-testid="shopping-cart-button">Cart</button>
           </Link>

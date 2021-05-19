@@ -8,8 +8,8 @@ class ProductCard extends Component {
     const myObj = {
       title,
       id,
-      price
-    }
+      price,
+    };
 
     return (
       <div data-testid="product">
@@ -29,7 +29,7 @@ class ProductCard extends Component {
         </Link>
         <button
           onClick={ () => onClick(myObj) }
-          //value={ myObj }
+          // value={ myObj }
           type="button"
           data-testid="product-add-to-cart"
         >

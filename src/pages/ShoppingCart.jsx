@@ -60,18 +60,31 @@ export default class ShoppingCart extends React.Component {
                 </p>
                 <label htmlFor={ item.title }>
                   { 'Quantidade: ' }
+
+                  <button
+                    type="button"
+                    name="sub"
+                    onClick={ (event) => quantityProduct(event) }
+                  >
+                    -
+                  </button>
                   <input
                   // Mudar o tipo do input para tipo text, criar os botões com onClick e criar funções de acréscimo e decréscimo que irão alterar o defaultValue do input, e criar no botão do X o remove do localStorage
                     type="text"
-                    min={ 1 }
-                    max={ item.availableQuantity }
                     defaultValue={ item.buyQuantity }
                     onChange={ (event) => {
-                      quantityProduct(event);
+                      // quantityProduct(event);
                       this.changeQuantity(event);
                     } }
                     id={ item.title }
                   />
+                  <button
+                    type="button"
+                    name="add"
+                    onClick={ (event) => quantityProduct(event) }
+                  >
+                    +
+                  </button>
                 </label>
               </div>
             ))

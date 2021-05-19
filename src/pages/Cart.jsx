@@ -19,25 +19,25 @@ class Cart extends React.Component {
 
   getFromLocalStorage = () => {
     const products = storageFunction.getProductsFromStorage();
-    if (products !== null) {
+    if (products.length > 0) {
       this.setState({ storage: true });
     }
     this.setState({
       products,
     });
-    // this.sumPrices(products);
+    this.sumPrices(products);
   }
 
-  // sumPrices = (products) => {
-  //   const totalPrice = products.reduce((acc, cur) => acc + cur.price, 0);
-  //   this.setState({ totalPrice });
-  // }
+  sumPrices = (products) => {
+    const totalPrice = products.reduce((acc, cur) => acc + cur.price, 0);
+    this.setState({ totalPrice });
+  }
 
-  handleOnChange = (totalPrice) => {
-    console.log('oi');
-    // this.setState((prevState) => ({
-    //   totalPrice: prevState.totalPrice + totalPrice,
-    // }));
+  handleOnChange = (id, totalPrice) => {
+    const products = storageFunction.getProductsFromStorage();
+    const productObject = products.find((product) => product.id === id);
+    productObject.price = totalPrice;
+    this.sumPrices(products);
   }
 
   render() {
@@ -46,7 +46,11 @@ class Cart extends React.Component {
       <div>
         {!storage && <EmptyCart />}
         { storage && products.map((product) => (
-          <CartItem key={ product.id } product={ product } onChange={ this.handleOnChange } />
+          <CartItem
+            key={ product.id }
+            product={ product }
+            onChange={ this.handleOnChange }
+          />
         )) }
         <p>{`Preço total: ${totalPrice}`}</p>
       </div>

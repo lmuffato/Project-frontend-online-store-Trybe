@@ -91,7 +91,7 @@ export default class ShoppingCart extends Component {
         { cartArray
           ? <h3>{`Valor total da Compra: ${this.totalValue(cartArray)}`}</h3> : ''}
           <div>
-          <Link to="/ShoppingCart/Checkout">Finalizar Compra</Link>
+          <Link to="/ShoppingCart/Checkout" data-testid="checkout-products">Finalizar Compra</Link>
           </div>
       </div>
     );

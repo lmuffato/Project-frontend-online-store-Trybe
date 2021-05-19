@@ -63,11 +63,14 @@ class CartItem extends Component {
             type="button"
             onClick={ this.changeProductQuantify }
             data-testid="product-decrease-quantity"
+            disabled={ quant === 1 }
           >
             -
           </button>
 
-          <p data-testid="shopping-cart-product-quantity">{ quant }</p>
+          <p data-testid="shopping-cart-product-quantity">
+            { quant }
+          </p>
 
           <button
             type="button"

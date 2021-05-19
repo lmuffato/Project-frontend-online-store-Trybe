@@ -55,7 +55,7 @@ class ProductCard extends Component {
     );
   }
 }
-
+// xablau
 ProductCard.propTypes = {
   title: string,
   imagePath: string,

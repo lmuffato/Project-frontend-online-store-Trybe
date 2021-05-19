@@ -12,6 +12,7 @@ class Details extends Component {
     const { cartSize } = state;
     this.state = {
       quantityItems: cartSize,
+      productQuantity: 0,
     };
   }
 
@@ -22,12 +23,19 @@ class Details extends Component {
     });
   }
 
+  handleQuantity = () => {
+    this.setState((prevState) => ({
+      productQuantity: prevState.productQuantity + 1,
+    }));
+    this.handleClick();
+  }
+
   render() {
     const { location } = this.props;
     const { state } = location;
     const { productDetail } = state;
     const { title, id, price, thumbnail, condition } = productDetail;
-    const { quantityItems } = this.state;
+    const { quantityItems, productQuantity } = this.state;
     return (
       <div>
         <CartSize size={ quantityItems } />
@@ -49,11 +57,22 @@ class Details extends Component {
           data-testid="product-detail-add-to-cart"
           type="button"
           value={ title }
-          onClick={ this.handleClick }
+          onClick={ this.handleQuantity }
         >
           Adicionar ao carrinho
         </button>
-        <Link to="/cart" data-testid="shopping-cart-button">
+        <Link
+          to={ {
+            pathname: '/cart',
+            hash: '',
+            search: '',
+            state: {
+              addedProduct: productDetail,
+              quantityAdded: productQuantity,
+            },
+          } }
+          data-testid="shopping-cart-button"
+        >
           <button type="button">Cart</button>
         </Link>
         <Rating />

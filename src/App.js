@@ -64,8 +64,8 @@ class App extends React.Component {
   }
 
   pushLocalStoragetoState = () => {
-    const LSCartList = JSON.parse(localStorage.getItem('cartList'));
-    this.setState({ cartList: { ...LSCartList } });
+    const localStorageCartList = JSON.parse(localStorage.getItem('cartList'));
+    this.setState({ cartList: { ...localStorageCartList } });
   }
 
   componentDidMount = () => {

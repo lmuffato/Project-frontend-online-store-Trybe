@@ -19,11 +19,17 @@ export const getAll = () => {
 };
 
 export const quantityProduct = ({ target }) => {
-  cartObj.buyQuantity = target.value;
-  cartObj.price *= cartObj.buyQuantity;
-  // { buyQuantity: target.value };
-  // const { storageArray } = state;
-  // addToLocalStorage(storageArray);
+  console.log(target);
+  const allProducts = getAll().map((product) => {
+    if (product.title === target.id) {
+      product.buyQuantity = target.value;
+      product.price = product.standardPrice * parseInt(product.buyQuantity, 10);
+    }
+    return product;
+  });
+  addToLocalStorage(allProducts);
+
+  console.log(allProducts);
   // return storageArray;
 };
 
@@ -32,6 +38,7 @@ export const creatObject = async (item) => {
     title: item.title,
     thumbnail: item.thumbnail,
     thumbnailId: item.thumbnail_id,
+    standardPrice: item.price,
     price: item.price,
     buyQuantity: 1,
   };

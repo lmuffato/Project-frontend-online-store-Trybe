@@ -57,7 +57,10 @@ class App extends Component {
             />
             <Route
               path="/productdetails/:id"
-              render={ (props) => <ProductDetail { ...props } /> }
+              render={ (props) => (<ProductDetail
+                { ...props }
+                cartItemMethod={ this.addCartItem }
+              />) }
             />
             <Route
               exact

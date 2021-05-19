@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import RatingForm from '../components/RatingForm';
 
 class ProductDetail extends Component {
   render() {
     const { location: { state } } = this.props;
+    const { cartItemMethod } = this.props;
     return (
       <div>
         <div>
@@ -13,6 +15,16 @@ class ProductDetail extends Component {
             Price R$
             { state.price }
           </h4>
+          <button
+            data-testid="product-detail-add-to-cart"
+            type="button"
+            onClick={ () => (
+              cartItemMethod(state)) }
+          >
+            Add To Cart
+          </button>
+          )
+          <Link data-testid="shopping-cart-button" to="/cart">Go To Cart</Link>
           <img src={ state.thumbnail } alt="Imagem do Produto" />
         </div>
         <div>

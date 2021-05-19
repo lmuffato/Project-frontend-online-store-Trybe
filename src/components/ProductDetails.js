@@ -50,7 +50,7 @@ class ProductDetails extends Component {
   }
 
   render() {
-    const { AddCart } = this.props;
+    const { AddCart, quantityTotal } = this.props;
     const { product: { title, price, thumbnail } } = this.state;
     return (
       <div>
@@ -71,7 +71,10 @@ class ProductDetails extends Component {
           Adicionar ao carrinho
         </button>
         <Link to="/cart-shopping/" data-testid="shopping-cart-button">
-          <img className="icon-cart" src={ icon } alt="shopping cart icon" />
+          <div>
+            <img className="icon-cart" src={ icon } alt="shopping cart icon" />
+            <p><span data-testid="shopping-cart-size">{ quantityTotal }</span></p>
+          </div>
         </Link>
       </div>
     );
@@ -86,6 +89,7 @@ ProductDetails.propTypes = {
       category: PropTypes.string,
     }),
   }).isRequired,
+  quantityTotal: PropTypes.number.isRequired,
 };
 
 export default ProductDetails;

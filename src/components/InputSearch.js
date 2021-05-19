@@ -12,7 +12,7 @@ class InputSearch extends Component {
     this.state = {
       inputValue: '',
       products: [],
-      selectValue: '',
+      selectValue: 'MLB5672',
     };
   }
 
@@ -49,8 +49,15 @@ class InputSearch extends Component {
     });
   }
 
+  /* sumQuantity = () => {
+    const { quantity } = this.props;
+    const arrQuantity = Object.values(quantity);
+    const total = arrQuantity.reduce((acc, actual) => acc + actual);
+    console.log(total);
+  } */
+
   render() {
-    const { AddCart } = this.props;
+    const { AddCart, quantityTotal } = this.props;
     const { inputValue, products, selectValue } = this.state;
     return (
       <div>
@@ -73,7 +80,10 @@ class InputSearch extends Component {
           Pesquisar
         </button>
         <Link to="/cart-shopping/" data-testid="shopping-cart-button">
-          <img className="icon-cart" src={ icon } alt="shopping cart icon" />
+          <div>
+            <img className="icon-cart" src={ icon } alt="shopping cart icon" />
+            <p><span data-testid="shopping-cart-size">{ quantityTotal }</span></p>
+          </div>
         </Link>
         <Category
           value={ selectValue }
@@ -95,6 +105,7 @@ class InputSearch extends Component {
 
 InputSearch.propTypes = {
   AddCart: PropTypes.func.isRequired,
+  quantityTotal: PropTypes.number.isRequired,
 };
 
 export default InputSearch;

@@ -13,7 +13,6 @@ class App extends Component {
   }
 
   addItem(selectedItem) {
-    console.log(selectedItem);
     this.setState((previousState) => (
       {
         items: [...previousState.items, selectedItem],

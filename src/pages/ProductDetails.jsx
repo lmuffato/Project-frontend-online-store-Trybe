@@ -1,39 +1,17 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import DetailedProductCard from '../components/DetailedProductCard/DetailedProductCard';
+import EvaluationForms from '../components/EvaluationForms/EvaluationForms';
+import Evaluations from '../components/Evaluations/Evaluations';
 
 class ProductDetails extends Component {
   render() {
     const { location: { state: product }, callBack } = this.props;
-
-    // Use o log abaixo para verificar todas as informações que temos sobre o produto
-    // console.log(Object.entries(product));
-    const { title, price, thumbnail } = product;
     return (
       <>
-        <Link
-          to="/cartContent"
-          data-testid="shopping-cart-button"
-        >
-          <img
-            style={ { width: '40px' } }
-            src="/images/shoppingCart.png"
-            alt="Carrinho de compras"
-          />
-        </Link>
-        <section>
-          <h2 data-testid="product-detail-name">
-            {`${title} - R$ ${price}`}
-          </h2>
-          <img src={ thumbnail } alt={ `Produto ${title}` } />
-          <button
-            data-testid="product-detail-add-to-cart"
-            type="button"
-            onClick={ () => callBack(product) }
-          >
-            Adicionar ao carrinho
-          </button>
-        </section>
+        <DetailedProductCard callBack={ callBack } product={ product } />
+        <EvaluationForms id={ product.id } />
+        <Evaluations id={ product.id } />
       </>
     );
   }
@@ -42,13 +20,10 @@ class ProductDetails extends Component {
 ProductDetails.propTypes = {
   location: PropTypes.shape({
     state: PropTypes.shape({
-      product: PropTypes.shape({
-        title: PropTypes.string,
-        price: PropTypes.number,
-        thumbnail: PropTypes.string,
-      }),
+      // A componente DetailedProductCard é responsável por validar as props que ela precisa
     }),
   }),
   callBack: PropTypes.func,
 }.isRequired;
+
 export default ProductDetails;

@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from './pages/Home';
 import ShoppingCart from './pages/ShoppingCart';
 import ProductDetails from './pages/ProductDetails';
+import Checkout from './pages/Checkout';
 
 class App extends React.Component {
   constructor() {
@@ -118,6 +119,16 @@ class App extends React.Component {
                 { ...props }
                 addItemToCart={ this.addItemToCart }
                 totalItemQty={ this.returnTotalCartItemQty() }
+              />
+            ) }
+          />
+          <Route
+            exact
+            path="/checkout"
+            render={ (props) => (
+              <Checkout
+                { ...props }
+                cartList={ cartList }
               />
             ) }
           />

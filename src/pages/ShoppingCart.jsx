@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ShoppingCartItem from '../components/ShoppingCartItem';
 
@@ -21,6 +22,9 @@ class ShoppingCart extends Component {
             updateItemQtyInCart={ updateItemQtyInCart }
           />
         ))}
+        <Link to="/checkout" data-testid="checkout-products">
+          <button type="button">Finalizar Compra</button>
+        </Link>
       </div>
     );
   }

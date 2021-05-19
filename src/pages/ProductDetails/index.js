@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { getProductsFromCategory } from '../../../services/api';
-import EvaluationFields from './EvaluationFields';
+import { getProductsFromCategory } from '../../services/api';
+import ReviewFields from './components/ReviewFields';
 
 class ProductDetails extends React.Component {
   constructor() {
@@ -10,14 +10,34 @@ class ProductDetails extends React.Component {
 
     this.state = {
       product: {},
-      assessments: {},
+      productReviews: {
+        productId: 0,
+        reviews: [],
+      },
     };
+
+    this.getReview = this.getReview.bind(this);
+    this.loadReviews = this.loadReviews.bind(this);
   }
 
   componentDidMount() {
     this.loadProduct();
+    this.loadReviews();
+  }
 
-    this.reapEvaluation = this.reapEvaluation.bind(this);
+  getReview(newReview) {
+    const { match, setReviews } = this.props;
+    const { id } = match.params;
+    const { productReviews: stateReviews } = this.state;
+
+    const { reviews } = stateReviews;
+
+    const productReviews = {
+      productId: id,
+      reviews: [...reviews, newReview],
+    };
+
+    setReviews(productReviews, id);
   }
 
   async loadProduct() {
@@ -42,17 +62,27 @@ class ProductDetails extends React.Component {
     }
   }
 
-  reapEvaluation(evaluation) {
-    this.setState((currentState) => ({
-      assessments: Object.assign(currentState, evaluation),
-    }));
+  loadReviews() {
+    const { allReviews, match } = this.props;
+    const { id } = match.params;
+
+    const foundReview = allReviews.find((review) => review.productId === id);
+
+    if (foundReview) {
+      this.setState({
+        productReviews: {
+          productId: id,
+          reviews: foundReview.reviews,
+        },
+      });
+    }
   }
 
   render() {
-    const { product } = this.state;
-    const { setCart } = this.props;
+    const { product, productReviews } = this.state;
+    const { addToCart } = this.props;
 
-    if (!product.attributes) return <h1>Loading...</h1>;
+    if (!product || !product.attributes) return <h1>Loading...</h1>;
 
     return (
       <>
@@ -74,14 +104,23 @@ class ProductDetails extends React.Component {
           </ul>
           <button
             type="button"
-            onClick={ setCart }
+            onClick={ addToCart }
             id={ product.id }
             data-testid="product-detail-add-to-cart"
           >
             Adicionar ao carrinho
           </button>
         </div>
-        <EvaluationFields reapEvaluation={ this.reapEvaluation } />
+        <ReviewFields getReview={ this.getReview } />
+        <section>
+          { productReviews.reviews.map((review) => (
+            <div key={ review.email }>
+              <strong>{ review.email }</strong>
+              <span>{ review.rating }</span>
+              <p>{ review.review }</p>
+            </div>
+          )) }
+        </section>
       </>
     );
   }

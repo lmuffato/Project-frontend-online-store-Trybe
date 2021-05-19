@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-class EvaluationFields extends React.Component {
+class ReviewFields extends React.Component {
   constructor() {
     super();
 
     this.state = {
-      inputValue: 'Email',
-      textareaValue: 'Mensagem (opcional)',
+      emailField: '',
+      textField: '',
       ratingValue: 0,
     };
 
@@ -16,35 +16,25 @@ class EvaluationFields extends React.Component {
   }
 
   handleChange({ target }) {
-    if (target.id === 'emailField') {
-      this.setState({
-        inputValue: target.value,
-      });
-    } else if (target.id === 'textField') {
-      this.setState({
-        textareaValue: target.value,
-      });
-    } else {
-      this.setState({
-        ratingValue: target.value,
-      });
-    }
+    this.setState({
+      [target.id]: target.value,
+    });
   }
 
   submit() {
-    const { inputValue, textareaValue, ratingValue } = this.state;
-    const { reapEvaluation } = this.props;
-    const evaluation = {
-      email: inputValue,
-      evaluation: textareaValue,
+    const { emailField, textField, ratingValue } = this.state;
+    const { getReview } = this.props;
+    const review = {
+      email: emailField,
+      review: textField,
       rating: ratingValue,
     };
 
-    reapEvaluation(evaluation);
+    getReview(review);
   }
 
   render() {
-    const { inputValue, textareaValue, ratingValue } = this.state;
+    const { emailField, textField, ratingValue } = this.state;
 
     return (
       <section>
@@ -52,22 +42,25 @@ class EvaluationFields extends React.Component {
         <form>
           <input
             type="email"
-            value={ inputValue }
+            value={ emailField }
             id="emailField"
             onChange={ this.handleChange }
+            placeholder="Email"
           />
           <input
             type="number"
             min="0"
             max="5"
+            id="ratingValue"
             value={ ratingValue }
             onChange={ this.handleChange }
           />
           <textarea
             data-testid="product-detail-evaluation"
             id="textField"
-            value={ textareaValue }
+            value={ textField }
             onChange={ this.handleChange }
+            placeholder="Mensagem (opcional)"
           />
         </form>
         <button
@@ -81,8 +74,8 @@ class EvaluationFields extends React.Component {
   }
 }
 
-EvaluationFields.propTypes = {
-  reapEvaluation: PropTypes.func,
+ReviewFields.propTypes = {
+  getReview: PropTypes.func,
 }.isRequired;
 
-export default EvaluationFields;
+export default ReviewFields;

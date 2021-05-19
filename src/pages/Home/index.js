@@ -14,7 +14,7 @@ class Home extends React.Component {
   render() {
     const {
       onSearch, onFilterByCategory, onFilterByQuery,
-      products, setCart,
+      products, addToCart,
     } = this.props;
 
     return (
@@ -36,7 +36,7 @@ class Home extends React.Component {
           <button type="button" data-testid="shopping-cart-button">Carrinho</button>
         </Link>
         <Category onCategorySelection={ onFilterByCategory } />
-        <CardProduct products={ products } setCart={ setCart } />
+        <CardProduct products={ products } addToCart={ addToCart } />
       </>
     );
   }

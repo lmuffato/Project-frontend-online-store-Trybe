@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Home from './pages/Home';
 import ShoppingCart from './pages/ShoppingCart';
-import ProductDetails from './pages/Home/components/ProductDetails';
+import ProductDetails from './pages/ProductDetails';
 import { getProductsFromCategoryAndQuery } from './services/api';
 
 class App extends React.Component {
@@ -15,12 +15,16 @@ class App extends React.Component {
       selectedCategory: '',
       searchedQuery: '',
       cart: [],
+      allReviews: [],
     };
 
     this.handleClick = this.handleClick.bind(this);
     this.filterFromCategory = this.filterFromCategory.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.setCart = this.setCart.bind(this);
+    this.setReviews = this.setReviews.bind(this);
+    this.addToCart = this.addToCart.bind(this);
+    this.removeFromCart = this.removeFromCart.bind(this);
   }
 
   async handleClick() {
@@ -41,7 +45,39 @@ class App extends React.Component {
     });
   }
 
-  setCart({ target }) {
+  setCart(cart) {
+    this.setState({
+      cart,
+    });
+  }
+
+  setReviews(productReviews, id) {
+    const { allReviews } = this.state;
+
+    let reviews = [];
+
+    const foundReview = allReviews.find((review) => review.productId === id);
+
+    if (foundReview) {
+      reviews = allReviews.map((review) => {
+        if (review.productId === id) {
+          review.reviews = [...productReviews.reviews];
+        }
+        return review;
+      });
+    } else {
+      reviews = [
+        ...allReviews,
+        { ...productReviews },
+      ];
+    }
+
+    this.setState({
+      allReviews: reviews,
+    });
+  }
+
+  addToCart({ target }) {
     const { products, cart } = this.state;
     let addedProduct = {};
     let updatedCart = [];
@@ -75,6 +111,14 @@ class App extends React.Component {
     });
   }
 
+  removeFromCart(id) {
+    const { cart } = this.state;
+    const updatedCart = cart.filter((product) => product.data.id !== id);
+    this.setState({
+      cart: updatedCart,
+    });
+  }
+
   async filterFromCategory(categoryId) {
     const { searchedQuery } = this.state;
     let products = await getProductsFromCategoryAndQuery(categoryId, searchedQuery);
@@ -86,7 +130,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { products, cart } = this.state;
+    const { products, cart, allReviews } = this.state;
     return (
       <BrowserRouter>
         <Switch>
@@ -96,17 +140,23 @@ class App extends React.Component {
               onFilterByCategory={ this.filterFromCategory }
               onFilterByQuery={ this.handleChange }
               products={ products }
-              setCart={ this.setCart }
+              addToCart={ this.addToCart }
             />
           </Route>
           <Route path="/cart">
-            <ShoppingCart cart={ cart } />
+            <ShoppingCart
+              cart={ cart }
+              removeFromCart={ this.removeFromCart }
+              setCart={ this.setCart }
+            />
           </Route>
           <Route
             path="/product/:category/:id"
             component={
               (props) => (<ProductDetails
-                setCart={ this.setCart }
+                addToCart={ this.addToCart }
+                allReviews={ allReviews }
+                setReviews={ this.setReviews }
                 { ...props }
               />)
             }

@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './styles.css';
 import Rating from '../../components/Rating';
 
 class ProductDetails extends React.Component {

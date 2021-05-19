@@ -3,6 +3,8 @@ import { FaStar } from 'react-icons/fa';
 
 import './styles.css';
 
+// usei o modelo do site: https://ichi.pro/pt/como-usar-css-e-react-para-criar-uma-avaliacao-com-estrelas-101140130179867
+
 class Rating extends React.Component {
   constructor(props) {
     super(props);

@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 
 class ProductDetails extends React.Component {
   render() {
-    const { location: { state: { title, price, thumbnail, attributes } } } = this.props;
+    const { location:
+      { state: { title, price, thumbnail, attributes } }, func } = this.props;
     return (
       <div>
         <h1 data-testid="product-detail-name">{ title }</h1>
@@ -17,6 +18,13 @@ class ProductDetails extends React.Component {
               </li>))}
           </ul>
         </div>
+        <button
+          type="button"
+          data-testid="product-detail-add-to-cart"
+          onClick={ () => func({ title, price, thumbnail, id: '' }) }
+        >
+          Adionar ao carrinho
+        </button>
       </div>
     );
   }

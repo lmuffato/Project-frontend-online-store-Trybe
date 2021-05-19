@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Rating from '../../components/Rating';
 
 class ProductDetails extends React.Component {
   constructor(props) {
@@ -8,7 +9,9 @@ class ProductDetails extends React.Component {
   }
 
   render() {
-    const { location: { state: { title, price, attributes, imagePath } } } = this.props;
+    const {
+      location: { state: { id, title, price, attributes, imagePath } },
+    } = this.props;
     return (
       <div>
         <h1 data-testid="product-detail-name">{ title }</h1>
@@ -25,6 +28,7 @@ class ProductDetails extends React.Component {
             ))}
           </ul>
         </div>
+        <Rating productId={ id } />
       </div>
     );
   }
@@ -33,6 +37,7 @@ class ProductDetails extends React.Component {
 ProductDetails.propTypes = {
   location: PropTypes.shape({
     state: PropTypes.shape({
+      id: PropTypes.string,
       title: PropTypes.string,
       price: PropTypes.number,
       attributes: PropTypes.arrayOf(PropTypes.object),

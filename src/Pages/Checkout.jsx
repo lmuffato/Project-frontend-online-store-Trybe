@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import PaymentMethod from '../components/PaymentMethod';
 
 class Checkout extends Component {
-
   showProductsInCart = () => {
     const { productsInCart } = this.props;
     const listCart = Object.values(productsInCart);
@@ -41,7 +40,6 @@ class Checkout extends Component {
   }
 
   render() {
-    const { productsInCart } = this.props;
     return (
       <div>
         <h1>checkout</h1>
@@ -86,7 +84,13 @@ class Checkout extends Component {
 }
 
 Checkout.propTypes = {
-
+  productsInCart: PropTypes.objectOf(PropTypes.shape({
+    productQuantity: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    thumbnail: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
+  })).isRequired,
 };
 
 export default Checkout;

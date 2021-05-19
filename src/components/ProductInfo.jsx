@@ -1,8 +1,19 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import * as shoppingCartService from '../services/shoppingCartService';
 // import { Link } from 'react-router-dom';
 
 class ProductInfo extends Component {
+  constructor() {
+    super();
+    this.onClick = this.onClick.bind(this);
+  }
+
+  onClick() {
+    const { product } = this.props;
+    shoppingCartService.setProducts(product);
+  }
+
   render() {
     const { product } = this.props;
     const { title, price, thumbnail } = product;
@@ -12,6 +23,13 @@ class ProductInfo extends Component {
         <h2 data-testid="product-detail-name">{title}</h2>
         <p>{price}</p>
         <img src={ thumbnail } alt={ title } />
+        <button
+          type="button"
+          data-testid="product-detail-add-to-cart"
+          onClick={ this.onClick }
+        >
+          Adicionar ao carrinho
+        </button>
       </div>
     );
   }

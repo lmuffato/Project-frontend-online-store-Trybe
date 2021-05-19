@@ -13,8 +13,6 @@ class App extends React.Component {
           <Route exact path="/" component={ Home } />
           <Route path="/ShoppingCartPage" component={ ShoppingCartPage } />
           <Route path="/:title" component={ ProductDetails } />
-          {/* alteração do path para title pois pela key(id)
-          não estava passando no teste */}
         </Switch>
       </BrowserRouter>
     );

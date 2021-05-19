@@ -14,6 +14,7 @@ class ProductList extends Component {
           image={ item.thumbnail }
           price={ item.price }
           key={ item.id }
+          Sku={ item.id }
           data-testid="product"
         />
       ));

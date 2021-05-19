@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { getProductsFromCategoryAndQuery, getCategories } from '../services/api';
 import CardItems from '../components/CardItems';
 import CategoriesList from '../components/CategoriesList';

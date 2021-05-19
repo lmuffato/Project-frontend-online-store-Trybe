@@ -4,11 +4,18 @@ import PurchaseSummary from './Home/components/PurchaseSummary';
 import Payment from './Home/components/Payment';
 
 class Checkout extends React.Component {
+  // locail() {
+  //   console.log(location);
+  // }
+
   render() {
+    const { location } = this.props;
+    console.log(location);
     return (
       <div>
+        { location }
         <form>
-          <PurchaseSummary />
+          <PurchaseSummary test={ location } />
           <BuyerInformation />
           <Payment />
           <button type="submit">Comprar</button>

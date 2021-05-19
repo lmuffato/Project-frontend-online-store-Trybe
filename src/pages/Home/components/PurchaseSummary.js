@@ -4,24 +4,29 @@ import BuyerInformation from './BuyerInformation';
 import Payment from './Payment';
 
 class PurchaseSummary extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+
+    console.log(this.props);
 
     this.state = {
       totalPrice: {},
     };
   }
 
+  // componentDidMount() {
+  //   this.TotalPrice();
+  // }
+
   TotalPrice() {
-    const { location: { state: { total } } } = this.props;
-    this.setState = {
-      totalPrice: total,
-    };
+  //   // console.log(this.props);
+  //   const { location } = this.props;
+  //   this.setState = {
+  //     totalPrice: location.state.total,
   }
 
   render() {
     const { cart } = this.props;
-    const { totalPrice } = this.state;
     if (!cart) return <h1>Loading...</h1>;
 
     return (
@@ -32,18 +37,22 @@ class PurchaseSummary extends React.Component {
             ? <h1 data-testid="shopping-cart-empty-message2">Seu carrinho está vazio</h1>
             : (
               <ul>
-                { cart.map((product) => (
-                  <li key={ product.data.id }>
-                    <h5 data-testid="shopping-cart-product-name2">
-                      {product.data.title}
-                    </h5>
-                    <h5 data-testid="shopping-cart-product-quantity2">
-                      {product.quantity}
-                    </h5>
-                    <h5>{product.data.price}</h5>
-                    <h5>{ totalPrice }</h5>
-                  </li>
-                ))}
+                {
+                  cart.map((product) => (
+                    <li key={ product.data.id }>
+                      <h5 data-testid="shopping-cart-product-name2">
+                        {product.data.title}
+                      </h5>
+                      <h5 data-testid="shopping-cart-product-quantity2">
+                        {product.quantity}
+                      </h5>
+                      {/* <h5>{product.data.price}</h5> */}
+                      <h5>
+                        { product.quantity * product.data.price }
+                      </h5>
+                    </li>
+                  ))
+                }
               </ul>
             )
         }

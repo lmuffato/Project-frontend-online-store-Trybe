@@ -58,7 +58,10 @@ class Home extends Component {
       categories,
       products,
       isCategoriesLoading,
+      cart,
     } = this.state;
+
+    console.log(cart);
 
     return (
       <div className="home-container">
@@ -100,7 +103,13 @@ class Home extends Component {
           </h3>
           <br />
           <button type="button">
-            <Link to="/shopping-cart" data-testid="shopping-cart-button">
+            <Link
+              to={ {
+                pathname: '/shopping-cart',
+                state: { cart },
+              } }
+              data-testid="shopping-cart-button"
+            >
               <img
                 className="shopping-cart"
                 src="https://img2.gratispng.com/20180425/lcq/kisspng-computer-icons-shopping-cart-5ae061983e57a6.1325375415246544882554.jpg"

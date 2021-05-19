@@ -14,7 +14,6 @@ class ShoppingCart extends Component {
     const { handle, productsInCart } = this.props;
     const product = productsInCart[name];
     const addQuantity = parseInt(`${value}1`, 10);
-    console.log(addQuantity);
     const { productQuantity } = product;
     if (productQuantity > 1 || value === '+') handle(product, addQuantity);
   };

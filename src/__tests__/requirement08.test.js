@@ -13,7 +13,7 @@ api.getProductsFromCategoryAndQuery.mockImplementation(
   () => Promise.resolve(mockedQueryResult),
 );
 
-describe.skip('8 - Adicione produtos a partir da tela de listagem de produtos', () => {
+describe('8 - Adicione produtos a partir da tela de listagem de produtos', () => {
   it('Adiciona da tela de listagem um produto que aparece no carrinho', async () => {
     render(<App />);
     await waitFor(() => expect(api.getCategories).toHaveBeenCalled());

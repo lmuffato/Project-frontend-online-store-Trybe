@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../components/Categories/Categories.css';
+import PropTypes from 'prop-types';
 import SearchBar from '../components/SearchBar/SearchBar';
 import Categories from '../components/Categories/Categories';
 import Products from '../components/Products/Products';
@@ -44,14 +45,22 @@ class Home extends Component {
 
   render() {
     const { requestedProducts } = this.state;
+    const { callBack } = this.props;
     return (
       <>
         <SearchBar onClick={ this.updateTextBoxValue } />
         <Categories onClick={ this.chooseCategory } />
-        <Products mlItems={ requestedProducts } />
+        <Products
+          callBack={ callBack }
+          mlItems={ requestedProducts }
+        />
       </>
     );
   }
 }
+
+Home.propTypes = {
+  callBack: PropTypes.func.isRequired,
+};
 
 export default Home;

@@ -13,14 +13,17 @@ export default class ShoppingCart extends Component {
         value.title === product.title)));
 
     // https://qastack.com.br/programming/19395257/how-to-count-duplicate-value-in-an-array-in-javascript
-    const counts = products.reduce((map, val) => {
-      map[val.title] = (map[val.title] || 0) + 1;
+    const counts = products.reduce((map, objProduct) => {
+      map[objProduct.title] = (map[objProduct.title] || 0) + 1;
       return map;
     }, {});
+    console.log(products);
+    console.log(filterProducts);
+    console.log(counts);
 
     // console.log(counts);
     const quantity = Object.values(counts);
-    // console.log(quantity);
+    console.log(`Quantidade: ${quantity}`);
 
     return (
       <div>

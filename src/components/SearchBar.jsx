@@ -18,14 +18,6 @@ class SearchBar extends React.Component {
     this.handleFilterCategory = this.handleFilterCategory.bind(this);
   }
 
-  addItem = (event) => {
-    const { buyList } = this.state;
-    const { value } = event.target;
-    this.setState((previ) => ({
-      buyList: [...previ.buyList, JSON.parse(value)],
-    }))
-  }
-
   async handleFilter() {
     const { filter, status } = this.state;
     const { getProductsFromCategoryAndQuery } = apiUrl;
@@ -48,18 +40,23 @@ class SearchBar extends React.Component {
     });
   }
 
-  renderButtonAdd = (item) => {
-    return (
-      <button
-        data-testid="product-add-to-cart"
-        onClick={ this.addItem }
-        value={ item }
-        type="button"
-      >
-        add
-      </button>
-    )
+  addItem = (event) => {
+    const { value } = event.target;
+    this.setState((previ) => ({
+      buyList: [...previ.buyList, JSON.parse(value)],
+    }));
   }
+
+  renderButtonAdd = (item) => (
+    <button
+      data-testid="product-add-to-cart"
+      onClick={ this.addItem }
+      value={ item }
+      type="button"
+    >
+      add
+    </button>
+  )
 
   products() {
     const { products } = this.state;
@@ -114,8 +111,8 @@ class SearchBar extends React.Component {
         <button type="button" data-testid="query-button" onClick={ this.handleFilter }>
           Search
         </button>
-        <Link 
-          to={ { pathname:"/cart", state:{ buyList: buyList } } }
+        <Link
+          to={ { pathname: '/cart', state: { buyList } } }
           data-testid="shopping-cart-button"
         >
           <img
@@ -130,7 +127,5 @@ class SearchBar extends React.Component {
     );
   }
 }
-
-// vqv
 
 export default SearchBar;

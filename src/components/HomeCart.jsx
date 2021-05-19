@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class HomeCart extends React.Component {
   constructor() {
@@ -6,7 +7,7 @@ class HomeCart extends React.Component {
     this.state = {
       counter: 1,
       status: false,
-    }
+    };
   }
 
   componentDidMount() {
@@ -15,8 +16,8 @@ class HomeCart extends React.Component {
 
   renderProducts = () => {
     const { location: { state: { buyList } } } = this.props;
-    const { counter } = this.state
-    const renderList = buyList.map((product) =>
+    const { counter } = this.state;
+    const renderList = buyList.map((product) => (
       <div key={ product.id }>
         <img src={ product.thumbnail } alt={ product.id } />
         <h6 data-testid="shopping-cart-product-name">{product.title}</h6>
@@ -24,23 +25,19 @@ class HomeCart extends React.Component {
         <button data-testid="shopping-cart-product-quantity" type="button">
           { counter }
         </button>
-      </div>
-    );
+      </div>));
     return renderList;
   }
 
-  renderEmptyCart = () => {
-    return (
-      <h2 data-testid="shopping-cart-empty-message">
-        Seu carrinho está vazio
-      </h2>
-    )
-  }
+  renderEmptyCart = () => (
+    <h2 data-testid="shopping-cart-empty-message">
+      Seu carrinho está vazio
+    </h2>
+  )
 
   setStatusTrue = () => {
-    const { status } = this.state;
     const { location: { state: { buyList } } } = this.props;
-    if(buyList.length > 0) {
+    if (buyList.length > 0) {
       this.setState({
         status: true,
       });
@@ -56,5 +53,20 @@ class HomeCart extends React.Component {
     );
   }
 }
+
+HomeCart.propTypes = {
+  location: PropTypes.shape({
+    state: PropTypes.shape({
+      buyList: PropTypes.shape({
+        map: PropTypes.func.isRequired,
+        length: PropTypes.number.isRequired,
+        thumbnail: PropTypes.string.isRequired,
+        id: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+        price: PropTypes.number.isRequired,
+      }).isRequired,
+    }).isRequired,
+  }).isRequired,
+};
 
 export default HomeCart;

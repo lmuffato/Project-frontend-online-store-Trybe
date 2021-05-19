@@ -1,41 +1,43 @@
 import React, { Component } from 'react';
+import FullName from './formComponents/FullName';
+import Email from './formComponents/Email';
+import Cpf from './formComponents/Cpf';
+import Phone from './formComponents/Phone';
+import Cep from './formComponents/Cep';
+import Address from './formComponents/Address';
 
 class Form extends Component {
-
   constructor() {
     super();
 
-    this.handleChange = this.handleChange.bind(this);
-
     this.state = {
-      nome: '',
-      // email: '',
-      // cpf: '',
-      // cidade: '',
-      // estado: '',
+      fullName: '',
+      email: '',
+      cpf: '',
+      phone: '',
+      cep: '',
+      address: '',
     };
   }
 
-  handleChange({ target }) {
-    this.setState({
-      nome: target.value,
-    });
+  handleChanges = ({ target }) => {
+    const { id, value } = target;
+    this.setState({ [id]: value });
   }
 
   render() {
-    const { nome } = this.state;
+    const { fullName, email, cpf, phone, cep, address } = this.state;
     return (
       <div>
         <form>
-          <label>
-            Nome:
-            <input
-              type="text"
-              value={ nome }
-              onChange={ this.handleChange }
-            />
-          </label>
+          <FullName value={ fullName } handleFunc={ this.handleChanges } />
+          <Email value={ email } handleFunc={ this.handleChanges } />
+          <Cpf value={ cpf } handleFunc={ this.handleChanges } />
+          <Phone value={ phone } handleFunc={ this.handleChanges } />
+          <Cep value={ cep } handleFunc={ this.handleChanges } />
+          <Address value={ address } handleFunc={ this.handleChanges } />
         </form>
+        <button type="button">COMPRAR</button>
       </div>
     );
   }

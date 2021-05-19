@@ -67,6 +67,7 @@ class Cart extends Component {
     );
   }
 }
+
 Cart.propTypes = {
   items: PropTypes.object,
   cartItemMethod: PropTypes.func,

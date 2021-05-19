@@ -65,10 +65,12 @@ export default class Landing extends Component {
         {products.length > 0 ? (
           products.map((product) => (
             <ProductCard
+              productSelected={ product }
               key={ product.id }
               title={ product.title }
               img={ product.thumbnail }
               price={ product.price }
+              id={ product.id }
             />
           ))
         ) : (

@@ -73,9 +73,7 @@ class SearchBar extends React.Component {
           <Link
             to={ {
               pathname: `/Product-Details/${product.id}`,
-              state: {
-                product: products[i],
-              },
+              state: { product: products[i] },
             } }
             data-testid="product-detail-link"
           >
@@ -118,8 +116,6 @@ class SearchBar extends React.Component {
           data-testid="shopping-cart-button"
         >
           <img
-            width="30px"
-            height="25px"
             src="https://image.flaticon.com/icons/png/512/126/126083.png"
             alt="Icone Cart"
             id="cart-image"

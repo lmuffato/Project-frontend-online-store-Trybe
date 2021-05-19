@@ -22,7 +22,10 @@ class ShoppingCart extends React.Component {
   }
 
   onRemove(event) {
-    const { removeFromCart, cart } = this.props;
+    let cart = localStorage.getItem('cart');
+    cart = JSON.parse(cart);
+    const { removeFromCart, cart: cartInProps } = this.props;
+    if (!cart) cart = cartInProps;
     let { total } = this.state;
     const { id } = event.target;
     const foundProduct = cart.products.find((product) => product.data.id === id);
@@ -140,8 +143,11 @@ class ShoppingCart extends React.Component {
   }
 
   render() {
+    let cart = localStorage.getItem('cart');
+    cart = JSON.parse(cart);
     const { total, increaseButtonDisabled } = this.state;
-    const { cart } = this.props;
+    const { cart: cartInProps } = this.props;
+    if (!cart) cart = cartInProps;
     const cartIsEmpty = cart.quantity < 1;
     return (
       <>

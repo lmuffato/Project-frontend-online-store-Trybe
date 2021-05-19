@@ -78,8 +78,12 @@ class ProductDetails extends React.Component {
   }
 
   render() {
+    let cart = localStorage.getItem('cart');
+    cart = JSON.parse(cart);
     const { product, productReviews } = this.state;
-    const { addToCart, cart } = this.props;
+    const { addToCart, cart: cartInProps } = this.props;
+
+    if (!cart) cart = cartInProps;
 
     if (!product || !product.attributes) return <h1>Loading...</h1>;
 

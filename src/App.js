@@ -83,7 +83,10 @@ class App extends React.Component {
   }
 
   addToCart({ target }, product) {
-    const { cart, products } = this.state;
+    let cart = localStorage.getItem('cart');
+    cart = JSON.parse(cart);
+    const { cart: cartInState, products } = this.state;
+    if (!cart) cart = cartInState;
     let addedProduct = {};
     let updatedCart = [];
 
@@ -131,7 +134,10 @@ class App extends React.Component {
   }
 
   removeFromCart(id) {
-    const { cart } = this.state;
+    let cart = localStorage.getItem('cart');
+    cart = JSON.parse(cart);
+    const { cart: cartInState } = this.state;
+    if (!cart) cart = cartInState;
     const productToRemove = cart.products.find((product) => product.data.id === id);
     const updatedCart = cart.products.filter((product) => product.data.id !== id);
     const quantity = cart.quantity - productToRemove.quantity;

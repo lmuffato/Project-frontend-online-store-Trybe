@@ -6,10 +6,14 @@ import Category from './components/Category';
 
 class Home extends React.Component {
   render() {
+    let cart = localStorage.getItem('cart');
+    cart = JSON.parse(cart);
     const {
       onSearch, onFilterByCategory, onFilterByQuery,
-      products, addToCart, cart,
+      products, addToCart, cart: cartInProps,
     } = this.props;
+
+    if (!cart) cart = cartInProps;
 
     return (
       <>

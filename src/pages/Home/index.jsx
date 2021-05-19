@@ -56,13 +56,7 @@ class Home extends React.Component {
   }
 
   render() {
-    const { categories, productsList, productsInCart } = this.state;
-    const location = {
-      pathname: '/Cart',
-      state: {
-        item: productsInCart,
-      },
-    };
+    const { categories, productsList } = this.state;
 
     return (
       <main id="home-page">
@@ -75,7 +69,7 @@ class Home extends React.Component {
           <SearchBar func={ this.generateArray } />
 
           <Button>
-            <Link data-testid="shopping-cart-button" to={ location }>Cart</Link>
+            <Link data-testid="shopping-cart-button" to="/Cart">Cart</Link>
           </Button>
 
           {productsList.length === 0

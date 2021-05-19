@@ -5,12 +5,12 @@ class ProductCard extends React.Component {
   render() {
     const { productList } = this.props;
     return (
-      <div>
+      <div className="products-cards">
         { productList.map((product) => (
           <div key={ product.id } data-testid="product">
-            <h1>{product.title}</h1>
+            <p>{product.title}</p>
             <p>{product.price}</p>
-            <img src={ product.thumbnail } alt="imagem" />
+            <img style={ { width: '50px' } } src={ product.thumbnail } alt="imagem" />
           </div>))}
       </div>
     );

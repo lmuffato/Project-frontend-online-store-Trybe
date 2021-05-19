@@ -25,10 +25,11 @@ class SearchProducts extends Component {
 
   addProductInCart = ({ target }) => {
     const { handle } = this.props;
-    console.log(target.value);
-    const product = target.value;
-    const productQuantity = target.parentElement.querySelector('.quantity').value;
-    // const title = target.parentElement.querySelector('.title-product').value;
+    const { productsList } = this.state;
+    const id = target.value;
+    const product = productsList.find((item) => item.id === id);
+    const quantityElment = target.parentElement.querySelector('.quantity');
+    const productQuantity = parseInt(quantityElment.value, 10);
     handle(product, productQuantity);
   }
 
@@ -68,7 +69,7 @@ class SearchProducts extends Component {
                     type="button"
                     data-testid="product-add-to-cart"
                     onClick={ this.addProductInCart }
-                    value={ product.title }
+                    value={ id }
                   >
                     Adicionar ao Carrinho
                   </button>

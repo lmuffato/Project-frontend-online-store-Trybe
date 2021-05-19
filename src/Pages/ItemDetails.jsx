@@ -40,7 +40,6 @@ ItemDetails.propTypes = {
       }).isRequired,
     }),
   }).isRequired,
-
 };
 
 export default ItemDetails;

@@ -1,0 +1,32 @@
+.conteiner-item {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  height: 60px;
+}
+
+.imgCart {
+  margin: 0 10px;
+  width: 40px;
+}
+
+.quantity-item {
+  border: solid black 1px;
+  border-radius: 30px;
+  height: 40px;
+  margin: 10px;
+  padding: 10px 15px;
+  width: 40px;
+}
+
+.button-change-quantity {
+  background-color: inherit;
+  border: none;
+  font-size: xx-large;
+  margin: 10px;
+}
+
+.title-item {
+  flex-basis: 500px;
+  flex-wrap: wrap;
+}

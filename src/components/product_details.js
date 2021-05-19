@@ -58,8 +58,8 @@ class ProductDetails extends React.Component {
       qtd: 1,
     };
     const avaliacoes = (JSON.parse(localStorage.getItem(id)))
-      ? (JSON.parse(localStorage.getItem(id, index)))
-        .map((avaliacao) => <p key={ index }>{ avaliacao }</p>) : '';
+      ? (JSON.parse(localStorage.getItem(id)))
+        .map((avaliacao, index) => <p key={ index }>{ avaliacao }</p>) : '';
     return (
       <div data-testid="product-detail-name">
         {item.title}
@@ -83,7 +83,9 @@ class ProductDetails extends React.Component {
         </form>
         <div>
           <h2>Avaliacoes</h2>
-          {avaliacoes}
+          <div>
+            {avaliacoes}
+          </div>
         </div>
         <Button obj={ newObj } dataTestId="product-detail-add-to-cart" />
         <ShopCartButton />

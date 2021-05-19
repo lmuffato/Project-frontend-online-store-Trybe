@@ -1,5 +1,6 @@
 // implement AddMovie component here
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './ShoppingCart.css';
 
@@ -98,6 +99,9 @@ class ShoppingCart extends Component {
     return (
       <section>
         {this.showProductsInCart()}
+        <Link to="/checkout" data-testid="checkout-products">
+          Finalizar Comprar
+        </Link>
       </section>
     );
   }

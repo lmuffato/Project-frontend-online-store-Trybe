@@ -14,7 +14,7 @@ class ProductDetails extends Component {
 
   render() {
     const { product } = this.state;
-    const { addItemToCart } = this.props;
+    const { addItemToCart, totalItemQty } = this.props;
 
     return (
       <section>
@@ -24,6 +24,7 @@ class ProductDetails extends Component {
             src="../images/shopping-basket.jpg"
             alt="Ícone de carrinho de compras"
           />
+          <span data-testid="shopping-cart-size">{totalItemQty}</span>
         </Link>
         <h1 data-testid="product-detail-name">{ product.title }</h1>
         <p>{ product.price }</p>

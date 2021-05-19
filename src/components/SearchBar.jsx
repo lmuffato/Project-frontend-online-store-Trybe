@@ -7,14 +7,6 @@ import { FaShoppingCart, FaSearch } from 'react-icons/fa';
 // import ShoppingCart from './ShoppingCart';
 
 class SearchBar extends Component {
-  // constructor(){
-  //   super()
-
-  //   this.state ={
-
-  //   }
-  // }
-
   renderInput = () => {
     const { onChange, value } = this.props;
     return (

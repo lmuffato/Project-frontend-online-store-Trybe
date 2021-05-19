@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+
 import ListagemProdutos from './Components/ListagemProdutos';
 import Details from './Components/Details';
 import ShoppingCart from './Pages/ShoppingCart';
+import Checkout from './Pages/Checkout';
 
 class App extends Component {
   constructor() {
@@ -15,23 +17,6 @@ class App extends Component {
     };
   }
 
-  handleAddToCart = ({ target }) => {
-    const { quantityCart } = this.state;
-    const { value } = target;
-    if (quantityCart[value] === undefined) {
-      this.setState((prevState) => ({
-        productsCart: [...prevState.productsCart, value],
-        quantityCart: { ...prevState.quantityCart, [value]: 1 },
-      }));
-    } else {
-      this.setState((prevState) => ({
-        productsCart: [...prevState.productsCart, value],
-        quantityCart: { ...prevState.quantityCart,
-          [value]: prevState.quantityCart[value] + 1 },
-      }));
-    }
-  }
-
   render() {
     const { productsCart, quantityCart } = this.state;
     return (
@@ -40,8 +25,9 @@ class App extends Component {
           <Route
             exact
             path="/cart"
-            render={ () => (
+            render={ (props) => (
               <ShoppingCart
+                { ...props }
                 products={ productsCart }
                 quantity={ quantityCart }
                 size={ productsCart.length }
@@ -65,6 +51,10 @@ class App extends Component {
               size={ productsCart.length }
               { ...props }
             />) }
+          />
+          <Route
+            path="/checkout"
+            component={ Checkout }
           />
         </Switch>
       </BrowserRouter>

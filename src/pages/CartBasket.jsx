@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { oneOfType, objectOf, object, array, string, number } from 'prop-types';
+import { Link } from 'react-router-dom';
 
 class CartBasket extends Component {
   emptyCart = () => (
@@ -22,6 +23,7 @@ class CartBasket extends Component {
     return (
       <main>
         {products.length > 0 ? this.cartList(products) : this.emptyCart() }
+        <Link to="/">Voltar</Link>
       </main>
     );
   }

@@ -10,6 +10,7 @@ class SearchBar extends React.Component {
       filter: '',
       status: false,
       products: [],
+      buyList: [],
     };
     this.eventFilter = this.eventFilter.bind(this);
     this.handleFilter = this.handleFilter.bind(this);
@@ -19,21 +20,18 @@ class SearchBar extends React.Component {
 
   async handleFilter() {
     const { filter, status } = this.state;
-    // console.log('Status', status, 'Filtro', filter);
     const { getProductsFromCategoryAndQuery } = apiUrl;
     if (status === true) {
       const result = await getProductsFromCategoryAndQuery('', filter);
       this.setState({
         products: result.results,
       }, () => {
-        // console.log('State', this.state.products);
       });
     }
   }
 
   async handleFilterCategory(event) {
     const category = event.target.value;
-    // console.log(category);
     const { getProductsFromCategoryAndQuery } = apiUrl;
     const result = await getProductsFromCategoryAndQuery(category, '');
     const { results } = result;
@@ -41,6 +39,24 @@ class SearchBar extends React.Component {
       products: results,
     });
   }
+
+  addItem = (event) => {
+    const { value } = event.target;
+    this.setState((previ) => ({
+      buyList: [...previ.buyList, JSON.parse(value)],
+    }));
+  }
+
+  renderButtonAdd = (item) => (
+    <button
+      data-testid="product-add-to-cart"
+      onClick={ this.addItem }
+      value={ item }
+      type="button"
+    >
+      add
+    </button>
+  )
 
   products() {
     const { products } = this.state;
@@ -64,20 +80,7 @@ class SearchBar extends React.Component {
             <h6>{product.title}</h6>
           </Link>
           <p>{` R$ ${product.price} `}</p>
-          <Link
-            to={ {
-              pathname: '/cart',
-              state: { product: products[i] },
-            } }
-            key={ product.id }
-          >
-            <button
-              type="button"
-              data-testid="product-add-to-cart"
-            >
-              Adicionar ao carrinho
-            </button>
-          </Link>
+          { this.renderButtonAdd(JSON.stringify(product)) }
         </div>
       ))
     );
@@ -98,6 +101,7 @@ class SearchBar extends React.Component {
   }
 
   render() {
+    const { buyList } = this.state;
     return (
       <div>
         <h2 data-testid="home-initial-message">
@@ -107,7 +111,10 @@ class SearchBar extends React.Component {
         <button type="button" data-testid="query-button" onClick={ this.handleFilter }>
           Search
         </button>
-        <Link to="/cart" data-testid="shopping-cart-button">
+        <Link
+          to={ { pathname: '/cart', state: { buyList } } }
+          data-testid="shopping-cart-button"
+        >
           <img
             src="https://image.flaticon.com/icons/png/512/126/126083.png"
             alt="Icone Cart"
@@ -120,7 +127,5 @@ class SearchBar extends React.Component {
     );
   }
 }
-
-// vqv
 
 export default SearchBar;

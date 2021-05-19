@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import Form from '../components/Form';
+import PropTypes, { shape } from 'prop-types';
+import ClientInfoForm from '../components/ClientInfoForm';
 
 export default class Checkout extends Component {
   constructor(props) {
@@ -87,7 +88,7 @@ export default class Checkout extends Component {
           <p>{totalPrice}</p>
         </span>
 
-        <Form
+        <ClientInfoForm
           clientInfo={ clientInfo }
           onChange={ this.handleChange }
           onSubmit={ this.handleSubmit }
@@ -96,3 +97,9 @@ export default class Checkout extends Component {
     );
   }
 }
+
+Checkout.propTypes = {
+  location: PropTypes.objectOf(shape({
+    products: PropTypes.arrayOf(PropTypes.object),
+  })),
+}.isRequired;

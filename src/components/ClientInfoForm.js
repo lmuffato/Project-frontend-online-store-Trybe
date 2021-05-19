@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes, { shape } from 'prop-types';
 
-export default class Form extends Component {
+export default class ClientInfoForm extends Component {
   render() {
     const { clientInfo: { fullname, email, cpf, phone, cep, address } } = this.props;
     const { onChange: handleChange, onSubmit: handleSubmit } = this.props;
@@ -106,7 +106,7 @@ export default class Form extends Component {
   }
 }
 
-Form.propTypes = {
+ClientInfoForm.propTypes = {
   handleChange: PropTypes.func,
   handleSubmit: PropTypes.func,
   clientInfo: PropTypes.objectOf(shape({

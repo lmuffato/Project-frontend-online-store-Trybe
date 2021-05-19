@@ -54,7 +54,9 @@ class App extends Component {
           <Route path="/item-details" component={ ItemDetails } />
           <Route
             path="/checkout"
-            render={ (props) => <Checkout { ...props } productsInCart={ productsInCart } /> }
+            render={
+              (props) => <Checkout { ...props } productsInCart={ productsInCart } />
+            }
           />
         </BrowserRouter>
       </section>

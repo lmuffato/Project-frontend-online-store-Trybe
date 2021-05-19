@@ -18,6 +18,8 @@ class App extends React.Component {
     const clickedItemTitle = event.target.getAttribute('data-title');
     const clickedItemPrice = event.target.getAttribute('data-price');
     const clickedItemThumbnail = event.target.getAttribute('data-thumbnail');
+    const clickedItemMaxAvailable = event.target.getAttribute('data-available-quantity');
+
     const currentItemsinCart = Object.keys(cartList);
 
     if (!currentItemsinCart.includes(clickedItemId)) {
@@ -28,12 +30,13 @@ class App extends React.Component {
             qty: 1,
             title: clickedItemTitle,
             price: clickedItemPrice,
-            thumbnail: clickedItemThumbnail } },
+            thumbnail: clickedItemThumbnail,
+            maxAvailable: clickedItemMaxAvailable } },
         ),
       }));
     } else {
       const updatedCart = { ...cartList };
-      updatedCart[clickedItemId].qty += 1;
+      updatedCart[clickedItemId].qty += 1; // Colocar IF do MAX
       this.setState({ cartList: updatedCart }, () => this.saveCartToLocalStorage());
     }
   }
@@ -41,13 +44,16 @@ class App extends React.Component {
   updateItemQtyInCart = (event) => {
     const operation = event.target.getAttribute('operation');
     const itemId = event.target.getAttribute('data-id');
+    // const itemMax = event.target.getAttribute('data-available-quantity');
     const { cartList } = this.state;
     const updatedCart = { ...cartList };
 
-    if (operation === '+') {
+    if (operation === '+' && updatedCart[itemId].qty < updatedCart[itemId].maxAvailable) {
       updatedCart[itemId].qty += 1;
-    } else {
-      updatedCart[itemId].qty -= 1;
+    } else if (operation === '-' && updatedCart[itemId].qty > 1) {
+      updatedCart[itemId].qty -= 1; // Futura função para remover o item do carrinho
+      // } else {
+      //   updatedCart[itemId].qty -= 1;
     }
 
     this.setState({ cartList: updatedCart }, () => this.saveCartToLocalStorage());

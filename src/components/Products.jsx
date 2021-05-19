@@ -25,7 +25,7 @@ Products.propTypes = {
     id: PropTypes.string,
     title: PropTypes.string,
     thumbnail: PropTypes.string,
-    price: PropTypes.string,
+    price: PropTypes.number,
   })).isRequired,
   addItemToCart: PropTypes.func.isRequired,
 };

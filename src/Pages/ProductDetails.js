@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { number, string } from 'prop-types';
+import { number, string, shape } from 'prop-types';
 
 class ProductDetails extends Component {
   render() {
@@ -39,9 +39,13 @@ class ProductDetails extends Component {
 }
 
 ProductDetails.propTypes = {
-  title: string,
-  thumbnail: string,
-  price: number,
-}.isRequired;
+  location: shape({
+    state: shape({
+      title: string,
+      price: number,
+      thumbnail: string,
+    }),
+  }).isRequired,
+};
 
 export default ProductDetails;

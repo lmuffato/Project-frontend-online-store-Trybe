@@ -66,6 +66,7 @@ ProductDetails.propTypes = {
     }),
   }).isRequired,
   addItemToCart: PropTypes.func.isRequired,
+  totalItemQty: PropTypes.number.isRequired,
 };
 
 export default ProductDetails;

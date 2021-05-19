@@ -25,13 +25,10 @@ class App extends Component {
         const productQuantity = (product.id in productsInCart)
           ? productsInCart[product.id].productQuantity + addQuantity
           : addQuantity;
-        return ({
-          productsInCart:
-            {
-              ...productsInCart,
-              [product.id]: { ...product, productQuantity },
-            },
-        });
+        const updateProductsInCart = productQuantity <= product.available_quantity
+          ? { ...productsInCart, [product.id]: { ...product, productQuantity } }
+          : { ...productsInCart };
+        return ({ productsInCart: updateProductsInCart });
       }, () => {
         const { productsInCart } = this.state;
         console.log(productsInCart);

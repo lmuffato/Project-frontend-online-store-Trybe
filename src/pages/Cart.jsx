@@ -25,12 +25,19 @@ class Cart extends React.Component {
     this.setState({
       products,
     });
-    this.sumPrices(products);
+    // this.sumPrices(products);
   }
 
-  sumPrices = (products) => {
-    const totalPrice = products.reduce((acc, cur) => acc + cur.price, 0);
-    this.setState({ totalPrice });
+  // sumPrices = (products) => {
+  //   const totalPrice = products.reduce((acc, cur) => acc + cur.price, 0);
+  //   this.setState({ totalPrice });
+  // }
+
+  handleOnChange = (totalPrice) => {
+    console.log('oi');
+    // this.setState((prevState) => ({
+    //   totalPrice: prevState.totalPrice + totalPrice,
+    // }));
   }
 
   render() {
@@ -39,7 +46,7 @@ class Cart extends React.Component {
       <div>
         {!storage && <EmptyCart />}
         { storage && products.map((product) => (
-          <CartItem key={ product.id } product={ product } />
+          <CartItem key={ product.id } product={ product } onChange={ this.handleOnChange } />
         )) }
         <p>{`Preço total: ${totalPrice}`}</p>
       </div>

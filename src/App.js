@@ -4,7 +4,7 @@ import { addToLocalStorage } from './services/shoppingCart';
 import Home from './pages/Home';
 import ShoppingCart from './pages/ShoppingCart';
 import ProductDetail from './pages/ProductDetail';
-import './App.css';
+import './styles/FrontPage.css';
 
 class App extends React.Component {
   render() {

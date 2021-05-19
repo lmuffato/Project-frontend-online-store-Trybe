@@ -29,8 +29,16 @@ export default class ShoppingCart extends React.Component {
               <p data-testid="shopping-cart-product-name">{item.title}</p>
               <img src={ item.thumbnail } alt={ item.thumbnailId } width="100px" />
               <p>
-                R$
-                {item.price.toFixed(2)}
+                Preço unitário:
+                { ` ${item.standardPrice}` }
+              </p>
+              <p>
+                Subtotal
+                { item.buyQuantity > 1
+                  ? ` (${item.buyQuantity} itens)`
+                  : ` (${value} item)` }
+                : R$
+                {item.price === null ? item.standardPrice : item.price.toFixed(2)}
               </p>
               <label htmlFor={ item.title }>
                 Quantidade:
@@ -38,8 +46,8 @@ export default class ShoppingCart extends React.Component {
                   type="number"
                   min={ 1 }
                   max={ item.availableQuantity }
+                  // value={ value }
                   defaultValue={ item.buyQuantity }
-                  data-testid="shopping-cart-product-quantity"
                   onChange={ (event) => {
                     quantityProduct(event);
                     this.changeQuantity(event);

@@ -9,7 +9,7 @@ export default class ProductCard extends React.Component {
   render() {
     const { item } = this.props;
     return (
-      <div>
+      <div className="product-box">
         <Link
           to={ `/${item.id}` }
           data-testid="product-detail-link"
@@ -24,7 +24,10 @@ export default class ProductCard extends React.Component {
             </p>
           </div>
         </Link>
-        <Button item={ item } data-testid="product-add-to-cart" />
+        <Button
+          item={ item }
+          dataTestId="product-add-to-cart"
+        />
       </div>
     );
   }

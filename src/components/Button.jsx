@@ -4,11 +4,11 @@ import { creatObject } from '../services/shoppingCart';
 
 export default class Button extends React.Component {
   render() {
-    const { item } = this.props;
+    const { item, dataTestId } = this.props;
     return (
       <button
         type="submit"
-        data-testid="product-detail-add-to-cart"
+        data-testid={ dataTestId }
         className="add-to-cart"
         onClick={ () => creatObject(item) }
       >

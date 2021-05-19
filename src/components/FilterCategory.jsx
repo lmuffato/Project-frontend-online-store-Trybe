@@ -11,13 +11,13 @@ class FilterCategory extends Component {
   }
 
   render() {
-    const test = () => {
-      getCategories().then((category) => {
-        this.setState({
-          arrayCategory: category,
-        });
+    // const test = () => {
+    getCategories().then((category) => {
+      this.setState({
+        arrayCategory: category,
       });
-    };
+    });
+    // };
     const { arrayCategory } = this.state;
     console.log(arrayCategory);
     if (arrayCategory) {

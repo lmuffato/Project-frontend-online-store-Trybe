@@ -41,6 +41,7 @@ export const creatObject = async (item) => {
     standardPrice: item.price,
     price: item.price,
     buyQuantity: 1,
+    availableQuantity: item.available_quantity,
   };
   productsArray.push(cartObj);
   addToLocalStorage(productsArray);

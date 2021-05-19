@@ -1,10 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import shoppingCart from '../imagens/shoppingCart.svg';
 import CategoryList from '../components/CategoryList';
-import ProductCard from '../components/ProductCard';
 import { getProductsFromCategoryAndQuery } from '../services/api';
-import Loading from './Loading';
+import FrontPage from '../components/FrontPage';
 
 export default class Home extends React.Component {
   constructor() {
@@ -51,51 +48,22 @@ export default class Home extends React.Component {
   }
 
   render() {
-    const { input, loading, items } = this.state;
+    const { loading, items } = this.state;
     return (
-      <div className="content-container">
-        <section className="search-and-products">
-          <div className="searchbar-container">
-            <button
-              type="submit"
-              data-testid="query-button"
-              id="search-button"
-              onClick={ this.request }
-            >
-              Pesquisar
-            </button>
-            <input
-              type="text"
-              name="input"
-              className="searchbar"
-              onChange={ this.handleChangeInput }
-              data-testid="query-input"
-            />
-            <Link
-              to="/ShoppingCart"
-              data-testid="shopping-cart-button"
-              className="shopping-cart-button"
-            >
-              <img
-                src={ shoppingCart }
-                alt="Carrinho de compras"
-                className="shopping-cart-image"
-              />
-            </Link>
-          </div>
-          <p data-testid="home-initial-message">
-            Digite algum termo de pesquisa ou escolha uma categoria.
-          </p>
-          {loading
-            ? <Loading />
-            : items.map((item) => <ProductCard item={ item } key={ item.id } />)}
-        </section>
-        <CategoryList
-          className="product-list"
-          handleChange={ this.handleChangeCheckbox }
-          // request={ this.request }
-        />
-      </div>
+      <main>
+        <div className="content-container">
+          <FrontPage
+            request={ this.request }
+            handleChangeInput={ this.handleChangeInput }
+            items={ items }
+            loading={ loading }
+          />
+          <CategoryList
+            className="product-list"
+            handleChange={ this.handleChangeCheckbox }
+          />
+        </div>
+      </main>
     );
   }
 }

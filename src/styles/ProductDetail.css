@@ -43,3 +43,43 @@
   font-size: 10pt;
   width: 30%;
 }
+
+h3 {
+  margin-left: 20px;
+}
+
+.review-form {
+  border: 2px solid rgba(59, 59, 59, 0.459);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px;
+  width: 1200px;
+}
+
+.email-input {
+  height: 24px;
+  margin-bottom: 20px;
+  margin-right: 20px;
+  width: 250px;
+}
+
+.icon {
+  margin-right: 10px;
+}
+
+.text-area {
+  font-family: Helvetica , Arial , sans-serif;
+  min-height: 80px;
+  resize: none;
+  width: 440px;
+}
+
+.review-btn {
+  height: 30px;
+  margin-top: 20px;
+  width: 80px;
+}

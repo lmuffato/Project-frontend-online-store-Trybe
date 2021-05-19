@@ -22,9 +22,9 @@ class HomeCart extends React.Component {
         <img src={ product.thumbnail } alt={ product.id } />
         <h6 data-testid="shopping-cart-product-name">{product.title}</h6>
         <p>{` R$ ${product.price} `}</p>
-        <button data-testid="shopping-cart-product-quantity" type="button">
-          { counter }
-        </button>
+        <button type="button" data-testid="product-increase-quantity">-</button>
+        <p data-testid="shopping-cart-product-quantity">{ counter }</p>
+        <button type="button" data-testid="product-increase-quantity">+</button>
       </div>));
     return renderList;
   }

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import AddToCart from './AddToCart';
 
 class ProductList extends React.Component {
   render() {
@@ -23,6 +24,7 @@ class ProductList extends React.Component {
             >
               Saiba mais
             </Link>
+            <AddToCart product={ product } />
           </div>
         ))}
       </div>

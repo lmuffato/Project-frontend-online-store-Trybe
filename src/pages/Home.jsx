@@ -41,7 +41,7 @@ class Home extends React.Component {
   }
 
   render() {
-    const { products, loading, isClicked, input } = this.state;
+    const { products, loading, input } = this.state;
     return (
       <>
         <SearchBar
@@ -51,7 +51,7 @@ class Home extends React.Component {
         />
         <Categories onClick={ this.handleRadio } />
         { loading && '...carregando' }
-        <ProductList products={ products } isClicked={ isClicked } />
+        <ProductList products={ products } />
         <CartButton data-testid="shopping-cart-button" />
       </>
     );

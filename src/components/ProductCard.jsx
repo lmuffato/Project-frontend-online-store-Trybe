@@ -26,6 +26,7 @@ class ProductCard extends Component {
           data-title={ item.title }
           data-price={ item.price }
           data-thumbnail={ item.thumbnail }
+          data-available-quantity={ item.available_quantity }
           data-testid="product-add-to-cart"
         >
           Adicionar ao carrinho
@@ -41,6 +42,7 @@ ProductCard.propTypes = {
     title: PropTypes.string,
     thumbnail: PropTypes.string,
     price: PropTypes.number,
+    available_quantity: PropTypes.number,
     shipping: {
       free_shipped: PropTypes.boolean,
     }.isRequired,

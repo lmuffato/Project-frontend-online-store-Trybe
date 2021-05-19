@@ -42,6 +42,7 @@ class ProductDetails extends Component {
           data-title={ product.title }
           data-price={ product.price }
           data-thumbnail={ product.thumbnail }
+          data-available-quantity={ product.available_quantity }
           data-testid="product-detail-add-to-cart"
         >
           Adicionar ao carrinho

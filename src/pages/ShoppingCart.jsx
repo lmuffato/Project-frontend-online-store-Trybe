@@ -28,6 +28,7 @@ class ShoppingCart extends Component {
 
 ShoppingCart.propTypes = {
   cartList: PropTypes.shape({}).isRequired,
+  updateItemQtyInCart: PropTypes.func.isRequired,
 };
 
 export default ShoppingCart;

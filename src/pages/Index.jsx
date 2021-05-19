@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { func, arrayOf, objectOf, oneOfType, string, number } from 'prop-types';
+import { func } from 'prop-types';
 import SearchBar from '../components/SearchBar';
 import Categories from '../components/Categories';
 import * as api from '../services/api';
@@ -53,7 +53,7 @@ class Index extends Component {
 
   render() {
     const { categories, searchText, products, loading } = this.state;
-    const { addToCart, shoppingCart } = this.props;
+    const { addToCart } = this.props;
     return (
       <main>
         <SearchBar
@@ -61,7 +61,7 @@ class Index extends Component {
           onChange={ this.handleSearchInput }
           onClick={ this.fetchProducts }
         />
-        <CartButton shoppingCart={ shoppingCart } />
+        <CartButton />
         <Categories
           onClick={ this.selectCategory }
           categories={ categories }
@@ -76,7 +76,6 @@ class Index extends Component {
 
 Index.propTypes = {
   addToCart: func,
-  shoppingCart: arrayOf(objectOf(oneOfType([string, number]))),
 }.isRequired;
 
 export default Index;

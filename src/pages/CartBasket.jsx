@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { oneOfType, objectOf, object, array, string, number } from 'prop-types';
+import { oneOfType, objectOf, object, array, string, number, func } from 'prop-types';
 import { Link } from 'react-router-dom';
+import { IoIosAdd, IoIosRemove, IoIosTrash } from 'react-icons/io';
 
 class CartBasket extends Component {
   emptyCart = () => (
@@ -10,19 +11,36 @@ class CartBasket extends Component {
       Seu carrinho está vazio
     </span>);
 
-  cartList = (products) => products.map((product) => (
-    <div key={ product.id }>
-      <p data-testid="shopping-cart-product-name">{product.title}</p>
-      <p>{product.price}</p>
-      <p data-testid="shopping-cart-product-quantity">{product.quantity}</p>
-    </div>));
+  cartList = (products, increaseQuantity, decreaseQuantity, removeCartItem) => (
+    products.map((product) => {
+      const { id, title, quantity, price } = product;
+      return (
+        <div key={ id }>
+          <p data-testid="shopping-cart-product-name">{title}</p>
+          <IoIosRemove
+            data-testid="product-decrease-quantity"
+            onClick={ () => decreaseQuantity(id) }
+          />
+          <span data-testid="shopping-cart-product-quantity">{quantity}</span>
+          <IoIosAdd
+            data-testid="product-increase-quantity"
+            onClick={ () => increaseQuantity(id) }
+          />
+          <p>{(quantity * price).toFixed(2)}</p>
+          <IoIosTrash onClick={ () => removeCartItem(id) } />
+        </div>);
+    }));
 
   render() {
-    const { location } = this.props;
-    const { state: products } = location;
+    const { increaseQuantity,
+      decreaseQuantity, removeCartItem, shoppingCart } = this.props;
+    // const { state: products } = location;
     return (
       <main>
-        {products.length > 0 ? this.cartList(products) : this.emptyCart() }
+        {shoppingCart.length > 0
+          ? this.cartList(shoppingCart,
+            increaseQuantity, decreaseQuantity, removeCartItem)
+          : this.emptyCart() }
         <Link to="/">Voltar</Link>
       </main>
     );
@@ -30,7 +48,10 @@ class CartBasket extends Component {
 }
 
 CartBasket.propTypes = {
-  location: objectOf(oneOfType([string, number, object, array])).isRequired,
+  shoppingCart: objectOf(oneOfType([string, number, object, array])).isRequired,
+  increaseQuantity: func.isRequired,
+  decreaseQuantity: func.isRequired,
+  removeCartItem: func.isRequired,
 };
 
 export default CartBasket;

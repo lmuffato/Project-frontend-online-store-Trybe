@@ -85,9 +85,9 @@ export default class ShoppingCart extends Component {
       <div>
         <h1>Carrinho de Compras</h1>
         <section>
-          { cartArray.length > 0 ? this.loadCart(cartArray) : this.emptyMsg() }
+          { cartArray ? this.loadCart(cartArray) : this.emptyMsg() }
         </section>
-        { cartArray.length > 0
+        { cartArray
           ? <h3>{`Valor total da Compra: ${this.totalValue(cartArray)}`}</h3> : ''}
       </div>
     );

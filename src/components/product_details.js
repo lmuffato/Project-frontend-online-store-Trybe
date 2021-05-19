@@ -24,11 +24,12 @@ class ProductDetails extends React.Component {
 
   handleSubmit() {
     const { textArea, select } = this.state;
+    const { match: { params: { id } } } = this.props;
     const productEvaluation = `Texto:${textArea}, Nota:${select}`;
-    const previousEvaluations = JSON.parse(localStorage.getItem('productSubmit'));
+    const previousEvaluations = JSON.parse(localStorage.getItem(id));
     const evaluationUpdate = !previousEvaluations ? [] : previousEvaluations;
     localStorage
-      .setItem('productSubmit', JSON.stringify([...evaluationUpdate, productEvaluation]));
+      .setItem(id, JSON.stringify([...evaluationUpdate, productEvaluation]));
   }
 
   async getProductsById(id) {
@@ -48,6 +49,7 @@ class ProductDetails extends React.Component {
 
   render() {
     const { item } = this.state;
+    const { match: { params: { id } } } = this.props;
     const newObj = {
       id: item.id,
       title: item.title,
@@ -55,6 +57,7 @@ class ProductDetails extends React.Component {
       thumbnail: item.thumbnail,
       qtd: 1,
     };
+    const avaliacoes = (JSON.parse(localStorage.getItem(id))) ? (JSON.parse(localStorage.getItem(id))).map((avaliacao) => <p>{ avaliacao }</p>) : '';
     return (
       <div data-testid="product-detail-name">
         {item.title}
@@ -76,6 +79,10 @@ class ProductDetails extends React.Component {
           </label>
           <input onClick={ () => this.handleSubmit() } type="submit" value="Enviar" />
         </form>
+        <div>
+          <h2>Avaliacoes</h2>
+          {avaliacoes}
+        </div>
         <Button obj={ newObj } dataTestId="product-detail-add-to-cart" />
         <ShopCartButton />
       </div>

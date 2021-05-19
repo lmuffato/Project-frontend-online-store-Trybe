@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class ListaCheckout extends Component {
   render() {
@@ -13,3 +14,11 @@ export default class ListaCheckout extends Component {
     );
   }
 }
+
+ListaCheckout.propTypes = {
+  product: PropTypes.shape({
+    title: PropTypes.string,
+    thumbnail: PropTypes.string,
+    price: PropTypes.number,
+  }).isRequired,
+};

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { oneOfType, objectOf, object, array, string, number, func } from 'prop-types';
+import { oneOfType, arrayOf, object, array, string, number, func } from 'prop-types';
 import { Link } from 'react-router-dom';
 import { IoIosAdd, IoIosRemove, IoIosTrash } from 'react-icons/io';
 
@@ -34,7 +34,6 @@ class CartBasket extends Component {
   render() {
     const { increaseQuantity,
       decreaseQuantity, removeCartItem, shoppingCart } = this.props;
-    // const { state: products } = location;
     return (
       <main>
         {shoppingCart.length > 0
@@ -48,7 +47,7 @@ class CartBasket extends Component {
 }
 
 CartBasket.propTypes = {
-  shoppingCart: objectOf(oneOfType([string, number, object, array])).isRequired,
+  shoppingCart: arrayOf(oneOfType([string, number, object, array])).isRequired,
   increaseQuantity: func.isRequired,
   decreaseQuantity: func.isRequired,
   removeCartItem: func.isRequired,

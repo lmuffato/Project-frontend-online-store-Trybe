@@ -4,6 +4,7 @@ import { oneOfType, objectOf, object, string, number, func, arrayOf } from 'prop
 import ProductInfo from '../components/ProductInfo';
 import AddToCartButton from '../components/AddToCartButton';
 import CartButton from '../components/CartButton';
+import RatingForm from '../components/RatingForm';
 
 class ProductDetails extends Component {
   render() {
@@ -12,16 +13,20 @@ class ProductDetails extends Component {
     const { id, title, price, thumbnail } = product;
     const cartProduct = { id, title, price, thumbnail, quantity: 1 };
     return (
-      <section className="product-details">
-        <CartButton shoppingCart={ shoppingCart } />
-        <ProductInfo product={ product } />
-        <Link to="/">Voltar</Link>
-        <AddToCartButton
-          cartProduct={ cartProduct }
-          addToCart={ addToCart }
-          testid="product-detail-add-to-cart"
-        />
-      </section>
+      <>
+        <section className="product-details">
+          <CartButton shoppingCart={ shoppingCart } />
+          <ProductInfo product={ product } />
+          <Link to="/">Voltar</Link>
+          <AddToCartButton
+            cartProduct={ cartProduct }
+            addToCart={ addToCart }
+            testid="product-detail-add-to-cart"
+          />
+        </section>
+        <RatingForm />
+        {/* <ComentSection /> */}
+      </>
     );
   }
 }

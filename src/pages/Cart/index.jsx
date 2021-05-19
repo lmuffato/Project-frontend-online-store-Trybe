@@ -38,10 +38,13 @@ class Cart extends React.Component {
 }
 
 Cart.propTypes = {
-  location: PropTypes.shape({
+  cartProduct: PropTypes.arrayOf(
+    PropTypes.object,
+  ).isRequired,
+  /*  location: PropTypes.shape({
     state: PropTypes.shape({
       item: PropTypes.arrayOf(
-        PropTypes.shape({
+        PropTypes.shape(
           id: PropTypes.string,
           price: PropTypes.number,
           thumbnail: PropTypes.string,
@@ -49,7 +52,7 @@ Cart.propTypes = {
         }),
       ),
     }),
-  }).isRequired,
+  }).isRequired, */
 };
 
 export default Cart;

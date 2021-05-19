@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import Button from '../../components/Button/index';
@@ -20,7 +21,6 @@ class Home extends React.Component {
     this.state = {
       categories: [],
       arrayOfItems: [],
-      cardProps: [],
     };
   }
 
@@ -41,13 +41,6 @@ class Home extends React.Component {
     });
   }
 
-  getPropsOfItem = (obj) => {
-    const { cardProps } = this.state;
-    this.setState({
-      cardProps: [...cardProps, obj],
-    });
-  }
-
   async fetchCategories() {
     const categories = await getCategories();
 
@@ -55,13 +48,8 @@ class Home extends React.Component {
   }
 
   render() {
-    const { categories, arrayOfItems, cardProps } = this.state;
-    const location = {
-      pathname: '/Cart',
-      state: {
-        item: cardProps,
-      },
-    };
+    const { categories, arrayOfItems } = this.state;
+    const { func } = this.props;
     return (
       <main id="home-page">
         <CategoriesBar
@@ -71,15 +59,19 @@ class Home extends React.Component {
         <section>
           <SearchBar func={ this.generateArray } />
           <Button>
-            <Link data-testid="shopping-cart-button" to={ location }>Cart</Link>
+            <Link data-testid="shopping-cart-button" to="/Cart">Cart</Link>
           </Button>
           {arrayOfItems.length === 0
             ? <p>Nenhum produto foi encontrado</p>
-            : <ListProducts arrayOfItems={ arrayOfItems } func={ this.getPropsOfItem } />}
+            : <ListProducts arrayOfItems={ arrayOfItems } func={ func } />}
         </section>
       </main>
     );
   }
 }
+
+Home.propTypes = {
+  func: PropTypes.func.isRequired,
+};
 
 export default Home;

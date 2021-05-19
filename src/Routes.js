@@ -30,7 +30,11 @@ class Routes extends React.Component {
             render={ (props) => (
               <Cart { ...props } cartProduct={ cartProduct } />) }
           />
-          <Route path="/" component={ Home } exact />
+          <Route
+            exact
+            path="/"
+            render={ (props) => <Home { ...props } func={ this.addToCart } /> }
+          />
           <Route
             path="/itemDetails/:itemId"
             render={ (props) => <ProductDetails { ...props } func={ this.addToCart } /> }

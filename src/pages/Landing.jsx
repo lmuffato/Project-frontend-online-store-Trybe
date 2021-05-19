@@ -68,7 +68,7 @@ export default class Landing extends Component {
     return (
       <div>
         <IconCart />
-        <SearchBar onChange={ this.handleChange } />
+        <SearchBar />
         <InitialMessage />
         <aside>
           <Categories onChange={ this.handleChange } />

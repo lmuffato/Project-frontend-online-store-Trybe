@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 class Products extends Component {
   render() {
-    const { mlItems } = this.props;
+    const { mlItems, callBack } = this.props;
     return (
       <section>
         {mlItems.map((item) => (
@@ -28,6 +28,13 @@ class Products extends Component {
               />
               <h2>{item.price}</h2>
             </Link>
+            <button
+              data-testid="product-add-to-cart"
+              type="button"
+              onClick={ () => callBack(item) }
+            >
+              Adicionar ao Carrinho
+            </button>
           </section>))}
       </section>
     );
@@ -35,9 +42,8 @@ class Products extends Component {
 }
 
 Products.propTypes = {
-  mlItems: PropTypes
-    .arrayOf(PropTypes.object)
-    .isRequired,
-};
+  mlItems: PropTypes.arrayOf(PropTypes.object),
+  callBack: PropTypes.func,
+}.isRequired;
 
 export default Products;

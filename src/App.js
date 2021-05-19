@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Home from './pages/Home';
 import ShoppingCart from './pages/ShoppingCart';
-import ProductDetails from './pages/Home/components/ProductDetails';
+import ProductDetails from './pages/ProductDetails';
 import { getProductsFromCategoryAndQuery } from './services/api';
 import FinalizingPurchase from './pages/FinalizingPurchase';
 import PurchaseSummary from './pages/Home/components/PurchaseSummary';
@@ -17,12 +17,14 @@ class App extends React.Component {
       selectedCategory: '',
       searchedQuery: '',
       cart: [],
+      allReviews: [],
     };
 
     this.handleClick = this.handleClick.bind(this);
     this.filterFromCategory = this.filterFromCategory.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.setCart = this.setCart.bind(this);
+    this.setReviews = this.setReviews.bind(this);
     this.addToCart = this.addToCart.bind(this);
     this.removeFromCart = this.removeFromCart.bind(this);
   }
@@ -48,6 +50,32 @@ class App extends React.Component {
   setCart(cart) {
     this.setState({
       cart,
+    });
+  }
+
+  setReviews(productReviews, id) {
+    const { allReviews } = this.state;
+
+    let reviews = [];
+
+    const foundReview = allReviews.find((review) => review.productId === id);
+
+    if (foundReview) {
+      reviews = allReviews.map((review) => {
+        if (review.productId === id) {
+          review.reviews = [...productReviews.reviews];
+        }
+        return review;
+      });
+    } else {
+      reviews = [
+        ...allReviews,
+        { ...productReviews },
+      ];
+    }
+
+    this.setState({
+      allReviews: reviews,
     });
   }
 
@@ -104,7 +132,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { products, cart } = this.state;
+    const { products, cart, allReviews } = this.state;
     return (
       <BrowserRouter>
         <Switch>
@@ -129,6 +157,8 @@ class App extends React.Component {
             component={
               (props) => (<ProductDetails
                 addToCart={ this.addToCart }
+                allReviews={ allReviews }
+                setReviews={ this.setReviews }
                 { ...props }
               />)
             }

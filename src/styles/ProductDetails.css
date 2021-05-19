@@ -1,0 +1,26 @@
+.assessments {
+  height: 25px;
+}
+
+fieldset {
+  display: flex;
+  flex-direction: column;
+}
+
+textarea {
+  height: 70px;
+  margin-top: 20px;
+  width: 16%;
+}
+
+img {
+  margin-left: 40px;
+  margin-top: 20px;
+  width: 20px;
+}
+
+.submit {
+  height: 40px;
+  margin-top: 20px;
+  width: 10%;
+}

@@ -1,0 +1,22 @@
+.conteiner-main {
+  display: flex;
+}
+
+.conteiner-categories {
+  border: solid black 1px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.conteiner-search {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: baseline;
+}
+
+.conteiner-controls {
+  display: flex;
+  justify-content: space-between;
+}

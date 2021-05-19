@@ -70,7 +70,11 @@ class App extends React.Component {
             exact
             path="/"
             render={ (props) => (
-              <Home { ...props } addItemToCart={ this.addItemToCart } />
+              <Home
+                { ...props }
+                addItemToCart={ this.addItemToCart }
+                totalItemQty={ this.returnTotalCartItemQty() }
+              />
             ) }
           />
           <Route
@@ -88,7 +92,11 @@ class App extends React.Component {
             exact
             path="/products/:id"
             render={ (props) => (
-              <ProductDetails { ...props } addItemToCart={ this.addItemToCart } />
+              <ProductDetails
+                { ...props }
+                addItemToCart={ this.addItemToCart }
+                totalItemQty={ this.returnTotalCartItemQty() }
+              />
             ) }
           />
         </Switch>

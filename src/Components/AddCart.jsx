@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 class AddCart extends Component {
   render() {
     const { cart, id, title, thumbnail, price } = this.props;
-    console.log();
     return (
       <button
         id={ id }

@@ -1,5 +1,5 @@
 const serviceCart = {
-  products: [],
+  cartItemList: [],
   counter: 0,
 };
 export default serviceCart;

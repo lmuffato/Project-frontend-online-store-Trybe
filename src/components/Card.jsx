@@ -1,27 +1,34 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import './styles/Card.css';
 
 class Card extends React.Component {
   getProductAtributes = () => {
     const { onclick, title, price, image } = this.props;
-    const product = {
+    const productData = {
       title,
       image,
       quantidade: 1,
       price,
     };
-    onclick(product);
+    onclick(productData);
   };
 
   render() {
-    const { title, price, image } = this.props;
+    const product = this.props;
+    const { title, price, image } = product;
 
     return (
       <div className="card" data-testid="product">
-        <p>{title}</p>
+        <Link
+          to={ { pathname: { title }, state: { product } } } // Alteração do path name para title. keys(id) não estava funcionando.
+          data-testid="product-detail-link"
+        >
+          <p>{title}</p>
+        </Link>
         <img src={ image } alt="foto do produto" />
-        <p>{`R$: ${price}`}</p>
+        <p>{ `R$: ${price}`}</p>
         <button
           onClick={ this.getProductAtributes }
           type="button"
@@ -30,6 +37,7 @@ class Card extends React.Component {
           Adicionar ao carrinho
         </button>
       </div>
+
     );
   }
 }

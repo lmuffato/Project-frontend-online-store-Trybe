@@ -2,28 +2,29 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Card from './Card';
 import './styles/ProductList.css';
-import serviceCart from '../services/products';
+import serviceCart from '../services/serviceCart';
 
 class ProductList extends Component {
   onclick = (addProduct) => {
-    const { products } = serviceCart;
+    const { cartItemList } = serviceCart;
 
-    if (products.map((element) => element.title === addProduct.title).includes(true)) {
-      const a = products.filter((element) => element.title === addProduct.title).shift();
+    if (cartItemList
+      .map((element) => element.title === addProduct.title).includes(true)) {
+      const a = cartItemList
+        .filter((element) => element.title === addProduct.title).shift();
       addProduct.quantidade = a.quantidade;
-      const index = products.indexOf(a);
-      products.splice(index);
+      const index = cartItemList.indexOf(a);
+      cartItemList.splice(index);
       addProduct.quantidade += 1;
-      products.push(addProduct);
+      cartItemList.push(addProduct);
     } else {
-      products.push(addProduct);
+      cartItemList.push(addProduct);
     }
     let contador = 0;
-    products.forEach(({ quantidade }) => {
+    cartItemList.forEach(({ quantidade }) => {
       contador += quantidade;
     });
     serviceCart.counter = contador;
-    // console.log(products);
   }
 
   cardsElements = () => {

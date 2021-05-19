@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import serviceCart from '../services/products';
+import serviceCart from '../services/serviceCart';
 
 class CartButton extends React.Component {
   constructor() {

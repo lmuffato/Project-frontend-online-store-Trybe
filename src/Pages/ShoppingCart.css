@@ -1,8 +1,8 @@
 .conteiner-item {
-  display: flex;
   align-items: center;
-  justify-content: left;
+  display: flex;
   height: 60px;
+  justify-content: left;
 }
 
 .imgCart {

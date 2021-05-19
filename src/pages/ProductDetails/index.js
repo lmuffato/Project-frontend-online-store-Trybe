@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { getProductsFromCategory } from '../../services/api';
 import ReviewFields from './components/ReviewFields';
-import ProductNumber from '../../components/ProductNumber';
 
 class ProductDetails extends React.Component {
   constructor() {
@@ -66,7 +65,6 @@ class ProductDetails extends React.Component {
   loadReviews() {
     const { allReviews, match } = this.props;
     const { id } = match.params;
-
     const foundReview = allReviews.find((review) => review.productId === id);
 
     if (foundReview) {
@@ -90,8 +88,12 @@ class ProductDetails extends React.Component {
         <div>
           <header>
             <Link to="/">Voltar</Link>
-            <Link to="/cart" data-testid="shopping-cart-button">Carrinho</Link>
-            <ProductNumber cart={ cart } />
+            <Link to="/cart" data-testid="shopping-cart-button">
+              Carrinho
+              <span data-testid="shopping-cart-size">
+                { cart.quantity }
+              </span>
+            </Link>
           </header>
           <h1 data-testid="product-detail-name">{product.title}</h1>
           <span>{`R$ ${product.price}`}</span>

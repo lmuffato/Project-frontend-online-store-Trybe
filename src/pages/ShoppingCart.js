@@ -25,7 +25,7 @@ class ShoppingCart extends React.Component {
     const { removeFromCart, cart } = this.props;
     let { total } = this.state;
     const { id } = event.target;
-    const foundProduct = cart.find((product) => product.data.id === id);
+    const foundProduct = cart.products.find((product) => product.data.id === id);
     let { price } = foundProduct.data;
 
     price *= foundProduct.quantity;
@@ -43,7 +43,7 @@ class ShoppingCart extends React.Component {
     const { id } = event.target;
     let { total } = this.state;
     const { cart, removeFromCart, setCart } = this.props;
-    const foundProduct = cart.find((product) => product.data.id === id);
+    const foundProduct = cart.products.find((product) => product.data.id === id);
     const { price } = foundProduct.data;
 
     if (foundProduct.quantity <= foundProduct.data.available_quantity) {
@@ -52,7 +52,7 @@ class ShoppingCart extends React.Component {
       });
     }
 
-    const updatedCart = cart.map((product) => {
+    const updatedCart = cart.products.map((product) => {
       if (product.data.id === id) {
         product.quantity -= 1;
       }
@@ -60,7 +60,17 @@ class ShoppingCart extends React.Component {
       return product;
     });
 
-    setCart(updatedCart);
+    let quantity = 0;
+    updatedCart.forEach((productInCart) => {
+      quantity += productInCart.quantity;
+    });
+
+    const toCart = {
+      quantity,
+      products: updatedCart,
+    };
+
+    setCart(toCart);
 
     if (foundProduct.quantity < 1) removeFromCart(id);
 
@@ -76,7 +86,7 @@ class ShoppingCart extends React.Component {
     let { total } = this.state;
     const { setCart, cart } = this.props;
 
-    const foundProduct = cart.find((product) => product.data.id === id);
+    const foundProduct = cart.products.find((product) => product.data.id === id);
     const { price } = foundProduct.data;
     total += price;
 
@@ -86,7 +96,7 @@ class ShoppingCart extends React.Component {
       });
     }
 
-    const updatedCart = cart.map((product) => {
+    const updatedCart = cart.products.map((product) => {
       if (product.data.id === id) {
         product.quantity += 1;
       }
@@ -96,7 +106,17 @@ class ShoppingCart extends React.Component {
       return product;
     });
 
-    setCart(updatedCart);
+    let quantity = 0;
+    updatedCart.forEach((productInCart) => {
+      quantity += productInCart.quantity;
+    });
+
+    const toCart = {
+      quantity,
+      products: updatedCart,
+    };
+
+    setCart(toCart);
 
     this.setState({
       total,
@@ -108,7 +128,7 @@ class ShoppingCart extends React.Component {
     const { total: totalState } = this.state;
     let total = totalState;
 
-    cart.forEach((product) => {
+    cart.products.forEach((product) => {
       const productPrice = product.data.price * product.quantity;
       total += productPrice;
       return total;
@@ -122,7 +142,7 @@ class ShoppingCart extends React.Component {
   render() {
     const { total, increaseButtonDisabled } = this.state;
     const { cart } = this.props;
-    const cartIsEmpty = cart.length < 1;
+    const cartIsEmpty = cart.quantity < 1;
     return (
       <>
         <header>
@@ -135,7 +155,7 @@ class ShoppingCart extends React.Component {
           </strong>
         ) : (
           <>
-            {cart.map((product) => (
+            {cart.products.map((product) => (
               <div key={ product.data.id }>
                 <button type="button" id={ product.data.id } onClick={ this.onRemove }>
                   Remover

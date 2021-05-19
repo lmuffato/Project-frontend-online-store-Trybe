@@ -14,7 +14,10 @@ class App extends React.Component {
       products: [],
       selectedCategory: '',
       searchedQuery: '',
-      cart: [],
+      cart: {
+        quantity: 0,
+        products: [],
+      },
       allReviews: [],
     };
 
@@ -86,7 +89,7 @@ class App extends React.Component {
       product = products.find((productState) => productState.id === target.id);
     }
 
-    const foundInCart = cart.find(
+    const foundInCart = cart.products.find(
       (productInCart) => productInCart.data.id === product.id,
     );
 
@@ -96,30 +99,43 @@ class App extends React.Component {
         ...foundInCart,
         quantity: increasedQuantity,
       };
-      updatedCart = cart.map((productInCart) => {
+      updatedCart = cart.products.map((productInCart) => {
         if (productInCart.data.id === product.id) {
-          product = addedProduct;
+          productInCart = addedProduct;
         }
-        return product;
+        return productInCart;
       });
     } else {
       addedProduct = {
         quantity: 1,
         data: product,
       };
-      updatedCart = [...cart, addedProduct];
+      updatedCart = [...cart.products, addedProduct];
     }
 
+    let quantity = 0;
+    updatedCart.forEach((productInCart) => {
+      quantity += productInCart.quantity;
+    });
+
     this.setState({
-      cart: updatedCart,
+      cart: {
+        quantity,
+        products: updatedCart,
+      },
     });
   }
 
   removeFromCart(id) {
     const { cart } = this.state;
-    const updatedCart = cart.filter((product) => product.data.id !== id);
+    const productToRemove = cart.products.find((product) => product.data.id === id);
+    const updatedCart = cart.products.filter((product) => product.data.id !== id);
+    const quantity = cart.quantity - productToRemove.quantity;
     this.setState({
-      cart: updatedCart,
+      cart: {
+        quantity,
+        products: updatedCart,
+      },
     });
   }
 

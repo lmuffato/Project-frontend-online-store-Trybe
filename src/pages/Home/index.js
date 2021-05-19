@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import CardProduct from './components/CardProduct';
 import Category from './components/Category';
-import ProductNumber from '../../components/ProductNumber';
 
 class Home extends React.Component {
   render() {
@@ -29,7 +28,9 @@ class Home extends React.Component {
         </strong>
         <Link to="/cart">
           <button type="button" data-testid="shopping-cart-button">Carrinho</button>
-          <ProductNumber cart={ cart } />
+          <span data-testid="shopping-cart-size">
+            { cart.quantity }
+          </span>
         </Link>
         <Category onCategorySelection={ onFilterByCategory } />
         <CardProduct products={ products } addToCart={ addToCart } />

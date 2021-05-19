@@ -51,7 +51,7 @@ class App extends Component {
           <Route path="/shoppingcart">
             <ShoppingCart productsInCart={ productsInCart } handle={ this.handle } />
           </Route>
-          <Route path="/item-details" render={ ItemDetails } />
+          <Route path="/item-details" component={ ItemDetails } />
           <Route
             path="/checkout"
             render={ (props) => <Checkout { ...props } productsInCart={ productsInCart } /> }

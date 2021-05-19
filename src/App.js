@@ -141,6 +141,7 @@ class App extends React.Component {
               onFilterByQuery={ this.handleChange }
               products={ products }
               addToCart={ this.addToCart }
+              cart={ cart }
             />
           </Route>
           <Route path="/cart">
@@ -156,6 +157,7 @@ class App extends React.Component {
               (props) => (<ProductDetails
                 addToCart={ this.addToCart }
                 allReviews={ allReviews }
+                cart={ cart }
                 setReviews={ this.setReviews }
                 { ...props }
               />)

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { getProductsFromCategory } from '../../services/api';
 import ReviewFields from './components/ReviewFields';
+import ProductNumber from '../../components/ProductNumber';
 
 class ProductDetails extends React.Component {
   constructor() {
@@ -80,7 +81,7 @@ class ProductDetails extends React.Component {
 
   render() {
     const { product, productReviews } = this.state;
-    const { addToCart } = this.props;
+    const { addToCart, cart } = this.props;
 
     if (!product || !product.attributes) return <h1>Loading...</h1>;
 
@@ -90,6 +91,7 @@ class ProductDetails extends React.Component {
           <header>
             <Link to="/">Voltar</Link>
             <Link to="/cart" data-testid="shopping-cart-button">Carrinho</Link>
+            <ProductNumber cart={ cart } />
           </header>
           <h1 data-testid="product-detail-name">{product.title}</h1>
           <span>{`R$ ${product.price}`}</span>

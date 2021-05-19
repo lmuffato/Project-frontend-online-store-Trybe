@@ -65,6 +65,7 @@ export default class ProductList extends Component {
           title: item.title,
           price: item.price,
           thumbnail: item.thumbnail,
+          qtd: 1,
         };
         ArrayText.push(newObjText);
         return this.setState({
@@ -97,7 +98,7 @@ export default class ProductList extends Component {
     }
     return obj.map((item) => (
       <section data-testid="product" key={ item.id }>
-        <Button obj={ item } />
+        <Button obj={ item } dataTestId="product-add-to-cart" />
         <Link
           to={ `/product_details/${item.id}/${item.title}` }
           data-testid="product-detail-link"

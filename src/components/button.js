@@ -22,11 +22,12 @@ class Button extends React.Component {
   }
 
   render() {
+    const { dataTestId } = this.props;
     return (
       <button
         type="button"
         onClick={ this.addCart }
-        data-testid="product-add-to-cart"
+        data-testid={ dataTestId }
       >
         Adicionar ao carrinho
       </button>

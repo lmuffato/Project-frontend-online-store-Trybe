@@ -4,6 +4,12 @@ import PropTypes from 'prop-types';
 import cartIcon from './ShoppinCart/cartIcon.png';
 
 class ItemDetails extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+    };
+  }
+
   render() {
     const { location: { state: { product } } } = this.props;
     const { title, thumbnail, price } = product;

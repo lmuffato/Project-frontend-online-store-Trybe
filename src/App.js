@@ -34,7 +34,11 @@ class App extends Component {
           <Route path="/shoppingcart">
             <ShoppingCart productsInCart={ productsInCart } />
           </Route>
-          <Route path="/item-details" component={ ItemDetails } />
+          {/* <Route path="/item-details" component={ ItemDetails } /> */}
+          <Route path="/item-details">
+            <ItemDetails />
+          </Route>
+
         </BrowserRouter>
       </section>
     );

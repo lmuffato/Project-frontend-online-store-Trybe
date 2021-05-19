@@ -19,7 +19,7 @@ class ProductList extends Component {
   };
 
   render() {
-    const { handle } = this.props;
+    const { handle, productsInCart } = this.props;
     const { category } = this.state;
     return (
       <div>
@@ -36,17 +36,28 @@ class ProductList extends Component {
           to="/ShoppingCart"
           data-testid="shopping-cart-button"
         >
-          <img
-            alt="shopping-cart"
-            className="shopping-cart-img"
-            src={ cartIcon }
-          />
+          <div className="cartIconContainer">
+            <img
+              alt="shopping-cart"
+              className="shopping-cart-img"
+              src={ cartIcon }
+            />
+            <h2
+              className="cartINumberItens"
+              data-testid="shopping-cart-size"
+            >
+              {productsInCart.length}
+            </h2>
+          </div>
         </Link>
         <div>
           <p data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
-          <SearchProduct category={ category } handle={ handle } />
+          <SearchProduct
+            category={ category }
+            handle={ handle }
+          />
         </div>
         <CategoriesBar handle={ this.handle } />
       </div>
@@ -56,6 +67,7 @@ class ProductList extends Component {
 
 ProductList.propTypes = {
   handle: PropTypes.func.isRequired,
+  productsInCart: PropTypes.arrayOf(PropTypes.obj).isRequired,
 };
 
 export default ProductList;

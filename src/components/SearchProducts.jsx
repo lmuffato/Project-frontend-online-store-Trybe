@@ -28,7 +28,6 @@ class SearchProducts extends Component {
     console.log(target.value);
     const product = target.value;
     const productQuantity = target.parentElement.querySelector('.quantity').value;
-    // const title = target.parentElement.querySelector('.title-product').value;
     handle(product, productQuantity);
   }
 

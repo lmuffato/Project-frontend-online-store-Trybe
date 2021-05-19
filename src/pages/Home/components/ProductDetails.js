@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { getProductsFromCategory } from '../../../services/api';
+import EvaluationFields from './EvaluationFields';
 
 class ProductDetails extends React.Component {
   constructor() {
@@ -9,11 +10,14 @@ class ProductDetails extends React.Component {
 
     this.state = {
       product: {},
+      assessments: {},
     };
   }
 
   componentDidMount() {
     this.loadProduct();
+
+    this.reapEvaluation = this.reapEvaluation.bind(this);
   }
 
   async loadProduct() {
@@ -38,29 +42,38 @@ class ProductDetails extends React.Component {
     }
   }
 
+  reapEvaluation(evaluation) {
+    this.setState((currentState) => ({
+      assessments: Object.assign(currentState, evaluation),
+    }));
+  }
+
   render() {
     const { product } = this.state;
 
     if (!product.attributes) return <h1>Loading...</h1>;
 
     return (
-      <div>
-        <header>
-          <Link to="/">Voltar</Link>
-          <Link to="/cart">Carrinho</Link>
-        </header>
-        <h1 data-testid="product-detail-name">{ product.title }</h1>
-        <span>{`R$ ${product.price}`}</span>
-        <img src={ product.thumbnail } alt={ product.title } />
-        <h3>Especificações técnicas</h3>
-        <ul>
-          { product.attributes.map((attribute) => (
-            <li key={ attribute.id }>
-              { `${attribute.name}: ${attribute.value_name}` }
-            </li>
-          )) }
-        </ul>
-      </div>
+      <>
+        <div>
+          <header>
+            <Link to="/">Voltar</Link>
+            <Link to="/cart">Carrinho</Link>
+          </header>
+          <h1 data-testid="product-detail-name">{product.title}</h1>
+          <span>{`R$ ${product.price}`}</span>
+          <img src={ product.thumbnail } alt={ product.title } />
+          <h3>Especificações técnicas</h3>
+          <ul>
+            {product.attributes.map((attribute) => (
+              <li key={ attribute.id }>
+                { `${attribute.name}: ${attribute.value_name}`}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <EvaluationFields reapEvaluation={ this.reapEvaluation } />
+      </>
     );
   }
 }

@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
-import serviceCart from '../services/serviceCart';
 import CartItem from './CartItem';
 
 class ShoppingCartList extends Component {
   render() {
-    const { cartItemList } = serviceCart;
+    const { carts } = this.props;
     return (
       <div>
-        {cartItemList
-          .map((product) => <CartItem product={ product } key={ product.title } />) }
+        {carts.map((product) => <CartItem product={ product } key={ product.title } />) }
       </div>
     );
   }

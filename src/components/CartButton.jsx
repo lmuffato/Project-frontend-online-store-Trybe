@@ -1,25 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import serviceCart from '../services/serviceCart';
 
 class CartButton extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      counter: serviceCart.counter,
-    };
-  }
-
   render() {
-    const { counter } = this.state;
+    const { data, newCartItemId } = this.props;
     return (
       <nav>
         <button type="button">
-          <Link to="/ShoppingCartPage" data-testid="shopping-cart-button">
+          <Link
+            to={ { pathname: '/ShoppingCartPage', state: { data, newCartItemId } } }
+            data-testid="shopping-cart-button"
+          >
             Carrinho
           </Link>
         </button>
-        <p>{ counter }</p>
+        <p>contador</p>
       </nav>
     );
   }

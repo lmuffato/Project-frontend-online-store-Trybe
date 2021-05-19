@@ -4,23 +4,13 @@ import { Link } from 'react-router-dom';
 import './styles/Card.css';
 
 class Card extends React.Component {
-  getProductAtributes = () => {
-    const { onclick, title, price, image } = this.props;
-    const productData = {
-      title,
-      image,
-      quantidade: 1,
-      price,
-    };
-    onclick(productData);
-  };
 
   render() {
     const product = this.props;
-    const { title, price, image } = product;
+    const { title, price, image, onclick } = product;
 
     return (
-      <div className="card" data-testid="product">
+      <div className="card" data-testid="id">
         <Link
           to={ { pathname: { title }, state: { product } } } // Alteração do path name para title. keys(id) não estava funcionando.
           data-testid="product-detail-link"
@@ -30,7 +20,7 @@ class Card extends React.Component {
         <img src={ image } alt="foto do produto" />
         <p>{ `R$: ${price}`}</p>
         <button
-          onClick={ this.getProductAtributes }
+          onClick={ onclick }
           type="button"
           data-testid="product-add-to-cart"
         >

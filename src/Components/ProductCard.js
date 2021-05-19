@@ -10,7 +10,7 @@ class ProductCard extends React.Component {
           <div key={ product.id } data-testid="product">
             <p>{product.title}</p>
             <p>{product.price}</p>
-            <img style={ { width: '50px' } } src={ product.thumbnail } alt="imagem" />
+            <img style={ { width: '100px' } } src={ product.thumbnail } alt="imagem" />
           </div>))}
       </div>
     );

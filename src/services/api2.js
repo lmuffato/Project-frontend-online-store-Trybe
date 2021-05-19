@@ -12,7 +12,6 @@ export function cartStorage({ thumbnail, title, price, id }) {
   if (Array.isArray(productsCart)) {
     if (productsCart.some((product) => product.id === id)) {
       const productFound = productsCart.find((product) => product.id === id);
-      console.log(productFound);
       productFound.quantity += 1;
     } else {
       productsCart.push(objProduct);

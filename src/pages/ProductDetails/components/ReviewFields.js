@@ -13,6 +13,7 @@ class ReviewFields extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.submit = this.submit.bind(this);
+    this.toEvaluate = this.toEvaluate.bind(this);
   }
 
   handleChange({ target }) {
@@ -21,9 +22,27 @@ class ReviewFields extends React.Component {
     });
   }
 
+  toEvaluate({ target }) {
+    this.setState({
+      ratingValue: target.value,
+    });
+  }
+
   submit() {
     const { emailField, textField, ratingValue } = this.state;
-    const { getReview } = this.props;
+    const { getReview, productReviews } = this.props;
+
+    const alertMessage = document.getElementById('alert');
+    const repeated = productReviews.reviews.find((review) => review.email === emailField);
+
+    if (emailField === '' || ratingValue === 0) {
+      alertMessage.innerText = 'O campo de e-mail e a avaliação são obrigatórios';
+      return;
+    } if (repeated !== undefined) {
+      alertMessage.innerText = 'Existe uma avaliação com este email';
+      return;
+    }
+
     const review = {
       email: emailField,
       review: textField,
@@ -34,7 +53,7 @@ class ReviewFields extends React.Component {
   }
 
   render() {
-    const { emailField, textField, ratingValue } = this.state;
+    const { emailField, textField } = this.state;
 
     return (
       <section>
@@ -47,14 +66,11 @@ class ReviewFields extends React.Component {
             onChange={ this.handleChange }
             placeholder="Email"
           />
-          <input
-            type="number"
-            min="0"
-            max="5"
-            id="ratingValue"
-            value={ ratingValue }
-            onChange={ this.handleChange }
-          />
+          <button type="button" onClick={ this.toEvaluate } value="1">1</button>
+          <button type="button" onClick={ this.toEvaluate } value="2">2</button>
+          <button type="button" onClick={ this.toEvaluate } value="3">3</button>
+          <button type="button" onClick={ this.toEvaluate } value="4">4</button>
+          <button type="button" onClick={ this.toEvaluate } value="5">5</button>
           <textarea
             data-testid="product-detail-evaluation"
             id="textField"
@@ -63,6 +79,7 @@ class ReviewFields extends React.Component {
             placeholder="Mensagem (opcional)"
           />
         </form>
+        <span id="alert" />
         <button
           type="button"
           onClick={ this.submit }

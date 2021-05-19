@@ -111,7 +111,10 @@ class ProductDetails extends React.Component {
             Adicionar ao carrinho
           </button>
         </div>
-        <ReviewFields getReview={ this.getReview } />
+        <ReviewFields
+          getReview={ this.getReview }
+          productReviews={ productReviews }
+        />
         <section>
           { productReviews.reviews.map((review) => (
             <div key={ review.email }>

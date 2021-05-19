@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { getCategories } from '../services/api';
 
 export default class ListCategories extends Component {
@@ -16,12 +17,14 @@ export default class ListCategories extends Component {
   }
 
   async fetchApi() {
-    const categories = await getCategories();
-    this.setState({ categories });
+    const data = await getCategories();
+    this.setState({ categories: data });
   }
 
   render() {
     const { categories } = this.state;
+    const { fetchProducts } = this.props;
+
     return (
       <aside className="category-id">
         <h1>Categorias:</h1>
@@ -34,6 +37,7 @@ export default class ListCategories extends Component {
                   type="radio"
                   name="category"
                   value={ category.id }
+                  onClick={ ({ target: { value } }) => fetchProducts(value) }
                 />
                 { category.name }
               </label>
@@ -44,3 +48,7 @@ export default class ListCategories extends Component {
     );
   }
 }
+
+ListCategories.propTypes = {
+  fetchProducts: PropTypes.func.isRequired,
+};

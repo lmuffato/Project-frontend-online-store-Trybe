@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 
 import * as api from '../services/api';
 
@@ -135,6 +134,7 @@ class ListagemProdutos extends Component {
           ? (<p>Nenhum produto foi encontrado</p>)
           : products.map((product) => (
             <ProductCard
+              quantityOnCart={ quantityItems }
               product={ product }
               id={ product.id }
               key={ product.id }
@@ -149,9 +149,5 @@ class ListagemProdutos extends Component {
     );
   }
 }
-
-ListagemProdutos.propTypes = {
-  size: PropTypes.number.isRequired,
-};
 
 export default ListagemProdutos;

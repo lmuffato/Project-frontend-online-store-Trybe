@@ -5,15 +5,32 @@ import Rating from './Rating';
 import CartSize from './CartSize';
 
 class Details extends Component {
+  constructor(props) {
+    super(props);
+    const { location } = this.props;
+    const { state } = location;
+    const { cartSize } = state;
+    this.state = {
+      quantityItems: cartSize,
+    };
+  }
+
+  handleClick = () => {
+    this.setState((prevState) => {
+      const sum = 1;
+      return { quantityItems: (prevState.quantityItems + sum) };
+    });
+  }
+
   render() {
-    const { location, size } = this.props;
+    const { location } = this.props;
     const { state } = location;
     const { productDetail } = state;
     const { title, id, price, thumbnail, condition } = productDetail;
-    const { addCart } = this.props;
+    const { quantityItems } = this.state;
     return (
       <div>
-        <CartSize size={ size } />
+        <CartSize size={ quantityItems } />
         <img src={ thumbnail } alt="imagem do produto" />
         <h1 data-testid="product-detail-name">{title}</h1>
         <p>
@@ -32,7 +49,7 @@ class Details extends Component {
           data-testid="product-detail-add-to-cart"
           type="button"
           value={ title }
-          onClick={ addCart }
+          onClick={ this.handleClick }
         >
           Adicionar ao carrinho
         </button>
@@ -53,8 +70,6 @@ Details.propTypes = {
     search: PropTypes.string.isRequired,
     state: PropTypes.objectOf(PropTypes.object),
   }).isRequired,
-  addCart: PropTypes.func.isRequired,
-  size: PropTypes.number.isRequired,
 };
 
 export default Details;

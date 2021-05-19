@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import { Link } from 'react-router-dom';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { getProductsFromCategoryAndQuery, getCategories } from '../services/api';
 import CardItems from '../components/CardItems';
 import CategoriesList from '../components/CategoriesList';
@@ -54,7 +54,7 @@ export default class Home extends Component {
 
   render() {
     const { inputValue, products, categories } = this.state;
-    // const { quantity } = this.props;
+    const { quantity } = this.props;
     return (
       <div>
         <input
@@ -86,18 +86,18 @@ export default class Home extends Component {
         >
           Cart
         </Link> */}
-        {/* <LinkToCart quantity={ quantity } /> */}
-        <LinkToCart />
+        <LinkToCart quantity={ quantity } />
+        {/* <LinkToCart /> */}
         <CardItems products={ products } />
       </div>
     );
   }
 }
 
-// Home.propTypes = {
-//   quantity: PropTypes.number,
-// };
+Home.propTypes = {
+  quantity: PropTypes.number,
+};
 
-// Home.defaultProps = {
-//   quantity: '',
-// };
+Home.defaultProps = {
+  quantity: '',
+};

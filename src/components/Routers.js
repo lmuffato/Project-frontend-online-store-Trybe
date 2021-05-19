@@ -18,8 +18,8 @@ export default class Routers extends Component {
   }
 
   render() {
-    // const { products, quantity } = this.state;
-    const { products } = this.state;
+    const { products, quantity } = this.state;
+    // const { products } = this.state;
 
     return (
       <Switch>
@@ -33,7 +33,7 @@ export default class Routers extends Component {
           render={ (props) => (<ProductDetail
             { ...props }
             addToCart={ this.addToCart }
-            // quantity={ quantity }
+            quantity={ quantity }
           />) }
         />
         <Route
@@ -42,7 +42,7 @@ export default class Routers extends Component {
           render={ (props) => (<Home
             { ...props }
             products={ products }
-            // quantity={ quantity }
+            quantity={ quantity }
           />) }
         />
       </Switch>

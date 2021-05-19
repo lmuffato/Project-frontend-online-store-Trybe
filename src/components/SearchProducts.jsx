@@ -5,7 +5,6 @@ import './SearchProducts.css';
 
 class SearchProducts extends Component {
   addProductInCart = ({ target }) => {
-    console.log(target);
     const { handle, productsList } = this.props;
     const id = target.value;
     const product = productsList.find((item) => item.id === id);

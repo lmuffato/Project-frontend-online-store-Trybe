@@ -4,13 +4,23 @@ import './App.css';
 import ProductList from './Pages/ProductList';
 import ShoppingCart from './Pages/ShoppingCart';
 import ItemDetails from './Pages/ItemDetails';
+import Checkout from './Pages/Checkout';
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
       productsInCart: {},
+      sumTotalItens: 0,
     };
+  }
+
+  sumItensInCart = () => {
+    const { productsInCart } = this.state;
+    let sum = 0;
+    sum = Object.values(productsInCart)
+      .reduce((acc, currentItem) => acc + currentItem.productQuantity, 0);
+    this.setState({ sumTotalItens: sum });
   }
 
   handle = (product, addQuantity, del = false) => {
@@ -18,7 +28,7 @@ class App extends Component {
       this.setState(({ productsInCart }) => {
         delete productsInCart[product.id];
         return ({ productsInCart: { ...productsInCart } });
-      });
+      }, () => this.sumItensInCart());
     } else {
       this.setState(({ productsInCart }) => {
         const productQuantity = (product.id in productsInCart)
@@ -32,29 +42,44 @@ class App extends Component {
             },
         });
       }, () => {
-        const { productsInCart } = this.state;
-        console.log(productsInCart);
+        const { productsInCart, sumTotalItens } = this.state;
+        this.sumItensInCart();
       });
     }
   };
 
   render() {
-    const { productsInCart } = this.state;
+    const { productsInCart, sumTotalItens } = this.state;
     return (
       <section>
         <BrowserRouter>
           <Route exact path="/">
-            <ProductList productsInCart={ productsInCart } handle={ this.handle } />
+            <ProductList
+              sumTotalItens={ sumTotalItens }
+              productsInCart={ productsInCart }
+              handle={ this.handle }
+            />
           </Route>
 
           <Route path="/shoppingcart">
             <ShoppingCart productsInCart={ productsInCart } handle={ this.handle } />
           </Route>
-          {/* <Route path="/item-details" component={ ItemDetails } /> */}
-          <Route path="/item-details">
-            <ItemDetails />
-          </Route>
-
+          <Route
+            path="/item-details"
+            render={
+              (props) => (<ItemDetails
+                { ...props }
+                productsInCart={ productsInCart }
+                sumTotalItens={ sumTotalItens }
+              />)
+            }
+          />
+          <Route
+            path="/checkout"
+            render={
+              (props) => <Checkout { ...props } productsInCart={ productsInCart } />
+            }
+          />
         </BrowserRouter>
       </section>
     );

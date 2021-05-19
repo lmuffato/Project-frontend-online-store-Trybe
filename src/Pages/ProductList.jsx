@@ -39,7 +39,7 @@ class ProductList extends Component {
   };
 
   render() {
-    const { handle, productsInCart } = this.props;
+    const { handle, productsInCart, sumTotalItens } = this.props;
     const { query, productsList } = this.state;
     return (
       <main className="conteiner-main">
@@ -74,6 +74,7 @@ class ProductList extends Component {
                 src={ cartIcon }
               />
             </Link>
+            <h2 data-testid="shopping-cart-size">{sumTotalItens}</h2>
           </section>
           <SearchProduct
             query={ query }

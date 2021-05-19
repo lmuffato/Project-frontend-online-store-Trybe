@@ -6,7 +6,6 @@ import ReviewForm from '../components/ReviewForm';
 
 class ItemDetails extends Component {
   addProductInCart = ({ target }) => {
-    console.log(target);
     const { location: { state: { product }, handle } } = this.props;
     const quantityElment = target.parentElement.querySelector('.quantity');
     const productQuantity = parseInt(quantityElment.value, 10);
@@ -14,7 +13,7 @@ class ItemDetails extends Component {
   }
 
   render() {
-    const { location: { state: { product } } } = this.props;
+    const { location: { state: { product } }, sumTotalItens } = this.props;
     const { title, thumbnail, price } = product;
 
     return (
@@ -53,6 +52,7 @@ class ItemDetails extends Component {
             src={ cartIcon }
           />
         </Link>
+        <p data-testid="shopping-cart-size">{sumTotalItens}</p>
       </main>
     );
   }

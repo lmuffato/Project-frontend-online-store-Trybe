@@ -1,7 +1,8 @@
 .categories {
+  align-items: baseline;
   display: flex;
   flex-direction: column;
-  width: 300px;
+  width: 200px;
 }
 
 .categories-list {
@@ -11,4 +12,8 @@
 
 .category-item {
   align-content: initial;
+  border: none;
+  background-color: inherit;
+  font-size: medium;
+  margin: 5px 0;
 }

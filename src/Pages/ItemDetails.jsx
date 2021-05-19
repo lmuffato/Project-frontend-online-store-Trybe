@@ -14,9 +14,8 @@ class ItemDetails extends Component {
   }
 
   render() {
-    console.log(this.props.location);
-    const { location: { state: { product }, handle } } = this.props;
-    const { title, thumbnail, price, id } = product;
+    const { location: { state: { product } } } = this.props;
+    const { title, thumbnail, price } = product;
 
     return (
       <main>
@@ -31,7 +30,6 @@ class ItemDetails extends Component {
           type="button"
           data-testid="product-detail-add-to-cart"
           onClick={ this.addProductInCart }
-          value={ id }
         >
           Adicionar ao Carrinho
         </button>
@@ -69,6 +67,7 @@ ItemDetails.propTypes = {
         price: PropTypes.number.isRequired,
       }).isRequired,
     }),
+    handle: PropTypes.func.isRequired,
   }).isRequired,
 };
 

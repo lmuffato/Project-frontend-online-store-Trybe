@@ -15,7 +15,7 @@ class SearchProducts extends Component {
   }
 
   productsCards = (list) => {
-    const { query, handle, productsList, productsInCart } = this.props;
+    const { query, handle /* , productsInCart */ } = this.props;
     const message = query === '' ? '' : 'Nenhum produto foi encontrado';
     return (
       <section className="search-conteiner">

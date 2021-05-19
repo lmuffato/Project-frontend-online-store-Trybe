@@ -90,6 +90,13 @@ class ProductList extends Component {
 
 ProductList.propTypes = {
   handle: PropTypes.func.isRequired,
+  productsInCart: PropTypes.objectOf(PropTypes.shape({
+    productQuantity: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    thumbnail: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
+  })).isRequired,
 };
 
 export default ProductList;

@@ -1,5 +1,4 @@
 import React from 'react';
-import reactDomTestUtilsProductionMin from 'react-dom/cjs/react-dom-test-utils.production.min';
 
 class ReviewForm extends React.Component {
   constructor(props) {

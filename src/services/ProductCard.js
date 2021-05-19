@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 
 class ProductCard extends React.Component {
   render() {
-    const { title, price, imagePath } = this.props;
+    const { title, price, imagePath, id, button } = this.props;
     return (
-      <div data-testid="product">
+      <div data-testid="product" id={ id }>
         <h2>{title}</h2>
         <img
           src={ imagePath }
@@ -13,6 +13,7 @@ class ProductCard extends React.Component {
           alt="Imagem do produto"
         />
         <span>{price}</span>
+        { button }
       </div>
     );
   }

@@ -1,6 +1,7 @@
 import React from 'react';
 import ProductCard from './ProductCard';
 import * as api from './api';
+import AddToCartBtn from '../components/AddToCartBtn';
 
 class Input extends React.Component {
   constructor() {
@@ -57,12 +58,19 @@ class Input extends React.Component {
           {
             products === []
               ? (<p>Nenhum produto foi encontrado</p>)
-              : products.map(({ title, price, thumbnail, id }) => (
+              : products.map(({ title, price, thumbnail, id, category_id: catId }) => (
                 <ProductCard
                   key={ id }
+                  id={ id }
                   title={ title }
                   price={ price }
                   imagePath={ thumbnail }
+                  button={ <AddToCartBtn
+                    category={ catId }
+                    query={ title }
+                    id={ id }
+                    dataid="product-add-to-cart"
+                  /> }
                 />
               ))
           }

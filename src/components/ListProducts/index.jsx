@@ -4,7 +4,8 @@ import Product from '../Product';
 
 class ListProducts extends React.Component {
   render() {
-    const { productsList, func } = this.props;
+    const { productsList, addToCart } = this.props;
+
     return (
       <>
         { productsList.map(
@@ -13,7 +14,7 @@ class ListProducts extends React.Component {
             imagePath={ thumbnail }
             price={ price }
             key={ id }
-            func={ () => func({ title, price, thumbnail, id }) }
+            addToCart={ addToCart }
             itemId={ id }
             techSpecs={ { title, price, thumbnail, attributes } }
           />),

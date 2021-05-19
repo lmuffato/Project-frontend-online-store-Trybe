@@ -31,7 +31,6 @@ class Cart extends React.Component {
     return (
       <div>
         { cartProduct.length === 0 ? noItems : cartItems }
-        ;
       </div>
     );
   }

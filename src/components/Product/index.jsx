@@ -16,8 +16,8 @@ class Product extends React.Component {
     return (
       <div data-testid="product" className="product-card">
         <img src={ imagePath } alt={ title } />
-        <h1>{ title }</h1>
-        <p>{ price }</p>
+        <h1>{title}</h1>
+        <p>{price}</p>
         <Link to={ location }>
           <button
             type="button"
@@ -32,7 +32,6 @@ class Product extends React.Component {
           onClick={ () => func(this.props) }
         >
           add cart
-
         </button>
       </div>
     );

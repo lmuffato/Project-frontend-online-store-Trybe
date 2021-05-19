@@ -5,11 +5,37 @@ import { Link } from 'react-router-dom';
 class ShoppingCart extends Component {
   constructor(props) {
     super(props);
-    const { products, quantity } = this.props;
+    const { location } = this.props;
+    const { state } = location;
+    const { products, productsQuantity, addedProduct, quantityAdded } = state;
     this.state = {
-      products,
-      quantity,
+      productsOnCart: products || [],
+      quantity: productsQuantity,
+      addedProduct,
+      quantityAdded,
     };
+  }
+
+  updateProperties = () => {
+    const { addedProduct, quantityAdded, productsOnCart } = this.state;
+    console.log(productsOnCart);
+    if (addedProduct) {
+      const { title, id, price } = addedProduct;
+      this.setState((prevState) => ({
+        productsOnCart: [...prevState.productsOnCart, {
+          title,
+          id,
+          price,
+        }],
+        productsQuantity: { ...prevState.productsQuantity,
+          [title]: quantityAdded,
+        },
+      }));
+    }
+  }
+
+  componentDidMount = () => {
+    this.updateProperties();
   }
 
   handleDecrease = ({ target }) => {
@@ -22,7 +48,6 @@ class ShoppingCart extends Component {
 
   handleIncrease = ({ target }) => {
     const { value } = target;
-    console.log(value);
     this.setState((prevState) => ({
       quantity: { ...prevState.quantity,
         [value]: prevState.quantity[value] + 1 },
@@ -31,28 +56,36 @@ class ShoppingCart extends Component {
 
   handleDelete = ({ target }) => {
     const { value } = target;
-    const { products, quantity } = this.state;
+    const { productsOnCart, quantity } = this.state;
     delete quantity[value];
-    const filteredProducts = products.filter((prod) => prod !== value);
+    const filteredProducts = productsOnCart.filter(({ title }) => title !== value);
 
     this.setState({
-      products: [...filteredProducts],
+      productsOnCart: [...filteredProducts],
     });
   }
 
   reduce = (arr) => {
     const reduced = [];
-    arr.forEach((element) => {
-      if (!reduced.includes(element)) {
-        reduced.push(element);
-      }
-    });
-    return reduced;
+    const newArray = [];
+    const { addedProduct } = this.state;
+
+    if (arr) {
+      arr.forEach((element) => {
+        if (!reduced.includes(element.title)) {
+          reduced.push(element.title);
+          newArray.push(element);
+        }
+      });
+      return newArray;
+    }
+    newArray.push(addedProduct);
+    return newArray;
   }
 
   render() {
-    const { products, quantity } = this.state;
-    const reducedProducts = this.reduce(products);
+    const { productsOnCart, quantity } = this.state;
+    const reducedProducts = this.reduce(productsOnCart);
 
     if (reducedProducts.length === 0) {
       return (
@@ -61,27 +94,42 @@ class ShoppingCart extends Component {
         </div>
       );
     }
-    return (
-      <>
-        {reducedProducts.map((product) => (
-          <div className="product-shopping-cart" key={ product }>
-            <p data-testid="shopping-cart-product-name">{product}</p>
+
+    if (reducedProducts.length === 1) {
+      let idProd; let titleProd; let
+        quantityProd;
+      const { addedProduct, quantityAdded } = this.state;
+      idProd = productsOnCart[0].id;
+      titleProd = productsOnCart[0].title;
+      if (typeof (quantity) !== 'undefined') {
+        quantityProd = quantity[titleProd];
+      }
+      if (addedProduct) {
+        const { id, title } = addedProduct;
+        idProd = id;
+        titleProd = title;
+        quantityProd = quantityAdded;
+      }
+      return (
+        <>
+          <div className="product-shopping-cart" key={ idProd }>
+            <p data-testid="shopping-cart-product-name">{titleProd}</p>
             <section
               className="product-quantity-manipulation"
               style={ { display: 'flex', flexDirection: 'row' } }
             >
               <button
                 type="button"
-                value={ product }
+                value={ titleProd }
                 onClick={ this.handleDecrease }
                 data-testid="product-decrease-quantity"
               >
                 -
               </button>
-              <p data-testid="shopping-cart-product-quantity">{quantity[product]}</p>
+              <p data-testid="shopping-cart-product-quantity">{quantityProd}</p>
               <button
                 type="button"
-                value={ product }
+                value={ titleProd }
                 onClick={ this.handleIncrease }
                 data-testid="product-increase-quantity"
               >
@@ -89,7 +137,59 @@ class ShoppingCart extends Component {
               </button>
               <button
                 type="button"
-                value={ product }
+                value={ titleProd }
+                onClick={ this.handleDelete }
+                data-testid="product-delete"
+              >
+                Deletar
+              </button>
+            </section>
+          </div>
+          <Link to="/">VOLTAR</Link>
+          <Link
+            data-testid="checkout-products"
+            to={ {
+              pathname: '/checkout',
+              search: '',
+              hash: '',
+              state: { products: reducedProducts, quantity },
+            } }
+          >
+            Finalizar compra
+          </Link>
+        </>
+      );
+    }
+
+    return (
+      <>
+        {reducedProducts.map(({ title, id }) => (
+          <div className="product-shopping-cart" key={ id }>
+            <p data-testid="shopping-cart-product-name">{title}</p>
+            <section
+              className="product-quantity-manipulation"
+              style={ { display: 'flex', flexDirection: 'row' } }
+            >
+              <button
+                type="button"
+                value={ title }
+                onClick={ this.handleDecrease }
+                data-testid="product-decrease-quantity"
+              >
+                -
+              </button>
+              <p data-testid="shopping-cart-product-quantity">{quantity[title]}</p>
+              <button
+                type="button"
+                value={ title }
+                onClick={ this.handleIncrease }
+                data-testid="product-increase-quantity"
+              >
+                +
+              </button>
+              <button
+                type="button"
+                value={ title }
                 onClick={ this.handleDelete }
                 data-testid="product-delete"
               >
@@ -99,14 +199,30 @@ class ShoppingCart extends Component {
           </div>
         ))}
         <Link to="/">VOLTAR</Link>
+        <Link
+          data-testid="checkout-products"
+          to={ {
+            pathname: '/checkout',
+            search: '',
+            hash: '',
+            state: { products: reducedProducts, quantity },
+          } }
+        >
+          Finalizar compra
+        </Link>
       </>
     );
   }
 }
 
 ShoppingCart.propTypes = {
-  products: PropTypes.arrayOf(PropTypes.string).isRequired,
-  quantity: PropTypes.objectOf(PropTypes.number).isRequired,
+  location: PropTypes.shape({
+    hash: PropTypes.string.isRequired,
+    key: PropTypes.string.isRequired,
+    pathname: PropTypes.string.isRequired,
+    search: PropTypes.string.isRequired,
+    state: PropTypes.objectOf(PropTypes.object),
+  }).isRequired,
 };
 
 export default ShoppingCart;

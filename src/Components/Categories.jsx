@@ -40,6 +40,7 @@ class Categories extends React.Component {
               <label htmlFor="category" key={ cat.id }>
                 <input
                   data-testid="category"
+                  id="category"
                   type="radio"
                   name="category"
                   onClick={ () => onClick(cat.id) }

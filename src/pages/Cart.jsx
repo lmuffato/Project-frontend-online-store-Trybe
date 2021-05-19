@@ -23,7 +23,7 @@ class Cart extends Component {
 
   render() {
     const { products } = this.state;
-    console.log(products);
+    const { cartItemMethod, removeCardItemMethod } = this.props;
     if (products.length < 1) {
       return (
         <div>
@@ -42,6 +42,22 @@ class Cart extends Component {
             >
               {`Quantidade: ${product.quant}`}
             </p>
+            <button
+              data-testid="product-increase-quantity"
+              type="button"
+              value={ product }
+              onClick={ () => cartItemMethod(product) }
+            >
+              Add 1
+            </button>
+            <button
+              data-testid="product-decrease-quantity"
+              type="button"
+              value={ product }
+              onClick={ () => removeCardItemMethod(product) }
+            >
+              Remove 1
+            </button>
           </div>
         ))}
         <Link to="/checkout">
@@ -53,6 +69,7 @@ class Cart extends Component {
 }
 Cart.propTypes = {
   items: PropTypes.object,
+  cartItemMethod: PropTypes.func,
 }.isRequired;
 
 export default Cart;

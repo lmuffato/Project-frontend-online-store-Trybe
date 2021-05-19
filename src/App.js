@@ -14,6 +14,18 @@ class App extends Component {
     };
   }
 
+  subtractionIds = (currProduct) => {
+    let result = currProduct.quant;
+    const { cartList } = this.state;
+    cartList.forEach((product) => {
+      if (product.id === currProduct.id) {
+        result -= 1;
+      }
+      return result;
+    });
+    return result;
+  }
+
   checkIds = (currProduct) => {
     let result = currProduct.quant;
     const { cartList } = this.state;
@@ -24,6 +36,25 @@ class App extends Component {
       return result;
     });
     return result;
+  }
+
+  removeCartItem = (newCartProduct) => {
+    const { cartList } = this.state;
+    const check = this.subtractionIds(newCartProduct);
+    if (check < 1) {
+      this.setState((previousState) => ({
+        cartList: [...previousState.cartList],
+      }));
+    } else {
+      const currObj = newCartProduct;
+      const indexId = cartList.indexOf(currObj);
+      const newObject = cartList[indexId];
+      newObject.quant = check;
+      const previousCartList = cartList.filter((product) => product.id !== newObject.id);
+      this.setState(() => ({
+        cartList: [...previousCartList, newObject],
+      }));
+    }
   }
 
   addCartItem = (newCartProduct) => {
@@ -54,7 +85,12 @@ class App extends Component {
           <Switch>
             <Route
               path="/cart"
-              render={ (props) => <Cart { ...props } items={ cartList } /> }
+              render={ (props) => (<Cart
+                { ...props }
+                removeCardItemMethod={ this.removeCartItem }
+                cartItemMethod={ this.addCartItem }
+                items={ cartList }
+              />) }
             />
             <Route
               path="/productdetails/:id"

@@ -8,7 +8,7 @@ class ProductDetails extends React.Component {
     return (
       <>
         <ProductCard props={ this.props } />
-        <CartButton data-testid="shopping-cart-button" />
+        <CartButton />
       </>
     );
   }

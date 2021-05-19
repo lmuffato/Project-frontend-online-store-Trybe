@@ -6,21 +6,25 @@ class Form extends React.Component {
   constructor() {
     super();
 
+    this.handleChange = this.handleChange.bind(this);
+
     this.state = {
       formInfos: {
         fullName: '',
-        email:'',
-        cpf: null,
-        phone: null,
-        cep: null,
+        email: '',
+        cpf: '',
+        phone: '',
+        cep: '',
         adress: '',
-        adressNum: 0,
-        comp: null,
+        adressNum: '',
+        comp: '',
       },
     };
   }
 
-  handleChange = ({ target: { name, value } }) => {
+  handleChange({ target }) {
+    const { name } = target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
     this.setState({
       [name]: value,
     });
@@ -42,7 +46,7 @@ class Form extends React.Component {
               name={ name }
               placeHolder={ placeHolder }
               onChange={ this.handleChange }
-              value={ formInfos[name] }
+              value={ formInfos.name }
             />
           ))}
         </form>

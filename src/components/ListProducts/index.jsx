@@ -4,10 +4,10 @@ import Product from '../Product';
 
 class ListProducts extends React.Component {
   render() {
-    const { arrayOfItems, func } = this.props;
+    const { productsList, func } = this.props;
     return (
       <>
-        { arrayOfItems.map(
+        { productsList.map(
           ({ title, price, thumbnail, id, attributes }) => (<Product
             title={ title }
             imagePath={ thumbnail }
@@ -24,7 +24,7 @@ class ListProducts extends React.Component {
 }
 
 ListProducts.propTypes = {
-  arrayOfItems: PropTypes.arrayOf(
+  productsList: PropTypes.arrayOf(
     PropTypes.object,
   ),
   func: PropTypes.func,

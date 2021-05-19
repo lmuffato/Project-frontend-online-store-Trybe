@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import DetailedProductCard from '../components/DetailedProductCard/DetailedProductCard';
+import EvaluationForms from '../components/EvaluationForms/EvaluationForms';
 
 class ProductDetails extends Component {
-  render() {
-    const { location: { state: product } } = this.props;
-    // Use o log abaixo para verificar todas as informações que temos sobre o produto
-    // console.log(Object.entries(product));
-    const { title, price, thumbnail } = product;
+  productCard(title, price, thumbnail) {
     return (
       <section>
         <h2 data-testid="product-detail-name">
@@ -16,16 +14,22 @@ class ProductDetails extends Component {
       </section>
     );
   }
+
+  render() {
+    const { location: { state: product } } = this.props;
+    return (
+      <>
+        <DetailedProductCard { ...product } />
+        <EvaluationForms />
+      </>
+    );
+  }
 }
 
 ProductDetails.propTypes = {
   location: PropTypes.shape({
     state: PropTypes.shape({
-      product: PropTypes.shape({
-        title: PropTypes.string,
-        price: PropTypes.number,
-        thumbnail: PropTypes.string,
-      }),
+      // A componente DetailedProductCard é responsável por validar as props que ela precisa
     }),
   }).isRequired,
 };

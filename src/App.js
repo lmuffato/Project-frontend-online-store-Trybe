@@ -52,6 +52,8 @@ class App extends React.Component {
     this.setState({
       cart,
     });
+
+    localStorage.setItem('cart', JSON.stringify(cart));
   }
 
   setReviews(productReviews, id) {
@@ -118,6 +120,8 @@ class App extends React.Component {
       quantity += productInCart.quantity;
     });
 
+    localStorage.setItem('cart', JSON.stringify({ quantity, products: updatedCart }));
+
     this.setState({
       cart: {
         quantity,
@@ -131,6 +135,9 @@ class App extends React.Component {
     const productToRemove = cart.products.find((product) => product.data.id === id);
     const updatedCart = cart.products.filter((product) => product.data.id !== id);
     const quantity = cart.quantity - productToRemove.quantity;
+
+    localStorage.setItem('cart', JSON.stringify({ quantity, products: updatedCart }));
+
     this.setState({
       cart: {
         quantity,

@@ -1,52 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import * as api from '../services/api';
 import './SearchProducts.css';
 
 class SearchProducts extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      query: '',
-      productsList: [],
-    };
-  }
-
-  componentDidUpdate(prevProps) {
-    const { category: categoryPrevious } = prevProps;
-    const { category } = this.props;
-    if (category !== categoryPrevious) this.search();
-  }
-
-  handle = ({ target: { value } }) => {
-    this.setState({ query: value });
-  };
-
   addProductInCart = ({ target }) => {
-    const { handle } = this.props;
-    console.log(target.value);
-    const product = target.value;
-    const productQuantity = target.parentElement.querySelector('.quantity').value;
-    // const title = target.parentElement.querySelector('.title-product').value;
+    console.log(target);
+    const { handle, productsList } = this.props;
+    const id = target.value;
+    const product = productsList.find((item) => item.id === id);
+    const quantityElment = target.parentElement.querySelector('.quantity');
+    const productQuantity = parseInt(quantityElment.value, 10);
     handle(product, productQuantity);
   }
 
-  search = async () => {
-    const { query } = this.state;
-    const { getProductsFromCategoryAndQuery } = api;
-    const { category } = this.props;
-    const request = await getProductsFromCategoryAndQuery(category, query);
-    let productsList = [];
-    if (request !== []) {
-      const { results } = request;
-      productsList = results;
-    }
-    this.setState({ productsList });
-  };
-
   productsCards = (list) => {
-    const { query } = this.state;
+    const { query, handle /* , productsInCart */ } = this.props;
     const message = query === '' ? '' : 'Nenhum produto foi encontrado';
     return (
       <section className="search-conteiner">
@@ -68,7 +37,7 @@ class SearchProducts extends Component {
                     type="button"
                     data-testid="product-add-to-cart"
                     onClick={ this.addProductInCart }
-                    value={ product.title }
+                    value={ id }
                   >
                     Adicionar ao Carrinho
                   </button>
@@ -83,7 +52,14 @@ class SearchProducts extends Component {
                   </label>
                   <Link
                     data-testid="product-detail-link"
-                    to={ { pathname: '/item-details', state: { product } } }
+                    to={ {
+                      pathname: '/item-details',
+                      state: {
+                        product,
+                        // productsInCartQuantity: Object.keys(productsInCart).length,
+                      },
+                      handle,
+                    } }
                   >
                     Detalhes
                   </Link>
@@ -96,22 +72,9 @@ class SearchProducts extends Component {
   };
 
   render() {
-    const { query, productsList } = this.state;
+    const { productsList } = this.props;
     return (
       <section>
-        <input
-          data-testid="query-input"
-          value={ query }
-          onChange={ this.handle }
-          type="text"
-        />
-        <button
-          data-testid="query-button"
-          type="button"
-          onClick={ this.search }
-        >
-          xablau
-        </button>
         {this.productsCards(productsList)}
       </section>
     );
@@ -119,8 +82,9 @@ class SearchProducts extends Component {
 }
 
 SearchProducts.propTypes = {
-  category: PropTypes.string.isRequired,
   handle: PropTypes.func.isRequired,
+  productsList: PropTypes.arrayOf(PropTypes.object).isRequired,
+  query: PropTypes.string.isRequired,
 };
 
 export default SearchProducts;

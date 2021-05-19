@@ -47,7 +47,7 @@ class Home extends Component {
     });
   }
 
-  cartId = (productObj) => {
+  productToCart = (productObj) => {
     this.setState(({ cart }) => ({
       cart: [...cart, productObj],
     }));
@@ -119,7 +119,7 @@ class Home extends Component {
           <section>
             <ul className="products">
               {products.map((product) => (
-                <CardItem cart={ this.cartId } key={ product.id } { ...product } />
+                <CardItem productToCart={ this.productToCart } key={ product.id } product={ { ...product } } />
               ))}
             </ul>
           </section>

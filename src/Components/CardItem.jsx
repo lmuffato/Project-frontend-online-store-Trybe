@@ -5,7 +5,9 @@ import AddCart from './AddCart';
 
 class cardItem extends Component {
   render() {
-    const { title, thumbnail, price, id, cart } = this.props;
+    const { product, productToCart } = this.props;
+    const { title, thumbnail, price, id } = product;
+
     return (
       <>
         <Link
@@ -22,7 +24,8 @@ class cardItem extends Component {
             <br />
           </div>
         </Link>
-        <AddCart
+{//<<<<<<< HEAD}
+        /* <AddCart
           id={ id }
           title={ title }
           thumbnail={ thumbnail }
@@ -30,6 +33,10 @@ class cardItem extends Component {
           { ...this.props }
           cart={ cart }
         />
+// =======
+        <AddCart id={ id } product={ { ...product } } productToCart={ productToCart } />
+// >>>>>>> 6f643354f9559458934a0ad586772e874269d7c5*/
+}
       </>
     );
   }

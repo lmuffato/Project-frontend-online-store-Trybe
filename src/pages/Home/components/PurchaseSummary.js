@@ -18,7 +18,9 @@ class PurchaseSummary extends React.Component {
               <ul>
                 { cart.map((product) => (
                   <li key={ product.data.id }>
-                    <h5 data-testid="shopping-cart-product-name2">{product.data.title}</h5>
+                    <h5 data-testid="shopping-cart-product-name2">
+                      {product.data.title}
+                    </h5>
                     <h5 data-testid="shopping-cart-product-quantity2">
                       {product.quantity}
                     </h5>

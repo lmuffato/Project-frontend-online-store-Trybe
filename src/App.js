@@ -20,10 +20,15 @@ class App extends Component {
     };
   }
 
+  updateLocalStorage = () => {
+    const { cartList } = this.state;
+    localStorage.setItem('cartList', JSON.stringify(cartList));
+  };
+
   handleClickAddCart = async (event) => {
     const elementos = [...event.target.parentNode.children];
     const product = [...elementos[0].children];
-    this.setState((anterior) => ({
+    await this.setState((anterior) => ({
       cartList: [...anterior.cartList, {
         img: product[1].src,
         title: product[0].innerHTML,
@@ -31,10 +36,15 @@ class App extends Component {
         price: elementos[1].innerHTML,
       }],
     }));
+    this.updateLocalStorage();
   };
 
+  componentDidMount() {
+    this.propsToCartList();
+  }
+
   handleDetailsToCart = async (product) => {
-    this.setState((anterior) => ({
+    await this.setState((anterior) => ({
       cartList: [...anterior.cartList, {
         img: product.thumbnail,
         title: product.title,
@@ -42,6 +52,7 @@ class App extends Component {
         price: product.price.toFixed(2),
       }],
     }));
+    this.updateLocalStorage();
   }
 
   changeQuantProductLength = (quant, productTitle) => {
@@ -53,6 +64,15 @@ class App extends Component {
 
     this.setState({ cartList: newCartList });
   }
+
+  propsToCartList = () => {
+    const storage = localStorage.getItem('cartList');
+    if (storage) {
+      this.setState({
+        cartList: JSON.parse(storage),
+      });
+    }
+  };
 
   render() {
     const { cartList } = this.state;

@@ -6,7 +6,7 @@ class ProductDetails extends Component {
   render() {
     const { location, handleDetailsToCart } = this.props;
     const { state: { product } } = location;
-    const { title, thumbnail, price } = product;
+    const { title, thumbnail, price, shipping } = product;
     return (
       <section>
         <div>
@@ -14,6 +14,8 @@ class ProductDetails extends Component {
             <span data-testid="product-detail-name">{ title }</span>
             <img src={ thumbnail } alt={ title } />
             <span>{`R$${price}`}</span>
+            { shipping.free_shipping
+            && <span data-testid="free-shipping">Frete grátis</span> }
             <button
               type="button"
               onClick={ () => handleDetailsToCart(product) }
@@ -57,6 +59,9 @@ ProductDetails.propTypes = {
         thumbnail: PropTypes.string,
         price: PropTypes.number,
         id: PropTypes.string,
+        shipping: PropTypes.shape({
+          free_shipping: PropTypes.bool,
+        }),
       }),
     }),
   }).isRequired,

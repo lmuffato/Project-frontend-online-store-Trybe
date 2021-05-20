@@ -8,7 +8,8 @@ import styles from './styles.module.css';
 class CardProduct extends Component {
   render() {
     const { product, onClick } = this.props;
-    const { title, thumbnail, price, id } = product;
+    const { title, thumbnail, price, id, shipping } = product;
+
     return (
       <section className={ styles.teste } data-testid="product">
         <Link
@@ -18,6 +19,8 @@ class CardProduct extends Component {
           <span>{ title }</span>
           <img src={ thumbnail } alt={ title } />
           <span>{`R$${price}`}</span>
+          { shipping.free_shipping
+          && <span data-testid="free-shipping">Frete grátis</span> }
         </Link>
         <button
           type="button"
@@ -38,6 +41,9 @@ CardProduct.propTypes = {
     thumbnail: PropTypes.string,
     price: PropTypes.number,
     id: PropTypes.string,
+    shipping: PropTypes.shape({
+      free_shipping: PropTypes.bool,
+    }),
   }).isRequired,
 };
 

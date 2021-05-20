@@ -9,14 +9,11 @@ class Checkout extends React.Component {
     const { cardProducts, totalPrice } = this.props;
     return (
       <div>
-        <CartResume
+        {/* <CartResume
           cardProducts={ cardProducts }
           totalPrice={ totalPrice }
-        />
+        /> */}
         <Form />
-        <button type="button">
-          Finalizar Compra
-        </button>
       </div>
     );
   }

@@ -20,15 +20,42 @@ class Form extends React.Component {
         comp: '',
         payMode: '',
       },
+      error: {},
     };
   }
 
   handleChange({ target }) {
     const { name } = target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
+    this.setState((ant) => ({
+      formInfos: { ...ant.formInfos, [name]: value },
+    }));
+  }
+
+  validateField = () => {
+    const { formInfos: {
+      fullName, email, cpf, phone, cep, adress, payMode,
+    } } = this.state;
+
+    const fails = {};
+    if (fullName.length === 0) fails.fullName = true;
+    if (!email.includes('@')) fails.email = true;
+    if (cpf.length !== 11) fails.cpf = true;
+    if (phone.length !== 11) fails.phone = true;
+    if (cep.length !== 8) fails.cep = true;
+    if (!adress) fails.adress = true;
+    if (!payMode) fails.payMode = true;
+
     this.setState({
-      [name]: value,
+      error: fails,
     });
+  }
+
+  resetState = (event) => {
+    event.preventDefault();
+    this.validateField();
+    const { error } = this.state;
+    if (!error) this.setState({ formInfos: {}, error: {} });
   }
 
   render() {
@@ -63,10 +90,13 @@ class Form extends React.Component {
                   id={ index }
                   onClick={ this.handleChange }
                 />
-                { payMode }
+                { payMode}
               </label>
             ))}
           </fieldset>
+          <button type="submit" onClick={ this.resetState }>
+            Finalizar Compra
+          </button>
         </form>
       </div>
     );

@@ -13,10 +13,7 @@ function App() {
         <Route exact path="/" component={ Home } />
         <Route path="/shopcart" component={ ShopCart } />
         <Route path="/shopcartbutton" component={ ShopCartButton } />
-        <Route
-          path="/productdetails/:id"
-          component={ ProductDetails }
-        />
+        <Route path="/productdetails/:id" component={ ProductDetails } />
       </BrowserRouter>
     </div>
   );

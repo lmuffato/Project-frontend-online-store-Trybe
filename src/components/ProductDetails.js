@@ -27,31 +27,17 @@ class ProductDetails extends Component {
     this.setState({ product });
   }
 
-  // productDetails(data, product) {
-  //   return (
-  //     <div>
-  //       <h1 data-testid="product-detail-name">{ data.data.title }</h1>
-  //       <img src={ data.data.thumbnail } alt={ `foto ${data.data.title}` } width="400" />
-  //       <p>{`R$${parseFloat(data.data.price).toFixed(2)}`}</p>
-  //       <p>{product.plain_text}</p>
-  //       <button type="button">
-  //         <Link to="/shopcart">Carrino</Link>
-  //       </button>
-  //     </div>
-  //   );
-  // }
-
   render() {
     const { data, product } = this.state;
-    const { data: { title } } = data;
+    const { data: { title, price, thumbnail } } = data;
     return (
       <div>
         <h1 data-testid="product-detail-name">{ title }</h1>
-        <img src={ data.data.thumbnail } alt={ `foto ${title}` } width="400" />
-        <p>{`R$${parseFloat(data.data.price).toFixed(2)}`}</p>
+        <img src={ thumbnail } alt={ `foto ${title}` } width="400" />
+        <p>{`R$${parseFloat(price).toFixed(2)}`}</p>
         <p>{product.plain_text}</p>
         <button type="button">
-          <Link to="/shopcart">Carrino</Link>
+          <Link to="/shopcart">Carrinho</Link>
         </button>
       </div>
     );

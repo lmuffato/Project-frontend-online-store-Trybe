@@ -12,15 +12,16 @@ class ProductList extends Component {
 
   productDetails(data) {
     return (
-      <div data-testid="product-detail-link">
+      <div>
         <li key={ data.id } data-testid="product">
+          <p>{ data.title }</p>
           <Link
+            data-testid="product-detail-link"
             to={ {
               pathname: `/productdetails/${data.id}`,
               state: { data },
             } }
           >
-            <p>{ data.title }</p>
             <img src={ data.thumbnail } alt={ `foto ${data.title}` } width="200" />
             <p>{ data.price }</p>
           </Link>
@@ -31,7 +32,6 @@ class ProductList extends Component {
 
   render() {
     const { dataApi, request } = this.props;
-    // console.log(dataApi);
     return (
       <div>
         <ul>

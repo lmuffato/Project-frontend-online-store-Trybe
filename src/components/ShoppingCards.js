@@ -4,15 +4,16 @@ class ShoppingCards extends React.Component {
   render() {
     const { title, price, imagePath, id } = this.props;
     return (
-      <div id={id}>
+      <div id={ id }>
         <h2 data-testid="shopping-cart-product-name" >{title}</h2>
         <img
-          src={imagePath}
+          src={ imagePath }
           width="250"
           alt="Imagem do produto"
         />
         <span>{price}</span>
-        <span data-testid="shopping-cart-product-quantity"></span>
+        <br />
+        <span data-testid="shopping-cart-product-quantity">1</span>
       </div>
     );
   }

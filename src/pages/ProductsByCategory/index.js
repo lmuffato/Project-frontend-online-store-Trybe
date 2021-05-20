@@ -40,7 +40,13 @@ class ProductsByCategory extends React.Component {
               title={ title }
               price={ price }
               imagePath={ thumbnail }
-              button={<AddToCartBtn category={category_id} query={title} id={id} dataid="product-add-to-cart"/>}
+              button={
+                <AddToCartBtn 
+                  category={ category_id }
+                  query={ title }
+                  id={ id }
+                  dataid="product-add-to-cart"
+                />}
             />
           ))
           }

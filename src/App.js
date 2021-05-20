@@ -14,7 +14,10 @@ class App extends React.Component {
       products: [],
       selectedCategory: '',
       searchedQuery: '',
-      cart: [],
+      cart: {
+        quantity: 0,
+        products: [],
+      },
       allReviews: [],
     };
 
@@ -49,6 +52,8 @@ class App extends React.Component {
     this.setState({
       cart,
     });
+
+    localStorage.setItem('cart', JSON.stringify(cart));
   }
 
   setReviews(productReviews, id) {
@@ -77,14 +82,21 @@ class App extends React.Component {
     });
   }
 
-  addToCart({ target }) {
-    const { products, cart } = this.state;
+  addToCart({ target }, product) {
+    let cart = localStorage.getItem('cart');
+    cart = JSON.parse(cart);
+    const { cart: cartInState, products } = this.state;
+    if (!cart) cart = cartInState;
     let addedProduct = {};
     let updatedCart = [];
 
-    const productFound = products.find((product) => product.id === target.id);
+    if (!product) {
+      product = products.find((productState) => productState.id === target.id);
+    }
 
-    const foundInCart = cart.find((product) => product.data.id === target.id);
+    const foundInCart = cart.products.find(
+      (productInCart) => productInCart.data.id === product.id,
+    );
 
     if (foundInCart) {
       const increasedQuantity = foundInCart.quantity + 1;
@@ -92,30 +104,51 @@ class App extends React.Component {
         ...foundInCart,
         quantity: increasedQuantity,
       };
-      updatedCart = cart.map((product) => {
-        if (product.data.id === target.id) {
-          product = addedProduct;
+      updatedCart = cart.products.map((productInCart) => {
+        if (productInCart.data.id === product.id) {
+          productInCart = addedProduct;
         }
-        return product;
+        return productInCart;
       });
     } else {
       addedProduct = {
         quantity: 1,
-        data: productFound,
+        data: product,
       };
-      updatedCart = [...cart, addedProduct];
+      updatedCart = [...cart.products, addedProduct];
     }
 
+    let quantity = 0;
+    updatedCart.forEach((productInCart) => {
+      quantity += productInCart.quantity;
+    });
+
+    localStorage.setItem('cart', JSON.stringify({ quantity, products: updatedCart }));
+
     this.setState({
-      cart: updatedCart,
+      cart: {
+        quantity,
+        products: updatedCart,
+      },
     });
   }
 
   removeFromCart(id) {
-    const { cart } = this.state;
-    const updatedCart = cart.filter((product) => product.data.id !== id);
+    let cart = localStorage.getItem('cart');
+    cart = JSON.parse(cart);
+    const { cart: cartInState } = this.state;
+    if (!cart) cart = cartInState;
+    const productToRemove = cart.products.find((product) => product.data.id === id);
+    const updatedCart = cart.products.filter((product) => product.data.id !== id);
+    const quantity = cart.quantity - productToRemove.quantity;
+
+    localStorage.setItem('cart', JSON.stringify({ quantity, products: updatedCart }));
+
     this.setState({
-      cart: updatedCart,
+      cart: {
+        quantity,
+        products: updatedCart,
+      },
     });
   }
 
@@ -141,6 +174,7 @@ class App extends React.Component {
               onFilterByQuery={ this.handleChange }
               products={ products }
               addToCart={ this.addToCart }
+              cart={ cart }
             />
           </Route>
           <Route path="/cart">
@@ -158,6 +192,7 @@ class App extends React.Component {
                 allReviews={ allReviews }
                 setReviews={ this.setReviews }
                 { ...props }
+                cart={ cart }
               />)
             }
             exact

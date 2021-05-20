@@ -5,17 +5,15 @@ import CardProduct from './components/CardProduct';
 import Category from './components/Category';
 
 class Home extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {};
-  }
-
   render() {
+    let cart = localStorage.getItem('cart');
+    cart = JSON.parse(cart);
     const {
       onSearch, onFilterByCategory, onFilterByQuery,
-      products, addToCart,
+      products, addToCart, cart: cartInProps,
     } = this.props;
+
+    if (!cart) cart = cartInProps;
 
     return (
       <>
@@ -34,6 +32,9 @@ class Home extends React.Component {
         </strong>
         <Link to="/cart">
           <button type="button" data-testid="shopping-cart-button">Carrinho</button>
+          <span data-testid="shopping-cart-size">
+            { cart.quantity }
+          </span>
         </Link>
         <Category onCategorySelection={ onFilterByCategory } />
         <CardProduct products={ products } addToCart={ addToCart } />

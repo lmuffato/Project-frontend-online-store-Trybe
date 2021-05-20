@@ -16,6 +16,13 @@ class Cards extends React.Component {
             <p>{title}</p>
             <p>{price}</p>
             <img style={ { width: '100px' } } src={ thumbnail } alt="imagem" />
+            <button
+              type="submit"
+              data-testid="product-add-to-cart"
+              onClick={ this.handleButton }
+            >
+              Adicionar ao carrinho
+            </button>
           </div>
         </Link>
       </div>

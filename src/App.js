@@ -15,7 +15,7 @@ function App() {
           <Route
             exact
             path="/detailsPage/:id"
-            render={ (props) => <DetailsPage { ...props } /> }
+            component={ DetailsPage }
           />
           <Route
             path="/CartShopPage"

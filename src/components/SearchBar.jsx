@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import CartButton from './CartButton';
 import './styles/SearchBar.css';
 
 class SearchBar extends React.Component {
@@ -21,7 +20,6 @@ class SearchBar extends React.Component {
           >
             Search
           </button>
-          <CartButton />
           <h2 data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
           </h2>

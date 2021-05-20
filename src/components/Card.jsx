@@ -6,11 +6,12 @@ import './styles/Card.css';
 class Card extends React.Component {
   render() {
     const product = this.props;
-    const { title, price, image, Sku } = product;
+    const { title, price, image } = product;
+
     return (
-      <div className="card" data-testid="product">
+      <div className="card" data-testid="id">
         <Link
-          to={ { pathname: { Sku }, state: { product } } } // Alteração do path name para title. keys(id) não estava funcionando.
+          to={ { pathname: { title }, state: { product } } } // Alteração do path name para title. keys(id) não estava funcionando.
           data-testid="product-detail-link"
         >
           <p>{title}</p>
@@ -26,7 +27,6 @@ Card.propTypes = {
   title: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
-  Sku: PropTypes.string.isRequired,
 };
 
 export default Card;

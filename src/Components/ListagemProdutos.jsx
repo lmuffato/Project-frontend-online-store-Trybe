@@ -18,7 +18,19 @@ class ListagemProdutos extends Component {
       isLoading: false,
       query: '',
       category: '',
+      catSize: 0,
     };
+  }
+
+  componentDidMount() {
+    this.handleSize();
+  }
+
+  handleSize() {
+    const prevSize = parseFloat(localStorage.getItem('cartSize'));
+    if (prevSize) {
+      this.setState({ catSize: prevSize });
+    }
   }
 
   fetchAPI = () => {
@@ -61,6 +73,7 @@ class ListagemProdutos extends Component {
           ...prevState.productsQuantity,
           [title]: 1,
         },
+        catSize: prevState.catSize + 1,
       }));
     } else {
       this.setState((prevState) => ({
@@ -71,23 +84,15 @@ class ListagemProdutos extends Component {
         }],
         productsQuantity: { ...prevState.productsQuantity,
           [title]: prevState.productsQuantity[title] + 1 },
+        catSize: prevState.catSize + 1,
       }));
     }
-  }
-
-  getQuantity = () => {
-    const { productsQuantity } = this.state;
-    const quantityArr = Object.values(productsQuantity);
-    if (quantityArr.length !== 0) {
-      const totalItems = quantityArr.reduce((acc, cur) => acc + cur);
-      localStorage.setItem('cartSize', totalItems);
-      return totalItems;
-    }
+    const { catSize } = this.state;
+    localStorage.setItem('cartSize', catSize + 1);
   }
 
   render() {
-    const { products, productsOnCart, productsQuantity, isLoading } = this.state;
-    const quantityItems = this.getQuantity();
+    const { products, productsOnCart, productsQuantity, isLoading, catSize } = this.state;
 
     if (isLoading) {
       return (
@@ -97,7 +102,7 @@ class ListagemProdutos extends Component {
 
     return (
       <div>
-        <CartSize size={ quantityItems } />
+        <CartSize size={ catSize } />
         <label htmlFor="query-input">
           <input
             data-testid="query-input"
@@ -134,7 +139,7 @@ class ListagemProdutos extends Component {
           ? (<p>Nenhum produto foi encontrado</p>)
           : products.map((product) => (
             <ProductCard
-              quantityOnCart={ quantityItems }
+              quantityOnCart={ catSize }
               product={ product }
               id={ product.id }
               key={ product.id }

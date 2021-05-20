@@ -26,7 +26,7 @@ class Category extends React.Component {
     const { categories } = this.state;
     const { handleFunction } = this.props;
     return (
-      <section>
+      <section id="categories" className="categories">
         {categories.map((category) => (
           <div key={ category.id }>
             <label htmlFor={ category.id }>

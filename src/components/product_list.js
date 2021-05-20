@@ -100,7 +100,7 @@ export default class ProductList extends Component {
       return 'Nenhum produto foi encontrado.';
     }
     return obj.map((item) => (
-      <section data-testid="product" key={ item.id }>
+      <section data-testid="product" id="product" className="product" key={ item.id }>
         <Button obj={ item } dataTestId="product-add-to-cart" />
         <Link
           to={ `/product_details/${item.id}` }
@@ -119,32 +119,44 @@ export default class ProductList extends Component {
   render() {
     const { obj, searchText } = this.state;
     return (
-      <div>
-        <Category handleFunction={ this.loadProductsByCategory } />
+      <div className="content">
         <label htmlFor="catSearchID" data-testid="home-initial-message">
-          <input
-            data-testid="query-input"
-            type="text"
-            name="searchText"
-            value={ searchText }
-            id="catSearchID"
-            onChange={ this.loadProductsByText }
-          />
-          Digite algum termo de pesquisa ou escolha uma categoria.
-          <button
-            type="submit"
-            data-testid="query-button"
-            onClick={ this.submitSearch }
-          >
-            Pesquisar
-          </button>
-          <div>
-            <section>
-              { obj.length > 0 ? this.loadProducts(obj) : ''}
-            </section>
+          <header>
+            <div className="seachByText">
+              <input
+                data-testid="query-input"
+                type="text"
+                name="searchText"
+                value={ searchText }
+                id="catSearchID"
+                className="catSearchID"
+                onChange={ this.loadProductsByText }
+                placeholder="Digite algum termo de pesquisa ou escolha uma categoria"
+              />
+              <button
+                type="submit"
+                data-testid="query-button"
+                onClick={ this.submitSearch }
+              >
+                Pesquisar
+              </button>
+            </div>
+            <span
+              className="textOfSeach"
+            >
+              Digite algum termo de pesquisa ou escolha uma categoria.
+            </span>
+            <ShopCartButton />
+          </header>
+          <div className="downContent">
+            <Category handleFunction={ this.loadProductsByCategory } />
+            <div>
+              <section className="listProductBySeachAndFilter">
+                { obj.length > 0 ? this.loadProducts(obj) : ''}
+              </section>
+            </div>
           </div>
         </label>
-        <ShopCartButton />
       </div>
     );
   }

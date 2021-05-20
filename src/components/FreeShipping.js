@@ -2,13 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import freteGratisImg from '../img/freteGratisImg.png';
 
-class FreeShoping extends React.Component {
+class FreeShipping extends React.Component {
   render() {
     let renderShipping;
     const imgshipping = (<img
       data-testid="free-shipping"
+      id="free-shipping"
+      className="free-shipping"
       src={ freteGratisImg }
-      width="100px"
       alt="freteGratisImg"
     />);
     const { shippingFree } = this.props;
@@ -22,8 +23,8 @@ class FreeShoping extends React.Component {
   }
 }
 
-FreeShoping.propTypes = {
+FreeShipping.propTypes = {
   shippingFree: PropTypes.string.isRequired,
 };
 
-export default FreeShoping;
+export default FreeShipping;

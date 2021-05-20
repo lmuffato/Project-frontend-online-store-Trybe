@@ -1,42 +1,63 @@
-.App {
-  text-align: center;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  padding: 20px;
 }
 
-@media ( prefers-reduced-motion : no-preference ) {
-
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-
+.content {
+  padding: 10px;
 }
 
-.App-header {
-  align-items: center;
-  background-color: #282c34;
-  color: white;
+header {
   display: flex;
-  flex-direction: column;
-  font-size: calc(10px + 2vmin);
-  justify-content: center;
-  min-height: 100vh;
+  justify-content: space-around;
+  margin-bottom: 15px;
+  padding: 10px;
 }
 
-.App-link {
-  color: #61dafb;
+.seachByText {
+  display: flex;
 }
 
-@keyframes App-logo-spin {
+.catSearchID {
+  padding-left: 2px;
+  padding-right: 2px;
+  width: 350px;
+}
 
-  from {
-    transform: rotate(0deg);
-  }
+.textOfSeach {
+  font-size: 0;
+}
 
-  to {
-    transform: rotate(360deg);
-  }
+.imgCar {
+  width: 25px;
+}
+
+.downContent {
+  display: flex;
+}
+
+.categories {
+  width: 300px;
+}
+
+.listProductBySeachAndFilter {
+  display: flex;
+  flex-wrap: wrap;
+  width: 1000px;
+}
+
+.product {
+  margin: 10px;
+  padding: 10px;
+  width: 300px;
+}
+
+.free-shipping {
+  width: 60px;
 }

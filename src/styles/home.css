@@ -80,7 +80,7 @@
   justify-content: space-between;
   margin: 20px 0;
   padding-left: 30px;
-  width: 500px;
+  width: 600px;
 }
 
 .cart-product {
@@ -138,4 +138,18 @@
 
 .imageProduct {
   width: 250px;
+}
+
+.quantity-section {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 150px;
+}
+
+.quantity-button {
+  background: transparent;
+  border: none;
+  font-size: 40px;
+  cursor: pointer;
 }

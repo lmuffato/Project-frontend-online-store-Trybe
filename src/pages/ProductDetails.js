@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import CartButton from '../components/CartButton';
 
 class ProductDetails extends React.Component {
@@ -26,8 +25,6 @@ class ProductDetails extends React.Component {
         <h2 data-testid="product-detail-name">{ product.title }</h2>
         <img src={ product.image } alt={ `Foto do produto ${product.title}` } />
         <h3>{ `R$: ${parseFloat(product.price).toFixed(2)}` }</h3>
-        <Link to="./ShoppingCartPage">Carrinho de compras</Link>
-        <br />
         <CartButton data={ cartList } newCartItemId={ cartList } />
         <button
           data-testid="product-detail-add-to-cart"
@@ -41,6 +38,7 @@ class ProductDetails extends React.Component {
           quantidade:
           {cartList.length}
         </span>
+        {/* essa parte era pra ser renderizada dentro do carrinho */}
         <ol>
           { cartList.map((item, index) => (
             <li

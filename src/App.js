@@ -1,21 +1,32 @@
 import React from 'react';
 import './App.css';
-import { BrowserRouter, Route } from 'react-router-dom';
-import CartButton from './Components/CartButton';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import CartShopPage from './Components/CartShopPage';
 import Search from './Components/Search';
-import CategorieList from './Components/CategorieList';
+import DetailsPage from './Components/DetailsPage';
 
 function App() {
   return (
-    <BrowserRouter>
-      <div>
-        <Search />
-        <Route path="/CartShopPage" component={ CartShopPage } />
-        <CartButton />
-        <CategorieList />
-      </div>
-    </BrowserRouter>
+    <div>
+      <BrowserRouter>
+
+        <Switch>
+          <Route exact path="/" component={ Search } />
+          <Route
+            exact
+            path="/detailsPage/:id"
+            render={ (props) => <DetailsPage { ...props } /> }
+          />
+          <Route
+            path="/CartShopPage"
+            render={ (props) => (<CartShopPage
+              { ...props }
+            />) }
+          />
+        </Switch>
+      </BrowserRouter>
+    </div>
+
   );
 }
 

@@ -30,11 +30,6 @@ class CategorieList extends React.Component {
     });
   }
 
-  // handleContent({ target }) {
-  //   const value = target.type === 'checkbox' ? target.checked : target.value;
-  //   this.setState({ [name]: value });
-  // }
-
   render() {
     const { categories, categoriesList } = this.state;
     return (

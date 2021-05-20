@@ -1,6 +1,8 @@
 import React from 'react';
 import * as api from '../services/api';
+import CategorieList from './CategorieList';
 import ResultSearch from './ResultSearch';
+import CartButton from './CartButton';
 
 class Search extends React.Component {
   constructor(props) {
@@ -8,6 +10,7 @@ class Search extends React.Component {
     this.state = {
       text: '',
       productList: [],
+      searched: false,
     };
     this.handleText = this.handleText.bind(this);
   }
@@ -25,13 +28,12 @@ class Search extends React.Component {
     const { text } = this.state;
     const query = await api.getProductsFromCategoryAndQuery('teste', text);
     const { results } = query;
-    this.setState({ productList: results });
+    this.setState({ productList: results, searched: true });
   }
 
   render() {
-    const { productList } = this.state;
+    const { productList, searched } = this.state;
     return (
-
       <div>
         <input
           type="text"
@@ -53,9 +55,11 @@ class Search extends React.Component {
             Digite algum termo de pesquisa ou escolha uma categoria.
 
           </h1>
-          {productList.length ? <ResultSearch productList={ productList } />
-            : <h1>Nenhum produto foi encontrado</h1>}
+          {!productList.length && searched ? <h1>Nenhum produto foi encontrado</h1>
+            : <ResultSearch productList={ productList } />}
         </div>
+        <CartButton />
+        <CategorieList />
       </div>
     );
   }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { shape, number, string, func } from 'prop-types';
-import changePriceToNumber from '../../utils/functions';
+import { changePriceToNumber } from '../../utils/functions';
 import styles from './styles.module.css';
 
 class CartItem extends Component {

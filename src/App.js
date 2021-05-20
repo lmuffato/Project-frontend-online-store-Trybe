@@ -43,7 +43,6 @@ class App extends Component {
   }
 
     handleDetailsToCart = async (product) => {
-      console.log(product);
       this.setState((anterior) => ({
         cartList: [...anterior.cartList, {
           img: product.thumbnail,

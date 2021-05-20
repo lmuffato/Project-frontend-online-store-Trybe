@@ -1,17 +1,29 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import * as shoppingCartService from '../services/shoppingCartService';
 
 class ProductCard extends Component {
+  constructor() {
+    super();
+    this.onClickTest = this.onClickTest.bind(this);
+  }
+
+  onClickTest() {
+    const { product } = this.props;
+    shoppingCartService.setProducts(product);
+  }
+
   render() {
     const { product } = this.props;
-    const { id, title, price, thumbnail } = product;
-
+    const { id, title, price, thumbnail, shipping } = product;
+    const freeShipping = shipping.free_shipping;
     return (
       <div data-testid="product">
         <h3>{title}</h3>
         <img src={ thumbnail } alt={ title } />
         <p>{price}</p>
+        { freeShipping ? (<p data-testid="free-shipping">Frete grátis</p>) : ''}
         <Link
           to={ { pathname: `/product${id}`, state: { product },
           } }
@@ -20,14 +32,13 @@ class ProductCard extends Component {
           Mostrar detalhes
         </Link>
         <br />
-        <Link
-          to={ {
-            pathname: '/shopping-cart', state: { product },
-          } }
+        <button
+          type="button"
           data-testid="product-add-to-cart"
+          onClick={ this.onClickTest }
         >
           Adicionar ao carrinho
-        </Link>
+        </button>
       </div>
     );
   }
@@ -39,6 +50,9 @@ ProductCard.propTypes = {
     price: PropTypes.number,
     thumbnail: PropTypes.string,
     id: PropTypes.string,
+    shipping: PropTypes.shape({
+      free_shipping: PropTypes.bool,
+    }),
   }).isRequired,
 };
 

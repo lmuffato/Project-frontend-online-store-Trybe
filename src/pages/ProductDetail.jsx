@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import Header from '../components/Header';
 import UserForm from '../components/UserReview';
 import ProductInfo from '../components/ProductInfo';
 
@@ -8,24 +8,19 @@ class ProductDetail extends Component {
   render() {
     const { location } = this.props;
     const { product } = location.state;
+    // const { cart, totalPayment } = this.state;
 
     return (
       <>
+        <Header />
         <ProductInfo product={ product } />
-        <Link
-          to={ {
-            pathname: '/shopping-cart', state: { product },
-          } }
-          data-testid="product-detail-add-to-cart"
-        >
-          Adicionar ao carrinho
-        </Link>
         <UserForm />
-        {/* // <AddToCart /> */}
       </>
     );
   }
 }
+
+// ---> passar a informação do produto, sem direcionar para a pg do carrinho
 
 ProductDetail.propTypes = {
   location: PropTypes.shape({

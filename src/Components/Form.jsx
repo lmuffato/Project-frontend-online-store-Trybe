@@ -13,20 +13,45 @@ class Form extends Component {
             data-testid="checkout-fullname"
           />
         </label>
-        <label htmlFor="cpf" data-testid="checkout-cpf">
-          <input id="cpf" type="text" placeholder="CPF" />
+        <label htmlFor="cpf">
+          <input
+            id="cpf"
+            type="text"
+            placeholder="CPF"
+            data-testid="checkout-cpf"
+          />
         </label>
-        <label htmlFor="email" data-testid="checkout-email">
-          <input id="email" type="email" placeholder="Email" />
+        <label htmlFor="email">
+          <input
+            id="email"
+            type="email"
+            placeholder="Email"
+            data-testid="checkout-email"
+          />
         </label>
-        <label htmlFor="telefone" data-testid="checkout-phone">
-          <input id="telefone" type="text" placeholder="Telefone" />
+        <label htmlFor="telefone">
+          <input
+            id="telefone"
+            type="text"
+            placeholder="Telefone"
+            data-testid="checkout-phone"
+          />
         </label>
-        <label htmlFor="cep" data-testid="checkout-cep">
-          <input id="cep" type="text" placeholder="CEP" />
+        <label htmlFor="cep">
+          <input
+            id="cep"
+            type="text"
+            placeholder="CEP"
+            data-testid="checkout-cep"
+          />
         </label>
-        <label htmlFor="endereço" data-testid="checkout-address">
-          <input id="endereço" type="text" placeholder="Endereço" />
+        <label htmlFor="endereço">
+          <input
+            id="endereço"
+            type="text"
+            placeholder="Endereço"
+            data-testid="checkout-address"
+          />
         </label>
         <label htmlFor="complemento">
           <input id="complemento" type="text" placeholder="Complemento" />

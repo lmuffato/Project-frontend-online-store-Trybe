@@ -67,9 +67,9 @@ class ShoppingCart extends React.Component {
         }
         <button
           type="button"
-          data-testid="checkout-products"
         >
           <Link
+            data-testid="checkout-products"
             to={ {
               pathname: '/checkout',
               state: { cartProducts },

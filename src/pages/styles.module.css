@@ -27,8 +27,8 @@ body {
 
   .btnCart {
     border-radius: 5px;
-    text-decoration: none;
     color: var(--orange-color-600);
+    text-decoration: none;
     width: 35px;
   }
 
@@ -39,33 +39,32 @@ body {
 
   .iconCart {
     height: 100%;
-    width: 100%;
     padding: 3px 5px 3px 3px;
     position: relative;
+    width: 100%;
   }
 
   /* Barra de pesquisa do header */
   .inputContent {
     display: flex;
     flex-direction: column;
-    margin: 0 auto;
-    min-width: 250px;
-    width: 80%;
     font-size: 0.7em;
-    text-align: center;
+    margin: 0 auto;
     margin-bottom: 14px;
+    min-width: 250px;
+    text-align: center;
+    width: 80%;
   }
 
   .inputSearch {
     border: none;
     border-radius: 10px;
     font-size: 1.1rem;
-    padding: 0.8rem;
     outline: 0;
+    padding: 0.8rem;
     transition: 0.7s;
   }
 
-  .inputSearch:active, 
   .inputSearch:focus {
     box-shadow: 0 0 1rem rgb(224 56 56 / 60%);
   }
@@ -73,15 +72,15 @@ body {
   .btnSearch {
     border: none;
     margin-top: 6px;
-    width: 34px;
     position: absolute;
+    width: 34px;
     right: 11%;
   }
 
   .iconSearch {
+    color: var(--black-color-600);
     height: 100%;
     width: 100%;
-    color: var(--black-color-600);
     padding: 3px;
   }
 
@@ -92,24 +91,24 @@ body {
   /* Categorias */
   .categoryList {
     display: flex;
-    overflow: scroll;
     list-style: none;
+    overflow: scroll;
   }
 
   .categoryItemBtn {
     background-color: var(--orange-color-600);
     border: none;
+    border-radius: 50%;
+    box-shadow: 0 0 1rem rgb(0 0 0 / 60%);
     color: white;
     font-family: Poppins , sans-serif;
     font-size: 0.7rem;
     font-weight: 300;
-    padding: 2px;
     height: 6.2rem;
-    width: 6.2rem;
-    border-radius: 50%;
     margin: 10px;
-    box-shadow: 0 0 1rem rgb(0 0 0 / 60%);
+    padding: 2px;
     transition: 0.7s;
+    width: 6.2rem;
   }
 
   /* produtos da pagina */

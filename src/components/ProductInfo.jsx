@@ -21,8 +21,13 @@ class ProductInfo extends Component {
     return (
       <div>
         <h2 data-testid="product-detail-name">{title}</h2>
-        <p>{price}</p>
         <img src={ thumbnail } alt={ title } />
+        <strong>
+          {new Intl.NumberFormat('pt-BR', {
+            style: 'currency',
+            currency: 'BRL',
+          }).format(price)}
+        </strong>
         <button
           type="button"
           data-testid="product-detail-add-to-cart"

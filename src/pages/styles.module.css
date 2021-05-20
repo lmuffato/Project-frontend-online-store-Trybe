@@ -1,3 +1,139 @@
 body {
   color: inherit;
 }
+
+@media screen and (max-width: 768px) {
+  /* Cabeçalho da Pagina */
+  .header {
+    background-color: var(--black-color-600);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .titleLogo {
+    font-size: 1.4rem;
+    color: white;
+    font-weight: 300;
+  }
+
+  .cartLogo {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    min-width: 250px;
+    margin: 10px auto;
+  }
+
+  .btnCart {
+    border-radius: 5px;
+    text-decoration: none;
+    width: 35px;
+    color: var(--orange-color-600);
+  }
+
+  .lengthCart {
+    color: var(--red-color-600);
+    position: absolute;
+  }
+
+  .iconCart {
+    width: 100%;
+    height: 100%;
+    padding: 3px 5px 3px 3px;
+    position: relative;
+  }
+
+  /* Barra de pesquisa do header */
+
+  .inputContent {
+    width: 80%;
+    min-width: 250px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-size: 0.7em;
+    margin-bottom: 14px;
+  }
+
+  .inputSearch {
+    border-radius: 10px;
+    border: none;
+    padding: 0.8rem;
+    font-size: 1.1rem;
+    outline: 0;
+    transition: 0.7s;
+  }
+
+  .inputSearch:active,
+  .inputSearch:focus {
+    box-shadow: 0 0 1rem rgb(224 56 56 / 60%);
+  }
+
+  .btnSearch {
+    border: none;
+    width: 34px;
+    margin-top: 6px;
+    position: absolute;
+    right: 11%;
+  }
+
+  .iconSearch {
+    width: 100%;
+    height: 100%;
+    padding: 3px;
+    color: var(--black-color-600);
+  }
+
+  .textInput {
+    display: none;
+  }
+
+  /* Categorias */
+
+  .categoryList {
+    overflow: scroll;
+    display: flex;
+    list-style: none;
+  }
+
+  .categoryItemBtn {
+    background-color: var(--orange-color-600);
+    border: none;
+    color: white;
+    font-family: Poppins, sans-serif;
+    font-size: 0.7rem;
+    font-weight: 300;
+    padding: 2px;
+    width: 6.2rem;
+    height: 6.2rem;
+    margin: 10px;
+    border-radius: 50%;
+    transition: 0.7s;
+    box-shadow: 0 0 1rem rgb(0 0 0 / 60%);
+  }
+
+  /* produtos da pagina */
+  .checkedProduct {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+
+  .contentProducts {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  /* Titulo geral */
+  .title {
+    color: var(--text-color-black-400);
+    text-align: center;
+    padding: 10px;
+  }
+
+  /* Contener de todos os produtos */
+  .productsItems {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}

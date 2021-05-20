@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { RiShoppingCartFill } from 'react-icons/ri';
 
 class ProductDetails extends Component {
   render() {
-    const { location, handleDetailsToCart } = this.props;
+    const { location, handleDetailsToCart, cartProductLength } = this.props;
     const { state: { product } } = location;
     const { title, thumbnail, price } = product;
     return (
@@ -22,13 +23,9 @@ class ProductDetails extends Component {
               Adicionar ao Carrinho
             </button>
           </section>
-          <Link to="/carrinho">
-            <button
-              data-testid="shopping-cart-button"
-              type="button"
-            >
-              Ir para o Carrinho
-            </button>
+          <Link data-testid="shopping-cart-button" to="/carrinho">
+            <RiShoppingCartFill />
+            <span data-testid="shopping-cart-size">{ cartProductLength }</span>
           </Link>
         </div>
         <div>pagamento</div>
@@ -61,6 +58,7 @@ ProductDetails.propTypes = {
     }),
   }).isRequired,
   handleDetailsToCart: PropTypes.func.isRequired,
+  cartProductLength: PropTypes.number.isRequired,
 };
 
 export default ProductDetails;

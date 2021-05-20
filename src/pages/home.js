@@ -25,16 +25,16 @@ class home extends Component {
 
   getProductAtributes = (event) => {
     const { addProduct } = this.state;
-    const elementData = [...Object.values(event.target.parentNode)].shift();
-    const elementKey = elementData.return.key;
-    if (addProduct.every((el) => el.id !== elementKey) || addProduct.length === 0) {
+    const element = Object.values(event.target).pop();
+    const elementSKU = element.SKU;
+    if (addProduct.every((el) => el.id !== elementSKU) || addProduct.length === 0) {
       addProduct.push({
         q: 1,
-        id: elementKey,
+        id: elementSKU,
       });
       this.setState({ addProduct });
     } else {
-      const filteredProduct = addProduct.filter((el) => el.id === elementKey).shift();
+      const filteredProduct = addProduct.filter((el) => el.id === elementSKU).shift();
       const index = addProduct.indexOf(filteredProduct);
       addProduct.splice(index);
       filteredProduct.q += 1;

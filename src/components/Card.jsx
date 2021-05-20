@@ -6,7 +6,7 @@ import './styles/Card.css';
 class Card extends React.Component {
   render() {
     const product = this.props;
-    const { title, price, image, onclick } = product;
+    const { title, price, image } = product;
 
     return (
       <div className="card" data-testid="id">
@@ -18,13 +18,6 @@ class Card extends React.Component {
         </Link>
         <img src={ image } alt="foto do produto" />
         <p>{ `R$: ${price}`}</p>
-        <button
-          onClick={ onclick }
-          type="button"
-          data-testid="product-add-to-cart"
-        >
-          Adicionar ao carrinho
-        </button>
       </div>
 
     );
@@ -35,7 +28,7 @@ Card.propTypes = {
   title: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
-  onclick: PropTypes.func.isRequired,
+  // onclick: PropTypes.func.isRequired,
 };
 
 export default Card;

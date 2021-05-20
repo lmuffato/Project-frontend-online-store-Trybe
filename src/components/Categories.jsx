@@ -30,7 +30,7 @@ class Categories extends Component {
     const { categories, onClick } = this.props;
 
     return (
-      <aside>
+      <aside className="color">
         <ul>
           {categories
             ? this.categoriesList(categories, onClick)

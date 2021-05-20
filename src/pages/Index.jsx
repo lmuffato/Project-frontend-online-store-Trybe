@@ -5,7 +5,6 @@ import Categories from '../components/Categories';
 import * as api from '../services/api';
 import Products from '../components/Products';
 import Loading from '../components/Loading';
-import CartButton from '../components/CartButton';
 
 class Index extends Component {
   constructor() {
@@ -61,7 +60,6 @@ class Index extends Component {
           onChange={ this.handleSearchInput }
           onClick={ this.fetchProducts }
         />
-        <CartButton />
         <Categories
           onClick={ this.selectCategory }
           categories={ categories }

@@ -9,7 +9,7 @@ class CartButton extends Component {
         to="/cart-basket"
         data-testid="shopping-cart-button"
       >
-        <CartImage />
+        <CartImage className="cart" />
       </Link>
     );
   }

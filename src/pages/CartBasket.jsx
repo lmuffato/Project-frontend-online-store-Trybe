@@ -36,12 +36,12 @@ class CartBasket extends Component {
       decreaseQuantity, removeCartItem, shoppingCart } = this.props;
     // const { state: products } = location;
     return (
-      <main>
+      <main className="main">
         {shoppingCart.length > 0
           ? this.cartList(shoppingCart,
             increaseQuantity, decreaseQuantity, removeCartItem)
           : this.emptyCart() }
-        <Link to="/">Voltar</Link>
+        <Link to="/" className="link">Voltar</Link>
       </main>
     );
   }

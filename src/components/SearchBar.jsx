@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import CartButton from './CartButton';
 
 class SearchBar extends Component {
   render() {
     const { searchText, onChange, onClick } = this.props;
 
     return (
-      <header>
+      <header className="form">
         <label htmlFor="searchBar" data-testid="home-initial-message">
           <input
             name="searchBar"
@@ -20,6 +21,7 @@ class SearchBar extends Component {
         <button type="button" data-testid="query-button" onClick={ onClick }>
           Buscar
         </button>
+        <CartButton />
       </header>
     );
   }

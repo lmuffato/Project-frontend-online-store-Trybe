@@ -35,8 +35,8 @@ class Products extends Component {
   render() {
     const { products } = this.props;
     return (
-      <section>
-        <ul className="product-list">
+      <section className="product-list">
+        <ul>
           { this.productsList(products) }
         </ul>
       </section>

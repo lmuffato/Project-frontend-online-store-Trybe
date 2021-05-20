@@ -15,12 +15,12 @@ class ProductDetails extends Component {
       <section className="product-details">
         <CartButton shoppingCart={ shoppingCart } />
         <ProductInfo product={ product } />
-        <Link to="/">Voltar</Link>
         <AddToCartButton
           cartProduct={ cartProduct }
           addToCart={ addToCart }
           testid="product-detail-add-to-cart"
         />
+        <Link to="/" className="link">Voltar</Link>
       </section>
     );
   }

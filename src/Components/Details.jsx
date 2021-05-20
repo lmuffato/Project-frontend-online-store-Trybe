@@ -7,13 +7,24 @@ import CartSize from './CartSize';
 class Details extends Component {
   constructor(props) {
     super(props);
-    const { location } = this.props;
-    const { state } = location;
-    const { cartSize } = state;
+    // const { location } = this.props;
+    // const { state } = location;
+    // const { cartSize } = state;
     this.state = {
-      quantityItems: cartSize,
+      quantityItems: 0,
       productQuantity: 0,
     };
+  }
+
+  componentDidMount() {
+    this.handleSize();
+  }
+
+  handleSize = () => {
+    const prevSize = localStorage.getItem('cartSize');
+    if (prevSize) {
+      this.setState({ quantityItems: prevSize });
+    }
   }
 
   handleClick = () => {

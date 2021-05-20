@@ -80,6 +80,7 @@ class ListagemProdutos extends Component {
     const quantityArr = Object.values(productsQuantity);
     if (quantityArr.length !== 0) {
       const totalItems = quantityArr.reduce((acc, cur) => acc + cur);
+      localStorage.setItem('cartSize', totalItems);
       return totalItems;
     }
   }

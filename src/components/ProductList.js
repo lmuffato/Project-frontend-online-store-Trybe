@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 class ProductList extends Component {
   constructor() {
@@ -11,11 +12,18 @@ class ProductList extends Component {
 
   productDetails(data) {
     return (
-      <div>
+      <div data-testid="product-detail-link">
         <li key={ data.id } data-testid="product">
-          <p>{ data.title }</p>
-          <img src={ data.thumbnail } alt={ `foto ${data.title}` } width="200" />
-          <p>{ data.price }</p>
+          <Link
+            to={ {
+              pathname: `/productdetails/${data.id}`,
+              state: { data },
+            } }
+          >
+            <p>{ data.title }</p>
+            <img src={ data.thumbnail } alt={ `foto ${data.title}` } width="200" />
+            <p>{ data.price }</p>
+          </Link>
         </li>
       </div>
     );
@@ -23,6 +31,7 @@ class ProductList extends Component {
 
   render() {
     const { dataApi, request } = this.props;
+    // console.log(dataApi);
     return (
       <div>
         <ul>

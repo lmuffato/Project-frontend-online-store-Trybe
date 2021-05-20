@@ -7,11 +7,11 @@ class Star extends Component {
     const { src, id, onClick } = this.props;
     return (
       <button
-        className="button"
+        className="buttonStar"
         type="button"
         onClick={ () => onClick(id) }
       >
-        <img src={ src } alt="Star" />
+        <img src={ src } alt="Star" className="img_star" />
       </button>
     );
   }

@@ -4,6 +4,7 @@ import Category from './category_list';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import ShopCartButton from './ShopCartButton';
 import Button from './button';
+import FreeShipping from './FreeShipping';
 
 export default class ProductList extends Component {
   constructor() {
@@ -41,6 +42,7 @@ export default class ProductList extends Component {
         price: item.price,
         thumbnail: item.thumbnail,
         qtd: 1,
+        shipping: item.shipping.free_shipping,
       };
       ArrayCategory.push(newObjCategory);
       return this.setState({
@@ -66,6 +68,7 @@ export default class ProductList extends Component {
           price: item.price,
           thumbnail: item.thumbnail,
           qtd: 1,
+          shipping: item.shipping.free_shipping,
         };
         ArrayText.push(newObjText);
         return this.setState({
@@ -108,6 +111,7 @@ export default class ProductList extends Component {
           | PRICE:
           {item.price}
         </Link>
+        <FreeShipping shippingFree={ item.shipping } />
       </section>
     ));
   }

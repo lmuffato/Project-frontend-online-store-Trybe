@@ -27,7 +27,7 @@ export default class ListCategories extends Component {
 
     return (
       <aside className="category-id">
-        <h1>Categorias:</h1>
+        <h3>Categorias:</h3>
         {
           categories.map((category) => (
             <div key={ category.id }>

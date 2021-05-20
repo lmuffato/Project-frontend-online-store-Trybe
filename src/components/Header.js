@@ -40,15 +40,14 @@ class Header extends Component {
 
   render() {
     const { dataApi, query, request } = this.state;
-    console.log(dataApi);
     return (
       <div>
-        <ListCategories fetchProducts={ this.fetchProducts } />
         <SearchBar
           query={ query }
           handleChange={ this.handleChange }
           handleClick={ this.fetchProducts }
         />
+        <ListCategories fetchProducts={ this.fetchProducts } />
         <ProductList dataApi={ dataApi } request={ request } />
       </div>
     );

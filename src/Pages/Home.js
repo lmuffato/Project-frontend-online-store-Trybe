@@ -119,7 +119,11 @@ class Home extends Component {
           <section>
             <ul className="products">
               {products.map((product) => (
-                <CardItem productToCart={ this.productToCart } key={ product.id } product={ { ...product } } />
+                <CardItem
+                  productToCart={ this.productToCart }
+                  key={ product.id }
+                  product={ { ...product } }
+                />
               ))}
             </ul>
           </section>

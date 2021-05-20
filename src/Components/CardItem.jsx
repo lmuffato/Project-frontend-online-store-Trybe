@@ -24,29 +24,20 @@ class cardItem extends Component {
             <br />
           </div>
         </Link>
-{//<<<<<<< HEAD}
-        /* <AddCart
-          id={ id }
-          title={ title }
-          thumbnail={ thumbnail }
-          price={ price }
-          { ...this.props }
-          cart={ cart }
-        />
-// =======
-        <AddCart id={ id } product={ { ...product } } productToCart={ productToCart } />
-// >>>>>>> 6f643354f9559458934a0ad586772e874269d7c5*/
-}
+        <AddCart product={ { ...product } } productToCart={ productToCart } />
       </>
     );
   }
 }
 
 cardItem.propTypes = {
-  title: string,
-  image: string,
-  price: number,
-  id: string,
-}.isRequired;
+  productToCart: func.isRequired,
+  product: shape({
+    id: string.isRequired,
+    title: string.isRequired,
+    thumbnail: string.isRequired,
+    price: number.isRequired,
+  }).isRequired,
+};
 
 export default cardItem;

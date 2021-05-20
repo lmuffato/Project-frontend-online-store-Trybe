@@ -4,60 +4,64 @@ import BuyerInformation from './BuyerInformation';
 import Payment from './Payment';
 
 class PurchaseSummary extends React.Component {
-  constructor(props) {
-    super(props);
-
-    console.log(this.props);
+  constructor() {
+    super();
 
     this.state = {
-      totalPrice: {},
+      total: 0,
     };
+
+    this.loadResult = this.loadResult.bind(this);
   }
 
-  // componentDidMount() {
-  //   this.TotalPrice();
-  // }
+  componentDidMount() {
+    this.loadResult();
+  }
 
-  TotalPrice() {
-  //   // console.log(this.props);
-  //   const { location } = this.props;
-  //   this.setState = {
-  //     totalPrice: location.state.total,
+  loadResult() {
+    const { cart } = this.props;
+    const { total: totalState } = this.state;
+    // const reducer = (acumulador, curretValue) => acumulador + curretValue;
+    let total = totalState;
+
+    cart.products.forEach((product) => {
+      const productPrice = product.data.price * product.quantity;
+      total += productPrice;
+
+      return total;
+    });
+
+    this.setState({
+      total,
+    });
   }
 
   render() {
     const { cart } = this.props;
-    if (!cart) return <h1>Loading...</h1>;
+    const { total } = this.state;
 
     return (
       <div>
         <h1>Revise seus produtos</h1>
-        {
-          cart.length === 0
-            ? <h1 data-testid="shopping-cart-empty-message2">Seu carrinho está vazio</h1>
-            : (
-              <ul>
-                {
-                  cart.map((product) => (
-                    <li key={ product.data.id }>
-                      <h5 data-testid="shopping-cart-product-name2">
-                        {product.data.title}
-                      </h5>
-                      <h5 data-testid="shopping-cart-product-quantity2">
-                        {product.quantity}
-                      </h5>
-                      {/* <h5>{product.data.price}</h5> */}
-                      <h5>
-                        { product.quantity * product.data.price }
-                      </h5>
-                    </li>
-                  ))
-                }
-              </ul>
-            )
-        }
+        <ul>
+          { cart.products.map((product) => (
+            <li key={ product.data.id }>
+              <h5 data-testid="shopping-cart-product-name2">
+                {product.data.title}
+              </h5>
+              <h5 data-testid="shopping-cart-product-quantity2">
+                {product.quantity}
+              </h5>
+              <h5>
+                { product.quantity * product.data.price }
+              </h5>
+            </li>
+          ))}
+        </ul>
+        <h4>{ `TOTAL DO PEDIDO: ${total}` }</h4>
         <BuyerInformation />
         <Payment />
+        <button type="submit">Comprar</button>
       </div>
     );
   }

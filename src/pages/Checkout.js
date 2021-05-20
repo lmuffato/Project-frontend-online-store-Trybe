@@ -18,7 +18,6 @@ class Checkout extends React.Component {
           <PurchaseSummary test={ location } />
           <BuyerInformation />
           <Payment />
-          <button type="submit">Comprar</button>
         </form>
       </div>
     );

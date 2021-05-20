@@ -1,0 +1,26 @@
+.detailsContainer .assessments {
+  height: 25px;
+}
+
+.detailsContainer fieldset {
+  display: flex;
+  flex-direction: column;
+}
+
+.detailsContainer textarea {
+  height: 70px;
+  margin-top: 20px;
+  width: 16%;
+}
+
+.detailsContainer img {
+  margin-left: 40px;
+  margin-top: 20px;
+  width: 120px;
+}
+
+.detailsContainer .submit {
+  height: 40px;
+  margin-top: 20px;
+  width: 10%;
+}

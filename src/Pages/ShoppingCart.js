@@ -28,10 +28,6 @@ class ShoppingCart extends React.Component {
     };
   }
 
-  cartFiltered = () => {
-
-  }
-
   render() {
     const { history: { goBack } } = this.props;
     const { cartProducts } = this.state;

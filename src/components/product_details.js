@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Button from './button';
 import ShopCartButton from './ShopCartButton';
+import FreeShipping from './FreeShipping';
 
 class ProductDetails extends React.Component {
   constructor() {
@@ -49,6 +50,9 @@ class ProductDetails extends React.Component {
 
   render() {
     const { item } = this.state;
+    const { shipping } = item;
+    const a = { ...shipping };
+    console.log(a.free_shipping);
     const { match: { params: { id } } } = this.props;
     const newObj = {
       id: item.id,
@@ -56,6 +60,7 @@ class ProductDetails extends React.Component {
       price: item.price,
       thumbnail: item.thumbnail,
       qtd: 1,
+      shipping: a.free_shipping,
     };
     const avaliacoes = (JSON.parse(localStorage.getItem(id)))
       ? (JSON.parse(localStorage.getItem(id)))
@@ -89,6 +94,7 @@ class ProductDetails extends React.Component {
         </div>
         <Button obj={ newObj } dataTestId="product-detail-add-to-cart" />
         <ShopCartButton />
+        <FreeShipping shippingFree={ newObj.shipping } />
       </div>
     );
   }

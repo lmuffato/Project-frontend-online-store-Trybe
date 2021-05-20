@@ -30,9 +30,13 @@ export default class Checkout extends Component {
 
   handleChange({ target }) {
     const { clientInfo } = this.state;
-    const { name, value } = target;
+    const { name, value, type } = target;
 
     clientInfo[name] = value;
+    target.style.border = '1px solid black';
+    if (type === 'radio') {
+      target.parentNode.parentNode.style.border = 'none';
+    }
 
     this.setState({
       clientInfo,
@@ -46,7 +50,17 @@ export default class Checkout extends Component {
     const { products } = this.state;
 
     if (isFormFiled && products.length > 1) {
-      alert('Compra realizada com sucesso');
+      document.alert('Compra realizada com sucesso');
+    } else {
+      const inputs = document.querySelectorAll('input');
+      const emptyInputs = Array.from(inputs)
+        .filter(({ value, checked }) => value === '' || !checked);
+      emptyInputs.forEach((input) => {
+        input.style.border = '1px solid red';
+        if (input.type === 'radio') {
+          input.parentNode.parentNode.style.border = '1px solid red';
+        }
+      });
     }
   }
 
@@ -71,13 +85,13 @@ export default class Checkout extends Component {
         {
           products.map((product) => (
             <div key={ product.id }>
-              <h1 data-testid="shopping-cart-product-name">
+              <h3 data-testid="shopping-cart-product-name">
                 {product.title}
-              </h1>
-              <img src={ product.thumbnail } alt="product" />
-              <h2>
+              </h3>
+              <img width="200" src={ product.thumbnail } alt="product" />
+              <p>
                 {product.price}
-              </h2>
+              </p>
               <p data-testid="shopping-cart-product-quantity">{product.quantity}</p>
             </div>
           ))

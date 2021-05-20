@@ -59,10 +59,7 @@ export default class ShoppingCart extends Component {
   }
 
   render() {
-<<<<<<< HEAD
-=======
     const { productsCart } = this.state;
->>>>>>> 1d4a3406a8f728be3a03d0f56b3fca1705efd2d9
     return (
       <div>
         { !productsCart || productsCart.length === 0
@@ -105,7 +102,7 @@ export default class ShoppingCart extends Component {
         <Link
           to={ {
             pathname: '/checkout',
-            products: this.getStorage(),
+            products: productsCart,
           } }
           data-testid="checkout-products"
         >

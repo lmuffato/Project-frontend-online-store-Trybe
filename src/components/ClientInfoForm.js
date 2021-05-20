@@ -14,7 +14,7 @@ export default class ClientInfoForm extends Component {
           onChange={ handleChange }
           name="fullname"
           placeholder="Nome Completo"
-          required
+
         />
         <input
           type="email"
@@ -22,7 +22,7 @@ export default class ClientInfoForm extends Component {
           onChange={ handleChange }
           value={ email }
           name="email"
-          required
+
           placeholder="Email"
         />
         <input
@@ -30,7 +30,7 @@ export default class ClientInfoForm extends Component {
           data-testid="checkout-cpf"
           onChange={ handleChange }
           value={ cpf }
-          required
+
           name="cpf"
           placeholder="CPF"
         />
@@ -39,7 +39,7 @@ export default class ClientInfoForm extends Component {
           value={ phone }
           onChange={ handleChange }
           data-testid="checkout-phone"
-          required
+
           name="phone"
           placeholder="Telefone"
         />
@@ -49,7 +49,7 @@ export default class ClientInfoForm extends Component {
           data-testid="checkout-cep"
           value={ cep }
           name="cep"
-          required
+
           placeholder="CEP"
         />
         <input
@@ -58,43 +58,45 @@ export default class ClientInfoForm extends Component {
           data-testid="checkout-address"
           value={ address }
           name="address"
-          required
+
           placeholder="Endereço"
         />
 
         <h2>Formas de pagamento</h2>
-        <label htmlFor="paymentMethod">
-          <input
-            type="radio"
-            name="paymentMethod"
-            onChange={ handleChange }
-            value="credit"
-            required
-          />
-          Cartão de Crédito
-        </label>
+        <div className="radios">
+          <label htmlFor="paymentMethod">
+            <input
+              type="radio"
+              name="paymentMethod"
+              onChange={ handleChange }
+              value="credit"
 
-        <label htmlFor="paymentMethod">
-          <input
-            type="radio"
-            name="paymentMethod"
-            onChange={ handleChange }
-            value="debit"
-            required
-          />
-          Cartão de Débito
-        </label>
+            />
+            Cartão de Crédito
+          </label>
 
-        <label htmlFor="paymentMethod">
-          <input
-            type="radio"
-            name="paymentMethod"
-            onChange={ handleChange }
-            value="cash"
-            required
-          />
-          Boleto
-        </label>
+          <label htmlFor="paymentMethod">
+            <input
+              type="radio"
+              name="paymentMethod"
+              onChange={ handleChange }
+              value="debit"
+
+            />
+            Cartão de Débito
+          </label>
+
+          <label htmlFor="paymentMethod">
+            <input
+              type="radio"
+              name="paymentMethod"
+              onChange={ handleChange }
+              value="cash"
+
+            />
+            Boleto
+          </label>
+        </div>
 
         <button
           type="submit"

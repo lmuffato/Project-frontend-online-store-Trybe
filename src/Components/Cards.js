@@ -10,7 +10,6 @@ class Cards extends React.Component {
       <div className="products-cards">
         <Link
           data-testid="product-detail-link"
-          onClick={ this.handleData }
           to={ { pathname: `/detailsPage/${id}`, state: [title, price, thumbnail] } }
         >
           <div data-testid="product">

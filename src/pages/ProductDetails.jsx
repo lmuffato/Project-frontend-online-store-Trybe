@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import * as API from '../services/api';
+import EvaluationForm from '../components/EvaluationForm';
 
 export default class ProductDetails extends Component {
   constructor(props) {
@@ -50,6 +51,7 @@ export default class ProductDetails extends Component {
             ))}
           </ul>
         )}
+        <EvaluationForm />
       </div>
     );
   }

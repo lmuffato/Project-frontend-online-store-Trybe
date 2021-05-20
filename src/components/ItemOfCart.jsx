@@ -14,10 +14,11 @@ class ItemOfCart extends React.Component {
   onClickAdd(event) {
     const type = event.target.getAttribute('data-type');
     const { quantity } = this.state;
-    // const { product } = this.props;
+    const { product } = this.props;
+    const stock = product.available_quantity;
     // const { price } = product;
 
-    if (type === 'increase') {
+    if (type === 'increase' && quantity < stock) {
       return this.setState({ quantity: quantity + 1 });
     }
     if (type === 'decrease' && quantity > 1) {
@@ -71,6 +72,7 @@ ItemOfCart.propTypes = {
   product: PropTypes.shape({
     title: PropTypes.string,
     price: PropTypes.number,
+    available_quantity: PropTypes.number,
   }).isRequired,
 };
 

@@ -1,10 +1,8 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import CartButton from './Components/CartButton';
 import CartShopPage from './Components/CartShopPage';
 import Search from './Components/Search';
-import CategorieList from './Components/CategorieList';
 import DetailsPage from './Components/DetailsPage';
 
 function App() {
@@ -13,16 +11,19 @@ function App() {
       <BrowserRouter>
 
         <Switch>
-          <Route path="/" exact component={ Search } />
+          <Route exact path="/" component={ Search } />
           <Route
+            exact
             path="/detailsPage/:id"
             render={ (props) => <DetailsPage { ...props } /> }
           />
-          <Route path="/CartShopPage" component={ CartShopPage } />
+          <Route
+            path="/CartShopPage"
+            render={ (props) => (<CartShopPage
+              { ...props }
+            />) }
+          />
         </Switch>
-
-        <CartButton />
-        <CategorieList />
       </BrowserRouter>
     </div>
 

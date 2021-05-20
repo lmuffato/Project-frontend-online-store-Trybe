@@ -22,6 +22,7 @@ class Cards extends React.Component {
     );
   }
 }
+
 Cards.propTypes = {
   product: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string,

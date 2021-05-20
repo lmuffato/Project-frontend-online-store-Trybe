@@ -4,10 +4,11 @@ import { Link } from 'react-router-dom';
 
 class ProductCard extends React.Component {
   render() {
-    const { id, title, imagePath, price } = this.props;
+    const { title, price, imagePath, id, button } = this.props;
     const products = this.props;
+
     return (
-      <div data-testid="product">
+      <div data-testid="product" id={ id }>
         <h2>{title}</h2>
         <img
           src={ imagePath }
@@ -15,6 +16,7 @@ class ProductCard extends React.Component {
           alt="Imagem do produto"
         />
         <span>{price}</span>
+        { button }
         <Link
           to={ {
             pathname: `/details/products/${id}`,

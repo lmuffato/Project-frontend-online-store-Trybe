@@ -36,7 +36,7 @@ const Vote = (props) => {
     ));
   }
   return (
-    <div>
+    <div className="card">
       <ul>
         { li() }
       </ul>

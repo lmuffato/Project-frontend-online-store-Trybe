@@ -2,13 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { getProductsFromCategoryAndQuery } from '../../services/api';
 import ProductCard from '../../services/ProductCard';
+import AddToCartBtn from '../../components/AddToCartBtn';
 
 class ProductsByCategory extends React.Component {
   constructor(props) {
     super(props);
-
     const { id } = this.props;
-
     this.state = {
       loading: true,
       category: id,
@@ -45,17 +44,32 @@ class ProductsByCategory extends React.Component {
     return (
       <div>
         <ul>
-          { products.map(({ title, thumbnail, price, id, attributes }, index) => (
+          {products.map(({
+            title,
+            price,
+            thumbnail,
+            id,
+            category_id: catId,
+            attributes },
+          index) => (
             <li key={ index }>
               <ProductCard
                 id={ id }
                 title={ title }
-                imagePath={ thumbnail }
                 price={ price }
+                imagePath={ thumbnail }
+                button={
+                  <AddToCartBtn
+                    category={ catId }
+                    query={ title }
+                    id={ id }
+                    dataid="product-add-to-cart"
+                  />
+                }
                 attributes={ attributes }
               />
             </li>
-          )) }
+          ))}
         </ul>
       </div>
     );

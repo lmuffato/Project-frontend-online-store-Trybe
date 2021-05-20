@@ -1,0 +1,30 @@
+.payment {
+  border: 1px solid black;
+  display: flex;
+  justify-content: space-around;
+  width: 80%;
+}
+
+.imagem {
+  width: 100px;
+}
+
+.button {
+  cursor: pointer;
+  height: 40px;
+  margin-top: 20px;
+  width: 10%;
+}
+
+.list_Products {
+  border: 1px solid black;
+  margin-bottom: 20px;
+  width: 80%;
+}
+
+.form {
+  border: 1px solid black;
+  height: 180px;
+  margin-bottom: 20px;
+  width: 80%;
+}

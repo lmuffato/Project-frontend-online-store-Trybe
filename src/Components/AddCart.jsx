@@ -3,11 +3,11 @@ import { func, shape, number, string } from 'prop-types';
 
 class AddCart extends Component {
   render() {
-    const { productToCart, product } = this.props;
+    const { productToCart, product, dataTestId } = this.props;
     return (
       <button
         type="submit"
-        data-testid="product-add-to-cart"
+        data-testid={ dataTestId }
         onClick={ () => productToCart(product) }
       >
         Add in Cart
@@ -18,6 +18,7 @@ class AddCart extends Component {
 
 AddCart.propTypes = {
   productToCart: func.isRequired,
+  dataTestId: string.isRequired,
   product: shape({
     id: string.isRequired,
     title: string.isRequired,

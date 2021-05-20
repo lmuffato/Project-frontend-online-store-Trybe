@@ -1,6 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { shape, string, number, func } from 'prop-types';
-
 import CartProduct from '../Components/CartProduct';
 import EmptyCart from '../Components/EmptyCart';
 
@@ -65,6 +65,19 @@ class ShoppingCart extends React.Component {
               );
             })
         }
+        <button
+          type="button"
+          data-testid="checkout-products"
+        >
+          <Link
+            to={ {
+              pathname: '/checkout',
+              state: { cartProducts },
+            } }
+          >
+            Finalizar Compra
+          </Link>
+        </button>
       </div>
     );
   }

@@ -1,4 +1,9 @@
-.button {
+.buttonStar {
   background-color: white;
   border: none;
+}
+
+.img_star {
+  margin-top: 20px;
+  width: 20px;
 }

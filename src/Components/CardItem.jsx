@@ -16,14 +16,18 @@ class cardItem extends Component {
         <Link
           to={ {
             pathname: `/productDetails/${id}`,
-            state: { thumbnail, title, price, id },
+            state: { thumbnail, title, price, id, product },
           } }
           data-testid="product-detail-link"
         >
           <img src={ thumbnail } alt="produto" className="product-image" />
         </Link>
         <span className="product-price">{`R$ ${price}`}</span>
-        <AddCart product={ { ...product } } productToCart={ productToCart } />
+        <AddCart
+          product={ { ...product } }
+          productToCart={ productToCart }
+          dataTestId="product-add-to-cart"
+        />
       </div>
     );
   }

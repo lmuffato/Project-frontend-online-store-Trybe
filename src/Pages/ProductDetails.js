@@ -1,22 +1,31 @@
 import React, { Component } from 'react';
 import { number, string, shape, func } from 'prop-types';
 import { Link } from 'react-router-dom';
-
 import Star from '../Components/Star';
+import EstrelaDourada from '../Pictures/EstrelaDourada.png';
+import EstrelaTransparente from '../Pictures/EstrelaTransparente.png';
+import AddCart from '../Components/AddCart';
 
 import '../styles/ProductDetails.css';
 
 class ProductDetails extends Component {
   constructor() {
     super();
-    const whiteStar = 'https://img-premium.flaticon.com/png/512/16/16078.png?token=exp=1621369569~hmac=4bd5c4cf7438fdd55983efcab05fac42';
-    const yellowStar = 'https://img-premium.flaticon.com/png/512/1820/1820006.png?token=exp=1621370572~hmac=7b6b1b98c1f083de5e7bbc39c2d56a47';
+    const whiteStar = EstrelaTransparente;
+    const yellowStar = EstrelaDourada;
     this.state = {
+      cart: [],
       white: whiteStar,
       // rating: 0,
       arrayStars: [whiteStar, whiteStar, whiteStar, whiteStar, whiteStar],
       yellow: yellowStar,
     };
+  }
+
+  productToCart = (productObj) => {
+    this.setState(({ cart }) => ({
+      cart: [...cart, productObj],
+    }));
   }
 
   changeStar = (id) => {
@@ -33,9 +42,9 @@ class ProductDetails extends Component {
 
   render() {
     const {
-      location: { state: { title, price, thumbnail } },
+      location: { state: { title, price, thumbnail, product } },
       history: { goBack } } = this.props;
-    const { arrayStars } = this.state;
+    const { arrayStars, cart } = this.state;
     return (
       <>
         <div className="detailsContainer">
@@ -52,9 +61,15 @@ class ProductDetails extends Component {
               alt="voltar"
             />
           </button>
+          <AddCart
+            product={ { ...product } }
+            productToCart={ this.productToCart }
+            dataTestId="product-detail-add-to-cart"
+          />
           <Link
             to={ {
               pathname: '/shopping-cart',
+              state: { cart },
             } }
             data-testid="shopping-cart-button"
           >

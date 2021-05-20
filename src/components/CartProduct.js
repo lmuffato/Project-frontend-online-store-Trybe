@@ -14,20 +14,50 @@ export default class CartProduct extends Component {
     };
   }
 
-  addPrice = () => {
+  componentDidMount() {
+    const { getItems, product: { id }, updateTotal } = this.props;
+    const { quantity, valueProduct } = this.state;
+
+    getItems({ name: id, value: quantity });
+    // updateTotal(valueProduct);
+  }
+
+  addPrice = (event) => {
     const { quantity, storageQuantity } = this.state;
-    const { product: { price } } = this.props;
+    const { product: { price }, getItems } = this.props;
     if (quantity < storageQuantity) {
       this.setState((prev) => ({ quantity: prev.quantity + 1 }));
     }
-    this.setState((prev) => ({ valueProduct: prev.quantity * price }));
+    const { name, value } = event.target;
+    this.setState((prev) => ({ valueProduct: prev.quantity * price }), () => {
+      getItems({ name, value });
+    });
   }
 
-  decreasePrice = () => {
+  // addPrice = () => {
+  //   const { product: { price, storageQuantity } } = this.props;
+  //   const { quantity } = this.state;
+
+  //   if (quantity < storageQuantity) {
+  //     this.setState((prev) => ({ quantity: prev.quantity + 1 }));
+  //   }
+  //   this.setState((prev) => ({
+  //     valueProduct: prev.quantity * price,
+  //   }), () => {
+  //     const { valueProduct } = this.state; // pegar o valor atualizado do produto
+  //     const { updateTotal } = this.props; // função passada pelo shoppingCart
+  //     updateTotal(valueProduct); // chama ela com o valor do produto
+  //   });
+  // }
+
+  decreasePrice = (event) => {
     const { quantity } = this.state;
-    const { product: { price } } = this.props;
+    const { product: { price }, getItems } = this.props;
     if (quantity > 1) { this.setState((prev) => ({ quantity: prev.quantity - 1 })); }
     this.setState((prev) => ({ valueProduct: prev.quantity * price }));
+
+    const { name, value } = event.target;
+    getItems({ name, value });
   }
 
   render() {
@@ -36,7 +66,7 @@ export default class CartProduct extends Component {
 
     return (
       <div>
-        <button type="button" name={ id } onClick={ deleteItem }>
+        <button type="button" name={ id } onClick={ /* (event) => deleteItem(event, valueProduct) */ deleteItem }>
           X
         </button>
         <h2 data-testid="shopping-cart-product-name">
@@ -51,6 +81,8 @@ export default class CartProduct extends Component {
         </h4>
         <button
           type="button"
+          name={ id }
+          value={ quantity }
           data-testid="product-increase-quantity"
           onClick={ this.addPrice }
         >
@@ -58,6 +90,8 @@ export default class CartProduct extends Component {
         </button>
         <button
           type="button"
+          name={ id }
+          value={ quantity }
           data-testid="product-decrease-quantity"
           onClick={ this.decreasePrice }
         >

@@ -20,6 +20,8 @@ class CardProduct extends Component {
           <span className={ styles.titleProduct }>{ title }</span>
           <img className={ styles.imgProduct } src={ thumbnail } alt={ title } />
         </Link>
+        { shipping.free_shipping
+          && <span data-testid="free-shipping">Frete grátis</span> }
         <span className={ styles.priceText }>{`R$${price}`}</span>
         { shipping.free_shipping
           && <span data-testid="free-shipping">Frete grátis</span> }

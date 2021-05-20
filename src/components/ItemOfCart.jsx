@@ -2,46 +2,61 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class ItemOfCart extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       quantity: 1,
+      altQuantity: false,
+      altPrice: props.product.price,
     };
-    this.altQuantity = this.altQuantity.bind(this);
     this.onClickAdd = this.onClickAdd.bind(this);
   }
 
   onClickAdd(event) {
     const type = event.target.getAttribute('data-type');
-    const { quantity } = this.state;
+    const { quantity, altPrice } = this.state;
     const { product } = this.props;
+    const { price } = product;
+    console.log(product);
     const stock = product.available_quantity;
-    // const { price } = product;
 
     if (type === 'increase' && quantity < stock) {
-      return this.setState({ quantity: quantity + 1 });
+      return this.setState({
+        quantity: quantity + 1,
+        altQuantity: true,
+        altPrice: (quantity + 1) * price,
+      });
     }
     if (type === 'decrease' && quantity > 1) {
-      return this.setState({ quantity: quantity - 1 });
+      return this.setState({
+        quantity: quantity - 1,
+        altQuantity: true,
+        altPrice: altPrice - price,
+      });
     }
   }
 
-  altQuantity(event) {
-    const { value } = event.target;
-    this.setState({
-      quantity: value,
-    });
-  }
+  // altQuantity(event) {
+  //   const { value } = event.target;
+  //   this.setState({
+  //     quantity: value,
+  //   });
+  // const freeShipping = shipping.free_shipping
+  // if (freeShipping === true)
+  // }
 
   render() {
     const { product } = this.props;
     const { title, price } = product;
-    const { quantity } = this.state;
+    const { quantity, altQuantity, altPrice } = this.state;
     return (
       <div>
         <h3 data-testid="shopping-cart-product-name">{title}</h3>
         <h4>
-          { new Intl.NumberFormat('pt-BR', {
+          { altQuantity ? new Intl.NumberFormat('pt-BR', {
+            style: 'currency',
+            currency: 'BRL',
+          }).format(Number(altPrice)) : new Intl.NumberFormat('pt-BR', {
             style: 'currency',
             currency: 'BRL',
           }).format(price) }

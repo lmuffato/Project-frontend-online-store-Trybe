@@ -22,7 +22,6 @@ export default class ClientInfoForm extends Component {
           onChange={ handleChange }
           value={ email }
           name="email"
-
           placeholder="Email"
         />
         <input
@@ -30,7 +29,6 @@ export default class ClientInfoForm extends Component {
           data-testid="checkout-cpf"
           onChange={ handleChange }
           value={ cpf }
-
           name="cpf"
           placeholder="CPF"
         />
@@ -39,7 +37,6 @@ export default class ClientInfoForm extends Component {
           value={ phone }
           onChange={ handleChange }
           data-testid="checkout-phone"
-
           name="phone"
           placeholder="Telefone"
         />
@@ -49,7 +46,6 @@ export default class ClientInfoForm extends Component {
           data-testid="checkout-cep"
           value={ cep }
           name="cep"
-
           placeholder="CEP"
         />
         <input
@@ -58,7 +54,6 @@ export default class ClientInfoForm extends Component {
           data-testid="checkout-address"
           value={ address }
           name="address"
-
           placeholder="Endereço"
         />
 

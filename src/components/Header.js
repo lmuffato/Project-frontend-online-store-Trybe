@@ -5,8 +5,9 @@ import SearchBar from './SearchBar';
 import ListCategories from './ListCategories';
 
 class Header extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    // console.log(props);
 
     this.state = {
       query: '',
@@ -40,7 +41,6 @@ class Header extends Component {
 
   render() {
     const { dataApi, query, request } = this.state;
-    console.log(dataApi);
     return (
       <div>
         <ListCategories fetchProducts={ this.fetchProducts } />

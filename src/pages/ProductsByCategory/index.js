@@ -2,13 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { getProductsFromCategoryAndQuery } from '../../services/api';
 import ProductCard from '../../services/ProductCard';
-import AddToCartBtn from '../../components/AddToCartBtn'
+import AddToCartBtn from '../../components/AddToCartBtn';
 
 class ProductsByCategory extends React.Component {
   constructor(props) {
     super(props);
     const { id } = this.props;
     this.state = {
+      loading: true,
       category: id,
       products: [],
     };
@@ -24,32 +25,51 @@ class ProductsByCategory extends React.Component {
 
   fetchProducts(products) {
     this.setState({
-      products,
+      loading: true,
+    }, () => {
+      this.setState({
+        loading: false,
+        products,
+      });
     });
   }
 
   render() {
-    const { products } = this.state;
+    const { loading, products } = this.state;
+
+    if (loading) {
+      return 'Carregando...';
+    }
+
     return (
       <div>
         <ul>
-          { products.map(({ title, price, thumbnail, id, category_id }) => (
-            <ProductCard
-              key={ id }
-              id={ id }
-              title={ title }
-              price={ price }
-              imagePath={ thumbnail }
-              button={
-                <AddToCartBtn 
-                  category={ category_id }
-                  query={ title }
-                  id={ id }
-                  dataid="product-add-to-cart"
-                />}
-            />
-          ))
-          }
+          {products.map(({
+            title,
+            price,
+            thumbnail,
+            id,
+            category_id: catId,
+            attributes },
+          index) => (
+            <li key={ index }>
+              <ProductCard
+                id={ id }
+                title={ title }
+                price={ price }
+                imagePath={ thumbnail }
+                button={
+                  <AddToCartBtn
+                    category={ catId }
+                    query={ title }
+                    id={ id }
+                    dataid="product-add-to-cart"
+                  />
+                }
+                attributes={ attributes }
+              />
+            </li>
+          ))}
         </ul>
       </div>
     );

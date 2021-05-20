@@ -37,26 +37,30 @@ class CarrinhoDeCompras extends React.Component {
     });
   }
 
+  RenderFunction() {
+    const { selected, loading } = this.state;
+    if (selected.length === 0) {
+      return (<p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>);
+    } if (loading) {
+      return (<p>Carregando</p>);
+    }
+    return (
+      selected.map(({ id, title, price, thumbnail }) => (<ShoppingCards
+        key={ id }
+        id={ id }
+        title={ title }
+        price={ price }
+        imagePath={ thumbnail }
+      />
+      ))
+    );
+  }
+
   render() {
-    const { selected, loading } = this.state
     return (
       <div>
         <h1>Página Carrinho de Compras</h1>
-        {
-          (selected.length === 0)
-            ? <p data-testid='shopping-cart-empty-message'>"Seu carrinho está vazio"</p>
-            : (loading)
-              ? <p>Carregando</p>
-              : selected.map(({ id, title, price, thumbnail }) =>
-                <ShoppingCards
-                  key={ id }
-                  id={ id }
-                  title={ title} 
-                  price={ price }
-                  imagePath={ thumbnail }
-                />
-              )
-        }
+        {this.RenderFunction()}
         <Link data-testid="shopping-cart-button" type="button" to="/">Voltar </Link>
       </div>
     );

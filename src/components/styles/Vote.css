@@ -1,0 +1,10 @@
+.card ul {
+  margin: 0;
+  padding: 0;
+}
+
+
+.card ul li {
+  display: inline;
+  list-style: none;
+}

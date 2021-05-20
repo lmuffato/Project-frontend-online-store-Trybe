@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default class AddToCartBtn extends React.Component {
   constructor() {
@@ -35,3 +36,10 @@ export default class AddToCartBtn extends React.Component {
     );
   }
 }
+
+AddToCartBtn.propTypes = {
+  query: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  category: PropTypes.string.isRequired,
+  dataid: PropTypes.string.isRequired,
+};

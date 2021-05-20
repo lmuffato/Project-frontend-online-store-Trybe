@@ -40,3 +40,15 @@
     transform: rotate(360deg);
   }
 }
+
+.cart-item {
+  align-items: center;
+  display: flex;
+  justify-content: space-around;
+  margin: 10px;
+  width: 50%;
+}
+
+.cart-item img {
+  width: 150px;
+}

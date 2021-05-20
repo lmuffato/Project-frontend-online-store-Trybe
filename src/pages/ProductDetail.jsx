@@ -7,6 +7,7 @@ import Loading from './Loading';
 import Button from '../components/Button';
 import '../styles/ProductDetail.css';
 import ReviewForm from '../components/ReviewForm';
+import backArrow from '../imagens/backArrow.svg';
 
 class ProductDetail extends React.Component {
   constructor(props) {
@@ -43,6 +44,16 @@ class ProductDetail extends React.Component {
 
     return (
       <div>
+        <Link
+          to="/"
+          className="backArrow"
+        >
+          <img
+            src={ backArrow }
+            alt="Seta de voltar"
+            className="backArrow-image"
+          />
+        </Link>
         <Link
           to="/ShoppingCart"
           data-testid="shopping-cart-button"

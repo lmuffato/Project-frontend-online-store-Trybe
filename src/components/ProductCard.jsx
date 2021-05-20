@@ -19,7 +19,7 @@ export default class ProductCard extends React.Component {
             <h3>{item.title}</h3>
             <img src={ item.thumbnail } alt={ item.title } width="120px" />
             <p>
-              Price:
+              Preço:
               {item.price}
             </p>
           </div>

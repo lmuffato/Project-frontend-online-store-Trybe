@@ -1,6 +1,8 @@
 // Criação do componente
 import React from 'react';
-import { getAll, quantityProduct } from '../services/localStorage';
+import { Link } from 'react-router-dom';
+import { getAll, addToLocalStorage } from '../services/localStorage';
+import CartCard from '../components/CartCard';
 import backArrow from '../imagens/backArrow.svg';
 import '../styles/ShoppingCart.css';
 
@@ -8,85 +10,106 @@ export default class ShoppingCart extends React.Component {
   constructor() {
     super();
 
-    this.state = { value: 1 };
+    this.state = {
+      array: false,
+      storageData: '',
+    };
   }
 
-  changeQuantity = ({ target }) => { this.setState({ value: target.value }); }
+  componentDidMount() {
+    this.checkStorage();
+    // this.deleteProduct();
+  }
+
+  quantityProduct = ({ target }) => {
+    const { storageData } = this.state;
+    storageData.map((product) => {
+      if (target.name === 'add' && product.buyQuantity <= product.availableQuantity) {
+        console.log('Me adicionaram aqui ó');
+        product.buyQuantity += 1;
+        product.price = product.standardPrice * parseInt(product.buyQuantity, 10);
+        this.setState({
+        });
+        return addToLocalStorage(product);
+      }
+      if (target.name === 'sub' && product.buyQuantity > 1) {
+        product.buyQuantity -= 1;
+        product.price = product.standardPrice * parseInt(product.buyQuantity, 10);
+        this.setState({
+        });
+        return addToLocalStorage(product);
+      }
+      return addToLocalStorage(product);
+    });
+  };
+
+  deleteProduct = ({ target }) => {
+    this.checkStorage();
+    const { storageData } = this.state;
+    const products = getAll();
+    console.log(target.previousSibling.previousSibling);
+    console.log(products);
+    const newArray = storageData
+      .filter((item) => target.previousSibling.previousSibling.id !== item.title);
+    this.setState({ storageData: newArray });
+    addToLocalStorage(newArray);
+  }
+
+  checkStorage = () => {
+    const storage = getAll();
+    console.log(storage);
+    if (Array.isArray(storage)) {
+      return this.setState({
+        storageData: storage,
+        array: true,
+      });
+    }
+    if (storage !== null) {
+      const storageArray = [storage];
+      return this.setState({
+        storageData: storageArray,
+        array: true,
+      });
+    }
+  }
 
   render() {
-    const { value } = this.state;
-    const storageCheck = () => getAll();
-    const storage = storageCheck();
-    if (storage === null) {
+    const { storageData, array } = this.state;
+    console.log(storageData);
+    if (array === false) {
       return (
         <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
       );
     }
-    console.log(storage);
+
     return (
       <div className="product-cart">
         <div className="shopping-cart-heading">
-          <img src={ backArrow } alt="Seta de voltar" className="backArrow-image" />
+          <Link
+            to="/"
+            className="backArrow"
+          >
+            <img
+              src={ backArrow }
+              alt="Seta de voltar"
+              className="backArrow-image"
+            />
+          </Link>
           <p
-            data-testid="shopping-cart-product-quantity"
             className="shopping-cart-product-quantity"
           >
             { 'Quantidade de items no carrinho: ' }
-            {storage.length}
+            {storageData.length}
           </p>
         </div>
         <div className="shopping-cart-container">
           {
-            storage.map((item) => (
-              <div key={ item.title } className="shopping-cart-product">
-                <p
-                  data-testid="shopping-cart-product-name"
-                  className="shopping-cart-product-name"
-                >
-                  {item.title}
-                </p>
-                <img src={ item.thumbnail } alt={ item.thumbnailId } width="100px" />
-                <p>
-                  Preço unitário:
-                  { ` ${item.standardPrice}` }
-                </p>
-                <p>
-                  Subtotal
-                  { item.buyQuantity > 1
-                    ? ` (${item.buyQuantity} itens)`
-                    : ` (${value} item)` }
-                  : R$
-                  {item.price === null ? item.standardPrice : item.price.toFixed(2)}
-                </p>
-                <label htmlFor={ item.title }>
-                  { 'Quantidade: ' }
-
-                  <button
-                    type="button"
-                    name="sub"
-                    onClick={ (event) => quantityProduct(event) }
-                  >
-                    -
-                  </button>
-                  <input
-                  // Mudar o tipo do input para tipo text, criar os botões com onClick e criar funções de acréscimo e decréscimo que irão alterar o defaultValue do input, e criar no botão do X o remove do localStorage
-                    type="text"
-                    defaultValue={ item.buyQuantity }
-                    onChange={ (event) => {
-                      // quantityProduct(event);
-                      this.changeQuantity(event);
-                    } }
-                    id={ item.title }
-                  />
-                  <button
-                    type="button"
-                    name="add"
-                    onClick={ (event) => quantityProduct(event) }
-                  >
-                    +
-                  </button>
-                </label>
-              </div>
+            storageData.map((item) => (
+              <CartCard
+                product={ item }
+                key={ item.title }
+                deleteProduct={ this.deleteProduct }
+              />
             ))
           }
         </div>

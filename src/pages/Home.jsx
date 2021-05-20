@@ -12,11 +12,14 @@ export default class Home extends React.Component {
       checkbox: '',
       // checked: false,
       items: [],
-      loading: true,
+      loading: false,
     };
   }
 
   request = () => {
+    this.setState({
+      loading: true,
+    });
     const { input, checkbox } = this.state;
     getProductsFromCategoryAndQuery(checkbox, input)
       .then((finalData) => {

@@ -18,30 +18,29 @@ export const getAll = () => {
   return elementArray;
 };
 
-export const quantityProduct = ({ target }) => {
-  console.log(target);
-  const allProducts = getAll().map((product) => {
-    let targetValue = 0;
-    if (target.name === 'add') {
-      targetValue = target.previousSibling.defaultValue;
-      targetValue += 1;
-    }
-    if (target.name === 'sub') {
-      targetValue = target.previousSibling.defaultValue;
-      targetValue -= 1;
-    }
-    if (product.title === target.id) {
-      product.buyQuantity = target.value;
-      product.price = product.standardPrice * parseInt(product.buyQuantity, 10);
-      return product;
-    }
-    return targetValue;
-  });
-  addToLocalStorage(allProducts);
+// export const quantityProduct = ({ target }) => {
+//   const allProducts = getAll().map((product) => {
+//     // let targetValue = 0;
+//     if (target.name === 'add') {
+//       product.buyQuantity += 1;
+//       target.previousSibling.defaultValue = product.buyQuantity;
+//       console.log(target.previousSibling.defaultValue);
+//     }
+//     if (target.name === 'sub') {
+//       product.buyQuantity -= 1;
+//       target.previousSibling.defaultValue = product.buyQuantity;
+//       console.log(product.buyQuantity);
+//     }
+//     if (product.title === target.id) {
+//       product.buyQuantity = target.value;
+//       product.price = product.standardPrice * parseInt(product.buyQuantity, 10);
+//     }
+//     return product;
+//   });
+//   addToLocalStorage(allProducts);
 
-  console.log(allProducts);
-  // return storageArray;
-};
+//   // console.log(allProducts);
+// };
 
 export const creatObject = async (item) => {
   cartObj = {

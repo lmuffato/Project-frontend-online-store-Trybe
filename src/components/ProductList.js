@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import AddButton from './AddButton';
 
 class ProductList extends Component {
@@ -15,9 +16,17 @@ class ProductList extends Component {
       <div>
         <li key={ data.id } data-testid="product">
           <p>{ data.title }</p>
-          <img src={ data.thumbnail } alt={ `foto ${data.title}` } width="200" />
-          <p>{`R$${parseFloat(data.price).toFixed(2)}`}</p>
-          <AddButton data={ data } />
+          <Link
+            data-testid="product-detail-link"
+            to={ {
+              pathname: `/productdetails/${data.id}`,
+              state: { data },
+            } }
+          >
+            <img src={ data.thumbnail } alt={ `foto ${data.title}` } width="200" />
+            <p>{`R$${parseFloat(data.price).toFixed(2)}`}</p>
+            <AddButton data={ data } />
+          </Link>
         </li>
       </div>
     );

@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import { getProductsFromCategoryAndQuery } from '../services/api';
 import ProductList from './ProductList';
+import { getProductsFromCategoryAndQuery } from '../services/api';
 import SearchBar from './SearchBar';
 import ListCategories from './ListCategories';
 
 class Header extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    // console.log(props);
 
     this.state = {
       query: '',

@@ -40,6 +40,7 @@ class Home extends Component {
     const { onClick } = this.props;
     if (products.length === 0) return <h2>Nenhum Produto encontrado</h2>;
     return (
+      // console.log(products),
       products.map((product) => (
         <CardProduct
           onClick={ onClick }
@@ -113,3 +114,8 @@ export default Home;
 
 // CartList component is now >  CartItem
 // CartItem page is now >  Cart
+
+// preciso interagir com o dados retornados da api novamente e verificar a chave de frete
+// a partir disso, modificar a renderização do cardProduct na home levando essa info
+// modificar a renderização tambem na pagina de product details
+// verificar um regra de negocio pra aparecer a propriedade (state vazio > if frete true > state: 'frete gratis' )

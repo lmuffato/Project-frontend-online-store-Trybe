@@ -69,6 +69,7 @@ class Details extends Component {
             state: {
               addedProduct: productDetail,
               quantityAdded: productQuantity,
+              productsQuantity: quantityItems,
             },
           } }
           data-testid="shopping-cart-button"

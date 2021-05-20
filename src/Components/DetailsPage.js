@@ -86,4 +86,4 @@ DetailsPage.propTypes = {
   })).isRequired,
 };
 
-export default DetailsPage;
+export default DetailsPage; 

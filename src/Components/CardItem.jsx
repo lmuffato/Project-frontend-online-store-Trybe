@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { string, number } from 'prop-types';
+import { string, number, func, shape } from 'prop-types';
 import { Link } from 'react-router-dom';
 import AddCart from './AddCart';
 

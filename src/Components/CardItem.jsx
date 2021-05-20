@@ -9,7 +9,10 @@ class cardItem extends Component {
     const { title, thumbnail, price, id } = product;
 
     return (
-      <>
+      <div data-testid="product" className="product">
+        <header>
+          <h3>{title}</h3>
+        </header>
         <Link
           to={ {
             pathname: `/productDetails/${id}`,
@@ -17,15 +20,11 @@ class cardItem extends Component {
           } }
           data-testid="product-detail-link"
         >
-          <div data-testid="product" className="product">
-            <img src={ thumbnail } alt="produto" />
-            <h3>{title}</h3>
-            <span>{`R$ ${price}`}</span>
-            <br />
-          </div>
+          <img src={ thumbnail } alt="produto" className="product-image" />
         </Link>
+        <span className="product-price">{`R$ ${price}`}</span>
         <AddCart product={ { ...product } } productToCart={ productToCart } />
-      </>
+      </div>
     );
   }
 }

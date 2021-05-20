@@ -18,6 +18,7 @@ class AddCart extends Component {
 
 AddCart.propTypes = {
   productToCart: func.isRequired,
+  dataTestId: string.isRequired,
   product: shape({
     id: string.isRequired,
     title: string.isRequired,

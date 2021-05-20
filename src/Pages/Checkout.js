@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../styles/checkout.css';
+import { object } from 'prop-types';
 import Form from '../Components/Form';
 import Payment from '../Components/Payment';
 import CartProduct from '../Components/CartProduct';
@@ -39,5 +40,9 @@ class Checkout extends Component {
     );
   }
 }
+
+Checkout.propTypes = {
+  cartProducts: object,
+}.isRequired;
 
 export default Checkout;

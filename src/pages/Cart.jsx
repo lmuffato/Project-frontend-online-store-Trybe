@@ -7,6 +7,8 @@ import CartItem from '../components/CartItem';
 
 import changePriceToNumber from '../utils/functions';
 
+import styles from './styles.module.css';
+
 class Cart extends Component {
   constructor(props) {
     super(props);
@@ -60,7 +62,7 @@ class Cart extends Component {
             changeQuantProductLength={ changeQuantProductLength }
           />
         ))
-      : cartString;
+      : <p>{cartString}</p>;
   };
 
   render() {
@@ -71,27 +73,26 @@ class Cart extends Component {
       state: { cartList, totalPrices },
     };
 
-    const totalPriceMessage = {
-      withPrice: `Valor total R$${totalPrices.toFixed(2)}`,
-      withoutPrice: 'Carrinho vazio',
-    };
+    const totalPriceMessage = totalPrices === 0
+      ? ''
+      : `Valor total R$${totalPrices.toFixed(2)}`;
 
     return (
-      <section data-testid="shopping-cart-empty-message">
+      <section
+        className={ styles.CartItemsContainer }
+        data-testid="shopping-cart-empty-message"
+      >
         <button type="button"><Link to="/">Home</Link></button>
 
         { this.renderCartList() }
 
-        <p>
-          {cartList.length
-            ? totalPriceMessage.withPrice
-            : totalPriceMessage.withoutPrice}
-        </p>
+        <p>{totalPriceMessage}</p>
 
         <Link to={ { ...propsToCheckout } }>
           <button
             type="button"
             data-testid="checkout-products"
+            className={ styles.FinishButton }
           >
             Finalizar compra
           </button>

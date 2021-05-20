@@ -1,3 +1,18 @@
-body {
-  color: inherit;
+.CartItemsContainer {
+  padding: 2rem;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  gap: 1rem;
+}
+
+.CartItemsContainer > a > button {
+  background-color: var(--red-color-600);
+  border: none;
+  outline: none;
+  font-size: 1.1rem;
+  padding: 0.5rem 0.8rem;
+  border-radius: 12px;
+  font-family: Poppins, sans-serif;
+  color: white;
 }

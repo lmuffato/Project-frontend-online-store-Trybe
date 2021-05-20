@@ -9,13 +9,10 @@ class Checkout extends React.Component {
   // }
 
   render() {
-    const { location } = this.props;
-    console.log(location);
     return (
       <div>
-        { location }
         <form>
-          <PurchaseSummary test={ location } />
+          <PurchaseSummary />
           <BuyerInformation />
           <Payment />
         </form>

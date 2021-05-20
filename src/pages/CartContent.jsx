@@ -6,6 +6,7 @@ class CartContent extends Component {
     super();
     this.createObjectIDsAndQuantities = this.createObjectIDsAndQuantities.bind(this);
     this.filteredItems = this.filterItems.bind(this);
+    this.cartItems = this.cartItems.bind(this);
   }
 
   filterItems(items) {
@@ -22,31 +23,32 @@ class CartContent extends Component {
   }
 
   createObjectIDsAndQuantities(items) {
-    const uniqueIdsCollection = [];
-    const idsAndQuantities = {};
-    const idsCollection = items.map((item) => item.id);
-    uniqueIdsCollection.push(idsCollection[0]);
-    idsCollection.forEach((ID) => {
+    const uniqueIDsCollection = [];
+    const IDsAndQuantities = {};
+    const IDsCollection = items.map((item) => item.id);
+    uniqueIDsCollection.push(IDsCollection[0]);
+    IDsCollection.forEach((ID) => {
       let repeatedID = 0;
-      uniqueIdsCollection.forEach((uniqueID) => {
+      uniqueIDsCollection.forEach((uniqueID) => {
         if (uniqueID === ID) repeatedID += 1;
       });
-      if (repeatedID === 0) uniqueIdsCollection.push(ID);
+      if (repeatedID === 0) uniqueIDsCollection.push(ID);
     });
-    uniqueIdsCollection.forEach((uniqueID) => {
+    uniqueIDsCollection.forEach((uniqueID) => {
       let repeatedID = 0;
-      idsCollection.forEach((ID) => {
+      IDsCollection.forEach((ID) => {
         if (uniqueID === ID) {
           repeatedID += 1;
         }
       });
-      idsAndQuantities[uniqueID] = repeatedID;
+      IDsAndQuantities[uniqueID] = repeatedID;
     });
-    return idsAndQuantities;
+    return IDsAndQuantities;
   }
 
-  cartItems(finalItems, theAmount) {
-    return finalItems.map((item) => (
+  cartItems(items, IDsAndQuantities) {
+    const { add, remove, find } = this.props;
+    return items.map((item) => (
       <section
         key={ item.id }
       >
@@ -60,14 +62,30 @@ class CartContent extends Component {
           alt={ `Produto ${item.title}` }
         />
         <h2>
-          {theAmount[item.id] * item.price}
+          {IDsAndQuantities[item.id] * item.price}
         </h2>
         <p
           data-testid="shopping-cart-product-quantity"
         >
           Quantidade:
-          {theAmount[item.id]}
+          {IDsAndQuantities[item.id]}
         </p>
+        <span>
+          <button
+            data-testid="product-decrease-quantity"
+            type="button"
+            onClick={ () => { remove(find(item.id)); } }
+          >
+            -
+          </button>
+          <button
+            data-testid="product-increase-quantity"
+            type="button"
+            onClick={ () => { add(find(item.id)); } }
+          >
+            +
+          </button>
+        </span>
       </section>));
   }
 
@@ -86,12 +104,9 @@ class CartContent extends Component {
       </section>);
 
     const { items } = this.props;
-    // console.log(this.createObjectIDsAndQuantities(items), 'nº elementos');
-    const theAmount = this.createObjectIDsAndQuantities(items);
-    // console.log(this.filterItems(items), 'last filter');
+    const IDsAndQuantities = this.createObjectIDsAndQuantities(items);
     const filteredItems = this.filterItems(items);
-    // console.log(filteredItems, 'final items');
-    return filteredItems[0] ? this.cartItems(filteredItems, theAmount) : emptyCart;
+    return filteredItems[0] ? this.cartItems(filteredItems, IDsAndQuantities) : emptyCart;
   }
 }
 
@@ -101,7 +116,10 @@ CartContent.propTypes = {
     price: PropTypes.number,
     title: PropTypes.string,
     thumbnail: PropTypes.string,
-  })).isRequired,
-};
+  })),
+  add: PropTypes.func,
+  remove: PropTypes.func,
+  find: PropTypes.func,
+}.isRequired;
 
 export default CartContent;

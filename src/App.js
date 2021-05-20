@@ -9,15 +9,39 @@ class App extends Component {
     this.state = {
       items: [],
     };
+    this.addItemToCart = this.addItemToCart.bind(this);
+    this.findIndexByID = this.findIndexByID.bind(this);
     this.addItem = this.addItem.bind(this);
+    this.removeItem = this.removeItem.bind(this);
   }
 
-  addItem(selectedItem) {
+  addItemToCart(selectedItem) {
     this.setState((previousState) => (
       {
         items: [...previousState.items, selectedItem],
       }
     ));
+  }
+
+  findIndexByID(givenID) {
+    const { items } = this.state;
+    const reversedArray = [...items].reverse();
+    const itemIndex = items.indexOf(reversedArray.find(({ id }) => id === givenID));
+    return itemIndex;
+  }
+
+  removeItem(index) {
+    const { items } = this.state;
+    items.splice(index, 1);
+    this.setState({
+      items,
+    });
+  }
+
+  addItem(index) {
+    const { items } = this.state;
+    const clone = { ...items[index] };
+    this.addItemToCart(clone);
   }
 
   render() {
@@ -30,18 +54,23 @@ class App extends Component {
           path="/product/:id"
           render={ (routeProps) => (<ProductDetails
             { ...routeProps }
-            callBack={ this.addItem }
+            callBack={ this.addItemToCart }
           />) }
         />
         <Route
           exact
           path="/cartContent"
-          render={ () => <CartContent items={ items } /> }
+          render={ () => (<CartContent
+            items={ items }
+            add={ this.addItem }
+            remove={ this.removeItem }
+            find={ this.findIndexByID }
+          />) }
         />
         <Route
           exact
           path="/"
-          render={ () => <Home callBack={ this.addItem } /> }
+          render={ () => <Home callBack={ this.addItemToCart } /> }
         />
       </Router>
     );

@@ -141,15 +141,15 @@
 }
 
 .quantity-section {
+  align-items: center;
   display: flex;
   justify-content: space-around;
-  align-items: center;
   width: 150px;
 }
 
 .quantity-button {
   background: transparent;
   border: none;
-  font-size: 40px;
   cursor: pointer;
+  font-size: 40px;
 }

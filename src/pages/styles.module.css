@@ -2,7 +2,8 @@ body {
   color: inherit;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and ( max-width : 768px ) {
+
   /* Cabeçalho da Pagina */
   .header {
     background-color: var(--black-color-600);
@@ -11,24 +12,24 @@ body {
   }
 
   .titleLogo {
-    font-size: 1.4rem;
     color: white;
+    font-size: 1.4rem;
     font-weight: 300;
   }
 
   .cartLogo {
     display: flex;
     justify-content: space-between;
-    width: 80%;
-    min-width: 250px;
     margin: 10px auto;
+    min-width: 250px;
+    width: 80%;
   }
 
   .btnCart {
     border-radius: 5px;
     text-decoration: none;
-    width: 35px;
     color: var(--orange-color-600);
+    width: 35px;
   }
 
   .lengthCart {
@@ -37,52 +38,51 @@ body {
   }
 
   .iconCart {
-    width: 100%;
     height: 100%;
+    width: 100%;
     padding: 3px 5px 3px 3px;
     position: relative;
   }
 
   /* Barra de pesquisa do header */
-
   .inputContent {
-    width: 80%;
-    min-width: 250px;
-    margin: 0 auto;
     display: flex;
     flex-direction: column;
-    text-align: center;
+    margin: 0 auto;
+    min-width: 250px;
+    width: 80%;
     font-size: 0.7em;
+    text-align: center;
     margin-bottom: 14px;
   }
 
   .inputSearch {
-    border-radius: 10px;
     border: none;
-    padding: 0.8rem;
+    border-radius: 10px;
     font-size: 1.1rem;
+    padding: 0.8rem;
     outline: 0;
     transition: 0.7s;
   }
 
-  .inputSearch:active,
+  .inputSearch:active, 
   .inputSearch:focus {
     box-shadow: 0 0 1rem rgb(224 56 56 / 60%);
   }
 
   .btnSearch {
     border: none;
-    width: 34px;
     margin-top: 6px;
+    width: 34px;
     position: absolute;
     right: 11%;
   }
 
   .iconSearch {
-    width: 100%;
     height: 100%;
-    padding: 3px;
+    width: 100%;
     color: var(--black-color-600);
+    padding: 3px;
   }
 
   .textInput {
@@ -90,10 +90,9 @@ body {
   }
 
   /* Categorias */
-
   .categoryList {
-    overflow: scroll;
     display: flex;
+    overflow: scroll;
     list-style: none;
   }
 
@@ -101,16 +100,16 @@ body {
     background-color: var(--orange-color-600);
     border: none;
     color: white;
-    font-family: Poppins, sans-serif;
+    font-family: Poppins , sans-serif;
     font-size: 0.7rem;
     font-weight: 300;
     padding: 2px;
-    width: 6.2rem;
     height: 6.2rem;
-    margin: 10px;
+    width: 6.2rem;
     border-radius: 50%;
-    transition: 0.7s;
+    margin: 10px;
     box-shadow: 0 0 1rem rgb(0 0 0 / 60%);
+    transition: 0.7s;
   }
 
   /* produtos da pagina */
@@ -127,8 +126,8 @@ body {
   /* Titulo geral */
   .title {
     color: var(--text-color-black-400);
-    text-align: center;
     padding: 10px;
+    text-align: center;
   }
 
   /* Contener de todos os produtos */

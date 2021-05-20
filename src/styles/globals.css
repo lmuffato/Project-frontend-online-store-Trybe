@@ -18,12 +18,12 @@
 
   --black-color-400: rgb(71, 70, 77);
 
-  --red-color-600: rgb(224, 56, 56); 
+  --red-color-600: rgb(224, 56, 56);
 }
 
 body {
   background-color: rgb(240, 242, 245);
-  font-family: Poppins, sans-serif;
+  font-family: Poppins , sans-serif;
 }
 
 h1, h3, h4, h5, h6 {

@@ -8,6 +8,7 @@ import Button from '../components/Button';
 import '../styles/ProductDetail.css';
 import ReviewForm from '../components/ReviewForm';
 import backArrow from '../imagens/backArrow.svg';
+import free from '../imagens/free.png';
 
 class ProductDetail extends React.Component {
   constructor(props) {
@@ -74,6 +75,9 @@ class ProductDetail extends React.Component {
                 R$
                 {item.price}
               </p>
+              {(item.shipping.free_shipping)
+                ? <img src={ free } alt="free" data-testid="free-shipping" width="10%" />
+                : <p />}
             </div>
             <Button item={ item } dataTestId="product-detail-add-to-cart" />
           </div>

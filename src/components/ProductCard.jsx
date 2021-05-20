@@ -3,11 +3,13 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import '../styles/ProductCard.css';
 import Button from './Button';
+import free from '../imagens/free.png';
 // import { getProductsFromCategoryAndQuery } from '../services/api';
 
 export default class ProductCard extends React.Component {
   render() {
     const { item } = this.props;
+    console.log(item.shipping.free_shipping);
     return (
       <div className="product-box">
         <Link
@@ -22,6 +24,9 @@ export default class ProductCard extends React.Component {
               Preço:
               {item.price}
             </p>
+            {(item.shipping.free_shipping)
+              ? <img src={ free } alt="free" data-testid="free-shipping" width="45%" />
+              : <p />}
           </div>
         </Link>
         <Button

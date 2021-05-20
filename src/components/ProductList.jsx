@@ -9,13 +9,12 @@ class ProductList extends Component {
     if (data !== undefined) {
       const { results } = data;
       return results.map((item) => (
-        <div key={ item.id }>
+        <div key={ item.id } data-testid="product">
           <Card
             sku={ item.id }
             title={ item.title }
             image={ item.thumbnail }
             price={ item.price }
-            data-testid="product"
           />
           <button
             onClick={ getId }

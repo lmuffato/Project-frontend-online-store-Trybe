@@ -14,7 +14,7 @@ export default class CartCard extends React.Component {
 
   quantityProduct = ({ target }) => {
     const { product } = this.props;
-    if (target.name === 'add' && product.buyQuantity <= product.availableQuantity) {
+    if (target.name === 'add' && product.buyQuantity < product.availableQuantity) {
       console.log('Me adicionaram aqui ó');
       product.buyQuantity += 1;
       product.price = product.standardPrice * parseInt(product.buyQuantity, 10);

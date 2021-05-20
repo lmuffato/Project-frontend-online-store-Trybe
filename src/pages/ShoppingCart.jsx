@@ -18,14 +18,12 @@ export default class ShoppingCart extends React.Component {
 
   componentDidMount() {
     this.checkStorage();
-    // this.deleteProduct();
   }
 
   quantityProduct = ({ target }) => {
     const { storageData } = this.state;
     storageData.map((product) => {
       if (target.name === 'add' && product.buyQuantity <= product.availableQuantity) {
-        console.log('Me adicionaram aqui ó');
         product.buyQuantity += 1;
         product.price = product.standardPrice * parseInt(product.buyQuantity, 10);
         this.setState({
@@ -46,9 +44,6 @@ export default class ShoppingCart extends React.Component {
   deleteProduct = ({ target }) => {
     this.checkStorage();
     const { storageData } = this.state;
-    const products = getAll();
-    console.log(target.previousSibling.previousSibling);
-    console.log(products);
     const newArray = storageData
       .filter((item) => target.previousSibling.previousSibling.id !== item.title);
     this.setState({ storageData: newArray });
@@ -57,7 +52,6 @@ export default class ShoppingCart extends React.Component {
 
   checkStorage = () => {
     const storage = getAll();
-    console.log(storage);
     if (Array.isArray(storage)) {
       return this.setState({
         storageData: storage,
@@ -75,7 +69,6 @@ export default class ShoppingCart extends React.Component {
 
   render() {
     const { storageData, array } = this.state;
-    console.log(storageData);
     if (array === false) {
       return (
         <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>

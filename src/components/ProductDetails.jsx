@@ -62,6 +62,16 @@ class ProductDetails extends Component {
             Adicionar ao Carrinho
           </button>
         </div>
+        <form>
+          <input type="email" />
+          <textarea
+            data-testid="product-detail-evaluation"
+            name="avaliation"
+            placeholder="Faça uma avaliação"
+            cols="30"
+            rows="10"
+          />
+        </form>
       </div>
     );
   }

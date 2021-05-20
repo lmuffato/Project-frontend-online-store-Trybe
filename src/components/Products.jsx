@@ -19,7 +19,7 @@ class Products extends Component {
                 title={ product.title }
                 price={ product.price }
                 imagePath={ product.thumbnail_id }
-                // onClick={ addCart } ALOHA FAMILIA
+                // onClick={ addCart }
               />
             ))}
         </div>

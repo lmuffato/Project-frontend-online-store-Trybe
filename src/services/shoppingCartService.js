@@ -4,10 +4,8 @@ export function setProducts(product) {
   const storagePrice = localStorage.getItem('total');
   let productsFromLS = [];
   let amount = 0;
-  if (storageItems) {
+  if (storageItems && storagePrice) {
     productsFromLS = JSON.parse(localStorage.getItem('products'));
-  }
-  if (storagePrice) {
     amount = JSON.parse(localStorage.getItem('total'));
   }
   productsFromLS.push(product);
@@ -16,13 +14,13 @@ export function setProducts(product) {
   localStorage.setItem('total', JSON.stringify(amount));
 }
 
-export function getProducts() {
-  const get = localStorage.getItem('products');
-  const getPrice = localStorage.getItem('total');
-  if (get) {
-    this.setState({ cart: JSON.parse(get) });
+export function getQuantity(quantidade) {
+  const storagedQuantity = localStorage.getItem('totalQuantity');
+  let quantity = 0;
+  if (storagedQuantity) {
+    quantity = JSON.parse(storagedQuantity);
   }
-  if (getPrice) {
-    this.setState({ totalPayment: JSON.parse(getPrice) });
-  }
+  quantity += quantidade;
+  localStorage.setItem('totalQuantity', JSON.stringify(quantity));
+  // return quantity.length;
 }

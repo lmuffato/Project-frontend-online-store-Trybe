@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import '../styles/ProductDetails.css';
+import { number, string, shape, func } from 'prop-types';
 import { Link } from 'react-router-dom';
-import { number, string } from 'prop-types';
+
 import Star from '../Components/Star';
+
+import '../styles/ProductDetails.css';
 
 class ProductDetails extends Component {
   constructor() {
@@ -30,7 +32,9 @@ class ProductDetails extends Component {
   }
 
   render() {
-    const { location: { state: { title, price, thumbnail } } } = this.props;
+    const {
+      location: { state: { title, price, thumbnail } },
+      history: { goBack } } = this.props;
     const { arrayStars } = this.state;
     return (
       <>
@@ -41,24 +45,25 @@ class ProductDetails extends Component {
           <br />
         </div>
         <section className="botoes">
-          <button type="button">
-            <Link to="/">
-              <img
-                className="back"
-                src="https://image.flaticon.com/icons/png/512/64/64516.png"
-                alt="voltar"
-              />
-            </Link>
+          <button type="button" onClick={ goBack }>
+            <img
+              className="back"
+              src="https://image.flaticon.com/icons/png/512/64/64516.png"
+              alt="voltar"
+            />
           </button>
-          <button type="button">
-            <Link to="/shopping-cart" data-testid="shopping-cart-button">
-              <img
-                className="shopping-cart"
-                src="https://img2.gratispng.com/20180425/lcq/kisspng-computer-icons-shopping-cart-5ae061983e57a6.1325375415246544882554.jpg"
-                alt="carrinho de compras"
-              />
-            </Link>
-          </button>
+          <Link
+            to={ {
+              pathname: '/shopping-cart',
+            } }
+            data-testid="shopping-cart-button"
+          >
+            <img
+              className="shopping-cart-icon"
+              src="https://image.flaticon.com/icons/png/128/833/833314.png"
+              alt="carrinho de compras"
+            />
+          </Link>
         </section>
         <form>
           <fieldset>
@@ -93,9 +98,16 @@ class ProductDetails extends Component {
 }
 
 ProductDetails.propTypes = {
-  title: string,
-  thumbnail: string,
-  price: number,
-}.isRequired;
+  location: shape({
+    state: shape({
+      title: string,
+      price: number,
+      thumbnail: string,
+    }),
+  }).isRequired,
+  history: shape({
+    goBack: func,
+  }).isRequired,
+};
 
 export default ProductDetails;

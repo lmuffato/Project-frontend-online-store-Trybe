@@ -1,5 +1,4 @@
 export function setProducts(product) {
-  console.log(product);
   // const { cart, totalPayment } = this.state; // vai virar parâmetro da função // cart = product
   const storageItems = localStorage.getItem('products');
   const storagePrice = localStorage.getItem('total');

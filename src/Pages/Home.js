@@ -13,6 +13,7 @@ class Home extends Component {
     this.state = {
       categories: [],
       products: [],
+      cart: [],
       query: '',
       categoryId: '',
       isCategoriesLoading: true,
@@ -46,11 +47,18 @@ class Home extends Component {
     });
   }
 
+  productToCart = (productObj) => {
+    this.setState(({ cart }) => ({
+      cart: [...cart, productObj],
+    }));
+  }
+
   render() {
     const {
       categories,
       products,
       isCategoriesLoading,
+      cart,
     } = this.state;
 
     return (
@@ -70,42 +78,51 @@ class Home extends Component {
           </form>
         </aside>
 
-        <main className="produtcs">
+        <main className="main-products">
+          <header className="home-header">
+            <label htmlFor="query" className="query-label">
+              <input
+                className="query-input"
+                name="query"
+                onChange={ this.newStateCategoryAndQuery }
+                type="text"
+                data-testid="query-input"
+              />
+              <button type="button" data-testid="query-button">
+                Pesquisar
+              </button>
+            </label>
 
-          <label htmlFor="myInput">
-            <input
-              id="myInput"
-              name="query"
-              onChange={ this.newStateCategoryAndQuery }
-              type="text"
-              data-testid="query-input"
-            />
-            <button
-              type="button"
-              data-testid="query-button"
-              onClick={ this.fetchItem }
+            <Link
+              to={ {
+                pathname: '/shopping-cart',
+                state: { cart },
+              } }
+              data-testid="shopping-cart-button"
             >
-              Pesquisar
-            </button>
-          </label>
-          <h3 data-testid="home-initial-message">
-            Digite algum termo de pesquisa ou escolha uma categoria.
-          </h3>
-          <br />
-          <button type="button">
-            <Link to="/shopping-cart" data-testid="shopping-cart-button">
               <img
-                className="shopping-cart"
-                src="https://img2.gratispng.com/20180425/lcq/kisspng-computer-icons-shopping-cart-5ae061983e57a6.1325375415246544882554.jpg"
+                className="shopping-cart-icon"
+                src="https://image.flaticon.com/icons/png/128/833/833314.png"
                 alt="carrinho de compras"
               />
             </Link>
-          </button>
+          </header>
+
+          <h3
+            data-testid="home-initial-message"
+            className="home-initial-message"
+          >
+            Digite algum termo de pesquisa ou escolha uma categoria.
+          </h3>
 
           <section>
             <ul className="products">
               {products.map((product) => (
-                <CardItem key={ product.id } { ...product } />
+                <CardItem
+                  productToCart={ this.productToCart }
+                  key={ product.id }
+                  product={ { ...product } }
+                />
               ))}
             </ul>
           </section>

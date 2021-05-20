@@ -5,8 +5,13 @@ class Form extends Component {
   render() {
     return (
       <form>
-        <label htmlFor="nome" data-testid="checkout-fullname">
-          <input id="nome" type="text" placeholder="Nome Completo" />
+        <label htmlFor="nome">
+          <input
+            id="nome"
+            type="text"
+            placeholder="Nome Completo"
+            data-testid="checkout-fullname"
+          />
         </label>
         <label htmlFor="cpf" data-testid="checkout-cpf">
           <input id="cpf" type="text" placeholder="CPF" />

@@ -65,7 +65,6 @@ class ProductDetails extends React.Component {
   loadReviews() {
     const { allReviews, match } = this.props;
     const { id } = match.params;
-
     const foundReview = allReviews.find((review) => review.productId === id);
 
     if (foundReview) {
@@ -79,8 +78,12 @@ class ProductDetails extends React.Component {
   }
 
   render() {
+    let cart = localStorage.getItem('cart');
+    cart = JSON.parse(cart);
     const { product, productReviews } = this.state;
-    const { addToCart } = this.props;
+    const { addToCart, cart: cartInProps } = this.props;
+
+    if (!cart) cart = cartInProps;
 
     if (!product || !product.attributes) return <h1>Loading...</h1>;
 
@@ -89,7 +92,12 @@ class ProductDetails extends React.Component {
         <div>
           <header>
             <Link to="/">Voltar</Link>
-            <Link to="/cart" data-testid="shopping-cart-button">Carrinho</Link>
+            <Link to="/cart" data-testid="shopping-cart-button">
+              Carrinho
+              <span data-testid="shopping-cart-size">
+                { cart.quantity }
+              </span>
+            </Link>
           </header>
           <h1 data-testid="product-detail-name">{product.title}</h1>
           <span>{`R$ ${product.price}`}</span>
@@ -104,7 +112,7 @@ class ProductDetails extends React.Component {
           </ul>
           <button
             type="button"
-            onClick={ addToCart }
+            onClick={ (event) => addToCart(event, product) }
             id={ product.id }
             data-testid="product-detail-add-to-cart"
           >

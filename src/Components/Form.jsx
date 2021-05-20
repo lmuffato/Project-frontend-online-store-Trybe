@@ -13,6 +13,7 @@ class Form extends Component {
             data-testid="checkout-fullname"
           />
         </label>
+
         <label htmlFor="cpf">
           <input
             id="cpf"
@@ -21,6 +22,7 @@ class Form extends Component {
             data-testid="checkout-cpf"
           />
         </label>
+
         <label htmlFor="email">
           <input
             id="email"
@@ -29,6 +31,7 @@ class Form extends Component {
             data-testid="checkout-email"
           />
         </label>
+
         <label htmlFor="telefone">
           <input
             id="telefone"
@@ -37,6 +40,7 @@ class Form extends Component {
             data-testid="checkout-phone"
           />
         </label>
+
         <label htmlFor="cep">
           <input
             id="cep"
@@ -45,6 +49,7 @@ class Form extends Component {
             data-testid="checkout-cep"
           />
         </label>
+
         <label htmlFor="endereço">
           <input
             id="endereço"
@@ -53,6 +58,7 @@ class Form extends Component {
             data-testid="checkout-address"
           />
         </label>
+
         <label htmlFor="complemento">
           <input id="complemento" type="text" placeholder="Complemento" />
         </label>

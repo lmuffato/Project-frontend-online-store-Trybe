@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { getProductsFromStorage } from '../services/localStorage';
 
 class ShopCart extends React.Component {
   render() {
+    const products = getProductsFromStorage();
     return (
       <div>
         <ul>

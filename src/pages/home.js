@@ -36,9 +36,8 @@ class home extends Component {
     } else {
       const filteredProduct = addProduct.filter((el) => el.id === elementSKU).shift();
       const index = addProduct.indexOf(filteredProduct);
-      addProduct.splice(index);
       filteredProduct.q += 1;
-      addProduct.push(filteredProduct);
+      addProduct[index] = filteredProduct;
       this.setState({ addProduct });
     }
   };

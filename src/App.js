@@ -20,6 +20,10 @@ class App extends Component {
     };
   }
 
+  componentDidMount() {
+    this.propsToCartList();
+  }
+
   updateLocalStorage = () => {
     const { cartList } = this.state;
     localStorage.setItem('cartList', JSON.stringify(cartList));
@@ -38,10 +42,6 @@ class App extends Component {
     }));
     this.updateLocalStorage();
   };
-
-  componentDidMount() {
-    this.propsToCartList();
-  }
 
   handleDetailsToCart = async (product) => {
     await this.setState((anterior) => ({

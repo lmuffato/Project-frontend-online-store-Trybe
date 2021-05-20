@@ -5,7 +5,7 @@ import { arrayOf, shape, string, number, func } from 'prop-types';
 
 import CartItem from '../components/CartItem';
 
-import changePriceToNumber from '../utils/functions';
+import { changePriceToNumber } from '../utils/functions';
 
 class Cart extends Component {
   constructor(props) {

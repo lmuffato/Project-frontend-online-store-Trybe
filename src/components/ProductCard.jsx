@@ -16,12 +16,14 @@ class ProductCard extends Component {
 
   render() {
     const { product } = this.props;
-    const { id, title, price, thumbnail } = product;
+    const { id, title, price, thumbnail, shipping } = product;
+    const freeShipping = shipping.free_shipping;
     return (
       <div data-testid="product">
         <h3>{title}</h3>
         <img src={ thumbnail } alt={ title } />
         <p>{price}</p>
+        { freeShipping ? (<p data-testid="free-shipping">Frete grátis</p>) : ''}
         <Link
           to={ { pathname: `/product${id}`, state: { product },
           } }
@@ -32,7 +34,6 @@ class ProductCard extends Component {
         <br />
         <button
           type="button"
-          // data-props={ product }
           data-testid="product-add-to-cart"
           onClick={ this.onClickTest }
         >
@@ -49,6 +50,9 @@ ProductCard.propTypes = {
     price: PropTypes.number,
     thumbnail: PropTypes.string,
     id: PropTypes.string,
+    shipping: PropTypes.shape({
+      free_shipping: PropTypes.bool,
+    }),
   }).isRequired,
 };
 

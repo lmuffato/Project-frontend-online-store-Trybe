@@ -15,14 +15,6 @@ class ProductDetail extends Component {
       <>
         <Header />
         <ProductInfo product={ product } />
-        {/* <Link
-          to={ {
-            pathname: '/shopping-cart', state: { product },
-          } }
-          data-testid="product-detail-add-to-cart"
-        >
-          Adicionar ao carrinho
-        </Link> */}
         <UserForm />
       </>
     );

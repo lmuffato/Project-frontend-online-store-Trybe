@@ -1,24 +1,31 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 export default class Header extends Component {
-  handleCartSize() {
-    const productsNumber = JSON.parse(localStorage.getItem('products')).length;
-    const quantity = localStorage.setItem('quantidade', JSON.stringify(productsNumber));
-    return quantity;
-  }
+  // contructor() {
+  //   super();
+  //   this.state = {
+  //     totalQuantity: 0,
+  //   };
+  // }
 
   render() {
-    // const { cartSize, status } = this.state;
-
+    const { totalQuantity } = this.props;
     return (
       <header>
         <Link to="/">Home</Link>
         <Link data-testid="shopping-cart-button" to="/shopping-cart">Carrinho</Link>
-        {/* { status
-          ? (<span datat-testid="shopping-cart-size">{ cartSize }</span>)
-          : (<span datat-testid="shopping-cart-size">0</span>) } */}
+        <span data-testid="shopping-cart-size">{totalQuantity}</span>
       </header>
     );
   }
 }
+
+Header.defaultProps = {
+  totalQuantity: 0,
+};
+
+Header.propTypes = {
+  totalQuantity: PropTypes.number,
+};

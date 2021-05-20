@@ -9,7 +9,12 @@ export default class ListaCheckout extends Component {
       <div>
         <h3>{title}</h3>
         <img src={ thumbnail } alt={ title } />
-        <p>{price}</p>
+        <p>
+          {new Intl.NumberFormat('pt-BR', {
+            style: 'currency',
+            currency: 'BRL',
+          }).format(price)}
+        </p>
       </div>
     );
   }

@@ -12,6 +12,8 @@ class ProductCard extends Component {
   onClickTest() {
     const { product } = this.props;
     shoppingCartService.setProducts(product);
+    shoppingCartService.getQuantity(1);
+    // return getQuantity;
   }
 
   render() {

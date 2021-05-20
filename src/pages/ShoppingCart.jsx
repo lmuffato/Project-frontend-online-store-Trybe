@@ -12,37 +12,12 @@ class ShoppingCart extends React.Component {
       cart: [],
       totalPayment: 0,
     };
-
-    // this.addProductToCart = this.addProductToCart.bind(this);
     this.getProducts = this.getProducts.bind(this);
-    // this.setProducts = this.setProducts.bind(this);
   }
 
   componentDidMount() {
-  //   const { location } = this.props;
     this.getProducts();
-  //   if (!location.state) return; // tratando problema qnd clica no carrinho vazio
-  //   const { product } = location.state;
-  //   this.addProductToCart(product);
   }
-
-  // setProducts() {
-  //   const { cart, totalPayment } = this.state; // vai virar parâmetro da função // cart = product
-  //   const storageItems = localStorage.getItem('products');
-  //   const storagePrice = localStorage.getItem('total');
-  //   let productsFromLS = [];
-  //   let amount = 0;
-  //   if (storageItems) {
-  //     productsFromLS = JSON.parse(localStorage.getItem('products'));
-  //   }
-  //   if (storagePrice) {
-  //     amount = JSON.parse(localStorage.getItem('total'));
-  //   }
-  //   productsFromLS.push(cart[0]);
-  //   amount += totalPayment; // price, de product
-  //   localStorage.setItem('products', JSON.stringify(productsFromLS));
-  //   localStorage.setItem('total', JSON.stringify(amount));
-  // }
 
   getProducts() {
     const get = localStorage.getItem('products');
@@ -54,15 +29,6 @@ class ShoppingCart extends React.Component {
       this.setState({ totalPayment: JSON.parse(getPrice) });
     }
   }
-
-  // addProductToCart(product) {
-  //   const { cart, totalPayment } = this.state;
-  //   const { price } = product;
-  //   this.setState({
-  //     cart: [...cart, product],
-  //     totalPayment: totalPayment + price,
-  //   }, () => this.setProducts());
-  // }
 
   render() {
     const { cart, totalPayment } = this.state;
@@ -81,10 +47,10 @@ class ShoppingCart extends React.Component {
             <ItemOfCart key={ item.id } product={ item } />))}
         </section>
         <p>
-          { new Intl.NumberFormat('pt-BR', {
+          {new Intl.NumberFormat('pt-BR', {
             style: 'currency',
             currency: 'BRL',
-          }).format(totalPayment) }
+          }).format(totalPayment)}
         </p>
         <Redirect to="/">Home</Redirect>
         <Link to="/checkout" data-testid="checkout-products">Comprar</Link>

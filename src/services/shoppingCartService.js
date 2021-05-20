@@ -22,5 +22,14 @@ export function getQuantity(quantidade) {
   }
   quantity += quantidade;
   localStorage.setItem('totalQuantity', JSON.stringify(quantity));
-  // return quantity.length;
+}
+
+export function subtractQuantity(quantidade) {
+  const storagedQuantity = localStorage.getItem('totalQuantity');
+  let quantity = 1;
+  if (storagedQuantity) {
+    quantity = JSON.parse(storagedQuantity);
+  }
+  quantity -= quantidade;
+  localStorage.setItem('totalQuantity', JSON.stringify(quantity));
 }

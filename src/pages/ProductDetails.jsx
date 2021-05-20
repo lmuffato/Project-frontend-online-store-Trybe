@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { RiShoppingCartFill } from 'react-icons/ri';
 
 class ProductDetails extends Component {
   render() {
-    const { location, handleDetailsToCart } = this.props;
+    const { location, handleDetailsToCart, cartProductLength } = this.props;
     const { state: { product } } = location;
-    const { title, thumbnail, price } = product;
+    const { title, thumbnail, price, shipping } = product;
     return (
       <section>
         <div>
@@ -14,6 +15,8 @@ class ProductDetails extends Component {
             <span data-testid="product-detail-name">{ title }</span>
             <img src={ thumbnail } alt={ title } />
             <span>{`R$${price}`}</span>
+            { shipping.free_shipping
+            && <span data-testid="free-shipping">Frete grátis</span> }
             <button
               type="button"
               onClick={ () => handleDetailsToCart(product) }
@@ -22,13 +25,9 @@ class ProductDetails extends Component {
               Adicionar ao Carrinho
             </button>
           </section>
-          <Link to="/carrinho">
-            <button
-              data-testid="shopping-cart-button"
-              type="button"
-            >
-              Ir para o Carrinho
-            </button>
+          <Link data-testid="shopping-cart-button" to="/carrinho">
+            <RiShoppingCartFill />
+            <span data-testid="shopping-cart-size">{ cartProductLength }</span>
           </Link>
         </div>
         <div>pagamento</div>
@@ -57,10 +56,14 @@ ProductDetails.propTypes = {
         thumbnail: PropTypes.string,
         price: PropTypes.number,
         id: PropTypes.string,
+        shipping: PropTypes.shape({
+          free_shipping: PropTypes.bool,
+        }),
       }),
     }),
   }).isRequired,
   handleDetailsToCart: PropTypes.func.isRequired,
+  cartProductLength: PropTypes.number.isRequired,
 };
 
 export default ProductDetails;

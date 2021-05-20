@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { FaSearch } from 'react-icons/fa';
+import { RiShoppingCartFill } from 'react-icons/ri';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
-import carrinho from '../services/Carrinho-compras.png';
 import CardProduct from '../components/CardProduct';
+
+import styles from './styles.module.css';
 
 class Home extends Component {
   constructor() {
@@ -38,15 +41,21 @@ class Home extends Component {
   checkRequest = () => {
     const { products } = this.state;
     const { onClick } = this.props;
-    if (products.length === 0) return <h2>Nenhum Produto encontrado</h2>;
+    if (products.length === 0) {
+      return (
+        <h2 className={ styles.checkedProduct }>Nenhum Produto encontrado</h2>
+      );
+    }
     return (
-      products.map((product) => (
-        <CardProduct
-          onClick={ onClick }
-          key={ product.id }
-          product={ product }
-        />
-      ))
+      <section className={ styles.productsItems }>
+        {products.map((product) => (
+          <CardProduct
+            onClick={ onClick }
+            key={ product.id }
+            product={ product }
+          />
+        ))}
+      </section>
     );
   };
 
@@ -57,40 +66,60 @@ class Home extends Component {
 
   render() {
     const { categories } = this.state;
-    const propsLink = {
-      className: 'btn-cart',
-      'data-testid': 'shopping-cart-button',
-      to: '/carrinho',
-    };
+    const { cartProductLength } = this.props;
     return (
-      <section>
-        <div>
-          <label htmlFor="search" data-testid="home-initial-message">
-            Digite algum termo de pesquisa ou escolha uma categoria.
+      <main>
+        <header className={ styles.header }>
+          <div className={ styles.cartLogo }>
+            <h2 className={ styles.titleLogo }>
+              Shopping Cart 2.0
+            </h2>
+            <Link
+              className={ styles.btnCart }
+              data-testid="shopping-cart-button"
+              to="/carrinho"
+            >
+              <RiShoppingCartFill className={ styles.iconCart } />
+              <span
+                className={ styles.lengthCart }
+                data-testid="shopping-cart-size"
+              >
+                { cartProductLength }
+              </span>
+            </Link>
+          </div>
+          <div className={ styles.inputContent }>
+            <p className={ styles.textInput } data-testid="home-initial-message">
+              Digite algum termo de pesquisa ou escolha uma categoria.
+            </p>
             <input
               id="search"
               data-testid="query-input"
               type="text"
               onChange={ this.handleChange }
+              className={ styles.inputSearch }
+              placeholder="O que você está procurando?"
             />
-          </label>
-          <button data-testid="query-button" type="button" onClick={ this.handleSubmit }>
-            Pesquisar
-          </button>
-        </div>
-        <Link { ...propsLink }>
-          <img
-            className="img-cart"
-            src={ carrinho }
-            alt="Logo Cart"
-          />
-        </Link>
-        <ul>
+            <button
+              className={ styles.btnSearch }
+              data-testid="query-button"
+              type="button"
+              onClick={ this.handleSubmit }
+            >
+              <FaSearch className={ styles.iconSearch } />
+            </button>
+          </div>
+
+        </header>
+        <h2 className={ styles.title }>Categorias</h2>
+        <ul className={ styles.categoryList }>
           {categories.map(({ id, name }) => (
             <li
               key={ id }
+              className={ styles.categoryItem }
             >
               <button
+                className={ styles.categoryItemBtn }
                 type="button"
                 onClick={ () => this.handleCategoryClicked(id) }
                 data-testid="category"
@@ -99,17 +128,24 @@ class Home extends Component {
               </button>
             </li>))}
         </ul>
+        <h2 className={ styles.title }>Produtos</h2>
         {this.checkRequest()}
-      </section>
+      </main>
     );
   }
 }
 
 Home.propTypes = {
   onClick: PropTypes.func.isRequired,
+  cartProductLength: PropTypes.number.isRequired,
 };
 
 export default Home;
 
 // CartList component is now >  CartItem
 // CartItem page is now >  Cart
+
+// preciso interagir com o dados retornados da api novamente e verificar a chave de frete
+// a partir disso, modificar a renderização do cardProduct na home levando essa info
+// modificar a renderização tambem na pagina de product details
+// verificar um regra de negocio pra aparecer a propriedade (state vazio > if frete true > state: 'frete gratis' )

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { getProductLength } from './utils/functions';
 
 import Home from './pages/Home';
 import ProductDetails from './pages/ProductDetails';
@@ -27,10 +28,21 @@ class App extends Component {
         img: product[1].src,
         title: product[0].innerHTML,
         quant: 1,
-        price: product[2].innerHTML,
+        price: elementos[1].innerHTML,
       }],
     }));
   };
+
+  handleDetailsToCart = async (product) => {
+    this.setState((anterior) => ({
+      cartList: [...anterior.cartList, {
+        img: product.thumbnail,
+        title: product.title,
+        quant: 1,
+        price: product.price.toFixed(2),
+      }],
+    }));
+  }
 
   changeQuantProductLength = (quant, productTitle) => {
     const { cartList } = this.state;

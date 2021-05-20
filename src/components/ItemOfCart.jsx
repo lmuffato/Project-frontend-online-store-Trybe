@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import * as shoppingCartService from '../services/shoppingCartService';
 
 class ItemOfCart extends React.Component {
   constructor(props) {
@@ -17,7 +18,6 @@ class ItemOfCart extends React.Component {
     const { quantity, altPrice } = this.state;
     const { product } = this.props;
     const { price } = product;
-    console.log(product);
     const stock = product.available_quantity;
 
     if (type === 'increase' && quantity < stock) {
@@ -25,25 +25,16 @@ class ItemOfCart extends React.Component {
         quantity: quantity + 1,
         altQuantity: true,
         altPrice: (quantity + 1) * price,
-      });
+      }, shoppingCartService.getQuantity(1));
     }
     if (type === 'decrease' && quantity > 1) {
       return this.setState({
         quantity: quantity - 1,
         altQuantity: true,
         altPrice: altPrice - price,
-      });
+      }, shoppingCartService.subtractQuantity(1));
     }
   }
-
-  // altQuantity(event) {
-  //   const { value } = event.target;
-  //   this.setState({
-  //     quantity: value,
-  //   });
-  // const freeShipping = shipping.free_shipping
-  // if (freeShipping === true)
-  // }
 
   render() {
     const { product } = this.props;

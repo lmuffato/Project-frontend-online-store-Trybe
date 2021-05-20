@@ -12,6 +12,8 @@ class ProductCard extends Component {
   onClickTest() {
     const { product } = this.props;
     shoppingCartService.setProducts(product);
+    shoppingCartService.getQuantity(1);
+    // return getQuantity;
   }
 
   render() {
@@ -22,7 +24,12 @@ class ProductCard extends Component {
       <div data-testid="product">
         <h3>{title}</h3>
         <img src={ thumbnail } alt={ title } />
-        <p>{price}</p>
+        <p>
+          {new Intl.NumberFormat('pt-BR', {
+            style: 'currency',
+            currency: 'BRL',
+          }).format(price)}
+        </p>
         { freeShipping ? (<p data-testid="free-shipping">Frete grátis</p>) : ''}
         <Link
           to={ { pathname: `/product${id}`, state: { product },

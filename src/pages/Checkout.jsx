@@ -34,7 +34,12 @@ export default class Checkout extends Component {
       <>
         <section>
           {cart.map((item) => <ListaCheckout key={ item.id } product={ item } />)}
-          <strong>{ totalPayment }</strong>
+          <strong>
+            { new Intl.NumberFormat('pt-BR', {
+              style: 'currency',
+              currency: 'BRL',
+            }).format(totalPayment)}
+          </strong>
         </section>
         <form>
           <input type="text" name="" id="" data-testid="checkout-fullname" />

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import * as shoppingCartService from '../services/shoppingCartService';
-// import { Link } from 'react-router-dom';
 
 class ProductInfo extends Component {
   constructor() {
@@ -12,6 +11,7 @@ class ProductInfo extends Component {
   onClick() {
     const { product } = this.props;
     shoppingCartService.setProducts(product);
+    shoppingCartService.getQuantity(1);
   }
 
   render() {

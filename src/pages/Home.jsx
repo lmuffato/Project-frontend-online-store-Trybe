@@ -14,18 +14,21 @@ export default class Home extends Component {
       categories: [],
       search: '',
       message: null,
+      totalQuantity: JSON.parse(localStorage.getItem('totalQuantity')),
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleFetchProducts = this.handleFetchProducts.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleFetchCategories = this.handleFetchCategories.bind(this);
     this.handleCategoryEvent = this.handleCategoryEvent.bind(this);
+    // this.getQuantity = this.getQuantity.bind(this);
   }
 
   // Requisito 4 - Exibe as categorias buscadas pela função handleFetchCategories
 
   componentDidMount() {
     this.handleFetchCategories();
+    // this.getQuantity();
   }
 
   // Requisito 5 - captura/controla o value digitado no input
@@ -85,11 +88,19 @@ export default class Home extends Component {
     }
   }
 
+  // getQuantity() {
+  //   const getQuantity = localStorage.getItem('totalQuantity');
+  //   if (getQuantity) {
+  //     this.setState({ totalQuantity: JSON.parse(getQuantity) });
+  //   }
+  // }
+
   render() {
-    const { search, message, productsList, categories } = this.state;
+    const { search, message, productsList, categories, totalQuantity } = this.state;
+
     return (
       <>
-        <Header />
+        <Header totalQuantity={ totalQuantity } />
         <SearchBar
           search={ search }
           handleChange={ this.handleChange }
@@ -101,7 +112,9 @@ export default class Home extends Component {
             handleClick={ this.handleCategoryEvent }
           />
         </aside>
-        {message ? <ProductNotFound /> : <ProductList products={ productsList } />}
+        {message
+          ? <ProductNotFound />
+          : <ProductList products={ productsList } />}
       </>
     );
   }

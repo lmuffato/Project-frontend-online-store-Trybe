@@ -1,0 +1,13 @@
+.input-radio {
+  display: none;
+}
+
+.star {
+  cursor: pointer;
+  transition: color 200ms;
+}
+
+.btn-form {
+  font-size: medium;
+  width: 150px;
+}

@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import ProductForm from './ProductForm';
+import '../form.css';
 
 class DetailsPage extends React.Component {
   constructor(props) {
@@ -73,6 +75,7 @@ class DetailsPage extends React.Component {
             </button>
           </Link>
         </div>
+        <ProductForm data={ this.state } />
       </div>
     );
   }

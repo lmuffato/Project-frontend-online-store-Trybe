@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import SideBar from '../components/SideBar';
 import Product from '../components/Product';
 import ButtonCart from '../components/ButtonCart';
@@ -12,7 +13,6 @@ export default class Home extends Component {
       products: [],
       loading: false,
       category: 'all',
-      cartItems: {},
     };
   }
 
@@ -44,14 +44,10 @@ export default class Home extends Component {
     });
   }
 
-  addToCart = (id, productInfo) => {
-    this.setState(({ cartItems }) => ({
-      cartItems: { ...cartItems, [id]: productInfo },
-    }));
-  }
-
   render() {
-    const { products, loading, cartItems } = this.state;
+    const { products, loading } = this.state;
+    const { addToCart, cartItems } = this.props;
+
     return (
       <main>
         <label data-testid="home-initial-message" htmlFor="search">
@@ -73,10 +69,16 @@ export default class Home extends Component {
           { !loading ? products.map((product, index) => (<Product
             key={ index }
             product={ product }
-            addToCart={ this.addToCart }
+            addToCart={ addToCart }
+            cartItems={ cartItems }
           />)) : 'Carregando...' }
         </section>
       </main>
     );
   }
 }
+
+Home.propTypes = {
+  cartItems: PropTypes.object,
+  addToCart: PropTypes.func,
+}.isRequired;

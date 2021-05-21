@@ -11,7 +11,7 @@ class Card extends React.Component {
     return (
       <div className="card" data-testid="id">
         <Link
-          to={ { pathname: { title }, state: { product } } } // Alteração do path name para title. keys(id) não estava funcionando.
+          to={ { pathname: `/${title}`, state: { product } } } // Alteração do path name para title. keys(id) não estava funcionando.
           data-testid="product-detail-link"
         >
           <p>{title}</p>

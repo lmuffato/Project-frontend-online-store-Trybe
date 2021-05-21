@@ -49,10 +49,15 @@ class ShoppingCart extends Component {
 
   handleIncrease = ({ target }) => {
     const { value } = target;
-    this.setState((prevState) => ({
-      quantity: { ...prevState.quantity,
-        [value]: prevState.quantity[value] + 1 },
-    }));
+    const { productsOnCart, quantity } = this.state;
+    const myProduct = productsOnCart.find((product) => product.title === value);
+    const maxQuantity = myProduct.availableQuantity;
+    if (quantity[value] < maxQuantity) {
+      this.setState((prevState) => ({
+        quantity: { ...prevState.quantity,
+          [value]: prevState.quantity[value] + 1 },
+      }));
+    }
   }
 
   handleDelete = ({ target }) => {

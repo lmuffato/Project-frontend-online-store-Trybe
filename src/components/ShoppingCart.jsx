@@ -12,8 +12,6 @@ class ShoppingCart extends React.Component {
   }
 
   addClick = () => {
-    const { quantity } = this.state;
-    console.log(quantity);
     this.setState((prevState) => ({
       quantity: prevState.quantity + 1,
     }));

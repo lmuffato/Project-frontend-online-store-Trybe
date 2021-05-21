@@ -18,20 +18,21 @@ class ShoppingCart extends Component {
 
   updateProperties = () => {
     const { addedProduct, quantityAdded, productsOnCart } = this.state;
-    console.log(productsOnCart);
     if (addedProduct) {
-      const { title, id, price } = addedProduct;
+      const { availableQuantity, title, id, price } = addedProduct;
       this.setState((prevState) => ({
         productsOnCart: [...prevState.productsOnCart, {
           title,
           id,
           price,
+          availableQuantity,
         }],
         productsQuantity: { ...prevState.productsQuantity,
           [title]: quantityAdded,
         },
       }));
     }
+    console.log(productsOnCart);
   }
 
   componentDidMount = () => {

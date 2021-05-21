@@ -18,7 +18,7 @@ class Details extends Component {
   }
 
   handleSize = () => {
-    const prevSize = parseFloat(localStorage.getItem('cartSize'));
+    const prevSize = parseFloat(sessionStorage.getItem('cartSize'));
     if (prevSize) {
       this.setState({ quantityItems: prevSize });
     }
@@ -29,6 +29,8 @@ class Details extends Component {
       const sum = 1;
       return { quantityItems: (prevState.quantityItems + sum) };
     });
+    const { quantityItems } = this.state;
+    sessionStorage.setItem('cartSize', quantityItems + 1);
   }
 
   handleQuantity = () => {

@@ -27,7 +27,7 @@ class ListagemProdutos extends Component {
   }
 
   handleSize() {
-    const prevSize = parseFloat(localStorage.getItem('cartSize'));
+    const prevSize = parseFloat(sessionStorage.getItem('cartSize'));
     if (prevSize) {
       this.setState({ catSize: prevSize });
     }
@@ -60,7 +60,7 @@ class ListagemProdutos extends Component {
     );
   }
 
-  handleAddToCart = ({ title, id, price }) => {
+  handleAddToCart = ({ availableQuantity, title, id, price }) => {
     const { productsQuantity } = this.state;
     if (productsQuantity[title] === undefined) {
       this.setState((prevState) => ({
@@ -68,6 +68,7 @@ class ListagemProdutos extends Component {
           title,
           id,
           price,
+          availableQuantity,
         }],
         productsQuantity: {
           ...prevState.productsQuantity,
@@ -81,6 +82,7 @@ class ListagemProdutos extends Component {
           title,
           id,
           price,
+          availableQuantity,
         }],
         productsQuantity: { ...prevState.productsQuantity,
           [title]: prevState.productsQuantity[title] + 1 },
@@ -88,7 +90,7 @@ class ListagemProdutos extends Component {
       }));
     }
     const { catSize } = this.state;
-    localStorage.setItem('cartSize', catSize + 1);
+    sessionStorage.setItem('cartSize', catSize + 1);
   }
 
   render() {
@@ -144,6 +146,7 @@ class ListagemProdutos extends Component {
               id={ product.id }
               key={ product.id }
               title={ product.title }
+              availableQuantity={ product.available_quantity }
               price={ product.price }
               imagePath={ product.thumbnail }
               onClick={ this.handleAddToCart }

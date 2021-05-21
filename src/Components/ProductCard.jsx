@@ -4,11 +4,13 @@ import { Link } from 'react-router-dom';
 
 class ProductCard extends Component {
   render() {
-    const { quantityOnCart, product, title, price, imagePath, id, onClick } = this.props;
+    const { availableQuantity, quantityOnCart, product,
+      title, price, imagePath, id, onClick } = this.props;
     const myObj = {
       title,
       id,
       price,
+      availableQuantity,
     };
 
     return (
@@ -43,6 +45,7 @@ class ProductCard extends Component {
 }
 
 ProductCard.propTypes = {
+  availableQuantity: PropTypes.number.isRequired,
   quantityOnCart: PropTypes.number.isRequired,
   id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,

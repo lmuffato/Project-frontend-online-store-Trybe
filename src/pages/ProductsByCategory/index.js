@@ -58,16 +58,15 @@ class ProductsByCategory extends React.Component {
                 title={ title }
                 price={ price }
                 imagePath={ thumbnail }
-                button={
-                  <AddToCartBtn
-                    category={ catId }
-                    query={ title }
-                    id={ id }
-                    dataid="product-add-to-cart"
-                  />
-                }
                 attributes={ attributes }
-              />
+              >
+                <AddToCartBtn
+                  category={ catId }
+                  query={ title }
+                  id={ id }
+                  dataid="product-add-to-cart"
+                />
+              </ProductCard>
             </li>
           ))}
         </ul>

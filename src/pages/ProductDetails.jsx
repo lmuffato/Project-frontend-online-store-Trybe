@@ -8,9 +8,24 @@ import { TiArrowBack } from 'react-icons/ti';
 import styles from './styles.module.css';
 
 class ProductDetails extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      quant: 1,
+    };
+  }
+
+  handleClickSom = ({ target: { innerText } }) => {
+    this.setState(({ quant }) => ({
+      quant: innerText === '-' ? quant - 1 : quant + 1,
+    }));
+  }
+
   render() {
     const string = ['available_quantity', 'thumbnail_id'];
     const { location, handleDetailsToCart, cartProductLength } = this.props;
+    const { quant } = this.state;
     const { state: { product } } = location;
     const { title, price, shipping } = product;
     const estoque = product[string[0]];
@@ -23,24 +38,40 @@ class ProductDetails extends Component {
           </Link>
           <Link data-testid="shopping-cart-button" to="/carrinho">
             <RiShoppingCartFill className={ styles.iconCartDetails } />
-            <span data-testid="shopping-cart-size">{ cartProductLength }</span>
+            <span
+              className={ styles.contCart }
+              data-testid="shopping-cart-size"
+            >
+              { cartProductLength }
+            </span>
           </Link>
         </header>
         <section className={ styles.contentProductDetails }>
           <div className={ styles.contentImg }>
             <img className={ styles.imgProduct } src={ `https://http2.mlstatic.com/D_NQ_NP_${image}-O.webp` } alt={ title } />
-
           </div>
           <span className={ styles.titleDetails } data-testid="product-detail-name">
             { title }
           </span>
           <div className={ styles.contentPriceFree }>
-            <span className={ styles.priceProductDetails }>{`R$${price}`}</span>
-            <button className={ styles.btnSub } type="button">
+            <span className={ styles.priceProductDetails }>
+              {`R$${(price * quant).toFixed(2)}`}
+            </span>
+            <button
+              onClick={ this.handleClickSom }
+              className={ styles.btnSub }
+              type="button"
+              disabled={ quant === 1 }
+            >
               -
             </button>
-            <p className={ styles.addQuantProductToCart }>1</p>
-            <button className={ styles.btnAdd } type="button">
+            <p className={ styles.addQuantProductToCart }>{ quant }</p>
+            <button
+              onClick={ this.handleClickSom }
+              className={ styles.btnAdd }
+              type="button"
+              disabled={ quant === estoque }
+            >
               +
             </button>
             <button
@@ -89,6 +120,7 @@ class ProductDetails extends Component {
               Nenhuma opnião sobre o produto.
             </div>
           </div>
+          <div style={ { textAlign: 'center' } }>-</div>
         </div>
       </main>
     );

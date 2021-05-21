@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { shape, number, string, func } from 'prop-types';
 import { changePriceToNumber } from '../../utils/functions';
+import styles from './styles.module.css';
 
 class CartItem extends Component {
   constructor(props) {
@@ -54,32 +55,44 @@ class CartItem extends Component {
     const { quant, price, title, img } = this.state;
 
     return (
-      <div>
-        <img src={ img } alt={ title } />
-        <p data-testid="shopping-cart-product-name">{ title }</p>
-
-        <div>
-          <button
-            type="button"
-            onClick={ this.changeProductQuantify }
-            data-testid="product-decrease-quantity"
-          >
-            -
-          </button>
-
-          <p data-testid="shopping-cart-product-quantity">{ quant }</p>
-
-          <button
-            type="button"
-            onClick={ this.changeProductQuantify }
-            data-testid="product-increase-quantity"
-          >
-            +
-          </button>
+      <section className={ styles.CartItemContainer }>
+        <div className={ styles.CartImageContainer }>
+          <img src={ img } alt={ title } />
         </div>
 
-        <p>{ price }</p>
-      </div>
+        <div className={ styles.CartInfoContainer }>
+          <p data-testid="shopping-cart-product-name">{ title }</p>
+
+          <div className={ styles.CartPriceQuantContainer }>
+            <p>{ price }</p>
+
+            <div>
+              <button
+                type="button"
+                onClick={ this.changeProductQuantify }
+                data-testid="product-decrease-quantity"
+                disabled={ quant === 1 }
+                style={ { color: 'var(--red-color-600)' } }
+              >
+                -
+              </button>
+
+              <p data-testid="shopping-cart-product-quantity">
+                { quant }
+              </p>
+
+              <button
+                type="button"
+                onClick={ this.changeProductQuantify }
+                data-testid="product-increase-quantity"
+                style={ { color: 'var(--green-color-600)' } }
+              >
+                +
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
     );
   }
 }

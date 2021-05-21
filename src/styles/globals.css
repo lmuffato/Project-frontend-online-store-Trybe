@@ -12,7 +12,7 @@
 
   --text-color-black-400: rgb(102, 102, 102);
 
-  --orange-color-600: rgb(228, 102, 68);
+  --orange-color-600: rgb(228, 104, 69);
 
   --black-color-600: rgb(47, 43, 51);
 
@@ -20,11 +20,18 @@
 
   --red-color-600: rgb(224, 56, 56);
 
-  --green-color-600: rgb(75,181,67);
+  --green-color-600: rgb(75, 181, 67);
+}
+
+a {
+  color: inherit;
+  outline: 0;
+  text-decoration: inherit;
 }
 
 body {
   background-color: rgb(240, 242, 245);
+  color: var(--text-color-black-800);
   font-family: Poppins , sans-serif;
 }
 

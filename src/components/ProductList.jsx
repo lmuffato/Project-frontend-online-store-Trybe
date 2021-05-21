@@ -5,10 +5,11 @@ import './styles/ProductList.css';
 
 class ProductList extends Component {
   cardsElements = () => {
-    const { data } = this.props;
+    const { data, getId } = this.props;
     if (data !== undefined) {
       const { results } = data;
       return results.map((item) => (
+<<<<<<< HEAD
         <Card
           title={ item.title }
           image={ item.thumbnail }
@@ -17,6 +18,24 @@ class ProductList extends Component {
           Sku={ item.id }
           data-testid="product"
         />
+=======
+        <div key={ item.id } data-testid="product">
+          <Card
+            sku={ item.id }
+            title={ item.title }
+            image={ item.thumbnail }
+            price={ item.price }
+          />
+          <button
+            onClick={ getId }
+            type="button"
+            SKU={ item.id }
+            data-testid="product-add-to-cart"
+          >
+            Adicionar ao carrinho
+          </button>
+        </div>
+>>>>>>> 35294b5e53073baca28f8edf846ed59c94f16739
       ));
     }
   };

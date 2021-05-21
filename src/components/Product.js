@@ -5,23 +5,32 @@ import { Link } from 'react-router-dom';
 export default class Product extends Component {
   constructor(props) {
     super(props);
-    this.state = { amount: 1 };
+
+    const {
+      product: { id },
+      cartItems,
+    } = this.props;
+    this.state = {
+      amount: cartItems[id]?.amount || 0,
+    };
   }
 
   handleClick = () => {
     const { product, addToCart } = this.props;
-    const { title, price, id } = product;
-    const { amount } = this.state;
+    const { title, price, id, thumbnail } = product;
 
     this.setState((prevState) => ({
       amount: prevState.amount + 1,
-    }));
-
-    addToCart(id, {
-      title,
-      price,
-      amount,
-      id,
+    }), () => {
+      const { amount } = this.state;
+      addToCart(id, {
+        title,
+        thumbnail,
+        price,
+        amount,
+        id,
+        totalPrice: amount * price,
+      });
     });
   };
 

@@ -4,16 +4,14 @@ import PropTypes from 'prop-types';
 
 export default class ButtonCart extends Component {
   render() {
-    const { cart } = this.props;
+    const { totalCount } = this.props;
     return (
       <div>
         <Link
-          to={ {
-            pathname: '/shoppingcart',
-            cartItems: cart,
-          } }
+          to="/shoppingcart"
           data-testid="shopping-cart-button"
         >
+          <span data-testid="shopping-cart-size">{totalCount}</span>
           <i className="bi bi-cart" />
         </Link>
       </div>

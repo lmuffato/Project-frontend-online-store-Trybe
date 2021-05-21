@@ -67,7 +67,7 @@ export default class BuyerData extends Component {
               onChange={ this.updateState }
             >
               {states.map(({ id, initials, name }) => (
-                <OptionStates key={ id } initial={ initials } name={ name } />
+                <OptionStates key={ id } initials={ initials } name={ name } />
               ))}
             </Form.Control>
             <Form.Control

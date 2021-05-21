@@ -25,8 +25,8 @@ export default class Checkout extends Component {
         <div className="checkout-content">
           <div className="products-review">
             <p>Revise seus produtos</p>
-            {Object.entries(cartItems).map((cartItem, i) => (
-              <ProductReview key={ i } product={ cartItem[1] } />
+            {Object.values(cartItems).map((cartItem, i) => (
+              <ProductReview key={ i } product={ cartItem } />
             ))}
           </div>
           <div className="user-form">

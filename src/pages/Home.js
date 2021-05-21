@@ -12,7 +12,6 @@ export default class Home extends Component {
       products: [],
       loading: false,
       category: 'all',
-      cartItems: {},
     };
   }
 
@@ -44,14 +43,10 @@ export default class Home extends Component {
     });
   }
 
-  addToCart = (id, productInfo) => {
-    this.setState(({ cartItems }) => ({
-      cartItems: { ...cartItems, [id]: productInfo },
-    }));
-  }
-
   render() {
-    const { products, loading, cartItems } = this.state;
+    const { products, loading } = this.state;
+    const { addToCart, cartItems, totalCount } = this.props;
+
     return (
       <main>
         <label data-testid="home-initial-message" htmlFor="search">
@@ -67,13 +62,14 @@ export default class Home extends Component {
           </button>
         </label>
         <SideBar handleChange={ this.handleChange } />
-        <ButtonCart cart={ cartItems } />
+        <ButtonCart totalCount={ totalCount } />
         <section>
           { products.length ? '' : <span>Nenhum produto foi encontrado</span> }
           { !loading ? products.map((product, index) => (<Product
             key={ index }
             product={ product }
-            addToCart={ this.addToCart }
+            addToCart={ addToCart }
+            cartItems={ cartItems }
           />)) : 'Carregando...' }
         </section>
       </main>

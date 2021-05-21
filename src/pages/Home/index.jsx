@@ -49,7 +49,7 @@ class Home extends React.Component {
 
   render() {
     const { categories, productsList } = this.state;
-    const { addToCart } = this.props;
+    const { addToCart, cartSize } = this.props;
 
     return (
       <main id="home-page">
@@ -64,6 +64,10 @@ class Home extends React.Component {
           <Button>
             <Link data-testid="shopping-cart-button" to="/Cart">Cart</Link>
           </Button>
+
+          <p data-testid="shopping-cart-size">
+            { cartSize }
+          </p>
 
           {productsList.length === 0
             ? <p>Nenhum produto foi encontrado</p>
@@ -80,6 +84,7 @@ class Home extends React.Component {
 
 Home.propTypes = {
   addToCart: PropTypes.func.isRequired,
+  cartSize: PropTypes.number.isRequired,
 };
 
 export default Home;

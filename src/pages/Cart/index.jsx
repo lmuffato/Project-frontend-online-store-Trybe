@@ -6,7 +6,9 @@ import Button from '../../components/Button';
 class Cart extends React.Component {
   constructor(props) {
     super(props);
+
     const { cartProduct } = this.props;
+
     this.state = {
       cartProduct,
     };
@@ -16,12 +18,16 @@ class Cart extends React.Component {
     const { cartProduct } = this.state;
     const cartItems = (
       <section>
-        {cartProduct.map(({ id, price, thumbnail, title }) => (
+        {cartProduct.map(({ id, price, thumbnail, title, size }) => (
           <div key={ id }>
             <h1 data-testid="shopping-cart-product-name">{title}</h1>
             <img src={ thumbnail } alt={ title } />
             <p>{price}</p>
-            <p data-testid="shopping-cart-product-quantity">Quantidade: 1</p>
+            <p data-testid="shopping-cart-product-quantity">
+              Quantidade:
+              {' '}
+              {size}
+            </p>
           </div>))}
       </section>
     );

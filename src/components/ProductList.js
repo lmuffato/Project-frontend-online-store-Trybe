@@ -25,8 +25,8 @@ class ProductList extends Component {
           >
             <img src={ data.thumbnail } alt={ `foto ${data.title}` } width="200" />
             <p>{`R$${parseFloat(data.price).toFixed(2)}`}</p>
-            <AddButton data={ data } />
           </Link>
+          <AddButton data={ data } />
         </li>
       </div>
     );

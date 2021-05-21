@@ -1,0 +1,68 @@
+const data = [
+  {
+    type: 'text',
+    dataId: 'checkout-fullname',
+    maxLength: 50,
+    className: 'input',
+    name: 'fullName',
+    placeHolder: 'Nome Completo',
+  },
+  {
+    type: 'email',
+    dataId: 'checkout-email',
+    maxLength: 30,
+    className: 'input',
+    name: 'email',
+    placeHolder: 'Email',
+  },
+  {
+    type: 'text',
+    dataId: 'checkout-cpf',
+    maxLength: 11,
+    className: 'input',
+    name: 'cpf',
+    placeHolder: 'CPF (Apenas os numeros)',
+  },
+  {
+    type: 'text',
+    dataId: 'checkout-phone',
+    maxLength: 11,
+    className: 'input',
+    name: 'phone',
+    placeHolder: 'Telefone/Celular',
+  },
+  {
+    type: 'text',
+    dataId: 'checkout-cep',
+    maxLength: 8,
+    className: 'input',
+    name: 'cep',
+    placeHolder: 'CEP',
+  },
+  {
+    type: 'text',
+    dataId: 'checkout-address',
+    maxLength: 200,
+    className: 'input',
+    name: 'adress',
+    placeHolder: 'Enderço',
+  },
+  {
+    type: 'text',
+    dataId: 'checkout-number',
+    maxLength: 10,
+    className: 'input',
+    name: 'adressNum',
+    placeHolder: 'Numero',
+  },
+  {
+    type: 'text',
+    dataId: 'checkout-comp',
+    maxLength: 10,
+    className: 'input',
+    name: 'comp',
+    placeHolder: 'Complemento',
+  },
+];
+
+export default data;

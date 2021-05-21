@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import Button from '../../components/Button';
 
 class Cart extends React.Component {
   constructor(props) {
@@ -36,7 +38,12 @@ class Cart extends React.Component {
     );
     return (
       <div>
-        { cartProduct.length === 0 ? noItems : cartItems }
+        { cartProduct.length === 0 ? noItems : cartItems}
+        <Link to="/checkout" data-testid="checkout-products">
+          <Button>
+            Ir para o carrinho
+          </Button>
+        </Link>
       </div>
     );
   }
@@ -46,18 +53,6 @@ Cart.propTypes = {
   cartProduct: PropTypes.arrayOf(
     PropTypes.object,
   ).isRequired,
-  /*  location: PropTypes.shape({
-    state: PropTypes.shape({
-      item: PropTypes.arrayOf(
-        PropTypes.shape(
-          id: PropTypes.string,
-          price: PropTypes.number,
-          thumbnail: PropTypes.string,
-          title: PropTypes.string,
-        }),
-      ),
-    }),
-  }).isRequired, */
 };
 
 export default Cart;

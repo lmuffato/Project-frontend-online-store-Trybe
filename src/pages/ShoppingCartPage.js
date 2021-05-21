@@ -87,12 +87,42 @@ class ShoppingCartPage extends React.Component {
     this.setState({ carts: [] });
   }
 
+  addQ = (e) => {
+    const { carts } = this.state;
+    const itemData = Object.values(e.target).pop().data;
+    itemData.quantity += 1;
+    const indexInCart = carts.indexOf(itemData);
+    carts[indexInCart] = itemData;
+    this.setState({ carts });
+    this.saveCart();
+  }
+
+  subQ = (e) => {
+    let { carts } = this.state;
+    const itemData = Object.values(e.target).pop().data;
+    const indexInCart = carts.indexOf(itemData);
+    console.log(indexInCart);
+    if (itemData.quantity >= 2) {
+      itemData.quantity -= 1;
+      carts[indexInCart] = itemData;
+    } else {
+      carts = carts.filter((el) => el.id !== itemData.id);
+      console.log(carts);
+    }
+    this.setState({ carts });
+    this.saveCart();
+  }
+
   render() {
     const { carts } = this.state;
     return (
       <main>
         <Link to="/"> Home </Link>
-        {carts.length !== 0 ? <ShoppingCartList carts={ carts } /> : <CartEmpty />}
+        <ShoppingCartList
+          carts={ carts }
+          add={ this.addQ }
+          sub={ this.subQ }
+        />
         <button type="button" onClick={ this.clearShopCart }>
           Limpar carrinho
         </button>

@@ -4,10 +4,15 @@ import CartItem from './CartItem';
 
 class ShoppingCartList extends Component {
   render() {
-    const { carts } = this.props;
+    const { carts, add, sub } = this.props;
     return (
       <div>
-        {carts.map((product) => <CartItem product={ product } key={ product.title } />) }
+        {carts.map((product) => (<CartItem
+          product={ product }
+          key={ product.title }
+          add={ add }
+          sub={ sub }
+        />)) }
       </div>
     );
   }
@@ -15,10 +20,8 @@ class ShoppingCartList extends Component {
 
 ShoppingCartList.propTypes = {
   carts: PropTypes.arrayOf(Object),
-};
-
-ShoppingCartList.defaultProps = {
-  carts: [],
-};
+  add: PropTypes.func,
+  sub: PropTypes.func,
+}.isRequired;
 
 export default ShoppingCartList;

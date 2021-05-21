@@ -9,16 +9,6 @@ class ProductList extends Component {
     if (data !== undefined) {
       const { results } = data;
       return results.map((item) => (
-<<<<<<< HEAD
-        <Card
-          title={ item.title }
-          image={ item.thumbnail }
-          price={ item.price }
-          key={ item.id }
-          Sku={ item.id }
-          data-testid="product"
-        />
-=======
         <div key={ item.id } data-testid="product">
           <Card
             sku={ item.id }
@@ -35,7 +25,6 @@ class ProductList extends Component {
             Adicionar ao carrinho
           </button>
         </div>
->>>>>>> 35294b5e53073baca28f8edf846ed59c94f16739
       ));
     }
   };

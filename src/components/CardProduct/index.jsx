@@ -21,8 +21,13 @@ class CardProduct extends Component {
           <img className={ styles.imgProduct } src={ thumbnail } alt={ title } />
         </Link>
         <span className={ styles.priceText }>{`R$${price}`}</span>
+
         { shipping.free_shipping
-          && <span data-testid="free-shipping">Frete grátis</span> }
+          && (
+            <span className={ styles.freteFree } data-testid="free-shipping">
+              <p className={ styles.titleFrete }>Frete grátis</p>
+            </span>)}
+
         <button
           className={ styles.btnAddToCart }
           type="button"

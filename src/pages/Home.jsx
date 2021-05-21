@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { FaSearch } from 'react-icons/fa';
+import { FaSearch, FaBoxOpen } from 'react-icons/fa';
 import { RiShoppingCartFill } from 'react-icons/ri';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 import CardProduct from '../components/CardProduct';
@@ -21,6 +21,7 @@ class Home extends Component {
 
   componentDidMount() {
     this.fetchCategories();
+    // this.fetchProductsPagesAll();
   }
 
   handleChange = ({ target: { value } }) => {
@@ -43,7 +44,10 @@ class Home extends Component {
     const { onClick } = this.props;
     if (products.length === 0) {
       return (
-        <h2 className={ styles.checkedProduct }>Nenhum Produto encontrado</h2>
+        <div className={ styles.contentProductempty }>
+          <h2 className={ styles.checkedProduct }>Nenhum Produto encontrado</h2>
+          <FaBoxOpen className={ styles.boxEmpty } />
+        </div>
       );
     }
     return (
@@ -58,6 +62,11 @@ class Home extends Component {
       </section>
     );
   };
+
+  // async fetchProductsPagesAll() {
+  //   const request = await getProductsFromCategoryAndQuery('', 'oferta');
+  //   this.setState({ products: request.results });
+  // }
 
   async fetchCategories() {
     const categories = await getCategories();
@@ -80,12 +89,12 @@ class Home extends Component {
               to="/carrinho"
             >
               <RiShoppingCartFill className={ styles.iconCart } />
-              <span
+              <p
                 className={ styles.lengthCart }
                 data-testid="shopping-cart-size"
               >
                 { cartProductLength }
-              </span>
+              </p>
             </Link>
           </div>
           <div className={ styles.inputContent }>

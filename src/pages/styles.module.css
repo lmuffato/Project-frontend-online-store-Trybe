@@ -106,13 +106,22 @@
   .btnCart {
     border-radius: 5px;
     color: var(--orange-color-600);
+    position: relative;
     text-decoration: none;
-    width: 35px;
+    width: 40px;
   }
 
   .lengthCart {
-    color: var(--red-color-600);
+    border-radius: 50%;
+    color: white;
+    display: block;
+    font-size: 1rem;
+    height: 20px;
     position: absolute;
+    right: -15%;
+    text-align: center;
+    top: 54%;
+    width: 20px;
   }
 
   .iconCart {
@@ -143,13 +152,10 @@
     transition: 0.7s;
   }
 
-  .inputSearch:focus {
-    box-shadow: 0 0 1rem rgb(224 56 56 / 60%);
-  }
-
   .btnSearch {
     border: none;
     margin-top: 6px;
+    opacity: 0.77;
     position: absolute;
     right: 11%;
     width: 34px;
@@ -177,7 +183,7 @@
     background-color: var(--orange-color-600);
     border: none;
     border-radius: 50%;
-    box-shadow: 0 0 1rem rgb(0 0 0 / 60%);
+    box-shadow: 0 0 2rem rgb(224 56 56 / 60%);
     color: white;
     font-family: Poppins , sans-serif;
     font-size: 0.7rem;
@@ -191,8 +197,25 @@
 
   /* produtos da pagina */
   .checkedProduct {
+    color: var(--text-color-black-600);
     font-size: 1.2rem;
+    margin-top: 40px;
+    opacity: 0.9;
     text-align: center;
+  }
+
+  .contentProductempty {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .boxEmpty {
+    align-self: center;
+    color: var(--text-color-black-400);
+    height: 200px;
+    opacity: 0.8;
+    width: 200px;
   }
 
   .contentProducts {
@@ -211,5 +234,204 @@
   .productsItems {
     display: flex;
     flex-wrap: wrap;
+  }
+
+  /* Detalhes do produto */
+  .pageHeader {
+    background-color: rgba(255, 255, 255, 0.2);
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    position: fixed;
+    width: 100%;
+    z-index: 999;
+  }
+
+  .iconArrow {
+    color: var(--orange-color-600);
+    height: 30px;
+    width: 30px;
+  }
+
+  .iconCartDetails {
+    color: var(--orange-color-600);
+    height: 28px;
+    width: 28px;
+  }
+
+  .contCart {
+    color: var(--purple-color-600);
+    font-size: 0.85rem;
+    font-weight: 600;
+    position: absolute;
+    right: 5px;
+    top: 26px;
+  }
+
+  .contentProductDetails {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .contentImg {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .imgProduct {
+    background-size: cover;
+    overflow: scroll;
+    position: relative;
+    top: 0;
+    z-index: 1;
+  }
+
+  .titleDetails {
+    color: var(--text-color-black-400);
+    padding: 10px;
+    text-align: center;
+  }
+
+  .priceProductDetails {
+    color: var(--red-color-600);
+  }
+
+  .contentPriceFree {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    position: relative;
+  }
+
+  .titleFrete {
+    color: var(--green-color-600);
+    font-size: 0.8rem;
+    position: absolute;
+    right: 15px;
+    top: -65px;
+  }
+
+  .iconBoxFrete {
+    color: var(--green-color-600);
+    height: 30px;
+    position: absolute;
+    right: 35px;
+    top: -52px;
+    width: 30px;
+  }
+
+  .btnAddCartProduct {
+    align-self: center;
+    background-color: var(--green-color-600);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 0.8rem;
+    padding: 0.4rem;
+    width: 138px;
+  }
+
+  .btnSub {
+    align-self: center;
+    border: none;
+    color: var(--red-color-600);
+    font-size: 1.1rem;
+    height: 20px;
+    margin-left: 10px;
+    width: 20px;
+  }
+
+  .btnAdd {
+    align-self: center;
+    border: none;
+    color: var(--green-color-600);
+    font-size: 1.1rem;
+    height: 20px;
+    margin-right: 10px;
+    width: 20px;
+  }
+
+  .addQuantProductToCart {
+    align-self: center;
+    font-size: 1rem;
+    margin: 0 5px;
+  }
+
+  .quantStock {
+    color: var(--text-color-black-400);
+    font-size: 0.65rem;
+    margin-top: 5px;
+    text-align: center;
+  }
+
+  /* Formulario de avaliação */
+  .contentOpition {
+    background-color: var(--black-color-600);
+    border-radius: 35px;
+    box-shadow: 0 -5px 8px 1px rgb(153, 153, 153);
+    margin: 20px 0;
+  }
+
+  .contentFrom {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .titleOption {
+    color: var(--orange-color-600);
+    font-size: 1.5rem;
+    padding: 0.8rem;
+    text-align: center;
+  }
+
+  .inputOption {
+    border: 1px solid var(--orange-color-600);
+    border-radius: 10px;
+    font-size: 0.9rem;
+    margin: 10px auto;
+    outline: none;
+    padding: 0.5rem;
+    width: 90%;
+  }
+
+  .contentStar {
+    color: white;
+    margin: 10px auto;
+    width: 90%;
+  }
+
+  .contentTextOption {
+    border: 1px solid var(--orange-color-600);
+    border-radius: 10px;
+    font-size: 0.9rem;
+    margin: 10px auto;
+    outline: none;
+    padding: 0.5rem;
+    width: 90%;
+  }
+
+  .btnOptionSubmit {
+    align-self: center;
+    background-color: var(--green-color-600);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 0.9rem;
+    margin: 10px 0;
+    padding: 0.3rem;
+    width: 150px;
+  }
+
+  .contentComentOption {
+    color: white;
+    margin: 30px 0;
+    text-align: center;
+  }
+
+  .hrFrom {
+    margin: 10px auto;
+    width: 60%;
   }
 }

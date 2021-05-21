@@ -21,7 +21,7 @@ class Home extends Component {
 
   componentDidMount() {
     this.fetchCategories();
-    this.fetchProductsPagesAll();
+    // this.fetchProductsPagesAll();
   }
 
   handleChange = ({ target: { value } }) => {
@@ -63,10 +63,10 @@ class Home extends Component {
     );
   };
 
-  async fetchProductsPagesAll() {
-    const request = await getProductsFromCategoryAndQuery('', 'oferta');
-    this.setState({ products: request.results });
-  }
+  // async fetchProductsPagesAll() {
+  //   const request = await getProductsFromCategoryAndQuery('', 'oferta');
+  //   this.setState({ products: request.results });
+  // }
 
   async fetchCategories() {
     const categories = await getCategories();

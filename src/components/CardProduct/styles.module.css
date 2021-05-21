@@ -39,8 +39,8 @@ body {
 
   .imgProduct {
     align-self: center;
-    height: 55%;
-    width: 55%;
+    height: 50%;
+    width: 50%;
   }
 
   .btnAddToCart {
@@ -50,5 +50,9 @@ body {
     font-size: 1rem;
     overflow: hidden;
     padding: 12px;
+  }
+
+  .titleFrete {
+    display: none;
   }
 }

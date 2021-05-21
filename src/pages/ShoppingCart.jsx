@@ -1,7 +1,7 @@
 // Criação do componente
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { getAll, addToLocalStorage } from '../services/localStorage';
+import { addToLocalStorage, checkStorage } from '../services/localStorage';
 import CartCard from '../components/CartCard';
 import backArrow from '../imagens/backArrow.svg';
 import '../styles/ShoppingCart.css';
@@ -17,61 +17,57 @@ export default class ShoppingCart extends React.Component {
   }
 
   componentDidMount() {
-    this.checkStorage();
+    this.mountComponent();
   }
 
-  quantityProduct = ({ target }) => {
-    const { storageData } = this.state;
-    storageData.map((product) => {
-      if (target.name === 'add' && product.buyQuantity <= product.availableQuantity) {
-        product.buyQuantity += 1;
-        product.price = product.standardPrice * parseInt(product.buyQuantity, 10);
-        this.setState({
-        });
-        return addToLocalStorage(product);
-      }
-      if (target.name === 'sub' && product.buyQuantity > 1) {
-        product.buyQuantity -= 1;
-        product.price = product.standardPrice * parseInt(product.buyQuantity, 10);
-        this.setState({
-        });
-        return addToLocalStorage(product);
-      }
-      return addToLocalStorage(product);
-    });
-  };
+  refreshState = (newArray) => {
+    this.setState({ storageData: newArray });
+  }
 
-  deleteProduct = ({ target }) => {
-    this.checkStorage();
+  deleteProduct = (id) => {
+    this.mountComponent();
     const { storageData } = this.state;
     const newArray = storageData
-      .filter((item) => target.previousSibling.previousSibling.id !== item.title);
-    this.setState({ storageData: newArray });
+      .filter((item) => id !== item.title);
+      // console.log('TO FILTRANDO AINDA, CALMA AI');
+    console.log(newArray);
+    this.refreshState(newArray);
+    // this.setState({ storageData: newArray });
     addToLocalStorage(newArray);
+    // const storageReturn = await this.mountComponent();
+    // Não está atualizando o storageData no momento da deleção, ele só atualiza depois da próxima mudança de estado, pq?
+    console.log(storageData);
   }
 
-  checkStorage = () => {
-    const storage = getAll();
-    if (Array.isArray(storage)) {
-      return this.setState({
-        storageData: storage,
+  mountComponent = () => {
+    const storageReturn = checkStorage();
+    if (storageReturn.length > 0) {
+      this.setState({
+        storageData: storageReturn,
         array: true,
       });
     }
-    if (storage !== null) {
-      const storageArray = [storage];
-      return this.setState({
-        storageData: storageArray,
-        array: true,
-      });
-    }
+    console.log(this.state);
+    return storageReturn;
   }
 
   render() {
     const { storageData, array } = this.state;
     if (array === false) {
       return (
-        <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
+        <div>
+          <Link
+            to="/"
+            className="backArrow"
+          >
+            <img
+              src={ backArrow }
+              alt="Seta de voltar"
+              className="backArrow-image"
+            />
+          </Link>
+          <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
+        </div>
       );
     }
 
@@ -91,6 +87,8 @@ export default class ShoppingCart extends React.Component {
           <p
             className="shopping-cart-product-quantity"
           >
+            {/* Para o requisito 13 é melhor pegar o length do
+            localStorage e juntar ele com o carrinho */}
             { 'Quantidade de items no carrinho: ' }
             {storageData.length}
           </p>

@@ -1,6 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import Input from '../Input';
 import data from './data';
+import './style.css';
 
 class Form extends React.Component {
   constructor() {
@@ -34,17 +37,22 @@ class Form extends React.Component {
 
   validateField = () => {
     const { formInfos: {
-      fullName, email, cpf, phone, cep, adress, payMode,
+      fullName, email, cpf, phone, cep, adress, payMode, adressNum,
     } } = this.state;
 
     const fails = {};
+    const maxLengthCpf = 11;
+    const maxLengthCep = 8;
+    const maxLengthPhone = 11;
+
     if (fullName.length === 0) fails.fullName = true;
     if (!email.includes('@')) fails.email = true;
-    if (cpf.length !== 11) fails.cpf = true;
-    if (phone.length !== 11) fails.phone = true;
-    if (cep.length !== 8) fails.cep = true;
+    if (cpf.length !== maxLengthCpf) fails.cpf = true;
+    if (phone.length !== maxLengthPhone) fails.phone = true;
+    if (cep.length !== maxLengthCep) fails.cep = true;
     if (!adress) fails.adress = true;
     if (!payMode) fails.payMode = true;
+    if (!adressNum) fails.adressNum = true;
 
     this.setState({
       error: fails,
@@ -52,14 +60,19 @@ class Form extends React.Component {
   }
 
   resetState = (event) => {
+    const { cleanCart, endShopping } = this.props;
     event.preventDefault();
     this.validateField();
     const { error } = this.state;
-    if (!error) this.setState({ formInfos: {}, error: {} });
+    if (!error) {
+      endShopping();
+      this.setState({ formInfos: {}, error: {} });
+      cleanCart();
+    }
   }
 
   render() {
-    const { formInfos } = this.state;
+    const { formInfos, error } = this.state;
     const payModes = ['Boleto', 'Visa', 'Mastercard', 'Elo'];
 
     return (
@@ -72,7 +85,7 @@ class Form extends React.Component {
               type={ type }
               dataId={ dataId }
               maxLength={ maxLength }
-              className={ className }
+              className={ error[name] ? 'notValidated' : className }
               name={ name }
               placeHolder={ placeHolder }
               onChange={ this.handleChange }
@@ -102,5 +115,10 @@ class Form extends React.Component {
     );
   }
 }
+
+Form.propTypes = {
+  cleanCart: PropTypes.func,
+  endShopping: PropTypes.func,
+}.isRequired;
 
 export default Form;

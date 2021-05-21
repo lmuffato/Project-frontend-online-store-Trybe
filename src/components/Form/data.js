@@ -16,7 +16,7 @@ const data = [
     placeHolder: 'Email',
   },
   {
-    type: 'number',
+    type: 'text',
     dataId: 'checkout-cpf',
     maxLength: 11,
     className: 'input',
@@ -24,7 +24,7 @@ const data = [
     placeHolder: 'CPF (Apenas os numeros)',
   },
   {
-    type: 'number',
+    type: 'text',
     dataId: 'checkout-phone',
     maxLength: 11,
     className: 'input',
@@ -32,7 +32,7 @@ const data = [
     placeHolder: 'Telefone/Celular',
   },
   {
-    type: 'number',
+    type: 'text',
     dataId: 'checkout-cep',
     maxLength: 8,
     className: 'input',
@@ -48,7 +48,7 @@ const data = [
     placeHolder: 'Enderço',
   },
   {
-    type: 'number',
+    type: 'text',
     dataId: 'checkout-number',
     maxLength: 10,
     className: 'input',

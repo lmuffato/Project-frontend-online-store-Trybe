@@ -12,6 +12,7 @@ class Routes extends React.Component {
     this.state = {
       cartProduct: [],
       totalPrice: 0,
+      stillShopping: true,
     };
   }
 
@@ -19,6 +20,23 @@ class Routes extends React.Component {
     const { cartProduct } = this.state;
     this.setState({
       cartProduct: [...cartProduct, obj],
+    });
+  }
+
+  resetState = () => {
+    const { stillShopping } = this.state;
+    if (!stillShopping) {
+      this.setState({
+        cartProduct: [],
+        totalPrice: 0,
+        stillShopping: true,
+      });
+    }
+  }
+
+  endShopping = () => {
+    this.setState({
+      stillShopping: false,
     });
   }
 
@@ -39,6 +57,8 @@ class Routes extends React.Component {
                 { ...props }
                 cardProducts={ cartProduct }
                 totalPrice={ totalPrice }
+                cleanCart={ this.resetState }
+                endShopping={ this.endShopping }
               />) }
           />
           <Route

@@ -60,6 +60,10 @@ h3 {
   width: 1200px;
 }
 
+.email-star {
+  display: flex;
+}
+
 .email-input {
   height: 24px;
   margin-bottom: 20px;
@@ -67,8 +71,13 @@ h3 {
   width: 250px;
 }
 
-.icon {
-  margin-right: 10px;
+.star-rating {
+  display: none;
+}
+
+.star {
+  cursor: pointer;
+  transition: color 200ms;
 }
 
 .text-area {

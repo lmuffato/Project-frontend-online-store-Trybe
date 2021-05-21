@@ -9,7 +9,6 @@ import free from '../imagens/free.png';
 export default class ProductCard extends React.Component {
   render() {
     const { item } = this.props;
-    console.log(item.shipping.free_shipping);
     return (
       <div className="product-box">
         <Link

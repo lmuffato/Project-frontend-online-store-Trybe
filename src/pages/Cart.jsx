@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 
 import { arrayOf, shape, string, number, func } from 'prop-types';
 
+import { TiArrowBack } from 'react-icons/ti';
+import { MdRemoveShoppingCart } from 'react-icons/md';
 import CartItem from '../components/CartItem';
 
 import { changePriceToNumber } from '../utils/functions';
@@ -51,7 +53,13 @@ class Cart extends Component {
 
   renderCartList = () => {
     const { cartList, changeQuantProductLength } = this.props;
-    const cartString = 'Seu carrinho está vazio';
+    const cartString = (
+      <div className={ styles.EmptyCartContainer }>
+        <p>Seu carrinho está vazio</p>
+        <MdRemoveShoppingCart />
+      </div>
+    );
+
     return cartList.length > 0
       ? cartList
         .map((product, index) => (
@@ -67,24 +75,31 @@ class Cart extends Component {
 
   render() {
     const { totalPrices, cartList } = this.state;
-
     const propsToCheckout = {
       pathname: '/checkout',
       state: { cartList, totalPrices },
     };
-
     const totalPriceMessage = totalPrices === 0
       ? ''
-      : `Valor total R$${totalPrices.toFixed(2)}`;
+      : `Total: R$${totalPrices.toFixed(2)}`;
 
     return (
       <section
         className={ styles.CartItemsContainer }
         data-testid="shopping-cart-empty-message"
       >
-        <button type="button"><Link to="/">Home</Link></button>
+        <header>
+          <Link to="/">
+            <TiArrowBack />
+          </Link>
+          <h1>Carrinho</h1>
+        </header>
 
-        { this.renderCartList() }
+        <main>
+          { this.renderCartList() }
+        </main>
+
+        <hr />
 
         <p>{totalPriceMessage}</p>
 
@@ -93,6 +108,7 @@ class Cart extends Component {
             type="button"
             data-testid="checkout-products"
             className={ styles.FinishButton }
+            disabled={ cartList.length === 0 }
           >
             Finalizar compra
           </button>

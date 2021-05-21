@@ -72,6 +72,7 @@ class CartItem extends Component {
                 onClick={ this.changeProductQuantify }
                 data-testid="product-decrease-quantity"
                 disabled={ quant === 1 }
+                style={ { color: 'var(--red-color-600)' } }
               >
                 -
               </button>
@@ -84,6 +85,7 @@ class CartItem extends Component {
                 type="button"
                 onClick={ this.changeProductQuantify }
                 data-testid="product-increase-quantity"
+                style={ { color: 'var(--green-color-600)' } }
               >
                 +
               </button>

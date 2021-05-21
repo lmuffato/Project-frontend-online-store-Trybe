@@ -1,20 +1,83 @@
+/* Container da lista de produtos no carrinho */
 .CartItemsContainer {
-  padding: 2rem;
+  align-items: center;
   display: flex;
   flex-flow: column nowrap;
+  gap: 1.5rem;
+  padding: 0 2rem 2rem;
+  width: 100%;
+}
+
+/* Cabeçalho */
+.CartItemsContainer > header {
   align-items: center;
+  background-color: transparent;
+  display: flex;
+  font-size: 1.6rem;
+  justify-content: center;
+  padding: 0.5rem;
+  width: 100vw;
+}
+
+.CartItemsContainer > header > a {
+  color: var(--orange-color-600);
+  left: 0;
+  margin: 0.5rem 0 0 0.5rem;
+  position: absolute;
+}
+
+.CartItemsContainer > header > h1 {
+  color: var(--orange-color-600);
+  font-size: 1.6rem;
+}
+
+/* Produtos */
+.CartItemsContainer > main {
+  display: flex;
+  flex-flow: column nowrap;
   gap: 1rem;
 }
 
+.EmptyCartContainer {
+  align-items: center;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 1.4rem;
+}
+
+.EmptyCartContainer > p {
+  font-size: 1.2rem;
+}
+
+.EmptyCartContainer > svg {
+  color: var(--text-color-black-400);
+  font-size: 8rem;
+  opacity: 20%;
+}
+
+/* Valor total e botão de finalizar */
+.CartItemsContainer > hr {
+  opacity: 40%;
+  width: 80%;
+}
+
+.CartItemsContainer > p {
+  font-size: 1.45rem;
+}
+
 .CartItemsContainer > a > button {
-  background-color: var(--red-color-600);
+  background-color: var(--green-color-600);
   border: none;
-  outline: none;
-  font-size: 1.1rem;
-  padding: 0.5rem 0.8rem;
   border-radius: 12px;
-  font-family: Poppins, sans-serif;
   color: white;
+  font-family: Poppins , sans-serif;
+  font-size: 1.1rem;
+  outline: none;
+  padding: 0.5rem 0.8rem;
+}
+
+.CartItemsContainer > a > button:disabled {
+  opacity: 50%;
 }
 
 @media screen and ( max-width : 768px ) {

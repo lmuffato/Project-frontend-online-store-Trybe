@@ -27,7 +27,7 @@ class ListagemProdutos extends Component {
   }
 
   handleSize() {
-    const prevSize = parseFloat(localStorage.getItem('cartSize'));
+    const prevSize = parseFloat(sessionStorage.getItem('cartSize'));
     if (prevSize) {
       this.setState({ catSize: prevSize });
     }
@@ -90,7 +90,7 @@ class ListagemProdutos extends Component {
       }));
     }
     const { catSize } = this.state;
-    localStorage.setItem('cartSize', catSize + 1);
+    sessionStorage.setItem('cartSize', catSize + 1);
   }
 
   render() {

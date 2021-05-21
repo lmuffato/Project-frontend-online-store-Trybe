@@ -5,7 +5,7 @@ class FreeShipping extends Component {
   render() {
     return (
       <div data-testid="free-shipping">
-        <MdLocalShipping width="25" />
+        <MdLocalShipping size={ 25 } />
         <p>Frete grátis</p>
       </div>
     );

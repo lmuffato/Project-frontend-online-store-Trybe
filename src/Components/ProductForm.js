@@ -8,6 +8,7 @@ class ProductForm extends React.Component {
       email: '',
       review: '',
       rating: 0,
+      hover: 0,
     };
   }
 

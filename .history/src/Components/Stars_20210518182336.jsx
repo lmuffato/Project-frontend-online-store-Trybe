@@ -1,5 +1,5 @@
-import React from 'react';
 import ReactStars from 'react-stars';
+import React from 'react';
 
 const ratingChanged = (newRating) => {
   console.log(newRating);

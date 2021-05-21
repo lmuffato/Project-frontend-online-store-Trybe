@@ -30,6 +30,7 @@ class App extends Component {
                 { ...props }
                 products={ productsCart }
                 quantity={ quantityCart }
+                size={ productsCart.length }
               />
             ) }
           />
@@ -45,7 +46,6 @@ class App extends Component {
           <Route
             path="/details/:id"
             render={ (props) => (<Details
-              addCart={ this.handleAddToCart }
               { ...props }
             />) }
           />

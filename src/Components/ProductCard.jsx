@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 class ProductCard extends Component {
   render() {
-    const { product, title, price, imagePath, id, onClick } = this.props;
+    const { quantityOnCart, product, title, price, imagePath, id, onClick } = this.props;
     const myObj = {
       title,
       id,
@@ -21,7 +21,9 @@ class ProductCard extends Component {
             pathname: `/details/${id}`,
             search: '',
             hash: '',
-            state: { productDetail: product },
+            state: { productDetail: product,
+              cartSize: quantityOnCart,
+            },
           } }
           data-testid="product-detail-link"
         >
@@ -41,6 +43,7 @@ class ProductCard extends Component {
 }
 
 ProductCard.propTypes = {
+  quantityOnCart: PropTypes.number.isRequired,
   id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   imagePath: PropTypes.string.isRequired,

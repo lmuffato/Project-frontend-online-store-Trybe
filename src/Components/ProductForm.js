@@ -11,9 +11,14 @@ class ProductForm extends React.Component {
     };
   }
 
+  handleBtn = () => {
+    const { review, email } = this.state;
+    console.log(review, email);
+  }
+
   render() {
-    console.log(this.props);
-    const { rating } = this.state;
+    const { rating, hover } = this.state;
+    const maxStars = 5;
     return (
 
       <form className="form">
@@ -33,11 +38,11 @@ class ProductForm extends React.Component {
           />
         </label>
 
-        { [...Array(5)].map((star, index) => {
+        { [...Array(maxStars)].map((star, index) => {
           const ratingValue = index + 1;
 
           return (
-            <label>
+            <label key={ index } htmlFor="rating">
               <input
                 className="input-radio"
                 type="radio"
@@ -46,8 +51,14 @@ class ProductForm extends React.Component {
                 value={ ratingValue }
                 onClick={ () => this.setState({ rating: ratingValue }) }
               />
-              <FaStar className="star" size={ 20 } 
-              color={ ratingValue <= rating ? '#ffc107' : '#e4e5e9' } />
+              <FaStar
+                className="star"
+                size={ 20 }
+                color={ ratingValue <= (rating || hover) ? '#ffc107' : '#e4e5e9' }
+                onClick={ () => this.setState({ rating: ratingValue }) }
+                onMouseEnter={ () => this.setState({ hover: ratingValue }) }
+                onMouseLeve={ () => this.setState({ hover: 0 }) }
+              />
             </label>
           );
         })}
@@ -66,7 +77,14 @@ class ProductForm extends React.Component {
         </label>
         {' '}
         <br />
-        <button type="submit" className="btn-form"> Avaliar </button>
+        <button
+          type="button"
+          className="btn-form"
+          onClick={ this.handleBtn }
+        >
+          {' '}
+          Avaliar
+        </button>
       </form>
     );
   }

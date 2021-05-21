@@ -8,10 +8,10 @@ class Home extends Component {
   render() {
     return (
       <div data-testid="home-initial-message">
-        <Header />
         <Link to="/shopcart" Component={ ShopCart } data-testid="shopping-cart-button">
           <ShopCartButton />
         </Link>
+        <Header />
       </div>
     );
   }

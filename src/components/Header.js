@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { getProductsFromCategoryAndQuery } from '../services/api';
 import ProductList from './ProductList';
+import { getProductsFromCategoryAndQuery } from '../services/api';
 import SearchBar from './SearchBar';
 import ListCategories from './ListCategories';
 
@@ -43,12 +43,12 @@ class Header extends Component {
     const { dataApi, query, request } = this.state;
     return (
       <div>
-        <ListCategories fetchProducts={ this.fetchProducts } />
         <SearchBar
           query={ query }
           handleChange={ this.handleChange }
           handleClick={ this.fetchProducts }
         />
+        <ListCategories fetchProducts={ this.fetchProducts } />
         <ProductList dataApi={ dataApi } request={ request } />
       </div>
     );

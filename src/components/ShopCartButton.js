@@ -5,7 +5,7 @@ class ShopCartButton extends React.Component {
   render() {
     return (
       <button type="button" id="button" onClick={ ShopCart }>
-        Teste
+        Carrinho
       </button>
     );
   }

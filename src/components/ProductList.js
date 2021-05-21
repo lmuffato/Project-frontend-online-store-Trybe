@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import AddButton from './AddButton';
 
 class ProductList extends Component {
   constructor() {
@@ -23,8 +24,9 @@ class ProductList extends Component {
             } }
           >
             <img src={ data.thumbnail } alt={ `foto ${data.title}` } width="200" />
-            <p>{ data.price }</p>
+            <p>{`R$${parseFloat(data.price).toFixed(2)}`}</p>
           </Link>
+          <AddButton data={ data } />
         </li>
       </div>
     );

@@ -1,30 +1,48 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 import CartProduct from '../components/CartProduct';
 
 export default class ShoppingCart extends Component {
   constructor(props) {
     super(props);
 
-    const {
-      location: { cartItems = {} },
-    } = this.props;
+    // const {
+    //   location: { cartItems = {} },
+    // } = this.props;
 
     this.state = {
-      cartItems,
+      // cartItems,
+      total: 0,
     };
   }
 
-  deleteItem = (event) => {
+  increaseTotal = (value) => {
+    this.setState(({ total }) => ({
+      total: total + value,
+    }));
+  }
+
+  decreaseTotal = (value) => {
+    this.setState(({ total }) => ({
+      total: total - value,
+    }));
+  }
+
+  deleteItem = (event, value) => {
     const { name } = event.target;
-    const { cartItems } = this.state;
+    const { cartItems } = this.props;
+
+    this.decreaseTotal(value);
 
     delete cartItems[name];
     this.setState({ cartItems });
   }
 
   validateCart = () => {
-    const { cartItems } = this.state;
+    const { total } = this.state;
+    const { cartItems } = this.props;
 
     if (Object.keys(cartItems).length) {
       return Object.entries(cartItems)
@@ -32,7 +50,10 @@ export default class ShoppingCart extends Component {
           key={ i }
           product={ product[1] }
           deleteItem={ this.deleteItem }
-          cart={ cartItems }
+          cartItems={ cartItems }
+          increaseTotal={ this.increaseTotal }
+          decreaseTotal={ this.decreaseTotal }
+          total={ total }
         />));
     }
 
@@ -42,16 +63,23 @@ export default class ShoppingCart extends Component {
   };
 
   render() {
-    return <section>{this.validateCart()}</section>;
+    const { cartItems } = this.state;
+
+    return (
+      <section>
+        {this.validateCart()}
+        <Link
+          to={ { pathname: '/checkout', cartItems } }
+          data-testid="checkout-products"
+        >
+          <Button variant="primary">Finalizar compra</Button>
+        </Link>
+      </section>
+    );
   }
 }
 
 ShoppingCart.propTypes = {
-  location: PropTypes.shape({
-    cartItems: PropTypes.shape({
-      title: PropTypes.string,
-      price: PropTypes.number,
-      amount: PropTypes.number,
-    }),
+  cartItems: PropTypes.shape({
   }).isRequired,
 };

@@ -5,7 +5,14 @@ import { Link } from 'react-router-dom';
 export default class Product extends Component {
   constructor(props) {
     super(props);
-    this.state = { amount: 1 };
+
+    const {
+      product: { id },
+      cartItems,
+    } = this.props;
+    this.state = {
+      amount: cartItems[id]?.amount || 0,
+    };
   }
 
   handleClick = () => {
@@ -17,19 +24,20 @@ export default class Product extends Component {
       thumbnail,
       available_quantity: availableQuantity,
     } = product;
-    const { amount } = this.state;
 
     this.setState((prevState) => ({
       amount: prevState.amount + 1,
-    }));
-
-    addToCart(id, {
-      title,
-      price,
-      amount,
-      id,
-      thumbnail,
-      availableQuantity,
+    }), () => {
+      const { amount } = this.state;
+      addToCart(id, {
+        title,
+        thumbnail,
+        price,
+        amount,
+        id,
+        totalPrice: amount * price,
+        availableQuantity,
+      });
     });
   };
 
@@ -86,4 +94,5 @@ Product.propTypes = {
     }).isRequired,
   }).isRequired,
   addToCart: PropTypes.func.isRequired,
+  cartItems: PropTypes.shape.isRequired,
 };

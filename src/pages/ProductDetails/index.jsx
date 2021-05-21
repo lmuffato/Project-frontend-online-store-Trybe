@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import Rating from '../../components/Rating';
 
 class ProductDetails extends React.Component {
   render() {
     const { location: { state: { title, price, thumbnail, attributes } } } = this.props;
+    const { addToCart } = this.props;
 
     return (
       <div>
@@ -20,6 +22,16 @@ class ProductDetails extends React.Component {
               </li>))}
           </ul>
         </div>
+        <button
+          type="button"
+          data-testid="product-detail-add-to-cart"
+          onClick={ () => addToCart({ title, price, thumbnail, id: '' }) }
+        >
+          Adionar ao carrinho
+        </button>
+        <Link to="/Cart" data-testid="shopping-cart-button">
+          <button type="button">Cart</button>
+        </Link>
         <div id="evaluate-container">
           <input type="email" placeholder="mail@mail.com" />
           <Rating />

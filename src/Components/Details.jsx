@@ -29,6 +29,8 @@ class Details extends Component {
       const sum = 1;
       return { quantityItems: (prevState.quantityItems + sum) };
     });
+    const { quantityItems } = this.state;
+    sessionStorage.setItem('cartSize', quantityItems + 1);
   }
 
   handleQuantity = () => {

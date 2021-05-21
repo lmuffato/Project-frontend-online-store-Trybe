@@ -20,8 +20,10 @@ export default class EvaluetionForm extends Component {
   }
 
   handleStar(value) {
-    console.log("ola mundo");
-    this.setState({ stars: value });
+    console.log('index', value);
+    if (value) {
+      this.setState({ stars: value });
+    }
   }
 
   handleChange(event) {
@@ -49,7 +51,7 @@ export default class EvaluetionForm extends Component {
             onChange={this.handleChange}
           />
           <input onClick={functionValue} value="Avaliar" type="submit" />
-          <EvaluationStar onChange={(value) => this.handleStar(value)} />
+          <EvaluationStar onChange={ this.handleStar } />
         </form>
         <div>
           <p>{evaluationText}</p>

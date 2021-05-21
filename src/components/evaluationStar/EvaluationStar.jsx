@@ -33,7 +33,10 @@ export default class EvaluationStar extends Component {
   }
 
   onSaveRating(index) {
+    const { onChange } = this.props;
     this.setState({ rating: index });
+    console.log(index);
+    onChange(index);
   }
 
   functionArr() {
@@ -47,12 +50,10 @@ export default class EvaluationStar extends Component {
   }
 
   render() {
-    const { onChange } = this.props;
     const { rating, hoverRating } = this.state;
     const array = this.functionArr();
     return (
       <div className="box flex">
-        {() => onChange(rating) }
         {array.map((index) => (
           <Icon
             key={ index }

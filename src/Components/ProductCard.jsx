@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
+import FreeShipping from './FreeShipping';
+
 class ProductCard extends Component {
   render() {
     const { availableQuantity, quantityOnCart, product,
-      title, price, imagePath, id, onClick } = this.props;
+      title, price, imagePath, id, freeShipping, onClick } = this.props;
     const myObj = {
       title,
       id,
@@ -17,6 +19,7 @@ class ProductCard extends Component {
       <div data-testid="product">
         <h1>{title}</h1>
         <img src={ imagePath } alt="Imagem do produto" />
+        {freeShipping && <FreeShipping />}
         <span>{price}</span>
         <Link
           to={ {
@@ -53,6 +56,7 @@ ProductCard.propTypes = {
   price: PropTypes.number.isRequired,
   product: PropTypes.objectOf(PropTypes.string).isRequired,
   onClick: PropTypes.func.isRequired,
+  freeShipping: PropTypes.bool.isRequired,
 };
 
 export default ProductCard;

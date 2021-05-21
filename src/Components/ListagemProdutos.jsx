@@ -143,6 +143,7 @@ class ListagemProdutos extends Component {
             <ProductCard
               quantityOnCart={ catSize }
               product={ product }
+              freeShipping={ product.shipping.free_shipping }
               id={ product.id }
               key={ product.id }
               title={ product.title }

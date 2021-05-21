@@ -197,7 +197,7 @@ class ShoppingCart extends React.Component {
             <span>{`R$${total}`}</span>
             <Link
               to={ {
-                pathname: '/cart/checkout',
+                pathname: '/cart/checkout', // confirmar se está usando esse "Rota do Location"
                 state: { total },
               } }
             >

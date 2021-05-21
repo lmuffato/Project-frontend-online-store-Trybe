@@ -183,6 +183,7 @@ class App extends React.Component {
             path="/cart/checkout"
             component={ Checkout }
           >
+            {/* <Checkout cart={ cart } /> */}
             <PurchaseSummary cart={ cart } />
           </Route>
           <Route path="/cart" exact>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaStar } from 'react-icons/fa';
+// Baseado em https://www.youtube.com/watch?v=eDw46GYAIDQ
 
 class StarRating extends React.Component {
   constructor(props) {

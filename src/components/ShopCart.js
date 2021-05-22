@@ -16,8 +16,7 @@ class ShopCart extends React.Component {
           />
           <p>{`R$${parseFloat(product[0].price).toFixed(2)}`}</p>
           <p data-testid="shopping-cart-product-quantity">
-            Quantidade:
-            {product.length}
+            {`Quantidade: ${product.length}`}
           </p>
         </li>
       ))

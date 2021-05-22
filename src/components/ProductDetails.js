@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import DetailsAddButton from './DetailsAddButton';
 
 class ProductDetails extends Component {
   constructor(props) {
@@ -34,11 +35,14 @@ class ProductDetails extends Component {
       <div>
         <h1 data-testid="product-detail-name">{ title }</h1>
         <img src={ thumbnail } alt={ `foto ${title}` } width="400" />
-        <p>{`R$${parseFloat(price).toFixed(2)}`}</p>
+        <p>
+          {`R$${parseFloat(price).toFixed(2)}`}
+        </p>
         <p>{product.plain_text}</p>
         <button type="button">
           <Link to="/shopcart">Carrinho</Link>
         </button>
+        <DetailsAddButton data={ data.data } />
       </div>
     );
   }

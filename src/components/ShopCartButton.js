@@ -4,7 +4,11 @@ import ShopCart from './ShopCart';
 class ShopCartButton extends React.Component {
   render() {
     return (
-      <button type="button" id="button" onClick={ ShopCart }>
+      <button
+        type="button"
+        id="button"
+        onClick={ ShopCart }
+      >
         Carrinho
       </button>
     );

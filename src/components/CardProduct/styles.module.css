@@ -58,4 +58,8 @@ body {
   .titleFrete {
     display: none;
   }
+
+  .stockProduct {
+    display: none;
+  }
 }

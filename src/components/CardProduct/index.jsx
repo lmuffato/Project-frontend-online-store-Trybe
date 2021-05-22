@@ -9,6 +9,7 @@ class CardProduct extends Component {
   render() {
     const { product, onClick } = this.props;
     const { title, thumbnail, price, id, shipping } = product;
+    const { available_quantity: availableQuantity } = product;
 
     return (
       <section className={ styles.content } data-testid="product">
@@ -19,6 +20,7 @@ class CardProduct extends Component {
         >
           <span className={ styles.titleProduct }>{ title }</span>
           <img className={ styles.imgProduct } src={ thumbnail } alt={ title } />
+          <span className={ styles.stockProduct }>{ availableQuantity }</span>
         </Link>
         <span className={ styles.priceText }>{`R$${price}`}</span>
 
@@ -48,6 +50,7 @@ CardProduct.propTypes = {
     thumbnail: PropTypes.string,
     price: PropTypes.number,
     id: PropTypes.string,
+    available_quantity: PropTypes.number,
     shipping: PropTypes.shape({
       free_shipping: PropTypes.bool,
     }),

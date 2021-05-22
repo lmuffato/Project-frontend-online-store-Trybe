@@ -7,13 +7,13 @@ class CartItem extends Component {
   constructor(props) {
     super(props);
 
-    const { quant, price, title, img } = props.product;
-
+    const { quant, price, title, img, stock } = props.product;
     this.state = {
       quant,
       price,
       title,
       img,
+      stock,
     };
   }
 
@@ -52,7 +52,7 @@ class CartItem extends Component {
   };
 
   render() {
-    const { quant, price, title, img } = this.state;
+    const { quant, price, title, img, stock } = this.state;
 
     return (
       <section className={ styles.CartItemContainer }>
@@ -86,6 +86,7 @@ class CartItem extends Component {
                 onClick={ this.changeProductQuantify }
                 data-testid="product-increase-quantity"
                 style={ { color: 'var(--green-color-600)' } }
+                disabled={ quant === stock }
               >
                 +
               </button>

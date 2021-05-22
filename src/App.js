@@ -38,6 +38,7 @@ class App extends Component {
         title: product[0].innerHTML,
         quant: 1,
         price: elementos[1].innerHTML,
+        stock: parseInt(product[2].innerHTML, 10),
       }],
     }));
     this.updateLocalStorage();
@@ -50,6 +51,7 @@ class App extends Component {
         title: product.title,
         quant: 1,
         price: product.price.toFixed(2),
+        stock: product.available_quantity,
       }],
     }));
     this.updateLocalStorage();

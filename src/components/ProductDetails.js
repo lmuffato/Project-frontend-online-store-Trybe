@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import ProductEvaluation from './ProductEvaluation';
 
 class ProductDetails extends Component {
   constructor(props) {
@@ -31,15 +32,20 @@ class ProductDetails extends Component {
     const { data, product } = this.state;
     const { data: { title, price, thumbnail } } = data;
     return (
-      <div>
-        <h1 data-testid="product-detail-name">{ title }</h1>
-        <img src={ thumbnail } alt={ `foto ${title}` } width="400" />
-        <p>{`R$${parseFloat(price).toFixed(2)}`}</p>
-        <p>{product.plain_text}</p>
-        <button type="button">
-          <Link to="/shopcart">Carrinho</Link>
-        </button>
-      </div>
+      <section>
+        <div className="product-details">
+          <h1 data-testid="product-detail-name">{ title }</h1>
+          <img src={ thumbnail } alt={ `foto ${title}` } width="400" />
+          <p>{`R$${parseFloat(price).toFixed(2)}`}</p>
+          <p>{product.plain_text}</p>
+          <button type="button">
+            <Link to="/shopcart">Carrinho</Link>
+          </button>
+        </div>
+        <div className="product-evaluation">
+          <ProductEvaluation />
+        </div>
+      </section>
     );
   }
 }

@@ -78,7 +78,7 @@ class ProductDetails extends Component {
             <button
               type="button"
               className={ styles.btnAddCartProduct }
-              onClick={ () => handleDetailsToCart(product) }
+              onClick={ () => handleDetailsToCart(product, quant) }
               data-testid="product-detail-add-to-cart"
             >
               Adicionar ao Carrinho

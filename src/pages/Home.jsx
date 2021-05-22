@@ -118,7 +118,6 @@ class Home extends Component {
               <FaSearch className={ styles.iconSearch } />
             </button>
           </div>
-
         </header>
         <h2 className={ styles.title }>Categorias</h2>
         <ul className={ styles.categoryList }>

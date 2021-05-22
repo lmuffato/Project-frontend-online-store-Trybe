@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import CartItem from './CartItem';
 
 class ShoppingCartList extends Component {
@@ -8,6 +9,13 @@ class ShoppingCartList extends Component {
     return (
       <div>
         {carts.map((product) => <CartItem product={ product } key={ product.title } />) }
+        <button type="button" data-testid="checkout-products">
+          <Link
+            to={ { pathname: '/Checkout', state: { carts } } }
+          >
+            Checkout
+          </Link>
+        </button>
       </div>
     );
   }

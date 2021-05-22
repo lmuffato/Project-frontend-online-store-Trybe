@@ -6,18 +6,12 @@ import PaymentMethods from '../components/PaymentMethods';
 
 class Checkout extends Component {
   render() {
-    const { ShopCartItems } = this.props;
+    const { location: { state: { carts } } } = this.props;
     return (
       <main>
-        <div>
-          <CheckoutProductList items={ ShopCartItems } />
-        </div>
-        <div>
-          <BuyerInfoForm />
-        </div>
-        <div>
-          <PaymentMethods />
-        </div>
+        <CheckoutProductList items={ carts } />
+        <BuyerInfoForm />
+        <PaymentMethods />
       </main>
     );
   }

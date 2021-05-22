@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { saveProductsOnStorage } from '../services/localStorage';
 
-export default class AddButton extends Component {
+export default class DetailsAddButton extends Component {
   handleClick = () => {
     const { data } = this.props;
     saveProductsOnStorage(data);
@@ -10,10 +10,10 @@ export default class AddButton extends Component {
 
   render() {
     return (
-      <div>
+      <div data-testid="shopping-cart-button">
         <button
           type="button"
-          data-testid="product-add-to-cart"
+          data-testid="product-detail-add-to-cart"
           onClick={ () => this.handleClick() }
         >
           Adicione ao carrinho
@@ -23,6 +23,6 @@ export default class AddButton extends Component {
   }
 }
 
-AddButton.propTypes = {
+DetailsAddButton.propTypes = {
   data: PropTypes.arrayOf.isRequired,
 };

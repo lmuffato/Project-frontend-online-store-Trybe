@@ -45,6 +45,7 @@ class FinalizingPurchase extends Component {
   render() {
     const storageCheck = () => getAll();
     const storage = storageCheck();
+    console.log(storage);
     const {
       nome, email, cpf, telefone, cep, endereco, cidade, estado, erro, shouldRedirect,
     } = this.state;
@@ -65,6 +66,10 @@ class FinalizingPurchase extends Component {
             <div key={ item.id }>
               <img src={ item.thumbnail } alt={ item.title } />
               <p>{item.title}</p>
+              <p>
+                Quantidade:
+                { item.buyQuantity }
+              </p>
               <p>
                 Preço :
                 {item.price * item.buyQuantity}

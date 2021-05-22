@@ -11,7 +11,7 @@ import { changePriceToNumber } from '../utils/functions';
 
 import styles from './styles.module.css';
 
-function Cart(props) {
+export default function Cart(props) {
   const { cartList, changeQuantProductLength } = props;
 
   const prices = cartList
@@ -121,5 +121,3 @@ Cart.propTypes = {
   )).isRequired,
   changeQuantProductLength: func.isRequired,
 };
-
-export default Cart;

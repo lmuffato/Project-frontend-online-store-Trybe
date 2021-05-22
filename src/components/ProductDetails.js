@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import AddButton from './AddButton';
 
 class ProductDetails extends Component {
   constructor(props) {
@@ -31,14 +32,19 @@ class ProductDetails extends Component {
     const { data, product } = this.state;
     const { data: { title, price, thumbnail } } = data;
     return (
-      <div>
-        <h1 data-testid="product-detail-name">{ title }</h1>
+      <div data-testid="product-detail-add-to-cart">
+        <div data-testid="shopping-cart-product-name">
+          <h1 data-testid="product-detail-name">{ title }</h1>
+        </div>
         <img src={ thumbnail } alt={ `foto ${title}` } width="400" />
-        <p>{`R$${parseFloat(price).toFixed(2)}`}</p>
+        <p>
+          {`R$${parseFloat(price).toFixed(2)}`}
+        </p>
         <p>{product.plain_text}</p>
-        <button type="button">
+        <button type="button" data-testid="shopping-cart-button">
           <Link to="/shopcart">Carrinho</Link>
         </button>
+        <AddButton data={ data.data } />
       </div>
     );
   }

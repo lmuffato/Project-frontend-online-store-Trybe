@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 class ShopCartItem extends React.Component {
   render() {
     const { product, quantity } = this.props;
-    
     const { title, thumbnail, price } = product;
     return (
       <li>

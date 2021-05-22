@@ -103,6 +103,9 @@ export default class ShoppingCart extends React.Component {
               />
             ))
           }
+          <Link to="/checkout">
+            <button type="button" data-testid="checkout-products">Comprar</button>
+          </Link>
         </div>
       </div>
     );

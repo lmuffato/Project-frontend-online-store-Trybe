@@ -1,4 +1,4 @@
-import React, { Component, useImperativeHandle } from 'react';
+import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { getAll } from '../services/localStorage';
 
@@ -11,10 +11,10 @@ class FinalizingPurchase extends Component {
       email: '',
       cpf: '',
       telefone: '',
+      cep: '',
       endereco: '',
       cidade: '',
       estado: '',
-      payment: '',
       erro: false,
       shouldRedirect: false,
     };
@@ -26,7 +26,8 @@ class FinalizingPurchase extends Component {
 
   handleClick=() => {
     const data = this.state;
-    arrayData = data.Object.values();
+    console.log(data);
+    const arrayData = Object.values(data);
 
     const flag = arrayData.some((item) => item !== '');
     if (flag) {
@@ -44,7 +45,9 @@ class FinalizingPurchase extends Component {
   render() {
     const storageCheck = () => getAll();
     const storage = storageCheck();
-    const { erro, shouldRedirect } = this.state;
+    const {
+      nome, email, cpf, telefone, cep, endereco, cidade, estado, erro, shouldRedirect,
+    } = this.state;
     let totalPrice = 0;
     if (storage === null) {
       return (
@@ -78,90 +81,98 @@ class FinalizingPurchase extends Component {
           <form>
             <label
               htmlFor="text"
-              data-testid="checkout-fullname"
             >
               Nome completo
               <input
+                data-testid="checkout-fullname"
                 name="nome"
                 type="text"
+                value={ nome }
                 onChange={ this.handleChange }
               />
             </label>
             <label
               htmlFor="text"
-              data-testid="checkout-email"
             >
               Email
               <input
+                data-testid="checkout-email"
                 name="email"
                 type="text"
+                value={ email }
                 onChange={ this.handleChange }
               />
             </label>
             <label
               htmlFor="text"
-              data-testid="checkout-cpf"
             >
               CPF
               <input
+                data-testid="checkout-cpf"
                 name="cpf"
                 type="text"
+                value={ cpf }
                 onChange={ this.handleChange }
               />
             </label>
             <label
               htmlFor="text"
-              data-testid="checkout-phone"
             >
               Telefone
               <input
+                data-testid="checkout-phone"
                 name="telefone"
                 type="text"
+                value={ telefone }
                 onChange={ this.handleChange }
               />
             </label>
             <label
               htmlFor="text"
-              data-testid="checkout-cep"
             >
               CEP
               <input
+                data-testid="checkout-cep"
                 name="cep"
                 type="text"
+                value={ cep }
                 onChange={ this.handleChange }
               />
             </label>
             <label
               htmlFor="text"
-              data-testid="checkout-address"
 
             >
               Endereço
               <input
+                data-testid="checkout-address"
                 name="endereco"
                 type="text"
+                value={ endereco }
                 onChange={ this.handleChange }
               />
             </label>
             <label
               htmlFor="text"
-              data-testid="checkout-city"
             >
               cidade
               <input
+                data-testid="checkout-city"
                 name="cidade"
                 type="text"
+                value={ cidade }
                 onChange={ this.handleChange }
               />
             </label>
             <label
               htmlFor="text"
-              data-testid="checkout-state"
             >
               estado
               <input
+                data-testid="checkout-state"
                 name="estado"
                 type="text"
+                value={ estado }
                 onChange={ this.handleChange }
               />
             </label>
@@ -211,11 +222,18 @@ class FinalizingPurchase extends Component {
           </label>
         </div>
         <div>
-          <button type="button" onClick={ this.handleClick }>Comprar</button>
+          <button
+            type="button"
+            key="buy-button"
+            id="buy-button"
+            onClick={ this.handleClick }
+          >
+            Comprar
+          </button>
           {erro ? <p>Campo Vazio</p> : <p>Por Favor Preencha todos os campos</p>}
           {shouldRedirect
             ? <Redirect to="/" />
-            : <p>Por Favor Preencha todos os campos</p> }
+            : false }
         </div>
 
       </main>

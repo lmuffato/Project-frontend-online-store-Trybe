@@ -20,11 +20,16 @@ class CardProduct extends Component {
         >
           <span className={ styles.titleProduct }>{ title }</span>
           <img className={ styles.imgProduct } src={ thumbnail } alt={ title } />
-          <span className={ styles.stockProduct }>{`Estoque: ${availableQuantity}`}</span>
+          <span className={ styles.stockProduct }>{ availableQuantity }</span>
         </Link>
         <span className={ styles.priceText }>{`R$${price}`}</span>
+
         { shipping.free_shipping
-          && <span data-testid="free-shipping">Frete grátis</span> }
+          && (
+            <span className={ styles.freteFree } data-testid="free-shipping">
+              <p className={ styles.titleFrete }>Frete grátis</p>
+            </span>)}
+
         <button
           className={ styles.btnAddToCart }
           type="button"
@@ -45,7 +50,7 @@ CardProduct.propTypes = {
     thumbnail: PropTypes.string,
     price: PropTypes.number,
     id: PropTypes.string,
-    availableQuantity: PropTypes.number,
+    available_quantity: PropTypes.number,
     shipping: PropTypes.shape({
       free_shipping: PropTypes.bool,
     }),

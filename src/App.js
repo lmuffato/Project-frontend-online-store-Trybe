@@ -20,20 +20,42 @@ class App extends Component {
     };
   }
 
+  componentDidMount() {
+    this.propsToCartList();
+  }
+
+  updateLocalStorage = () => {
+    const { cartList } = this.state;
+    localStorage.setItem('cartList', JSON.stringify(cartList));
+  };
+
   handleClickAddCart = async (event) => {
     const elementos = [...event.target.parentNode.children];
     const product = [...elementos[0].children];
-
-    this.setState((anterior) => ({
+    await this.setState((anterior) => ({
       cartList: [...anterior.cartList, {
         img: product[1].src,
         title: product[0].innerHTML,
         quant: 1,
         price: elementos[1].innerHTML,
-        available_quantity: product[2].innerHTML,
+        stock: parseInt(product[2].innerHTML, 10),
       }],
     }));
+    this.updateLocalStorage();
   };
+
+  handleDetailsToCart = async (product) => {
+    await this.setState((anterior) => ({
+      cartList: [...anterior.cartList, {
+        img: product.thumbnail,
+        title: product.title,
+        quant: 1,
+        price: product.price.toFixed(2),
+        stock: product.available_quantity,
+      }],
+    }));
+    this.updateLocalStorage();
+  }
 
   changeQuantProductLength = (quant, productTitle) => {
     const { cartList } = this.state;
@@ -45,54 +67,52 @@ class App extends Component {
     this.setState({ cartList: newCartList });
   }
 
-    handleDetailsToCart = async (product) => {
-      this.setState((anterior) => ({
-        cartList: [...anterior.cartList, {
-          img: product.thumbnail,
-          title: product.title,
-          quant: 1,
-          price: product.price.toFixed(2),
-        }],
-      }));
+  propsToCartList = () => {
+    const storage = localStorage.getItem('cartList');
+    if (storage) {
+      this.setState({
+        cartList: JSON.parse(storage),
+      });
     }
+  };
 
-    render() {
-      const { cartList } = this.state;
-      return (
-        <Router>
-          <Route
-            path="/carrinho"
-            render={ (props) => (
-              <Cart
-                { ...props }
-                cartList={ cartList }
-                changeQuantProductLength={ this.changeQuantProductLength }
-              />) }
-          />
-          <Route
-            exact
-            path="/"
-            render={ (props) => (
-              <Home
-                { ...props }
-                onClick={ this.handleClickAddCart }
-                cartProductLength={ getProductLength(cartList) }
-              />
-            ) }
-          />
-          <Route
-            path="/details/:id"
-            render={ (props) => (
-              <ProductDetails
-                { ...props }
-                handleDetailsToCart={ this.handleDetailsToCart }
-                cartProductLength={ getProductLength(cartList) }
-              />) }
-          />
-          <Route path="/checkout" render={ (props) => <Checkout { ...props } /> } />
-        </Router>
-      );
-    }
+  render() {
+    const { cartList } = this.state;
+    return (
+      <Router>
+        <Route
+          path="/carrinho"
+          render={ (props) => (
+            <Cart
+              { ...props }
+              cartList={ cartList }
+              changeQuantProductLength={ this.changeQuantProductLength }
+            />) }
+        />
+        <Route
+          exact
+          path="/"
+          render={ (props) => (
+            <Home
+              { ...props }
+              onClick={ this.handleClickAddCart }
+              cartProductLength={ getProductLength(cartList) }
+            />
+          ) }
+        />
+        <Route
+          path="/details/:id"
+          render={ (props) => (
+            <ProductDetails
+              { ...props }
+              handleDetailsToCart={ this.handleDetailsToCart }
+              cartProductLength={ getProductLength(cartList) }
+            />) }
+        />
+        <Route path="/checkout" render={ (props) => <Checkout { ...props } /> } />
+      </Router>
+    );
+  }
 }
 
 export default App;

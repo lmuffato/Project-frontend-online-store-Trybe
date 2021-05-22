@@ -8,12 +8,14 @@ class ProductDetails extends Component {
     const { location, handleDetailsToCart, cartProductLength } = this.props;
     const { state: { product } } = location;
     const { title, thumbnail, price, shipping } = product;
+    const { available_quantity: availableQuantity } = product;
     return (
       <section>
         <div>
           <section>
             <span data-testid="product-detail-name">{ title }</span>
             <img src={ thumbnail } alt={ title } />
+            <span>{`Estoque: ${availableQuantity}`}</span>
             <span>{`R$${price}`}</span>
             { shipping.free_shipping
             && <span data-testid="free-shipping">Frete grátis</span> }
@@ -56,6 +58,7 @@ ProductDetails.propTypes = {
         thumbnail: PropTypes.string,
         price: PropTypes.number,
         id: PropTypes.string,
+        availableQuantity: PropTypes.number,
         shipping: PropTypes.shape({
           free_shipping: PropTypes.bool,
         }),

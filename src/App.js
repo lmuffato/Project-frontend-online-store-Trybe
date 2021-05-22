@@ -23,26 +23,17 @@ class App extends Component {
   handleClickAddCart = async (event) => {
     const elementos = [...event.target.parentNode.children];
     const product = [...elementos[0].children];
+
     this.setState((anterior) => ({
       cartList: [...anterior.cartList, {
         img: product[1].src,
         title: product[0].innerHTML,
         quant: 1,
         price: elementos[1].innerHTML,
+        available_quantity: product[2].innerHTML,
       }],
     }));
   };
-
-  handleDetailsToCart = async (product) => {
-    this.setState((anterior) => ({
-      cartList: [...anterior.cartList, {
-        img: product.thumbnail,
-        title: product.title,
-        quant: 1,
-        price: product.price.toFixed(2),
-      }],
-    }));
-  }
 
   changeQuantProductLength = (quant, productTitle) => {
     const { cartList } = this.state;
@@ -85,6 +76,7 @@ class App extends Component {
               <Home
                 { ...props }
                 onClick={ this.handleClickAddCart }
+                cartProductLength={ getProductLength(cartList) }
               />
             ) }
           />
@@ -94,6 +86,7 @@ class App extends Component {
               <ProductDetails
                 { ...props }
                 handleDetailsToCart={ this.handleDetailsToCart }
+                cartProductLength={ getProductLength(cartList) }
               />) }
           />
           <Route path="/checkout" render={ (props) => <Checkout { ...props } /> } />

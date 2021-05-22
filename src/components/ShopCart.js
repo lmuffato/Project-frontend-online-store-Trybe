@@ -10,7 +10,11 @@ class ShopCart extends React.Component {
     console.log(productsFromStorage);
     return (
       productsFromStorage
-        .map((product) => <ShopCartItem key={ product[0].id } product={ product[0] } quantity={ product.length } />)
+        .map((product) => (<ShopCartItem
+          key={ product[0].id }
+          product={ product[0] }
+          quantity={ product.length }
+        />))
     );
   }
 

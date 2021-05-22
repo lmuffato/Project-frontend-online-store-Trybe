@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import { IoReturnUpBack } from 'react-icons/io5';
-import BuyerData from '../components/form/BuyerData';
+import PropTypes from 'prop-types';
 import PaymentMethods from '../components/form/PaymentMethods';
 import ProductReview from '../components/ProductReview';
+import BuyerData from '../components/form/BuyerData';
 
 export default class Checkout extends Component {
   constructor(props) {
@@ -43,3 +44,7 @@ export default class Checkout extends Component {
     );
   }
 }
+
+Checkout.propTypes = {
+  cartItems: PropTypes.object,
+}.isRequired;

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import SideBar from '../components/SideBar';
-import Product from '../components/Product';
 import ButtonCart from '../components/ButtonCart';
+import Product from '../components/Product';
 import * as api from '../services/api';
 
 export default class Home extends Component {
@@ -76,3 +77,8 @@ export default class Home extends Component {
     );
   }
 }
+
+Home.propTypes = {
+  cartItems: PropTypes.object,
+  addToCart: PropTypes.func,
+}.isRequired;

@@ -17,7 +17,13 @@ export default class Product extends Component {
 
   handleClick = () => {
     const { product, addToCart } = this.props;
-    const { title, price, id, thumbnail } = product;
+    const {
+      title,
+      price,
+      id,
+      thumbnail,
+      available_quantity: availableQuantity,
+    } = product;
 
     this.setState((prevState) => ({
       amount: prevState.amount + 1,
@@ -30,9 +36,16 @@ export default class Product extends Component {
         amount,
         id,
         totalPrice: amount * price,
+        availableQuantity,
       });
     });
   };
+
+  FreeShipping = () => {
+    const { product: { shipping } } = this.props;
+    const FreeShipping = shipping.free_shipping;
+    if (FreeShipping) return (<div data-testid="free-shipping">Frete Grátis</div>);
+  }
 
   render() {
     const { product } = this.props;
@@ -42,6 +55,7 @@ export default class Product extends Component {
       <>
         <div data-testid="product">
           <h2>{title}</h2>
+          { this.FreeShipping() }
           <img src={ thumbnail } alt="Imagem do produto" />
           <h3>{price}</h3>
           <div className="cart-button">
@@ -73,6 +87,11 @@ Product.propTypes = {
     price: PropTypes.number,
     thumbnail: PropTypes.string,
     id: PropTypes.string,
+    available_quantity: PropTypes.number,
+    shipping: PropTypes.shape({
+      free_shipping: PropTypes.bool,
+    }).isRequired,
   }).isRequired,
   addToCart: PropTypes.func.isRequired,
+  cartItems: PropTypes.shape.isRequired,
 };

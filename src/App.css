@@ -51,8 +51,8 @@
 
 .checkout-content > div {
   border: 2px solid;
-  padding: 10px;
   margin: 15px 0;
+  padding: 10px;
 }
 
 .user-form {
@@ -194,8 +194,8 @@
 }
 
 .products-review .product {
+  align-items: center;
   display: flex;
   justify-content: space-between;
   width: 50%;
-  align-items: center;
 }

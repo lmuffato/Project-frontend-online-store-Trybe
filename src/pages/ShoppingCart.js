@@ -21,11 +21,16 @@ export default class ShoppingCart extends Component {
     this.setLocalStorage();
   }
 
+  increaseTotal = (value) => {
+    this.setState(({ total }) => ({
+      total: total + value,
+    }));
+  }
+
   decreaseTotal = (value) => {
     this.setState(({ total }) => ({
       total: total - value,
     }));
-    this.setLocalStorage();
   }
 
   deleteItem = (event, value) => {
@@ -78,11 +83,7 @@ export default class ShoppingCart extends Component {
 }
 
 ShoppingCart.propTypes = {
-  location: PropTypes.shape({
-    cartItems: PropTypes.shape({
-      title: PropTypes.string,
-      price: PropTypes.number,
-      amount: PropTypes.number,
-    }),
+  cartItems: PropTypes.shape({
   }).isRequired,
+  setLocalStorage: PropTypes.func.isRequired,
 };

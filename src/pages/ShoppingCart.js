@@ -99,6 +99,15 @@ export default class ShoppingCart extends Component {
             ))
           )}
         <Link to="/">Voltar</Link>
+        <Link
+          to={ {
+            pathname: '/checkout',
+            products: productsCart,
+          } }
+          data-testid="checkout-products"
+        >
+          Checkout
+        </Link>
       </div>
     );
   }

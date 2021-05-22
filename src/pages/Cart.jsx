@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { arrayOf, shape, string, number, func } from 'prop-types';
@@ -11,48 +11,50 @@ import { changePriceToNumber } from '../utils/functions';
 
 import styles from './styles.module.css';
 
-class Cart extends Component {
-  constructor(props) {
-    super(props);
+export default function Cart(props) {
+  const { cartList, changeQuantProductLength } = props;
 
-    const { cartList } = props;
-    const prices = cartList
-      .reduce((acc, { price }) => acc + changePriceToNumber(price), 0);
+  const prices = cartList
+    .reduce((acc, { price, quant }) => (
+      acc + (changePriceToNumber(price) * quant)
+    ), 0);
+  const [totalPrices, setTotalPrices] = useState(prices);
+  const totalPrice = totalPrices === 0
+    ? prices.toFixed(2)
+    : totalPrices.toFixed(2);
+  const totalPriceMessage = totalPrice === '0.00'
+    ? ''
+    : `Total: R$${totalPrice}`;
 
-    this.state = {
-      totalPrices: prices,
-      cartList,
-    };
-  }
+  const propsToCheckout = {
+    pathname: '/checkout',
+    state: { cartList, prices },
+  };
 
-  getNewTotalPrice({ oldPrice, priceToHandle, symbol }) {
+  const getNewTotalPrice = ({ oldPrice, priceToHandle, symbol }) => {
     const sumOrSubtract = {
-      // ALERTA GAMBIARRA
-      '+': (oldPrice + priceToHandle) - (priceToHandle / 2),
-      '-': (oldPrice - priceToHandle) + (priceToHandle / 2),
+      '+': oldPrice + priceToHandle,
+      '-': oldPrice - priceToHandle,
     };
 
     const newTotalPrice = sumOrSubtract[symbol];
 
     return newTotalPrice;
-  }
+  };
 
-  handleChangeTotalPrice = (priceToHandle, symbol) => {
-    this.setState((oldState) => {
-      const priceInfos = {
-        oldPrice: Number(oldState.totalPrices),
-        priceToHandle,
-        symbol,
-      };
+  const handleChangeTotalPrice = (priceToHandle, symbol) => {
+    const priceInfos = {
+      oldPrice: Number(totalPrice),
+      priceToHandle,
+      symbol,
+    };
 
-      const newTotalPrice = this.getNewTotalPrice(priceInfos);
+    const newTotalPrice = getNewTotalPrice(priceInfos);
 
-      return { totalPrices: newTotalPrice };
-    });
-  }
+    setTotalPrices(newTotalPrice);
+  };
 
-  renderCartList = () => {
-    const { cartList, changeQuantProductLength } = this.props;
+  const renderCartList = () => {
     const cartString = (
       <div className={ styles.EmptyCartContainer }>
         <p>Seu carrinho está vazio</p>
@@ -66,57 +68,46 @@ class Cart extends Component {
           <CartItem
             key={ index }
             product={ product }
-            handleChangeTotalPrice={ this.handleChangeTotalPrice }
+            handleChangeTotalPrice={ handleChangeTotalPrice }
             changeQuantProductLength={ changeQuantProductLength }
           />
         ))
-      : <p>{cartString}</p>;
+      : cartString;
   };
 
-  render() {
-    const { totalPrices, cartList } = this.state;
-    const propsToCheckout = {
-      pathname: '/checkout',
-      state: { cartList, totalPrices },
-    };
-    const totalPriceMessage = totalPrices === 0
-      ? ''
-      : `Total: R$${totalPrices.toFixed(2)}`;
-
-    return (
-      <section
-        className={ styles.CartItemsContainer }
-        data-testid="shopping-cart-empty-message"
-      >
-        <header>
-          <Link to="/">
-            <TiArrowBack />
-          </Link>
-          <h1>Carrinho</h1>
-        </header>
-
-        <main>
-          { this.renderCartList() }
-        </main>
-
-        <hr />
-
-        <p>{totalPriceMessage}</p>
-
-        <Link to={ { ...propsToCheckout } }>
-          <button
-            type="button"
-            data-testid="checkout-products"
-            className={ styles.FinishButton }
-            disabled={ cartList.length === 0 }
-          >
-            Finalizar compra
-          </button>
+  return (
+    <section
+      className={ styles.CartItemsContainer }
+      data-testid="shopping-cart-empty-message"
+    >
+      <header>
+        <Link to="/">
+          <TiArrowBack />
         </Link>
+        <h1>Carrinho</h1>
+      </header>
 
-      </section>
-    );
-  }
+      <main>
+        { renderCartList() }
+      </main>
+
+      <hr />
+
+      <p>{totalPriceMessage}</p>
+
+      <Link to={ { ...propsToCheckout } }>
+        <button
+          type="button"
+          data-testid="checkout-products"
+          className={ styles.FinishButton }
+          disabled={ cartList.length === 0 }
+        >
+          Finalizar compra
+        </button>
+      </Link>
+
+    </section>
+  );
 }
 
 Cart.propTypes = {
@@ -130,5 +121,3 @@ Cart.propTypes = {
   )).isRequired,
   changeQuantProductLength: func.isRequired,
 };
-
-export default Cart;

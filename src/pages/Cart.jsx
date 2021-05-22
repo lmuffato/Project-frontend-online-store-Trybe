@@ -70,7 +70,7 @@ class Cart extends Component {
             changeQuantProductLength={ changeQuantProductLength }
           />
         ))
-      : <p>{cartString}</p>;
+      : cartString;
   };
 
   render() {

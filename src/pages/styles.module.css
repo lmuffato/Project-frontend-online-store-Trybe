@@ -183,7 +183,7 @@
     background-color: var(--orange-color-600);
     border: none;
     border-radius: 50%;
-    box-shadow: 0 0 2rem rgb(224 56 56 / 60%);
+    box-shadow: 0 0 1rem rgb(224 56 56 / 60%);
     color: white;
     font-family: Poppins , sans-serif;
     font-size: 0.7rem;
@@ -242,7 +242,7 @@
     display: flex;
     justify-content: space-between;
     padding: 10px;
-    position: fixed;
+    position: absolute;
     width: 100%;
     z-index: 999;
   }
@@ -260,12 +260,12 @@
   }
 
   .contCart {
-    color: var(--purple-color-600);
-    font-size: 0.85rem;
+    color: var(--black-color-600);
+    font-size: 0.95rem;
     font-weight: 600;
     position: absolute;
-    right: 5px;
-    top: 26px;
+    right: 7px;
+    top: 25px;
   }
 
   .contentProductDetails {

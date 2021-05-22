@@ -21,7 +21,11 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.propsToCartList();
+    this.storageToCartList();
+  }
+
+  componentDidUpdate() {
+    this.updateLocalStorage();
   }
 
   updateLocalStorage = () => {
@@ -32,7 +36,7 @@ class App extends Component {
   handleClickAddCart = async (event) => {
     const elementos = [...event.target.parentNode.children];
     const product = [...elementos[0].children];
-    await this.setState((anterior) => ({
+    this.setState((anterior) => ({
       cartList: [...anterior.cartList, {
         img: product[1].src,
         title: product[0].innerHTML,
@@ -40,11 +44,10 @@ class App extends Component {
         price: elementos[1].innerHTML,
       }],
     }));
-    this.updateLocalStorage();
   };
 
   handleDetailsToCart = async (product) => {
-    await this.setState((anterior) => ({
+    this.setState((anterior) => ({
       cartList: [...anterior.cartList, {
         img: product.thumbnail,
         title: product.title,
@@ -52,7 +55,6 @@ class App extends Component {
         price: product.price.toFixed(2),
       }],
     }));
-    this.updateLocalStorage();
   }
 
   changeQuantProductLength = (quant, productTitle) => {
@@ -65,7 +67,7 @@ class App extends Component {
     this.setState({ cartList: newCartList });
   }
 
-  propsToCartList = () => {
+  storageToCartList = () => {
     const storage = localStorage.getItem('cartList');
     if (storage) {
       this.setState({

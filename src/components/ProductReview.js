@@ -8,7 +8,7 @@ export default class ProductReview extends Component {
       <div className="product">
         <img src={ thumbnail } alt="Imagem do produto no carrinho" />
         <p>{title}</p>
-        <span>{price}</span>
+        <span>{`R$ ${parseFloat(price).toFixed(2)}`}</span>
       </div>
     );
   }

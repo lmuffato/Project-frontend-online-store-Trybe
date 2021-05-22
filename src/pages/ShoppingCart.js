@@ -55,7 +55,7 @@ export default class ShoppingCart extends Component {
               decreaseTotal={ this.decreaseTotal }
             />
           ))}
-          <span>{total}</span>
+          <span>{`R$ ${parseFloat(total).toFixed(2)}`}</span>
         </div>
       );
     }

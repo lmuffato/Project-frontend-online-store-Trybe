@@ -38,7 +38,7 @@ export default class CartProduct extends Component {
         totalPrice,
       },
       deleteItem,
-      total } = this.props;
+    } = this.props;
 
     return (
       <div>
@@ -56,7 +56,7 @@ export default class CartProduct extends Component {
         </h2>
         <img src={ thumbnail } alt="Imagem Produto" />
         <h3>
-          { totalPrice }
+          {`R$ ${parseFloat(totalPrice).toFixed(2)}`}
         </h3>
         <h4 data-testid="shopping-cart-product-quantity">
           { amount }
@@ -77,7 +77,6 @@ export default class CartProduct extends Component {
         >
           -
         </button>
-        <div>{total}</div>
       </div>
     );
   }

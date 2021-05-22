@@ -51,7 +51,7 @@ export default class Product extends Component {
           <h2>{title}</h2>
           { freeShipping(product) }
           <img src={ thumbnail } alt="Imagem do produto" />
-          <h3>{price}</h3>
+          <h3>{`R$ ${parseFloat(price).toFixed(2)}`}</h3>
           <div className="cart-button">
             <button
               className="add-cart-button"

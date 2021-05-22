@@ -53,6 +53,12 @@ class App extends Component {
   //   this.setState({ totalCount });
   // };
 
+  freeShipping = (product) => {
+    const { shipping } = product;
+    const freeShipping = shipping.free_shipping;
+    if (freeShipping) return (<div data-testid="free-shipping">Frete Grátis</div>);
+  }
+
   render() {
     const { cartItems, totalCount } = this.state;
 
@@ -67,6 +73,7 @@ class App extends Component {
                 addToCart={ this.addToCart }
                 cartItems={ cartItems }
                 totalCount={ totalCount }
+                freeShipping={ this.freeShipping }
               />
             ) }
           />
@@ -90,6 +97,7 @@ class App extends Component {
                 addToCart={ this.addToCart }
                 cartItems={ cartItems }
                 totalCount={ totalCount }
+                freeShipping={ this.freeShipping }
                 { ...props }
               />
             ) }

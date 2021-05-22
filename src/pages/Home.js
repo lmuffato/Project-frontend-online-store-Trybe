@@ -46,7 +46,7 @@ export default class Home extends Component {
 
   render() {
     const { products, loading } = this.state;
-    const { addToCart, cartItems, totalCount } = this.props;
+    const { addToCart, cartItems, totalCount, freeShipping } = this.props;
 
     return (
       <main>
@@ -71,6 +71,7 @@ export default class Home extends Component {
             product={ product }
             addToCart={ addToCart }
             cartItems={ cartItems }
+            freeShipping={ freeShipping }
           />)) : 'Carregando...' }
         </section>
       </main>

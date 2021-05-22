@@ -41,21 +41,15 @@ export default class Product extends Component {
     });
   };
 
-  FreeShipping = () => {
-    const { product: { shipping } } = this.props;
-    const FreeShipping = shipping.free_shipping;
-    if (FreeShipping) return (<div data-testid="free-shipping">Frete Grátis</div>);
-  }
-
   render() {
-    const { product } = this.props;
+    const { product, freeShipping } = this.props;
     const { title, price, thumbnail, id } = product;
 
     return (
       <>
         <div data-testid="product">
           <h2>{title}</h2>
-          { this.FreeShipping() }
+          { freeShipping(product) }
           <img src={ thumbnail } alt="Imagem do produto" />
           <h3>{price}</h3>
           <div className="cart-button">
@@ -94,4 +88,5 @@ Product.propTypes = {
   }).isRequired,
   addToCart: PropTypes.func.isRequired,
   cartItems: PropTypes.shape.isRequired,
+  freeShipping: PropTypes.func.isRequired,
 };

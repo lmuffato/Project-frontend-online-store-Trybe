@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import CartShopPage from './Components/CartShopPage';
 import Search from './Components/Search';
 import DetailsPage from './Components/DetailsPage';
+import Checkout from './Components/Checkout';
 
 function App() {
   return (
@@ -12,6 +13,10 @@ function App() {
 
         <Switch>
           <Route exact path="/" component={ Search } />
+          <Route
+            path="/checkout"
+            component={ Checkout }
+          />
           <Route
             exact
             path="/detailsPage/:id"

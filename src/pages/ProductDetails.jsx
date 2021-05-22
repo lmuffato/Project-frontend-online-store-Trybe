@@ -53,6 +53,7 @@ class ProductDetails extends Component {
           <span className={ styles.titleDetails } data-testid="product-detail-name">
             { title }
           </span>
+          <span>{ `Qtd. Disponível: ${estoque}` }</span>
           <div className={ styles.contentPriceFree }>
             <span className={ styles.priceProductDetails }>
               {`R$${(price * quant).toFixed(2)}`}
@@ -77,7 +78,7 @@ class ProductDetails extends Component {
             <button
               type="button"
               className={ styles.btnAddCartProduct }
-              onClick={ () => handleDetailsToCart(product) }
+              onClick={ () => handleDetailsToCart(product, quant) }
               data-testid="product-detail-add-to-cart"
             >
               Adicionar ao Carrinho
@@ -135,6 +136,7 @@ ProductDetails.propTypes = {
         thumbnail: PropTypes.string,
         price: PropTypes.number,
         id: PropTypes.string,
+        availableQuantity: PropTypes.number,
         shipping: PropTypes.shape({
           free_shipping: PropTypes.bool,
         }),

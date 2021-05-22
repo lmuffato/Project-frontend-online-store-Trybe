@@ -36,25 +36,59 @@ class App extends Component {
   handleClickAddCart = async (event) => {
     const elementos = [...event.target.parentNode.children];
     const product = [...elementos[0].children];
-    this.setState((anterior) => ({
-      cartList: [...anterior.cartList, {
-        img: product[1].src,
-        title: product[0].innerHTML,
-        quant: 1,
-        price: elementos[1].innerHTML,
-      }],
-    }));
+    const { cartList } = this.state;
+    const checked = cartList.find(({ title }) => title === product[0].innerHTML);
+    if (checked === undefined) {
+      console.log('if');
+      this.setState((anterior) => ({
+        cartList: [...anterior.cartList, {
+          img: product[1].src,
+          title: product[0].innerHTML,
+          quant: 1,
+          price: elementos[1].innerHTML,
+          stock: parseInt(product[2].innerHTML, 10),
+        }],
+      }));
+    } else {
+      console.log('else');
+      const test = cartList.reduce((acc, item) => {
+        if (item.title === product[0].innerHTML) {
+          console.log('if');
+          return [...acc, { ...item, quant: item.quant + 1 }];
+        }
+        console.log('depois do if');
+        return [...acc, item];
+      }, []);
+      this.setState({
+        cartList: test,
+      });
+    }
   };
 
-  handleDetailsToCart = async (product) => {
-    this.setState((anterior) => ({
-      cartList: [...anterior.cartList, {
-        img: product.thumbnail,
-        title: product.title,
-        quant: 1,
-        price: product.price.toFixed(2),
-      }],
-    }));
+  handleDetailsToCart = async (product, quant) => {
+    const { cartList } = this.state;
+    const checked = cartList.find(({ title }) => title === product.title);
+    if (checked === undefined) {
+      this.setState((anterior) => ({
+        cartList: [...anterior.cartList, {
+          img: product.thumbnail,
+          title: product.title,
+          quant,
+          price: product.price.toFixed(2),
+          stock: product.available_quantity,
+        }],
+      }));
+    } else {
+      const test = cartList.reduce((acc, item) => {
+        if (item.title === product.title) {
+          return [...acc, { ...item, quant: item.quant + quant }];
+        }
+        return [...acc, item];
+      }, []);
+      this.setState({
+        cartList: test,
+      });
+    }
   }
 
   changeQuantProductLength = (quant, productTitle) => {

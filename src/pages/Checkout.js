@@ -43,13 +43,13 @@ export default class Checkout extends Component {
     });
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
+  handleSubmit(event) {
+    event.preventDefault();
     const { clientInfo } = this.state;
     const isFormFiled = Object.values(clientInfo).every((info) => info !== '');
     const { products } = this.state;
 
-    if (isFormFiled && products.length > 1) {
+    if (isFormFiled && products.length >= 1) {
       document.alert('Compra realizada com sucesso');
     } else {
       const inputs = document.querySelectorAll('input');

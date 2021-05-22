@@ -1,13 +1,43 @@
 import React from 'react';
 
 class Checkout extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      fullname: '',
+      email: '',
+      cpf: '',
+      phone: '',
+      cep: '',
+      address: '',
+      payment: false,
+
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange({ target }) {
+    const { name } = target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+
+    this.setState({
+      [name]: value,
+    });
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+  }
+
   render() {
+    const { fullname, email, cpf, phone, cep, address, payment } = this.state;
     return (
       <div>
         <section>
           <h3>Revise seus produtos</h3>
         </section>
-        <form action="">
+        <form>
           <section>
             <h3> Informações do Comprador</h3>
             <div>
@@ -15,15 +45,9 @@ class Checkout extends React.Component {
                 data-testid="checkout-fullname"
                 type="text"
                 placeholder="Nome Completo"
-                required
-              />
-            </div>
-            <div>
-              <input
-                data-testid="checkout-cpf"
-                type="number"
-                placeholder="CPF"
-                required
+                name="fullname"
+                value={ fullname }
+                onChange={ this.handleChange }
               />
             </div>
             <div>
@@ -31,23 +55,39 @@ class Checkout extends React.Component {
                 data-testid="checkout-email"
                 type="email"
                 placeholder="Email"
-                required
+                name="email"
+                value={ email }
+                onChange={ this.handleChange }
+              />
+            </div>
+            <div>
+              <input
+                data-testid="checkout-cpf"
+                type="text"
+                placeholder="CPF"
+                name="cpf"
+                value={ cpf }
+                onChange={ this.handleChange }
               />
             </div>
             <div>
               <input
                 data-testid="checkout-phone"
-                type="number"
+                type="text"
                 placeholder="Telefone"
-                required
+                name="phone"
+                value={ phone }
+                onChange={ this.handleChange }
               />
             </div>
             <div>
               <input
                 data-testid="checkout-cep"
-                type="number"
+                type="text"
                 placeholder="CEP"
-                required
+                name="cep"
+                value={ cep }
+                onChange={ this.handleChange }
               />
             </div>
             <div>
@@ -55,44 +95,65 @@ class Checkout extends React.Component {
                 data-testid="checkout-address"
                 type="text"
                 placeholder="Endereço"
-                required
+                name="address"
+                value={ address }
+                onChange={ this.handleChange }
               />
-            </div>
-            <div>
-              <input type="text" placeholder="Complemento" />
             </div>
             <div>
               <input type="number" placeholder="Número" />
             </div>
-            <div>
-              <input type="text" placeholder="Cidade" />
-            </div>
-            <select name="state" id="">
-              <option value="">Estado</option>
-            </select>
           </section>
           <h3> Método de Pagamento</h3>
           Boleto
           <br />
           <label htmlFor="boleto">
-            <input id="boleto" name="pagamento" value="boleto" type="radio" />
+            <input
+              id="boleto"
+              name="payment"
+              value={ payment }
+              type="checkbox"
+              onChange={ this.handleChange }
+            />
           </label>
           <br />
           Cartão de Crédito
           <br />
           <label htmlFor="master">
             MasterCard
-            <input id="master" name="pagamento" value="master" type="radio" />
+            <input
+              id="master"
+              name="payment"
+              value={ payment }
+              type="checkbox"
+              onChange={ this.handleChange }
+            />
           </label>
           <label htmlFor="visa">
             Visa
-            <input id="visa" name="pagamento" value="visa" type="radio" />
+            <input
+              id="visa"
+              name="payment"
+              value={ payment }
+              type="checkbox"
+              onChange={ this.handleChange }
+            />
           </label>
           <label htmlFor="elo">
             Elo
-            <input id="elo" name="pagamento" value="elo" type="radio" />
+            <input
+              id="elo"
+              name="payment"
+              value={ payment }
+              type="checkbox"
+              onChange={ this.handleChange }
+            />
           </label>
-          <button data-testid="checkout-products" type="submit">
+          <button
+            onClick={ this.handleSubmit }
+            data-testid="checkout-products"
+            type="submit"
+          >
             Comprar
           </button>
         </form>

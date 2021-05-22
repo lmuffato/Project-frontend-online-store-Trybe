@@ -5,7 +5,8 @@ import CheckoutProductsCard from './CheckoutProductsCard';
 class CheckoutProductList extends Component {
   render() {
     const { items } = this.props;
-    const totalPrice = items.reduce((e1, e2) => e1.price + e2.price );
+    const totalPrice = items
+      .reduce(((acc, item) => acc + (item.price * item.quantity)), 0);
     return (
       <section>
         {items.map((item) => <CheckoutProductsCard item={ item } key={ item.id } />)}

@@ -40,7 +40,7 @@ class ProductDetails extends Component {
         </p>
         <p>{product.plain_text}</p>
         <button type="button">
-          <Link to="/shopcart">Carrinho</Link>
+          <Link to="/shopcart" data-testid="shopping-cart-button">Carrinho</Link>
         </button>
         <DetailsAddButton data={ data.data } />
       </div>

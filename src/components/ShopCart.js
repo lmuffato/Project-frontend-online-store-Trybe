@@ -1,25 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { getProductsFromStorage } from '../services/localStorage';
+import ShopCartItem from './ShopCartItem';
 
 class ShopCart extends React.Component {
   shoppingCartProducts = () => {
     const keys = Object.keys(localStorage);
     const productsFromStorage = keys.map((key) => getProductsFromStorage(key));
+    console.log(productsFromStorage);
     return (
-      productsFromStorage.map((product) => (
-        <li key={ product[0].id }>
-          <p data-testid="shopping-cart-product-name">{product[0].title}</p>
-          <img
-            src={ product[0].thumbnail }
-            alt={ `imagem do produto ${product[0].title}` }
-          />
-          <p>{`R$${parseFloat(product[0].price).toFixed(2)}`}</p>
-          <p data-testid="shopping-cart-product-quantity">
-            {`Quantidade: ${product.length}`}
-          </p>
-        </li>
-      ))
+      productsFromStorage
+        .map((product) => (<ShopCartItem
+          key={ product[0].id }
+          product={ product[0] }
+          quantity={ product.length }
+        />))
     );
   }
 

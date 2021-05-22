@@ -10,7 +10,7 @@ export default class DetailsAddButton extends Component {
 
   render() {
     return (
-      <div data-testid="shopping-cart-button">
+      <div>
         <button
           type="button"
           data-testid="product-detail-add-to-cart"

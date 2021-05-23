@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ProductEvaluation from './ProductEvaluation';
+import DetailsAddButton from './DetailsAddButton';
+
 
 class ProductDetails extends Component {
   constructor(props) {
@@ -39,8 +41,9 @@ class ProductDetails extends Component {
           <p>{`R$${parseFloat(price).toFixed(2)}`}</p>
           <p>{product.plain_text}</p>
           <button type="button">
-            <Link to="/shopcart">Carrinho</Link>
+            <Link to="/shopcart" data-testid="shopping-cart-button">Carrinho</Link>
           </button>
+          <DetailsAddButton data={ data.data } />
         </div>
         <div className="product-evaluation">
           <ProductEvaluation />

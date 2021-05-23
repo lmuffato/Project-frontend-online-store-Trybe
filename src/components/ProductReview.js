@@ -3,13 +3,18 @@ import PropTypes from 'prop-types';
 
 export default class ProductReview extends Component {
   render() {
-    const { product: { title, thumbnail, price } } = this.props;
+    const {
+      product: { title, thumbnail, price, amount },
+    } = this.props;
     return (
-      <div className="product">
-        <img src={ thumbnail } alt="Imagem do produto no carrinho" />
-        <p>{title}</p>
-        <span>{`R$ ${parseFloat(price).toFixed(2)}`}</span>
-      </div>
+      <tr className="product">
+        <td>
+          <img src={ thumbnail } alt="Imagem do produto no carrinho" />
+          {title}
+        </td>
+        <td>{amount}</td>
+        <td>{`R$ ${parseFloat(price).toFixed(2)}`}</td>
+      </tr>
     );
   }
 }
@@ -19,5 +24,6 @@ ProductReview.propTypes = {
     title: PropTypes.string,
     price: PropTypes.number,
     thumbnail: PropTypes.string,
+    amount: PropTypes.number,
   }).isRequired,
 };

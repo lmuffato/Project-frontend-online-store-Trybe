@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import ProductEvaluation from './ProductEvaluation';
 import DetailsAddButton from './DetailsAddButton';
 
-
 class ProductDetails extends Component {
   constructor(props) {
     super(props);

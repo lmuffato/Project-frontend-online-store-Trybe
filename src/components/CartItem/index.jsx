@@ -17,9 +17,7 @@ class CartItem extends Component {
     };
   }
 
-  getPrice(priceToNumber, quant) {
-    return (priceToNumber * quant).toFixed(2);
-  }
+  getPrice = (price, quant) => (price * quant).toFixed(2);
 
   getQuant(quant, symbol) {
     const sumOrSubtract = {
@@ -35,24 +33,22 @@ class CartItem extends Component {
     const { product } = this.props;
     const { title } = this.state;
 
-    this.setState((oldState) => {
-      const { quant } = oldState;
+    this.setState(({ quant }) => {
       const { handleChangeTotalPrice, changeQuantProductLength } = this.props;
 
       const quantResult = this.getQuant(quant, symbol);
-
       const priceToNumber = changePriceToNumber(product.price);
-      const priceResult = this.getPrice(priceToNumber, quantResult);
 
       handleChangeTotalPrice(priceToNumber, symbol);
       changeQuantProductLength(quantResult, title);
 
-      return { quant: quantResult, price: `R$${priceResult}` };
+      return { quant: quantResult };
     });
   };
 
   render() {
     const { quant, price, title, img, stock } = this.state;
+    const priceToDisplay = this.getPrice(changePriceToNumber(price), quant);
 
     return (
       <section className={ styles.CartItemContainer }>
@@ -64,7 +60,7 @@ class CartItem extends Component {
           <p data-testid="shopping-cart-product-name">{ title }</p>
 
           <div className={ styles.CartPriceQuantContainer }>
-            <p>{ price }</p>
+            <p>{ priceToDisplay }</p>
 
             <div>
               <button

@@ -15,7 +15,7 @@ export default class Checkout extends Component {
 
   render() {
     const { cartItems } = this.props;
-    const products = Object.values(cartItems);
+    // const products = Object.values(cartItems);
     return (
       <div>
         <Link to="/" className="return-button">
@@ -38,7 +38,7 @@ export default class Checkout extends Component {
             </div>
           </div>
           <div className="order-summary">
-            <h5>resumo do pedido</h5>
+            {/* <h5>resumo do pedido</h5>
             <table>
               <tbody>
                 <tr>
@@ -46,7 +46,7 @@ export default class Checkout extends Component {
                   <th></th>
                 </tr>
               </tbody>
-            </table>
+            </table> */}
           </div>
         </section>
       </div>

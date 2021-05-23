@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Home, CartContent, ProductDetails } from './pages';
+import Checkout from './pages/Checkout';
 
 class App extends Component {
   constructor() {
@@ -49,6 +50,13 @@ class App extends Component {
 
     return (
       <Router>
+        <Route
+          exact
+          path="/checkout"
+          component={ (routeProps) => (<Checkout
+            { ...routeProps }
+          />) }
+        />
         <Route
           exact
           path="/product/:id"

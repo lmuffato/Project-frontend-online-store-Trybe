@@ -1,7 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import BuyerInformation from './BuyerInformation';
-import Payment from './Payment';
 
 class PurchaseSummary extends React.Component {
   constructor() {
@@ -21,7 +19,6 @@ class PurchaseSummary extends React.Component {
   loadResult() {
     const { cart } = this.props;
     const { total: totalState } = this.state;
-    // const reducer = (acumulador, curretValue) => acumulador + curretValue;
     let total = totalState;
 
     cart.products.forEach((product) => {
@@ -59,9 +56,6 @@ class PurchaseSummary extends React.Component {
           ))}
         </ul>
         <h4>{ `TOTAL DO PEDIDO: ${total}` }</h4>
-        <BuyerInformation />
-        <Payment />
-        <button type="submit">Comprar</button>
       </div>
     );
   }

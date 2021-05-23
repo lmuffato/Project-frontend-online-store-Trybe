@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Redirect } from 'react-router';
 import BuyerInformation from './Home/components/BuyerInformation';
 import PurchaseSummary from './Home/components/PurchaseSummary';
 import Payment from './Home/components/Payment';
@@ -15,22 +16,26 @@ class Checkout extends React.Component {
       phone: '', // Number
       cep: '', // Number
       address: '',
-      bookmarkedOnly: false,
+      status: false,
     };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange({ target }) {
-    const { name } = target;
-    const value = target.type === 'checkbox'
-      ? target.checked : target.value;
-    this.setState({
-      [name]: value,
-    });
+    const { name, value } = target;
+    this.setState({ [name]: value });
+  }
+
+  handleSubmit() {
+    this.setState({ status: true });
   }
 
   render() {
     const { cart } = this.props;
-    const { fullName, email, cpf, phone, cep, address, bookmarkedOnly } = this.state;
+    const { fullName, email, cpf, phone, cep, address, status } = this.state;
+    if (status) return <Redirect to="/" />;
+
     return (
       <div>
         <form>
@@ -45,10 +50,9 @@ class Checkout extends React.Component {
             handleChange={ this.handleChange }
           />
           <Payment
-            bookmarkedOnly={ bookmarkedOnly }
             handleChange={ this.handleChange }
           />
-          {/* <button type="submit">Comprar</button> */}
+          <button type="button" onClick={ this.handleSubmit }>Comprar</button>
         </form>
       </div>
     );

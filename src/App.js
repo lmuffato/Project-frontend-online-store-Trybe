@@ -6,7 +6,6 @@ import ShoppingCart from './pages/ShoppingCart';
 import ProductDetails from './pages/ProductDetails';
 import { getProductsFromCategoryAndQuery } from './services/api';
 import Checkout from './pages/Checkout';
-import PurchaseSummary from './pages/Home/components/PurchaseSummary';
 
 class App extends React.Component {
   constructor() {
@@ -183,8 +182,7 @@ class App extends React.Component {
             path="/cart/checkout"
             component={ Checkout }
           >
-            {/* <Checkout cart={ cart } /> */}
-            <PurchaseSummary cart={ cart } />
+            <Checkout cart={ cart } />
           </Route>
           <Route path="/cart" exact>
             <ShoppingCart

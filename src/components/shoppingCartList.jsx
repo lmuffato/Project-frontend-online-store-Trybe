@@ -9,8 +9,9 @@ class ShoppingCartList extends Component {
     return (
       <div>
         {carts.map((product) => <CartItem product={ product } key={ product.title } />) }
-        <button type="button" data-testid="checkout-products">
+        <button type="submit">
           <Link
+            data-testid="checkout-products"
             to={ { pathname: '/Checkout', state: { carts } } }
           >
             Checkout

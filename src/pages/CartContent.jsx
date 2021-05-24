@@ -1,12 +1,21 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 class CartContent extends Component {
   constructor() {
     super();
+    this.state = {
+      redirectNow: false,
+    };
     this.createObjectIDsAndQuantities = this.createObjectIDsAndQuantities.bind(this);
     this.filteredItems = this.filterItems.bind(this);
     this.cartItems = this.cartItems.bind(this);
+    this.redirectToCheckout = this.redirectToCheckout.bind(this);
+  }
+
+  redirectToCheckout() {
+    this.setState({ redirectNow: true });
   }
 
   filterItems(items) {
@@ -103,10 +112,28 @@ class CartContent extends Component {
         </p>
       </section>);
 
+    const { redirectNow } = this.state;
     const { items } = this.props;
     const IDsAndQuantities = this.createObjectIDsAndQuantities(items);
     const filteredItems = this.filterItems(items);
-    return filteredItems[0] ? this.cartItems(filteredItems, IDsAndQuantities) : emptyCart;
+    return (
+      <>
+        {filteredItems[0] ? this.cartItems(filteredItems, IDsAndQuantities)
+          : emptyCart}
+        <button
+          data-testid="checkout-products"
+          type="button"
+          onClick={ this.redirectToCheckout }
+        >
+          Finalizar Compra
+        </button>
+        {redirectNow ? <Redirect
+          to={ {
+            pathname: '/checkout',
+            state: { filteredItems, IDsAndQuantities, redirectNow },
+          } }
+        /> : null}
+      </>);
   }
 }
 

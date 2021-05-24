@@ -23,7 +23,7 @@ ProductReview.propTypes = {
   product: PropTypes.shape({
     title: PropTypes.string,
     price: PropTypes.number,
-    thumbnail: PropTypes.string,
+    thumbnailId: PropTypes.string,
     amount: PropTypes.number,
   }).isRequired,
 };

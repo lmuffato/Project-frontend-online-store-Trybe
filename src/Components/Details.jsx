@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Rating from './Rating';
 import CartSize from './CartSize';
+import FreeShipping from './FreeShipping';
 
 class Details extends Component {
   constructor(props) {
@@ -44,7 +45,7 @@ class Details extends Component {
     const { location } = this.props;
     const { state } = location;
     const { productDetail } = state;
-    const { title, id, price, thumbnail, condition } = productDetail;
+    const { title, id, price, thumbnail, condition, shipping } = productDetail;
     const { quantityItems, productQuantity } = this.state;
     return (
       <div>
@@ -63,6 +64,7 @@ class Details extends Component {
           Condição atual do Produto:
           {condition}
         </p>
+        {shipping.free_shipping && <FreeShipping />}
         <button
           data-testid="product-detail-add-to-cart"
           type="button"

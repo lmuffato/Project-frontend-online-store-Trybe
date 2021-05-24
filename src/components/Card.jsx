@@ -32,7 +32,7 @@ Card.propTypes = {
   price: PropTypes.number,
   availableQuantity: PropTypes.number.isRequired,
   shipping: PropTypes.shape({
-  free_shipping: PropTypes.bool,
+    free_shipping: PropTypes.bool,
   }).isRequired,
 }.isRequired;
 

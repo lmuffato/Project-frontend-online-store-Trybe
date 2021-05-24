@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class Checkout extends React.Component {
   constructor() {
@@ -32,10 +33,30 @@ class Checkout extends React.Component {
 
   render() {
     const { fullname, email, cpf, phone, cep, address, payment } = this.state;
+    const { location } = this.props;
+    const { state } = location;
+    const [title, thumbnail, price, qnt] = state;
+
     return (
       <div>
         <section>
           <h3>Revise seus produtos</h3>
+          <img src={ thumbnail } alt="imagem" />
+          {' '}
+          Título:
+          {title}
+          <br />
+
+          <p data-testid="shopping-cart-product-quantity">
+            {' '}
+            Quantidade:
+            {qnt}
+          </p>
+          <p>
+            {' '}
+            Preço:
+            {price}
+          </p>
         </section>
         <form>
           <section>
@@ -161,5 +182,12 @@ class Checkout extends React.Component {
     );
   }
 }
+Checkout.propTypes = {
+  location: PropTypes.arrayOf(PropTypes.shape({
+    title: PropTypes.string,
+    price: PropTypes.number,
+    thumbnail: PropTypes.string,
+  })).isRequired,
+};
 
 export default Checkout;

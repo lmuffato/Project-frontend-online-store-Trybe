@@ -32,7 +32,7 @@ export default class CartProduct extends Component {
     const {
       product: {
         title,
-        thumbnail,
+        thumbnailId,
         id,
         amount,
         totalPrice,
@@ -54,7 +54,7 @@ export default class CartProduct extends Component {
         <h2 data-testid="shopping-cart-product-name">
           { title }
         </h2>
-        <img src={ thumbnail } alt="Imagem Produto" />
+        <img src={ `https://http2.mlstatic.com/D_NQ_NP_${thumbnailId}-O.webp` } alt="Imagem do produto" />
         <h3>
           {`R$ ${parseFloat(totalPrice).toFixed(2)}`}
         </h3>

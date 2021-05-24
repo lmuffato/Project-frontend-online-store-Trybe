@@ -9,7 +9,9 @@ export default class ProductDetails extends Component {
     super(props);
 
     const {
-      location: { state: { product } },
+      location: {
+        state: { product },
+      },
       cartItems,
     } = this.props;
 
@@ -24,23 +26,35 @@ export default class ProductDetails extends Component {
     const { addToCart } = this.props;
     const { title, price, id, thumbnail } = this.product;
 
-    this.setState((prevState) => ({
-      amount: prevState.amount + 1,
-    }), () => {
-      const { amount } = this.state;
-      addToCart(id, {
-        title,
-        price,
-        amount,
-        id,
-        thumbnail,
-        totalPrice: amount * price,
-      });
-    });
+    this.setState(
+      (prevState) => ({
+        amount: prevState.amount + 1,
+      }),
+      () => {
+        const { amount } = this.state;
+        addToCart(id, {
+          title,
+          price,
+          amount,
+          id,
+          thumbnail,
+          totalPrice: amount * price,
+        });
+      },
+    );
   };
 
   render() {
-    const { location: { state: { product } }, totalCount, freeShipping } = this.props;
+    const {
+      location: {
+        state: {
+          product,
+          product: { title, thumbnail_id: thumbnailId },
+        },
+      },
+      totalCount,
+      freeShipping,
+    } = this.props;
 
     return (
       <section>
@@ -49,9 +63,12 @@ export default class ProductDetails extends Component {
           <ButtonCart totalCount={ totalCount } />
         </div>
         <div>
-          <h2 data-testid="product-detail-name">{ product.title }</h2>
-          { freeShipping(product) }
-          <img src={ product.thumbnail } alt="Imagem do produto" />
+          <h2 data-testid="product-detail-name">{title}</h2>
+          {freeShipping(product)}
+          <img
+            src={ `https://http2.mlstatic.com/D_NQ_NP_${thumbnailId}-O.webp` }
+            alt="Imagem do produto"
+          />
         </div>
         <button
           type="button"

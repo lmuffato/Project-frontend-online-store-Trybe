@@ -29,6 +29,7 @@ class ShoppingCartPage extends React.Component {
         price,
         id,
         quantity: q,
+        availableQuantity: relativeProduct.available_quantity,
       };
       return cartProduct;
     });

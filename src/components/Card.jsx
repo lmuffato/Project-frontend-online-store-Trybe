@@ -7,6 +7,7 @@ class Card extends React.Component {
   render() {
     const product = this.props;
     const { title, price, image, availableQuantity } = this.props;
+    console.log(availableQuantity);
     return (
       <div className="card">
         <Link

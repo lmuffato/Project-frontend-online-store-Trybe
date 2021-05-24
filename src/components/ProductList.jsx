@@ -15,6 +15,7 @@ class ProductList extends Component {
             title={ item.title }
             image={ item.thumbnail }
             price={ item.price }
+            availableQuantity={ item.available_quantity }
             data={ data }
           />
           <button

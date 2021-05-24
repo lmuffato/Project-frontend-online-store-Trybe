@@ -15,6 +15,7 @@ class ShoppingCart extends React.Component {
     const { quantity } = this.state;
     const { product } = this.props;
     const { availableQuantity } = product;
+    console.log(availableQuantity);
 
     if (quantity < availableQuantity) {
       this.setState((prevState) => ({

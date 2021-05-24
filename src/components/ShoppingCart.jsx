@@ -12,9 +12,15 @@ class ShoppingCart extends React.Component {
   }
 
   addClick = () => {
-    this.setState((prevState) => ({
-      quantity: prevState.quantity + 1,
-    }));
+    const { quantity } = this.state;
+    const { product } = this.props;
+    const { availableQuantity } = product;
+
+    if (quantity < availableQuantity) {
+      this.setState((prevState) => ({
+        quantity: prevState.quantity + 1,
+      }));
+    }
   }
 
   subClick = () => {
@@ -67,6 +73,7 @@ ShoppingCart.propTypes = {
     image: PropTypes.string,
     price: PropTypes.number,
     quantity: PropTypes.number,
+    availableQuantity: PropTypes.number,
   }).isRequired,
 };
 

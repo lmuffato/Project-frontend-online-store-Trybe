@@ -23,5 +23,6 @@ CartItem.propTypes = {
     image: PropTypes.string,
     price: PropTypes.number,
     quantity: PropTypes.number,
+    availableQuantity: PropTypes.number,
   }).isRequired,
 };

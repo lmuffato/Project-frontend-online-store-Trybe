@@ -22,13 +22,15 @@ class ShoppingCartPage extends React.Component {
       const { q, id } = item;
       const { results } = data;
       const relativeProduct = results.filter((el) => el.id === id).shift();
-      const { title, thumbnail, price } = relativeProduct;
+      // eslint-disable-next-line camelcase
+      const { title, thumbnail, price, available_quantity } = relativeProduct;
       const cartProduct = {
         title,
         image: thumbnail,
         price,
         id,
         quantity: q,
+        availableQuantity: available_quantity,
       };
       return cartProduct;
     });

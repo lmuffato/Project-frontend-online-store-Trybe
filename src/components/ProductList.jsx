@@ -15,6 +15,7 @@ class ProductList extends Component {
             title={ item.title }
             image={ item.thumbnail }
             price={ item.price }
+            shipping={ item.shipping }
             data={ data }
           />
           <button

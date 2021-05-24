@@ -20,12 +20,13 @@ class DetailsPage extends React.Component {
   handleButton = () => {
     const { location } = this.props;
     const { state } = location;
-    this.setState({
+    this.setState((prevState) => ({
+      ...prevState,
       title: state[0],
       price: state[1],
       thumbnail: state[2],
-    });
-    console.log(this.state);
+    }
+    ));
   }
 
   render() {
@@ -33,7 +34,6 @@ class DetailsPage extends React.Component {
     const { state } = location;
     const [title, price, thumbnail] = state;
     const { qnt } = this.state;
-
     return (
       <div>
         <Link to="/"> Voltar </Link>

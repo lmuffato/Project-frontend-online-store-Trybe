@@ -2,17 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 export default class CartProduct extends Component {
-  constructor(props) {
-    super(props);
-
-    const { product: { price, id }, cartItems } = this.props;
-
-    this.state = {
-      valueProduct: price,
-      quantity: cartItems[id].amount || 0,
-    };
-  }
-
   componentDidMount() {
     const { increaseTotal, product } = this.props;
     increaseTotal(product.totalPrice);
@@ -30,34 +19,34 @@ export default class CartProduct extends Component {
 
   decreaseProduct = () => {
     const { decreaseTotal } = this.props;
-    const { product, product: { price } } = this.props;
-    product.amount -= 1;
-    product.totalPrice -= price;
-    decreaseTotal(price);
+    const { product, product: { price, amount } } = this.props;
+
+    if (amount !== 1) {
+      product.amount -= 1;
+      product.totalPrice -= price;
+      decreaseTotal(price);
+    }
   }
 
   render() {
-    // console.log(this.props);
     const {
       product: {
         title,
-        thumbnail,
+        thumbnailId,
         id,
         amount,
         totalPrice,
       },
       deleteItem,
-      total } = this.props;
+    } = this.props;
 
-    const { valueProduct, quantity } = this.state;
-    console.log(quantity);
     return (
       <div>
         <button
           type="button"
           name={ id }
           onClick={
-            (event) => deleteItem(event, valueProduct)
+            (event) => deleteItem(event, totalPrice)
           }
         >
           X
@@ -65,9 +54,9 @@ export default class CartProduct extends Component {
         <h2 data-testid="shopping-cart-product-name">
           { title }
         </h2>
-        <img src={ thumbnail } alt="Imagem Produto" />
+        <img src={ `https://http2.mlstatic.com/D_NQ_NP_${thumbnailId}-O.webp` } alt="Imagem do produto" />
         <h3>
-          { totalPrice }
+          {`R$ ${parseFloat(totalPrice).toFixed(2)}`}
         </h3>
         <h4 data-testid="shopping-cart-product-quantity">
           { amount }
@@ -88,7 +77,6 @@ export default class CartProduct extends Component {
         >
           -
         </button>
-        <div>{total}</div>
       </div>
     );
   }

@@ -21,7 +21,7 @@ export default class Product extends Component {
       title,
       price,
       id,
-      thumbnail,
+      thumbnail_id: thumbnailId,
       available_quantity: availableQuantity,
     } = product;
 
@@ -31,7 +31,7 @@ export default class Product extends Component {
       const { amount } = this.state;
       addToCart(id, {
         title,
-        thumbnail,
+        thumbnailId,
         price,
         amount,
         id,
@@ -41,24 +41,17 @@ export default class Product extends Component {
     });
   };
 
-  FreeShipping = () => {
-    const { product: { shipping } } = this.props;
-    const FreeShipping = shipping.free_shipping;
-    console.log(FreeShipping);
-    if (FreeShipping) return (<div data-testid="free-shipping"> Frete Grátis</div>);
-  }
-
   render() {
-    const { product } = this.props;
-    const { title, price, thumbnail, id } = product;
+    const { product, freeShipping } = this.props;
+    const { title, price, thumbnail_id: thumbnailId, id } = product;
 
     return (
       <>
         <div data-testid="product">
           <h2>{title}</h2>
-          { this.FreeShipping() }
-          <img src={ thumbnail } alt="Imagem do produto" />
-          <h3>{price}</h3>
+          { freeShipping(product) }
+          <img src={ `https://http2.mlstatic.com/D_NQ_NP_${thumbnailId}-O.webp` } alt="Imagem do produto" />
+          <h3>{`R$ ${parseFloat(price).toFixed(2)}`}</h3>
           <div className="cart-button">
             <button
               className="add-cart-button"
@@ -86,7 +79,8 @@ Product.propTypes = {
   product: PropTypes.shape({
     title: PropTypes.string,
     price: PropTypes.number,
-    thumbnail: PropTypes.string,
+    thumbnail_id: PropTypes.string,
+    thumbnailId: PropTypes.string,
     id: PropTypes.string,
     available_quantity: PropTypes.number,
     shipping: PropTypes.shape({
@@ -94,5 +88,6 @@ Product.propTypes = {
     }).isRequired,
   }).isRequired,
   addToCart: PropTypes.func.isRequired,
-  cartItems: PropTypes.shape.isRequired,
+  cartItems: PropTypes.shape({}).isRequired,
+  freeShipping: PropTypes.func.isRequired,
 };

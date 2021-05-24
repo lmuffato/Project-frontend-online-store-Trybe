@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Form } from 'react-bootstrap';
-// import { FaBarcode } from 'react-icons/fa';
+import { FaBarcode } from 'react-icons/fa';
 import BuyerData from './form/BuyerData';
 import PaymentCard from './form/PaymentCard';
 
@@ -18,7 +18,7 @@ export default class UserDataForm extends Component {
                 name="payment-method"
                 id="payment-ticket"
               />
-              {/* <FaBarcode className="payment-icon" /> */}
+              <FaBarcode className="payment-icon" />
             </Form.Group>
           </Form.Group>
           <Form.Group controlId="card-method-container">

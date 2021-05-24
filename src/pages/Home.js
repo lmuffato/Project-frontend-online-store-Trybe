@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import SideBar from '../components/SideBar';
-import Product from '../components/Product';
 import ButtonCart from '../components/ButtonCart';
+import Product from '../components/Product';
 import * as api from '../services/api';
 
 export default class Home extends Component {
@@ -46,7 +46,7 @@ export default class Home extends Component {
 
   render() {
     const { products, loading } = this.state;
-    const { addToCart, cartItems } = this.props;
+    const { addToCart, cartItems, totalCount, freeShipping } = this.props;
 
     return (
       <main>
@@ -63,7 +63,7 @@ export default class Home extends Component {
           </button>
         </label>
         <SideBar handleChange={ this.handleChange } />
-        <ButtonCart cart={ cartItems } />
+        <ButtonCart totalCount={ totalCount } />
         <section>
           { products.length ? '' : <span>Nenhum produto foi encontrado</span> }
           { !loading ? products.map((product, index) => (<Product
@@ -71,6 +71,7 @@ export default class Home extends Component {
             product={ product }
             addToCart={ addToCart }
             cartItems={ cartItems }
+            freeShipping={ freeShipping }
           />)) : 'Carregando...' }
         </section>
       </main>
@@ -79,6 +80,6 @@ export default class Home extends Component {
 }
 
 Home.propTypes = {
-  cartItems: PropTypes.object,
+  cartItems: PropTypes.shape({}),
   addToCart: PropTypes.func,
 }.isRequired;

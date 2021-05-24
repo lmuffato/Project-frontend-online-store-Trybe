@@ -12,18 +12,55 @@ class App extends Component {
     super(props);
     this.state = {
       cartItems: {},
+      totalCount: 0,
     };
   }
 
+  componentDidMount() {
+    this.getLocalStorage();
+  }
+
   addToCart = (id, productInfo) => {
-    this.setState(({ cartItems }) => ({
-      cartItems: { ...cartItems, [id]: productInfo },
-    }));
+    this.setState(
+      ({ cartItems }) => ({
+        cartItems: { ...cartItems, [id]: productInfo },
+      }),
+      () => {
+        // this.sumTotalProducts();
+        this.setLocalStorage();
+      },
+    );
   };
 
-  render() {
+  setLocalStorage = () => {
     const { cartItems } = this.state;
-    // console.log(cartItems);
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+  };
+
+  getLocalStorage = () => {
+    const cartItems = JSON.parse(localStorage.getItem('cartItems'));
+    if (cartItems) {
+      this.setState({ cartItems });
+    }
+  };
+
+  // sumTotalProducts = () => {
+  //   const { cartItems } = this.state;
+  //   const totalCount = Object.values(cartItems).reduce(
+  //     (a, b) => a + b.amount,
+  //     0,
+  //   );
+  //   this.setState({ totalCount });
+  // };
+
+  freeShipping = (product) => {
+    const { shipping } = product;
+    const freeShipping = shipping.free_shipping;
+    if (freeShipping) return (<div data-testid="free-shipping">Frete Grátis</div>);
+  }
+
+  render() {
+    const { cartItems, totalCount } = this.state;
 
     return (
       <BrowserRouter>
@@ -32,12 +69,22 @@ class App extends Component {
             exact
             path="/"
             render={ () => (
-              <Home addToCart={ this.addToCart } cartItems={ cartItems } />
+              <Home
+                addToCart={ this.addToCart }
+                cartItems={ cartItems }
+                totalCount={ totalCount }
+                freeShipping={ this.freeShipping }
+              />
             ) }
           />
           <Route
             path="/shoppingcart"
-            render={ () => <ShoppingCart cartItems={ cartItems } /> }
+            render={ () => (
+              <ShoppingCart
+                setLocalStorage={ this.setLocalStorage }
+                cartItems={ cartItems }
+              />
+            ) }
           />
           <Route
             path="/checkout"
@@ -49,6 +96,8 @@ class App extends Component {
               <ProductDetails
                 addToCart={ this.addToCart }
                 cartItems={ cartItems }
+                totalCount={ totalCount }
+                freeShipping={ this.freeShipping }
                 { ...props }
               />
             ) }

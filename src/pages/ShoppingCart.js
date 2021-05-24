@@ -8,27 +8,25 @@ export default class ShoppingCart extends Component {
   constructor(props) {
     super(props);
 
-    // const {
-    //   location: { cartItems = {} },
-    // } = this.props;
-
     this.state = {
-      // cartItems,
       total: 0,
     };
+    this.setLocalStorage = props.setLocalStorage;
   }
 
   increaseTotal = (value) => {
     this.setState(({ total }) => ({
       total: total + value,
     }));
-  }
+    this.setLocalStorage();
+  };
 
   decreaseTotal = (value) => {
     this.setState(({ total }) => ({
       total: total - value,
     }));
-  }
+    this.setLocalStorage();
+  };
 
   deleteItem = (event, value) => {
     const { name } = event.target;
@@ -37,24 +35,29 @@ export default class ShoppingCart extends Component {
     this.decreaseTotal(value);
 
     delete cartItems[name];
-    this.setState({ cartItems });
-  }
+    this.setLocalStorage();
+  };
 
   validateCart = () => {
     const { total } = this.state;
     const { cartItems } = this.props;
 
     if (Object.keys(cartItems).length) {
-      return Object.entries(cartItems)
-        .map((product, i) => (<CartProduct
-          key={ i }
-          product={ product[1] }
-          deleteItem={ this.deleteItem }
-          cartItems={ cartItems }
-          increaseTotal={ this.increaseTotal }
-          decreaseTotal={ this.decreaseTotal }
-          total={ total }
-        />));
+      return (
+        <div>
+          {Object.values(cartItems).map((product, i) => (
+            <CartProduct
+              key={ i }
+              product={ product }
+              deleteItem={ this.deleteItem }
+              cartItems={ cartItems }
+              increaseTotal={ this.increaseTotal }
+              decreaseTotal={ this.decreaseTotal }
+            />
+          ))}
+          <span>{`R$ ${parseFloat(total).toFixed(2)}`}</span>
+        </div>
+      );
     }
 
     return (
@@ -80,6 +83,6 @@ export default class ShoppingCart extends Component {
 }
 
 ShoppingCart.propTypes = {
-  cartItems: PropTypes.shape({
-  }).isRequired,
+  cartItems: PropTypes.shape({}).isRequired,
+  setLocalStorage: PropTypes.func.isRequired,
 };

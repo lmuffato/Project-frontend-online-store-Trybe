@@ -397,7 +397,8 @@
   }
 
   .contentStar {
-    color: white;
+    color: yellow;
+    display: flex;
     margin: 10px auto;
     width: 90%;
   }
@@ -414,7 +415,7 @@
 
   .btnOptionSubmit {
     align-self: center;
-    background-color: var(--green-color-600);
+    background-color: var(--red-color-600);
     border: none;
     border-radius: 10px;
     color: white;

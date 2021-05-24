@@ -33,7 +33,7 @@ class App extends Component {
     localStorage.setItem('cartList', JSON.stringify(cartList));
   };
 
-  handleClickAddCart = async (event) => {
+  handleClickAddCart = (event) => {
     const elementos = [...event.target.parentNode.children];
     const product = [...elementos[0].children];
     const { cartList } = this.state;
@@ -65,7 +65,7 @@ class App extends Component {
     }
   };
 
-  handleDetailsToCart = async (product, quant) => {
+  handleDetailsToCart = (product, quant) => {
     const { cartList } = this.state;
     const checked = cartList.find(({ title }) => title === product.title);
     if (checked === undefined) {
@@ -90,6 +90,10 @@ class App extends Component {
       });
     }
   }
+
+  handleClickResetState = () => {
+    this.setState({ cartList: [] });
+  };
 
   changeQuantProductLength = (quant, productTitle) => {
     const { cartList } = this.state;
@@ -143,7 +147,11 @@ class App extends Component {
               cartProductLength={ getProductLength(cartList) }
             />) }
         />
-        <Route path="/checkout" render={ (props) => <Checkout { ...props } /> } />
+        <Route
+          path="/checkout"
+          render={ (props) => <Checkout { ...props } /> }
+          handleClickResetState={ this.handleClickResetState }
+        />
       </Router>
     );
   }

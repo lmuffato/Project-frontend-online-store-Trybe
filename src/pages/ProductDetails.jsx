@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { RiShoppingCartFill } from 'react-icons/ri';
 import { FaBoxOpen } from 'react-icons/fa';
 import { TiArrowBack } from 'react-icons/ti';
+import { AiOutlineStar, AiFillStar } from 'react-icons/ai';
 
 import styles from './styles.module.css';
 
@@ -53,7 +54,6 @@ class ProductDetails extends Component {
           <span className={ styles.titleDetails } data-testid="product-detail-name">
             { title }
           </span>
-          <span>{ `Qtd. Disponível: ${estoque}` }</span>
           <div className={ styles.contentPriceFree }>
             <span className={ styles.priceProductDetails }>
               {`R$${(price * quant).toFixed(2)}`}
@@ -104,7 +104,13 @@ class ProductDetails extends Component {
               name="email"
               placeholder="E-mail"
             />
-            <div className={ styles.contentStar }>estrelas</div>
+            <div className={ styles.contentStar }>
+              <AiFillStar />
+              <AiFillStar />
+              <AiFillStar />
+              <AiFillStar />
+              <AiOutlineStar />
+            </div>
             <textarea
               className={ styles.contentTextOption }
               data-testid="product-detail-evaluation"

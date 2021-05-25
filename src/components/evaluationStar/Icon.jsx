@@ -26,7 +26,7 @@ function Icon(props) {
       onMouseLeave={ () => onMouseLeave() }
       onClick={ () => onSaveRating(index) }
       onKeyUp={ () => onSaveRating(index) }
-      role="avaliation"
+      role="combobox"
     >
       <StarIcon fill={ fill } />
     </div>

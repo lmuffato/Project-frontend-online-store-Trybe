@@ -1,15 +1,18 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import EvaluationStar from "./evaluationStar/EvaluationStar";
+import React, { Component } from 'react';
+import EvaluationStar from './evaluationStar/EvaluationStar';
+import StarComent from './evaluationStar/StarComent';
 
+// referencias: https://medium.com/@lameckanao/armazenando-e-manipulando-dados-no-localstorage-7bcc901ba12b
 export default class EvaluetionForm extends Component {
   constructor() {
     super();
+    const obj = JSON.parse(localStorage.getItem('evaluation'));
     this.state = {
       stars: 0,
+      storageItems: obj,
     };
+    this.functionValue = this.functionValue.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.handleStar = this.handleStar.bind(this);
   }
 
   componentDidUpdate(_prevProps, prevState) {
@@ -21,50 +24,73 @@ export default class EvaluetionForm extends Component {
 
   handleStar(value) {
     console.log('index', value);
-    if (value) {
+    if (value || value === 0) {
       this.setState({ stars: value });
     }
   }
 
-  handleChange(event) {
-    const { value, name } = event.target;
-    this.setState({ [name]: value });
+  handleChange(field, value) {
+    this.setState({ [field]: value });
+  }
+
+  functionValue(event) {
+    event.preventDefault();
+    const { stars, email, coment } = this.state;
+    const object = { stars, email, coment };
+    if (localStorage.getItem('evaluation')) {
+      localStorage.setItem(
+        'evaluation',
+        JSON.stringify([...JSON.parse(localStorage.getItem('evaluation')), object]),
+      );
+    }
+    if (!localStorage.getItem('evaluation')) {
+      localStorage.setItem('evaluation', JSON.stringify([object]));
+    }
+    const obj = JSON.parse(localStorage.getItem('evaluation'));
+    this.setState({ storageItems: obj });
+    this.setState({ email: '', coment: '', stars: 0 });
+    // this.handleStar(0);/
   }
 
   render() {
-    const { stars, evaluationText, evaluationEmail } = this.state;
-    const { onChangeEmail, functionValue } = this.props;
+    const { coment, email, storageItems, stars } = this.state;
+    console.log(storageItems);
     return (
       <div>
         <h2>Avaliações</h2>
         <form>
           <input
+            value={ email }
             placeholder="Email"
-            onChange={this.handleChange}
+            onChange={ (event) => this.handleChange('email', event.target.value) }
             type="email"
             name="evaluetionEmail"
           />
           <textarea
-            data-testid="product-detail-evaluetion"
+            value={ coment }
+            data-testid="product-detail-evaluation"
             placeholder="Mensagem (opcional)"
             name="evaluetionText"
-            onChange={this.handleChange}
+            onChange={ (event) => this.handleChange('coment', event.target.value) }
           />
-          <input onClick={functionValue} value="Avaliar" type="submit" />
-          <EvaluationStar onChange={ this.handleStar } />
+          <button onClick={ this.functionValue } value="Avaliar" type="button">
+            Avaliar
+          </button>
+          <EvaluationStar
+            stars={ stars }
+            onChange={ (value) => this.handleStar(value) }
+          />
         </form>
         <div>
-          <p>{evaluationText}</p>
-          <div>{stars}</div>
-          <p>{evaluationEmail}</p>
+          { storageItems ? storageItems
+            .map((oobj) => (
+              <div key={ oobj.email }>
+                <p>{ oobj.email }</p>
+                <p>{ oobj.coment }</p>
+                <StarComent setStar={ oobj.stars } />
+              </div>)) : '' }
         </div>
       </div>
     );
   }
 }
-
-EvaluetionForm.propTypes = {
-  onChangeEmail: PropTypes.func.isRequired,
-  onChangeTextAvaliation: PropTypes.func.isRequired,
-  functionValue: PropTypes.func.isRequired,
-};

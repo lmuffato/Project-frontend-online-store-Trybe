@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Icon from './Icon';
 import './styleStars.css';
+
 // referencia: https://ichi.pro/pt/como-construir-um-componente-de-classificacao-por-estrelas-no-react-240588683569051
 // https://www.youtube.com/watch?v=Pl2Fn6PIpaI&ab_channel=LevelUpDeveloper
 export default class EvaluationStar extends Component {
@@ -15,13 +16,12 @@ export default class EvaluationStar extends Component {
     this.onMouseLeave = this.onMouseLeave.bind(this);
     this.onSaveRating = this.onSaveRating.bind(this);
     this.functionArr = this.functionArr.bind(this);
+    this.setRating = this.setRating.bind(this);
   }
 
   componentDidUpdate(_prevProps, prevState) {
-    const { rating, hoverRating } = this.state;
-    if (prevState.rating !== rating) return this.onSaveRating;
-    if (prevState.hoverRating !== hoverRating) return this.onMouseEnter;
-    if (prevState.hoverRating !== hoverRating) return this.onMouseLeave;
+    const { rating } = this.state;
+    if (prevState.rating !== rating) return this.setRating;
   }
 
   onMouseEnter(index) {
@@ -35,8 +35,14 @@ export default class EvaluationStar extends Component {
   onSaveRating(index) {
     const { onChange } = this.props;
     this.setState({ rating: index });
-    console.log(index);
     onChange(index);
+  }
+
+  setRating() {
+    const { stars } = this.props;
+    if (stars === 0) {
+      this.setState({ rating: stars });
+    }
   }
 
   functionArr() {

@@ -10,7 +10,7 @@ class CheckoutProductList extends Component {
     return (
       <section>
         {items.map((item) => <CheckoutProductsCard item={ item } key={ item.id } />)}
-        <p>{`Total:${totalPrice}`}</p>
+        <p className="checkout-totalPrice">{`Total: R$${totalPrice}`}</p>
       </section>
     );
   }

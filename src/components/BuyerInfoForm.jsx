@@ -4,9 +4,9 @@ import React, { Component } from 'react';
 class BuyerInfoForm extends Component {
   render() {
     return (
-      <form>
-        <label htmlFor="buyer-info">
-          <h1>Suas informações</h1>
+      <form className="checkout-form">
+        <h1>Suas informações</h1>
+        <label htmlFor="buyer-info" className="checkout-label">
           <input
             type="text"
             placeholder="Nome Completo"

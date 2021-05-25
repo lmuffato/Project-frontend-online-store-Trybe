@@ -8,10 +8,12 @@ class Checkout extends Component {
   render() {
     const { location: { state: { carts } } } = this.props;
     return (
-      <main>
-        <CheckoutProductList items={ carts } />
-        <BuyerInfoForm />
-        <PaymentMethods />
+      <main className="checkout-page">
+        <section className="checkout-prod-list">
+          <CheckoutProductList items={ carts } />
+        </section>
+        <BuyerInfoForm className="buyer-info-data" />
+        <PaymentMethods className="payment-methods" />
       </main>
     );
   }

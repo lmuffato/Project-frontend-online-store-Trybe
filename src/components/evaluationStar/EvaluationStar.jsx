@@ -6,8 +6,8 @@ import './styleStars.css';
 // referencia: https://ichi.pro/pt/como-construir-um-componente-de-classificacao-por-estrelas-no-react-240588683569051
 // https://www.youtube.com/watch?v=Pl2Fn6PIpaI&ab_channel=LevelUpDeveloper
 export default class EvaluationStar extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       rating: 0,
       hoverRating: 0,
@@ -16,11 +16,14 @@ export default class EvaluationStar extends Component {
     this.onMouseLeave = this.onMouseLeave.bind(this);
     this.onSaveRating = this.onSaveRating.bind(this);
     this.functionArr = this.functionArr.bind(this);
+    this.setRating = this.setRating.bind(this);
   }
 
-  componentDidUpdate(_prevProps, prevState) {
-    const { rating } = this.state;
-    if (prevState.rating !== rating) return this.setRating;
+  componentDidUpdate(prevProps) {
+    const { stars } = this.props;
+    if (prevProps.stars !== stars) {
+      return this.setRating();
+    }
   }
 
   onMouseEnter(index) {
@@ -40,7 +43,9 @@ export default class EvaluationStar extends Component {
   setRating() {
     const { stars } = this.props;
     if (stars === 0) {
-      this.setState({ rating: stars });
+      this.setState({
+        rating: stars,
+      });
     }
   }
 
@@ -57,6 +62,7 @@ export default class EvaluationStar extends Component {
   render() {
     const { rating, hoverRating } = this.state;
     const array = this.functionArr();
+    // console.log('stars', this.props.stars, 'rating', rating);
     return (
       <div className="box flex" role="radiogroup">
         {array.map((index) => (

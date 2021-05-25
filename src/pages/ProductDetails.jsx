@@ -7,9 +7,7 @@ export default class ProductDetails extends Component {
   constructor(props) {
     super(props);
     const { match } = this.props;
-    console.log(match);
     const { params } = match;
-    console.log(params);
     const { category, id } = params;
     this.state = {
       category,
@@ -28,15 +26,12 @@ export default class ProductDetails extends Component {
       .getProductsFromCategoryAndQuery(category);
     const productsArray = response.results;
     const productFound = productsArray.find((product) => product.id === id);
-    console.log(productFound);
     this.setState({ selectedProduct: productFound });
   }
 
   render() {
     const { selectedProduct } = this.state;
     const { price, title, thumbnail, attributes } = selectedProduct;
-    console.log(attributes);
-    console.log('elisa');
     return (
       <div>
         <h2 data-testid="product-detail-name">{ title }</h2>

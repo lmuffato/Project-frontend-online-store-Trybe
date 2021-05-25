@@ -19,8 +19,7 @@ function Icon(props) {
       return 'yellow';
     } if (!hoverRating && rating >= index) {
       return 'yellow';
-    }
-    return 'none';
+    } return 'none';
   }, [rating, hoverRating, index]);
   return (
     <div

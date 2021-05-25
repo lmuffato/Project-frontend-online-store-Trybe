@@ -23,7 +23,7 @@ export default class EvaluetionForm extends Component {
   }
 
   handleStar(value) {
-    console.log('index', value);
+    // console.log('index', value);
     if (value || value === 0) {
       this.setState({ stars: value });
     }
@@ -49,12 +49,11 @@ export default class EvaluetionForm extends Component {
     const obj = JSON.parse(localStorage.getItem('evaluation'));
     this.setState({ storageItems: obj });
     this.setState({ email: '', coment: '', stars: 0 });
-    this.handleStar(0);
   }
 
   render() {
     const { coment, email, storageItems, stars } = this.state;
-    console.log(storageItems);
+    // console.log(storageItems);
     return (
       <div>
         <h2>Avaliações</h2>

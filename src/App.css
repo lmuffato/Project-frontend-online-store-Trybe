@@ -52,3 +52,80 @@
 .cart-item img {
   width: 150px;
 }
+
+.checkout-page {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.checkout-prod-list {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  width: 100%;
+}
+
+.checkout-products-card {
+  align-items: center;
+  border: 1px solid black;
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.checkout-products-card p {
+  margin: 0 50px;
+}
+
+.checkout-card-title {
+  font-size: 18px;
+  text-align: center;
+  width: 300px;
+}
+
+.checkout-products-card img {
+  padding-right: 50px;
+  width: 100px;
+}
+
+.checkout-card-numbers {
+  font-size: 25px;
+}
+
+.checkout-totalPrice {
+  font-size: 25px;
+  text-align: center;
+}
+
+.checkout-form {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.checkout-label {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: stretch;
+  width: 50%;
+}
+
+.checkout-label input {
+  width: 200px;
+}
+
+.payment-method-form {
+  align-items: center;
+  display: flex;
+  justify-content: space-around;
+}
+
+.payment-method-form img {
+  height: 80px;
+  margin-right: 50px;
+  width: 100px;
+}

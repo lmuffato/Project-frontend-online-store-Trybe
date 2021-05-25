@@ -26,7 +26,7 @@ class App extends Component {
         cartItems: { ...cartItems, [id]: productInfo },
       }),
       () => {
-        // this.sumTotalProducts();
+        this.sumTotalProducts();
         this.setLocalStorage();
       },
     );
@@ -44,14 +44,14 @@ class App extends Component {
     }
   };
 
-  // sumTotalProducts = () => {
-  //   const { cartItems } = this.state;
-  //   const totalCount = Object.values(cartItems).reduce(
-  //     (a, b) => a + b.amount,
-  //     0,
-  //   );
-  //   this.setState({ totalCount });
-  // };
+  sumTotalProducts = () => {
+    const { cartItems } = this.state;
+    const totalCount = Object.values(cartItems).reduce(
+      (a, b) => a + b.amount,
+      0,
+    );
+    this.setState({ totalCount });
+  };
 
   freeShipping = (product) => {
     const { shipping } = product;

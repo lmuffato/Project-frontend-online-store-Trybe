@@ -6,55 +6,55 @@ class CartShopPage extends React.Component {
   constructor() {
     super();
     this.state = {
-      quant: '',
+      quant: 1,
       totalPrice: '',
+      products: [],
     };
   }
 
   componentDidMount() {
-    this.onMount();
+    this.getFromLocalStorage();
   }
 
-  onMount = () => {
-    const { location } = this.props;
-    const { state } = location;
-    if (state !== undefined) {
-      this.setState({
-        quant: Number(state[3]),
-        totalPrice: Number(state[1]),
+  // qntFromStorage = () => {
+  //   const { products } = this.state;
+  //   products.map((product) => this.setState({
+  //     quant: product[3],
+  //   }), console.log(this.state.quant));
+  // }
 
-      });
-    }
+  getFromLocalStorage = () => {
+    const parsedProducts = JSON.parse(localStorage.getItem('products')) || [];
+    this.setState({
+      products: parsedProducts,
+    });
   }
 
   handlePlusQnt = () => {
-    this.setState((prevState) => ({
-      quant: prevState.quant + 1,
+    this.setState((prev) => ({
+      quant: prev.value + 1,
     }));
   }
 
   handleMinusQnt = () => {
-    this.setState((prevState) => ({
-      quant: prevState.quant - 1,
+    this.setState((prev) => ({
+      quant: prev.quant - 1,
     }));
   }
 
   validation = () => {
-    const { location } = this.props;
-    const { state } = location;
-    const { quant, totalPrice } = this.state;
-    if (state === undefined) {
+    const { quant, totalPrice, products } = this.state;
+    console.log(quant);
+    if (products.length === 0) {
       return <h1 data-testid="shopping-cart-empty-message">Seu carrinho está vazio</h1>;
     }
-
-    return (
-      <div data-testid="shopping-cart-product-name">
-        <img src={ state[2] } alt="imagem" />
+    return products.map((product) => (
+      <div key={ Math.random() * 1000 } data-testid="shopping-cart-product-name">
+        <img style={ { width: '100px' } } src={ product[2] } alt="imagem" />
         {' '}
         Título:
-        {state[0]}
+        {product[0]}
         <br />
-
         <button
           data-testid="product-increase-quantity"
           onClick={ this.handlePlusQnt }
@@ -81,19 +81,10 @@ class CartShopPage extends React.Component {
           Preço:
           {totalPrice}
         </p>
-        <Link
-          to={ {
-            pathname: '/checkout',
-            state: [state[0], state[2], totalPrice, quant],
-          } }
 
-        >
-          <button data-testid="checkout-products" type="button">
-            Finalizar Compra
-          </button>
-        </Link>
       </div>
-    );
+
+    ));
   }
 
   render() {
@@ -102,6 +93,16 @@ class CartShopPage extends React.Component {
         <Link to="/"> Voltar </Link>
         <h1> Carrinho de Compras </h1>
         { this.validation() }
+        <div>
+          <Link
+            to="/checkout"
+
+          >
+            <button data-testid="checkout-products" type="button">
+              Finalizar Compra
+            </button>
+          </Link>
+        </div>
       </div>
     );
   }

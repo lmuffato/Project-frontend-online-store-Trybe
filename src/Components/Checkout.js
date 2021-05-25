@@ -18,6 +18,10 @@ class Checkout extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentDidMount() {
+    this.getFromLocalStorage();
+  }
+
   handleChange({ target }) {
     const { name } = target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -31,11 +35,18 @@ class Checkout extends React.Component {
     e.preventDefault();
   }
 
+  // getFromLocalStorage = () => {
+  //   const parsedProducts = JSON.parse(localStorage.getItem('products')) || [];
+  //   this.setState({
+  //     products: parsedProducts,
+  //   });
+  // }
+
   render() {
     const { fullname, email, cpf, phone, cep, address, payment } = this.state;
     const { location } = this.props;
     const { state } = location;
-    const [title, thumbnail, price, qnt] = state;
+    const [title, thumbnail, qnt, price] = state;
 
     return (
       <div>

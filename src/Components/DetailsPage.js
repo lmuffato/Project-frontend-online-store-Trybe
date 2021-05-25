@@ -3,30 +3,18 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 class DetailsPage extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
-      title: '',
-      price: 1,
-      thumbnail: '',
       qnt: 1,
     };
   }
 
-  componentDidMount() {
-    this.handleButton();
-  }
-
-  handleButton = () => {
-    const { location } = this.props;
-    const { state } = location;
-    this.setState((prevState) => ({
-      ...prevState,
-      title: state[0],
-      price: state[1],
-      thumbnail: state[2],
-    }
-    ));
+  handleButton = (title, price, thumbnail, qnt) => {
+    const parsedProducts = JSON.parse(localStorage.getItem('products')) || [];
+    const selectedProduct = [title, price, thumbnail, qnt];
+    parsedProducts.push(selectedProduct);
+    localStorage.setItem('products', JSON.stringify(parsedProducts));
   }
 
   render() {
@@ -59,14 +47,12 @@ class DetailsPage extends React.Component {
           <button
             type="submit"
             data-testid="product-detail-add-to-cart"
-            onClick={ this.handleButton }
+            onClick={ () => this.handleButton(title, price, thumbnail, qnt) }
           >
             Adicionar ao carrinho
           </button>
           <Link
-            to={ {
-              pathname: '/CartShopPage', state: [title, price, thumbnail, qnt],
-            } }
+            to="/CartShopPage"
           >
             <button type="submit" data-testid="shopping-cart-button">
               Ir para o carrinho

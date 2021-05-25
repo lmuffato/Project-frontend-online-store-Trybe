@@ -20,7 +20,6 @@ export default class EvaluationStar extends Component {
   setRating() {
     const { setStar } = this.props;
     if (setStar) {
-      console.log(setStar);
       this.setState({ rating: setStar });
     }
   }
@@ -37,7 +36,6 @@ export default class EvaluationStar extends Component {
 
   render() {
     const { rating } = this.state;
-    console.log(rating);
     const array = this.functionArr();
     return (
       <div className="box flex">

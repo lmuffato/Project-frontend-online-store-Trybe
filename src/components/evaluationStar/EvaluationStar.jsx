@@ -8,6 +8,9 @@ import './styleStars.css';
 export default class EvaluationStar extends Component {
   constructor() {
     super();
+    // const { stars } = this.props;
+    // const number = stars;
+    // console.log(number);
     this.state = {
       rating: 0,
       hoverRating: 0,
@@ -16,7 +19,7 @@ export default class EvaluationStar extends Component {
     this.onMouseLeave = this.onMouseLeave.bind(this);
     this.onSaveRating = this.onSaveRating.bind(this);
     this.functionArr = this.functionArr.bind(this);
-    this.setRating = this.setRating.bind(this);
+    // this.setRating = this.setRating.bind(this);
   }
 
   componentDidUpdate(_prevProps, prevState) {
@@ -36,6 +39,7 @@ export default class EvaluationStar extends Component {
     const { onChange } = this.props;
     this.setState({ rating: index });
     onChange(index);
+    console.log(index);
   }
 
   setRating() {
@@ -59,7 +63,7 @@ export default class EvaluationStar extends Component {
     const { rating, hoverRating } = this.state;
     const array = this.functionArr();
     return (
-      <div className="box flex">
+      <div className="box flex" role="radiogroup">
         {array.map((index) => (
           <Icon
             key={ index }

@@ -49,7 +49,7 @@ export default class EvaluetionForm extends Component {
     const obj = JSON.parse(localStorage.getItem('evaluation'));
     this.setState({ storageItems: obj });
     this.setState({ email: '', coment: '', stars: 0 });
-    // this.handleStar(0);/
+    this.handleStar(0);
   }
 
   render() {

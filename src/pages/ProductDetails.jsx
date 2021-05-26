@@ -47,7 +47,6 @@ export default class ProductDetails extends Component {
             ))}
           </ul>
         )}
-       
         <ButtonAdd
           classDataTest="product-detail-add-to-cart"
           newCartItem={ selectedProduct }

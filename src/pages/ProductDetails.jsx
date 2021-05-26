@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import * as API from '../services/api';
+import ButtonAdd from '../components/ButtonAdd';
 
 export default class ProductDetails extends Component {
   constructor(props) {
@@ -50,6 +51,10 @@ export default class ProductDetails extends Component {
             ))}
           </ul>
         )}
+        <ButtonAdd
+          classDataTest="product-detail-add-to-cart"
+          newCartItem={ selectedProduct }
+        />
       </div>
     );
   }

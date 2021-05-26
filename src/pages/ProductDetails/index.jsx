@@ -8,6 +8,7 @@ class ProductDetails extends React.Component {
   render() {
     const { location: { state: { title, price, thumbnail, attributes } } } = this.props;
     const { addToCart } = this.props;
+    const { match: { params: { itemId: id } } } = this.props;
 
     return (
       <div>
@@ -16,8 +17,8 @@ class ProductDetails extends React.Component {
         <img src={ thumbnail } alt={ title } />
         <div>
           <ul>
-            {attributes.map(({ value_name: value, name, id }) => (
-              <li key={ id }>
+            {attributes.map(({ value_name: value, name }, index) => (
+              <li key={ index }>
                 { `${name} : ${value}`}
               </li>))}
           </ul>
@@ -25,7 +26,7 @@ class ProductDetails extends React.Component {
         <button
           type="button"
           data-testid="product-detail-add-to-cart"
-          onClick={ () => addToCart({ title, price, thumbnail, id: '' }) }
+          onClick={ () => addToCart({ title, price, thumbnail, id }) }
         >
           Adionar ao carrinho
         </button>

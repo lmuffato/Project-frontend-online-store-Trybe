@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import shoppingCart from '../imagens/shoppingCart.svg';
 import ProductCard from './ProductCard';
-import Loading from '../pages/Loading';
+import Loading from './Loading';
 import { checkStorage } from '../services/localStorage';
 
 export default class FrontPage extends React.Component {

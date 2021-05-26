@@ -3,38 +3,42 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 export default class ButtonAdd extends Component {
-   counter = () => {
-    const { newCartItem } = this.props;
-    return newCartItem.reduce((acc, cur) => acc + cur.qtd, 0);
+  constructor() {
+    super();
+    this.addProductToStorage = this.addProductToStorage.bind(this);
   }
 
- /*  handleClick = () => {
-    const { productSelected } = this.props;
-  } */
+  addProductToStorage = () => {
+    // Para essa função contei com o auxílio do repositório do grupo 26
+    let products = [];
+    const { newCartItem } = this.props;
+    console.log(newCartItem);
+    if (localStorage.getItem('cartItems') !== null) {
+      products = JSON.parse(localStorage.getItem('cartItems'));
+    }
+    products.push(newCartItem);
+    localStorage.setItem('cartItems', JSON.stringify(products));
+  }
 
   render() {
-    const { cartItems, newCartItem } = this.props;
     return (
       <div>
-         <Link
-            to={ { pathname: '/Cart', state: { cartItems, newCartItem } } }
+        <Link
+          to={ { pathname: '/cart' } }
+        >
+          <button
+            type="button"
+            data-testid="product-add-to-cart"
+            onClick={ () => this.addProductToStorage() }
           >
-            <button type="button" data-testid="product-add-to-cart">
-              Adicionar ao carrinho
-            </button>
-            {/*  {`Carrinho ${this.counter()}`} */}
-          </Link>
+            Adicionar ao carrinho
+          </button>
+        </Link>
       </div>
     );
   }
 }
 
 ButtonAdd.propTypes = {
-  cartItems: PropTypes.arrayOf(Object),
-  newCartItem: PropTypes.string,
-};
-
-ButtonAdd.defaultProps = {
-  cartItems: [],
-  newCartItem: '',
-};
+  newCartItem: PropTypes.object,
+}.isRequired;

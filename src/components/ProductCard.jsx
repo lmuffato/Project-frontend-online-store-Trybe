@@ -4,18 +4,6 @@ import PropTypes from 'prop-types';
 import ButtonAdd from './ButtonAdd';
 
 export default class ProductCard extends Component {
-/*   constructor() {
-    super();
-    this.handleClick = this.handleClick.bind(this);
-  } */
-
-  /* async handleClick(category, query) {
-    const response = await API
-      .getProductsFromCategoryAndQuery(category, query);
-    console.log(response.results);
-    this.setState({ products: response.results });
-  } */
-
   render() {
     const { title, price, img, id, productSelected } = this.props;
     const detailsLink = `/details/${id}/${productSelected.category_id}`;
@@ -29,9 +17,7 @@ export default class ProductCard extends Component {
           </div>
         </Link>
         <ButtonAdd
-          /* handleClick={ handleClick } */
-          productSelected={ productSelected }
-
+          newCartItem={ productSelected }
         />
       </div>
     );

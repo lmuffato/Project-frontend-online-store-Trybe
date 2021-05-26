@@ -64,29 +64,14 @@ export default class Landing extends Component {
         </aside>
         {products.length > 0 ? (
           products.map((product) => (
-            <>
-              <ProductCard
-                productSelected={ product }
-                key={ product.id }
-                title={ product.title }
-                img={ product.thumbnail }
-                price={ product.price }
-                id={ product.id }
-                // handleClick={}
-              />
-              {/* <button
-                onClick={ this.getProduct }
-                type="button"
-                SKU={ product.id }
-                data-testid="product-add-to-cart"
-              >
-                Adicionar ao carrinho
-              </button> */}
-              {/* <ButtonAdd
-                onClick={ this.getProduct }
-                SKU={ product.id }
-              /> */}
-            </>
+            <ProductCard
+              productSelected={ product }
+              key={ product.id }
+              title={ product.title }
+              img={ product.thumbnail }
+              price={ product.price }
+              id={ product.id }
+            />
           ))
         ) : (
           <p>Nenhum objeto encontrado</p>

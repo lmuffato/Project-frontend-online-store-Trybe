@@ -7,7 +7,7 @@ import Rating from '../../components/Rating';
 class ProductDetails extends React.Component {
   render() {
     const { location: { state: { title, price, thumbnail, attributes } } } = this.props;
-    const { addToCart } = this.props;
+    const { addToCart, cartSize } = this.props;
     const { match: { params: { itemId: id } } } = this.props;
 
     return (
@@ -15,6 +15,7 @@ class ProductDetails extends React.Component {
         <h1 data-testid="product-detail-name">{ title }</h1>
         <h2>{` R$ ${price} `}</h2>
         <img src={ thumbnail } alt={ title } />
+
         <div>
           <ul>
             {attributes.map(({ value_name: value, name }, index) => (
@@ -23,6 +24,7 @@ class ProductDetails extends React.Component {
               </li>))}
           </ul>
         </div>
+
         <button
           type="button"
           data-testid="product-detail-add-to-cart"
@@ -30,9 +32,15 @@ class ProductDetails extends React.Component {
         >
           Adionar ao carrinho
         </button>
+
         <Link to="/Cart" data-testid="shopping-cart-button">
           <button type="button">Cart</button>
         </Link>
+
+        <p data-testid="shopping-cart-size">
+          { cartSize }
+        </p>
+
         <div id="evaluate-container">
           <input type="email" placeholder="mail@mail.com" />
           <Rating />

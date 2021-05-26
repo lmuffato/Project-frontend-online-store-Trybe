@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import fetchProduct from '../services/itemApi';
 import shoppingCart from '../imagens/shoppingCart.svg';
-import Loading from './Loading';
+import Loading from '../components/Loading';
 import Button from '../components/Button';
 import '../styles/ProductDetail.css';
 import ReviewForm from '../components/ReviewForm';
 import backArrow from '../imagens/backArrow.svg';
+import free from '../imagens/free.png';
 
 class ProductDetail extends React.Component {
   constructor(props) {
@@ -39,8 +40,6 @@ class ProductDetail extends React.Component {
     if (loading) {
       return loadingElement;
     }
-
-    console.log(item);
 
     return (
       <div>
@@ -74,6 +73,9 @@ class ProductDetail extends React.Component {
                 R$
                 {item.price}
               </p>
+              {(item.shipping.free_shipping)
+                ? <img src={ free } alt="free" data-testid="free-shipping" width="10%" />
+                : <p />}
             </div>
             <Button item={ item } dataTestId="product-detail-add-to-cart" />
           </div>

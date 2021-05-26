@@ -31,6 +31,7 @@ export default class ProductDetails extends Component {
   }
 
   render() {
+    // Comentários a parte!!
     const { selectedProduct } = this.state;
     const { price, title, thumbnail, attributes } = selectedProduct;
     return (
@@ -47,7 +48,6 @@ export default class ProductDetails extends Component {
             ))}
           </ul>
         )}
-       
         <ButtonAdd
           classDataTest="product-detail-add-to-cart"
           newCartItem={ selectedProduct }

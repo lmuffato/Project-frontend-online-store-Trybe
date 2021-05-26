@@ -17,6 +17,7 @@ export default class ProductCard extends Component {
           </div>
         </Link>
         <ButtonAdd
+          classDataTest="product-add-to-cart"
           newCartItem={ productSelected }
         />
       </div>

@@ -20,6 +20,7 @@ export default class Cart extends Component {
 
   render() {
     const { cartProducts } = this.state;
+    console.log(localStorage);
     return (
       <div>
         <IconCart />

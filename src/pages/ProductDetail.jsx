@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import fetchProduct from '../services/itemApi';
 import shoppingCart from '../imagens/shoppingCart.svg';
-import Loading from './Loading';
+import Loading from '../components/Loading';
 import Button from '../components/Button';
 import '../styles/ProductDetail.css';
 import ReviewForm from '../components/ReviewForm';
@@ -40,8 +40,6 @@ class ProductDetail extends React.Component {
     if (loading) {
       return loadingElement;
     }
-
-    console.log(item);
 
     return (
       <div>

@@ -5,6 +5,7 @@ import { FaSearch, FaBoxOpen } from 'react-icons/fa';
 import { RiShoppingCartFill } from 'react-icons/ri';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 import CardProduct from '../components/CardProduct';
+import Footer from '../components/Footer';
 
 import styles from './styles.module.css';
 
@@ -138,6 +139,7 @@ class Home extends Component {
         </ul>
         <h2 className={ styles.title }>Produtos</h2>
         {this.checkRequest()}
+        <Footer />
       </main>
     );
   }

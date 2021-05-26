@@ -4,6 +4,7 @@ import { addToLocalStorage } from './services/localStorage';
 import Home from './pages/Home';
 import ShoppingCart from './pages/ShoppingCart';
 import ProductDetail from './pages/ProductDetail';
+import FinalizingPurchase from './pages/FinalizingPurchase';
 import './styles/FrontPage.css';
 
 class App extends React.Component {
@@ -24,7 +25,9 @@ class App extends React.Component {
                 />)
               }
             />
+            <Route path="/checkout" component={ FinalizingPurchase } />
             <Route
+              exact
               path="/:id"
               render={
                 (props) => (<ProductDetail

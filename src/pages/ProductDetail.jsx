@@ -82,6 +82,7 @@ class ProductDetail extends React.Component {
           <div className="specifications">
             Especificações Técnicas:
             {
+              // console.log(item)
               item.attributes.map((attribute) => (
                 <p key={ attribute.id }>{`${attribute.name}: ${attribute.value_name}`}</p>
               ))

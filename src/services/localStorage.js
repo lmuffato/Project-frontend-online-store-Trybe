@@ -18,29 +18,28 @@ export const getAll = () => {
   return elementArray;
 };
 
-// export const quantityProduct = ({ target }) => {
-//   const allProducts = getAll().map((product) => {
-//     // let targetValue = 0;
-//     if (target.name === 'add') {
-//       product.buyQuantity += 1;
-//       target.previousSibling.defaultValue = product.buyQuantity;
-//       console.log(target.previousSibling.defaultValue);
-//     }
-//     if (target.name === 'sub') {
-//       product.buyQuantity -= 1;
-//       target.previousSibling.defaultValue = product.buyQuantity;
-//       console.log(product.buyQuantity);
-//     }
-//     if (product.title === target.id) {
-//       product.buyQuantity = target.value;
-//       product.price = product.standardPrice * parseInt(product.buyQuantity, 10);
-//     }
-//     return product;
-//   });
-//   addToLocalStorage(allProducts);
-
-//   // console.log(allProducts);
-// };
+export const checkStorage = () => {
+  const storage = getAll();
+  let storageData = '';
+  if (Array.isArray(storage)) {
+    storageData = storage;
+    return storageData;
+    // this.setState({
+    //   storageData: storage,
+    //   array: true,
+    // });
+  }
+  if (storage !== null) {
+    const storageArray = [storage];
+    storageData = storageArray;
+    return storageData;
+    // return this.setState({
+    //   storageData: storageArray,
+    //   array: true,
+    // });
+  }
+  return storageData;
+};
 
 export const creatObject = async (item) => {
   cartObj = {

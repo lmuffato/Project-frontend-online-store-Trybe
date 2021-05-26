@@ -91,7 +91,7 @@ export default class CartCard extends React.Component {
             type="button"
             name="delete"
             className="delete"
-            onClick={ (event) => deleteProduct(event) }
+            onClick={ () => deleteProduct(product.title) }
           >
             x
           </button>

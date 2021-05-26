@@ -71,7 +71,7 @@ export default class Checkout extends Component {
 
   renderCheckboxPayments() {
     const icons = {
-      Boleto: <IoMdBarcode />, // values como componentes de cada reac-icon <BiBarcode />
+      Boleto: <IoMdBarcode />,
       Visa: <FaCcVisa />,
       MasterCard: <FaCcMastercard />,
       Elo: <BsCreditCard />,
@@ -127,7 +127,7 @@ export default class Checkout extends Component {
         </div>
 
         <div className={ styles.checkoutCustomerInfos }>
-          <h2>Informação do comprador</h2>
+          <h2>Informações do comprador</h2>
           <form>
             { this.renderFormElements() }
           </form>

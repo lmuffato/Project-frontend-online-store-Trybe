@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { RiShoppingCartFill } from 'react-icons/ri';
 import { FaBoxOpen } from 'react-icons/fa';
 import { TiArrowBack } from 'react-icons/ti';
+import { AiOutlineStar, AiFillStar } from 'react-icons/ai';
 
 import styles from './styles.module.css';
 
@@ -77,7 +78,7 @@ class ProductDetails extends Component {
             <button
               type="button"
               className={ styles.btnAddCartProduct }
-              onClick={ () => handleDetailsToCart(product) }
+              onClick={ () => handleDetailsToCart(product, quant) }
               data-testid="product-detail-add-to-cart"
             >
               Adicionar ao Carrinho
@@ -103,7 +104,13 @@ class ProductDetails extends Component {
               name="email"
               placeholder="E-mail"
             />
-            <div className={ styles.contentStar }>estrelas</div>
+            <div className={ styles.contentStar }>
+              <AiFillStar />
+              <AiFillStar />
+              <AiFillStar />
+              <AiFillStar />
+              <AiOutlineStar />
+            </div>
             <textarea
               className={ styles.contentTextOption }
               data-testid="product-detail-evaluation"
@@ -135,6 +142,7 @@ ProductDetails.propTypes = {
         thumbnail: PropTypes.string,
         price: PropTypes.number,
         id: PropTypes.string,
+        availableQuantity: PropTypes.number,
         shipping: PropTypes.shape({
           free_shipping: PropTypes.bool,
         }),

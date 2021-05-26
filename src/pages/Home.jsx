@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { FaSearch, FaBoxOpen } from 'react-icons/fa';
-import { RiShoppingCartFill } from 'react-icons/ri';
+import { FaBoxOpen } from 'react-icons/fa';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 import CardProduct from '../components/CardProduct';
+import Header from '../components/Header';
 
 import styles from './styles.module.css';
 
@@ -78,48 +77,11 @@ class Home extends Component {
     const { cartProductLength } = this.props;
     return (
       <main>
-        <header className={ styles.header }>
-          <div className={ styles.cartLogo }>
-            <h2 className={ styles.titleLogo }>
-              Shopping Cart 2.0
-            </h2>
-            <Link
-              className={ styles.btnCart }
-              data-testid="shopping-cart-button"
-              to="/carrinho"
-            >
-              <RiShoppingCartFill className={ styles.iconCart } />
-              <p
-                className={ styles.lengthCart }
-                data-testid="shopping-cart-size"
-              >
-                { cartProductLength }
-              </p>
-            </Link>
-          </div>
-          <div className={ styles.inputContent }>
-            <p className={ styles.textInput } data-testid="home-initial-message">
-              Digite algum termo de pesquisa ou escolha uma categoria.
-            </p>
-            <input
-              id="search"
-              data-testid="query-input"
-              type="text"
-              onChange={ this.handleChange }
-              className={ styles.inputSearch }
-              placeholder="O que você está procurando?"
-            />
-            <button
-              className={ styles.btnSearch }
-              data-testid="query-button"
-              type="button"
-              onClick={ this.handleSubmit }
-            >
-              <FaSearch className={ styles.iconSearch } />
-            </button>
-          </div>
-
-        </header>
+        <Header
+          cartProductLength={ cartProductLength }
+          handleChange={ this.handleChange }
+          handleSubmit={ this.handleSubmit }
+        />
         <h2 className={ styles.title }>Categorias</h2>
         <ul className={ styles.categoryList }>
           {categories.map(({ id, name }) => (

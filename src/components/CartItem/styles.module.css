@@ -41,7 +41,7 @@
 }
 
 .CartPriceQuantContainer > p {
-  color: var(--red-color-600);
+  color: var(--green-color-600);
   font-size: 1rem;
 }
 

@@ -4,16 +4,16 @@
 }
 
 .titleOption {
-  font-size: 1.5rem;
   color: var(--orange-color-600);
+  font-size: 1.5rem;
   padding: 1.2rem;
   text-align: center;
 }
 
 .contentCopy {
-  font-size: 65%;
   color: rgb(235, 202, 202);
-  margin: 20px 20px 20px;
+  font-size: 65%;
+  margin: 20px;
   text-align: center;
 }
 

@@ -4,6 +4,7 @@
 }
 
 .titleOption {
+  font-size: 1.5rem;
   color: var(--orange-color-600);
   padding: 1.2rem;
   text-align: center;

@@ -7,6 +7,7 @@ import './styles.css';
 class Product extends React.Component {
   render() {
     const { title, imagePath, price, itemId, techSpecs, addToCart } = this.props;
+    const { free_shipping: freeShipping } = this.props;
 
     const location = {
       pathname: `/itemDetails/${itemId}`,
@@ -25,6 +26,7 @@ class Product extends React.Component {
         <img src={ imagePath } alt={ title } />
         <h1 data-testid="addProductToCart">{title}</h1>
         <p>{price}</p>
+        {freeShipping && <p data-testid="free-shipping">Frete grátis</p>}
         <Link to={ location }>
           <button
             type="button"

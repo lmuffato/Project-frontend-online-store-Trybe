@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Rating from '../../components/Rating';
 import AddToCartBtn from '../../components/AddToCartBtn';
+import InfoFreeShipping from '../../components/InfoFreeShipping';
 
 class ProductDetails extends React.Component {
   constructor(props) {
@@ -36,7 +37,7 @@ class ProductDetails extends React.Component {
   render() {
     const {
       product: {
-        id, title, price, attributes, thumbnail, category_id: catId,
+        id, title, price, attributes, thumbnail, category_id: catId, shipping,
       } } = this.state;
     const { loading } = this.state;
     if (loading) return <p>Carregando...</p>;
@@ -63,6 +64,7 @@ class ProductDetails extends React.Component {
             ))}
           </ul>
         </div>
+        <InfoFreeShipping shipping={ shipping.free_shipping } />
         <Rating productId={ id } />
         <AddToCartBtn
           category={ catId }

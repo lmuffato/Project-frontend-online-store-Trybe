@@ -15,6 +15,7 @@ class BuyerInformation extends React.Component {
             value={ fullName }
             onChange={ handleChange }
             data-testid="checkout-fullname"
+            required
           />
         </label>
         <br />
@@ -26,6 +27,7 @@ class BuyerInformation extends React.Component {
             value={ email }
             onChange={ handleChange }
             data-testid="checkout-email"
+            required
           />
         </label>
         <br />
@@ -37,6 +39,7 @@ class BuyerInformation extends React.Component {
             value={ cpf }
             onChange={ handleChange }
             data-testid="checkout-cpf"
+            required
           />
         </label>
         <br />
@@ -48,6 +51,7 @@ class BuyerInformation extends React.Component {
             value={ phone }
             onChange={ handleChange }
             data-testid="checkout-phone"
+            required
           />
         </label>
         <br />
@@ -59,6 +63,7 @@ class BuyerInformation extends React.Component {
             value={ cep }
             onChange={ handleChange }
             data-testid="checkout-cep"
+            required
           />
         </label>
         <br />
@@ -70,6 +75,7 @@ class BuyerInformation extends React.Component {
             value={ address }
             onChange={ handleChange }
             data-testid="checkout-address"
+            required
           />
         </label>
       </div>

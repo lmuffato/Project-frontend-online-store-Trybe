@@ -13,6 +13,7 @@ class Payment extends React.Component {
             name="Payment"
             value="boleto"
             onChange={ handleChange }
+            required
           />
           Boleto
         </label>

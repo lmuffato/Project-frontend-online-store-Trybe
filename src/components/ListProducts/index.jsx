@@ -17,7 +17,7 @@ class ListProducts extends React.Component {
             addToCart={ addToCart }
             itemId={ id }
             techSpecs={ { title, price, thumbnail, attributes } }
-            free_shipping={shipping.free_shipping}
+            free_shipping={ shipping.free_shipping }
           />),
         )}
       </>

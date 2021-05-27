@@ -14,11 +14,12 @@ export default class AddToCartBtn extends React.Component {
       category,
       id,
     };
+
     const Item = JSON.parse(localStorage.getItem('shoppingcart'));
-    if (Item === null) {
-      localStorage.setItem('shoppingcart', JSON.stringify(data));
+    if (!Item) {
+      localStorage.setItem('shoppingcart', JSON.stringify([data]));
     } else {
-      const newItems = { ...Item, ...data };
+      const newItems = [...Item, data];
       localStorage.setItem('shoppingcart', JSON.stringify(newItems));
     }
   }

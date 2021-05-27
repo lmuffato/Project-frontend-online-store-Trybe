@@ -50,7 +50,8 @@ class ProductsByCategory extends React.Component {
             thumbnail,
             id,
             category_id: catId,
-            attributes },
+            attributes,
+            shipping },
           index) => (
             <li key={ index }>
               <ProductCard
@@ -59,6 +60,7 @@ class ProductsByCategory extends React.Component {
                 price={ price }
                 imagePath={ thumbnail }
                 attributes={ attributes }
+                shipping={ shipping.free_shipping }
               >
                 <AddToCartBtn
                   category={ catId }

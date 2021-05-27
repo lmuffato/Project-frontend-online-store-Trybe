@@ -8,6 +8,7 @@ class CarrinhoDeCompras extends React.Component {
     super();
     this.selectedProducts = this.selectedProducts.bind(this);
     this.infoRender = this.infoRender.bind(this);
+    this.changeQtd = this.changeQtd.bind(this);
     this.state = {
       loading: true,
       selected: [],
@@ -18,23 +19,55 @@ class CarrinhoDeCompras extends React.Component {
     this.infoRender();
   }
 
-  async infoRender() {
+  infoRender() {
     const productInfo = JSON.parse(localStorage.getItem('shoppingcart'));
     if (productInfo === null) {
       return;
     }
-    const { category, query, id } = productInfo;
-    const productSearch = await api.getProductsFromCategoryAndQuery(category, query);
-    const selected = Object.values(productSearch)[3]
-      .filter((product) => product.id === id);
-    this.selectedProducts(selected);
+    productInfo.forEach(async (item) => {
+      const { category, query, id } = item;
+      const qtdItems = productInfo.filter((i) => i.id === id).length;
+      const productSearch = await api.getProductsFromCategoryAndQuery(category, query);
+      const selected = Object.values(productSearch)[3]
+        .filter((product) => product.id === id);
+      const { selected: selectedItems } = this.state;
+      if (selectedItems.filter((i) => i.id === id).length === 0) {
+        this.selectedProducts(selected, qtdItems);
+      }
+    });
   }
 
-  selectedProducts(param) {
+  selectedProducts(param, qtd) {
     this.setState({
-      selected: param,
-      loading: false,
+      loading: true,
+    }, () => {
+      this.setState((prevState) => {
+        param[0].qtd = qtd;
+        return {
+          selected: [...prevState.selected, param[0]],
+          loading: false,
+        };
+      });
     });
+  }
+
+  changeQtd(e, id) {
+    const { value } = e.target;
+    const { selected } = this.state;
+    const item = selected.findIndex((i) => i.id === id);
+    const data = [...selected];
+    if (parseInt(value, 10) === 1) {
+      data[item].qtd += 1;
+      this.setState({
+        selected: [...data],
+      });
+    } else {
+      data[item].qtd -= 1;
+      if (data[item].qtd < 0) data[item].qtd = 0;
+      this.setState({
+        selected: [...data],
+      });
+    }
   }
 
   RenderFunction() {
@@ -45,13 +78,15 @@ class CarrinhoDeCompras extends React.Component {
       return (<p>Carregando</p>);
     }
     return (
-      selected.map(({ id, title, price, thumbnail }) => (<ShoppingCards
-        key={ id }
-        id={ id }
-        title={ title }
-        price={ price }
-        imagePath={ thumbnail }
-      />
+      selected.map(({ id, title, price, thumbnail, qtd }) => (
+        <ShoppingCards
+          key={ id }
+          id={ id }
+          title={ title }
+          price={ price }
+          imagePath={ thumbnail }
+          qtd={ { qtd, changeQtd: this.changeQtd } }
+        />
       ))
     );
   }

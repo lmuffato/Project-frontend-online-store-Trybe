@@ -9,7 +9,7 @@ class ListProducts extends React.Component {
     return (
       <>
         { productsList.map(
-          ({ title, price, thumbnail, id, attributes }) => (<Product
+          ({ title, price, thumbnail, id, attributes, shipping }) => (<Product
             title={ title }
             imagePath={ thumbnail }
             price={ price }
@@ -17,6 +17,7 @@ class ListProducts extends React.Component {
             addToCart={ addToCart }
             itemId={ id }
             techSpecs={ { title, price, thumbnail, attributes } }
+            free_shipping={shipping.free_shipping}
           />),
         )}
       </>

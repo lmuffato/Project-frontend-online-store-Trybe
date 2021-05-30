@@ -15,6 +15,7 @@ class ProductDetails extends Component {
     this.handleInput = this.handleInput.bind(this);
     this.renderRating = this.renderRating.bind(this);
     this.renderItems = this.renderItems.bind(this);
+    this.retrieveData = this.retrieveData.bind(this);
 
     this.state = {
       rating: 0,
@@ -80,11 +81,16 @@ class ProductDetails extends Component {
   async renderRating() {
     const { email, comment, rating } = this.state;
     const { id } = this.props.location.state;
-    const numberOfStars = 5;
     const ratingComments = { id, email, comment, rating };
     this.setState(({ customersRating: previousState }) => ({
       customersRating: [...previousState, ratingComments],
     }), () => this.updateState());
+  }
+
+  retrieveData(id) {
+    const storage = JSON.parse(window.localStorage.getItem('ratings'));
+    return storage.filter((item) => item.id === id);
+
   }
 
   render() {
@@ -93,7 +99,7 @@ class ProductDetails extends Component {
     const { id, title, price, thumbnail } = product;
     const { stars, customersRating } = this.state;
     const cartProduct = { id, title, price, thumbnail, quantity: 1 };
-    const items = JSON.parse(window.localStorage.getItem('ratings'));
+    const items = this.retrieveData(id);
 
     return (
       <>

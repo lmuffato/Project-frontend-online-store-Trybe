@@ -11,14 +11,14 @@ class ProductDetails extends Component {
   constructor() {
     super();
 
-    this.ratingStars = this.ratingStars.bind(this);
     this.unratedRender = this.unratedRender.bind(this);
     this.handleInput = this.handleInput.bind(this);
     this.renderRating = this.renderRating.bind(this);
     this.renderItems = this.renderItems.bind(this);
 
     this.state = {
-      rating: '',
+      rating: 0,
+      stars: [],
       email: '',
       comment: '',
       customersRating: [],
@@ -32,24 +32,18 @@ class ProductDetails extends Component {
     });
   }
 
-  unratedRender = () => {
-    const arrayRating = ['star1', 'star2', 'star3', 'star4', 'star5'];
-    const rating = arrayRating.map((star, index) => (
-      <AiOutlineStar onClick={ this.ratingStars } id={ index } key={ index } />
-    ));
-    this.setState({ rating });
-  }
-
-  ratingStars({ target }) {
-    const { id } = target;
-    const arrayRating = ['star1', 'star2', 'star3', 'star4', 'star5'];
-    const rating = arrayRating.map((star, index) => {
-      if (index <= id) {
-        return <AiFillStar id={ index } onClick={ this.ratingStars } key={ index } />;
-      }
-      return <AiOutlineStar id={ index } onClick={ this.ratingStars } key={ index } />;
+  unratedRender() {
+    const numberOfStars = 5;
+    const starsArray = [...Array(numberOfStars)].map((star, index) => {
+      const { rating } = this.state;
+      return (
+        <label key={ index }>
+          <input className="rating-input" type="radio" name="rate" value={ index } onClick={ () => this.setState({ rating: index + 1 }) } />
+          <AiFillStar className="stars" color={ index < rating ? 'yellow' : 'grey' } />
+        </label>
+      );
     });
-    this.setState({ rating });
+    return starsArray;
   }
 
   async updateState() {
@@ -73,9 +67,9 @@ class ProductDetails extends Component {
   }
 
   async renderRating() {
-    const { email, comment, rating } = this.state;
+    const { email, comment, stars } = this.state;
     const { id } = this.props;
-    const ratingComments = { id, email, comment, rating };
+    const ratingComments = { id, email, comment, stars };
     this.setState(({ customersRating: previousState }) => ({
       customersRating: [...previousState, ratingComments],
     }), () => this.updateState());
@@ -85,7 +79,7 @@ class ProductDetails extends Component {
     const { location, addToCart, shoppingCart } = this.props; // location passado por product card, resto passado por App.js
     const { state: product } = location;
     const { id, title, price, thumbnail } = product;
-    const { rating, customersRating } = this.state;
+    const { stars, customersRating } = this.state;
     const cartProduct = { id, title, price, thumbnail, quantity: 1 };
     const items = JSON.parse(window.localStorage.getItem('ratings'));
 
@@ -104,7 +98,7 @@ class ProductDetails extends Component {
         <RatingForm
           unratedRender={ this.unratedRender }
           handleInput={ this.handleInput }
-          rating={ rating }
+          stars={ stars }
           renderRating={ this.renderRating }
         />
 

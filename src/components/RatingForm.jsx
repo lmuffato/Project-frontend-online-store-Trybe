@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
 
 class RatingForm extends Component {
-  componentDidMount() {
-    const { unratedRender } = this.props;
-    unratedRender();
-  }
-
   render() {
-    const { rating, handleInput, value, renderRating } = this.props;
+    const { handleInput, value, renderRating, unratedRender } = this.props; // recebe de ProductDetails.jsx
     return (
       <section className="rating-form">
         <input
@@ -17,7 +12,7 @@ class RatingForm extends Component {
           placeholder="Digite seu email"
           name="email"
         />
-        <span>{ rating }</span>
+        <span>{ unratedRender() }</span>
         <div>
           <textarea
             onChange={ handleInput }

@@ -64,13 +64,15 @@ class Index extends Component {
           <CartButton />
 
         </SearchBar>
-        <Categories
-          onClick={ this.selectCategory }
-          categories={ categories }
-          getData={ this.fetchCategories }
-        />
-        { loading && <Loading /> }
-        { products && <Products products={ products } addToCart={ addToCart } /> }
+        <section className="content">
+          <Categories
+            onClick={ this.selectCategory }
+            categories={ categories }
+            getData={ this.fetchCategories }
+          />
+          { loading && <Loading /> }
+          { products && <Products products={ products } addToCart={ addToCart } /> }
+        </section>
       </main>
     );
   }

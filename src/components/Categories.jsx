@@ -31,7 +31,7 @@ class Categories extends Component {
 
     return (
       <aside>
-        <ul>
+        <ul className="categories-list">
           {categories
             ? this.categoriesList(categories, onClick)
             : 'loading...'}

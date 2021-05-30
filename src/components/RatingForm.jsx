@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import { func, string } from 'prop-types';
 
 class RatingForm extends Component {
   render() {
-    const { handleInput, value, renderRating, unratedRender } = this.props; // recebe de ProductDetails.jsx
+    const { handleInput, value, submitRate, ratingStars } = this.props; // recebe de ProductDetails.jsx
     return (
       <section className="rating-form">
         <input
@@ -12,7 +13,7 @@ class RatingForm extends Component {
           placeholder="Digite seu email"
           name="email"
         />
-        <span>{ unratedRender() }</span>
+        <span>{ ratingStars() }</span>
         <div>
           <textarea
             onChange={ handleInput }
@@ -22,10 +23,17 @@ class RatingForm extends Component {
             name="comment"
           />
         </div>
-        <button onClick={ renderRating } type="button">Avaliar</button>
+        <button onClick={ submitRate } type="button">Avaliar</button>
       </section>
     );
   }
 }
+
+RatingForm.propTypes = {
+  handleInput: func,
+  value: string,
+  submitRate: func,
+  ratingStars: func,
+}.isRequired;
 
 export default RatingForm;

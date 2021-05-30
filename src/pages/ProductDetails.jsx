@@ -48,35 +48,40 @@ class ProductDetails extends Component {
 
   async updateState() {
     const { customersRating } = this.state;
-    localStorage.setItem('ratings', JSON.stringify(customersRating));
+    const items = JSON.parse(window.localStorage.getItem('ratings'));
+    if (items) {
+      const storage = [...items, ...customersRating];
+      localStorage.setItem('ratings', JSON.stringify(storage));
+    } else {
+      localStorage.setItem('ratings', JSON.stringify(customersRating));
+    }
   }
 
   renderItems(items) {
+    const starsNumber = 5;
     return items.map((comment, key) => (
-      <div key={ key }>
+      <div className="comment" key={ key }>
         <p>
-          {comment.email}
+          Email: {comment.email}
+          <span>
+            {[...Array(starsNumber)].map((star, index) => {
+              return (
+                <AiFillStar key={ index } color={ index < comment.rating ? 'yellow' : 'grey' } />
+              );
+            })}
+          </span>
         </p>
         <p>
-          {comment.comment}
-        </p>
-        <p>
-          {/* {comment.rating[0]} */}
+          Comentário: {comment.comment}
         </p>
       </div>));
   }
 
   async renderRating() {
     const { email, comment, rating } = this.state;
-    const { id } = this.props;
+    const { id } = this.props.location.state;
     const numberOfStars = 5;
-    const starsArray = [...Array(numberOfStars)].map((star, index) => {
-      const { rating } = this.state;
-      return (
-        <AiFillStar key={ index } color={ index < rating ? 'yellow' : 'grey' } />
-      );
-    });
-    const ratingComments = { id, email, comment, rating: starsArray };
+    const ratingComments = { id, email, comment, rating };
     this.setState(({ customersRating: previousState }) => ({
       customersRating: [...previousState, ratingComments],
     }), () => this.updateState());

@@ -67,9 +67,16 @@ class ProductDetails extends Component {
   }
 
   async renderRating() {
-    const { email, comment, stars } = this.state;
+    const { email, comment, rating } = this.state;
     const { id } = this.props;
-    const ratingComments = { id, email, comment, stars };
+    const numberOfStars = 5;
+    const starsArray = [...Array(numberOfStars)].map((star, index) => {
+      const { rating } = this.state;
+      return (
+        <AiFillStar key={ index } color={ index < rating ? 'yellow' : 'grey' } />
+      );
+    });
+    const ratingComments = { id, email, comment, rating: starsArray };
     this.setState(({ customersRating: previousState }) => ({
       customersRating: [...previousState, ratingComments],
     }), () => this.updateState());

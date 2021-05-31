@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { FaBoxOpen } from 'react-icons/fa';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 import CardProduct from '../components/CardProduct';
+import Footer from '../components/Footer';
 import Header from '../components/Header';
 
 import styles from './styles.module.css';
@@ -101,6 +102,7 @@ class Home extends Component {
         </ul>
         <h2 className={ styles.title }>Produtos</h2>
         {this.checkRequest()}
+        <Footer />
       </main>
     );
   }

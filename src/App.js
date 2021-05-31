@@ -45,18 +45,15 @@ class App extends Component {
           img: product[1].src,
           title: product[0].innerHTML,
           quant: 1,
-          price: elementos[1].innerHTML,
+          price: elementos[1].innerHTML.split('$')[1],
           stock: parseInt(product[2].innerHTML, 10),
         }],
       }));
     } else {
-      console.log('else');
       const test = cartList.reduce((acc, item) => {
         if (item.title === product[0].innerHTML) {
-          console.log('if');
           return [...acc, { ...item, quant: item.quant + 1 }];
         }
-        console.log('depois do if');
         return [...acc, item];
       }, []);
       this.setState({
@@ -149,8 +146,12 @@ class App extends Component {
         />
         <Route
           path="/checkout"
-          render={ (props) => <Checkout { ...props } /> }
-          handleClickResetState={ this.handleClickResetState }
+          render={ (props) => (
+            <Checkout
+              { ...props }
+              handleClickResetState={ this.handleClickResetState }
+            />
+          ) }
         />
       </Router>
     );

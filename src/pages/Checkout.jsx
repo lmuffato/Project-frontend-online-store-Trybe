@@ -4,7 +4,7 @@ import { TiArrowBack } from 'react-icons/ti';
 import { IoMdBarcode } from 'react-icons/io';
 import { FaCcVisa, FaCcMastercard } from 'react-icons/fa';
 import { BsCreditCard } from 'react-icons/bs';
-import { arrayOf, shape, string, number } from 'prop-types';
+import { arrayOf, shape, string, number, func } from 'prop-types';
 import { inputsInfo, brazilStates, paymentWays } from '../services/data';
 
 import styles from './styles.module.css';
@@ -22,7 +22,9 @@ export default class Checkout extends Component {
         <div className={ styles.checkoutInfosItem }>
           <p>{title}</p>
           <div className={ styles.checkoutInfosNumb }>
-            <p className={ styles.checkoutItemPrice }>{`R$ ${price}`}</p>
+            <p className={ styles.checkoutItemPrice }>
+              {`R$ ${(price * quant).toFixed(2)}`}
+            </p>
             <p>{quant}</p>
           </div>
         </div>
@@ -110,6 +112,8 @@ export default class Checkout extends Component {
   }
 
   render() {
+    const { location, handleClickResetState } = this.props;
+    const { prices } = location.state;
     return (
       <section className={ styles.checkoutContainer }>
         <div className={ styles.checkoutProducts }>
@@ -122,7 +126,7 @@ export default class Checkout extends Component {
           { this.renderCartList() }
           <div className={ styles.checkoutTotal }>
             <span>Total:</span>
-            <span>{`R$${this.renderSum()}`}</span>
+            <span>{`R$${prices.toFixed(2)}`}</span>
           </div>
         </div>
 
@@ -139,13 +143,22 @@ export default class Checkout extends Component {
             { this.renderCheckboxPayments() }
           </fieldset>
         </div>
-        <button className="checkoutButton" type="submit">Processar Pagamento</button>
+        <button
+          onClick={ handleClickResetState }
+          className="checkoutButton"
+          type="submit"
+        >
+          <Link to="/">
+            Processar Pagamento
+          </Link>
+        </button>
       </section>
     );
   }
 }
 
 Checkout.propTypes = {
+  handleClickResetState: func.isRequired,
   location: shape({
     state: shape({
       cartList: arrayOf(shape({

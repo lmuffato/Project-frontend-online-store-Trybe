@@ -21,7 +21,6 @@ class Home extends Component {
 
   componentDidMount() {
     this.fetchCategories();
-    // this.fetchProductsPagesAll();
   }
 
   handleChange = ({ target: { value } }) => {
@@ -62,11 +61,6 @@ class Home extends Component {
       </section>
     );
   };
-
-  // async fetchProductsPagesAll() {
-  //   const request = await getProductsFromCategoryAndQuery('', 'oferta');
-  //   this.setState({ products: request.results });
-  // }
 
   async fetchCategories() {
     const categories = await getCategories();
@@ -114,11 +108,3 @@ Home.propTypes = {
 };
 
 export default Home;
-
-// CartList component is now >  CartItem
-// CartItem page is now >  Cart
-
-// preciso interagir com o dados retornados da api novamente e verificar a chave de frete
-// a partir disso, modificar a renderização do cardProduct na home levando essa info
-// modificar a renderização tambem na pagina de product details
-// verificar um regra de negocio pra aparecer a propriedade (state vazio > if frete true > state: 'frete gratis' )

@@ -22,26 +22,9 @@
   justify-content: space-around;
 }
 
-.iconFace {
+.iconfooter {
   color: white;
   height: 30px;
-  width: 30px;
-}
-
-.iconInsta {
-  color: white;
-  height: 30px;
-  width: 30px;
-}
-
-.iconEmail {
-  color: white;
-  height: 35px;
-  width: 35px;
-}
-
-.iconCall {
-  color: white;
-  height: 30px;
+  opacity: 0.6;
   width: 30px;
 }

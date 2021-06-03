@@ -53,6 +53,11 @@ body {
     font-size: 1rem;
     overflow: hidden;
     padding: 12px;
+    transition: 0.5s;
+  }
+
+  .btnAddToCart:active {
+    color: var(--red-color-600);
   }
 
   .titleFrete {

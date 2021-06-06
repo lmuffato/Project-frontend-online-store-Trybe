@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import CartButton from './CartButton';
 
 class SearchBar extends Component {
   render() {
@@ -20,6 +21,7 @@ class SearchBar extends Component {
         <button type="button" data-testid="query-button" onClick={ onClick }>
           Buscar
         </button>
+        <CartButton />
       </header>
     );
   }

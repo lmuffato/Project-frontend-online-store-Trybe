@@ -60,15 +60,19 @@ class Index extends Component {
           searchText={ searchText }
           onChange={ this.handleSearchInput }
           onClick={ this.fetchProducts }
-        />
-        <CartButton />
-        <Categories
-          onClick={ this.selectCategory }
-          categories={ categories }
-          getData={ this.fetchCategories }
-        />
-        { loading && <Loading /> }
-        { products && <Products products={ products } addToCart={ addToCart } /> }
+        >
+          <CartButton />
+
+        </SearchBar>
+        <section className="content">
+          <Categories
+            onClick={ this.selectCategory }
+            categories={ categories }
+            getData={ this.fetchCategories }
+          />
+          { loading && <Loading /> }
+          { products && <Products products={ products } addToCart={ addToCart } /> }
+        </section>
       </main>
     );
   }

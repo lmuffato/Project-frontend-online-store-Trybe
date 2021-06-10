@@ -74,7 +74,7 @@ class Checkout extends React.Component {
         { cart
           .map((item, index) => (
             <p key={ index }>
-              {`${item[0].title} ${item.length * parseFloat(item[0].price)} `}
+              {`${item.product.title} ${item.quantity * parseFloat(item.product.price)} `}
             </p>
           ))}
       </div>

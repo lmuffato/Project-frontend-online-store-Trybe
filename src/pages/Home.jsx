@@ -4,6 +4,7 @@ import Mensagem from '../components/Mensagem';
 import Card from '../components/Card';
 import CategoryFilter from '../components/CategoryFilter';
 import * as api2 from '../services/api2';
+import CartButton from '../components/CartButton';
 
 class Home extends React.Component {
   constructor() {
@@ -72,9 +73,11 @@ class Home extends React.Component {
   }
 
   render() {
-    const { categories, products, search } = this.state;
+    const { categories, products, search, cart } = this.state;
     return (
       <div>
+        <CartButton cartSize={ cart.length } />
+
         <Mensagem />
         <input
           type="text"

@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import * as api2 from '../services/api2';
 import CartAmount from '../components/CartAmount';
+import CartButton from '../components/CartButton';
 
 class Cart extends React.Component {
   constructor(props) {
@@ -9,7 +10,7 @@ class Cart extends React.Component {
 
     this.state = {
       cart: [],
-      products: api2.readCartLocalStorage(),
+      products: [],
     };
   }
 
@@ -19,11 +20,10 @@ class Cart extends React.Component {
 
   fetchCart = () => {
     // utilizando exemplo de reduce fornecido em https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce
-    const { products } = this.state;
-
-    if (products) {
-      const quantidadeProdutos = products.reduce((acc, obj) => {
-        if (!obj) return;
+    let products = api2.readCartLocalStorage();
+    const { cart } = this.state;
+    if (products && cart) {
+      const quantity = products.reduce((acc, obj) => {
         const key = obj.id;
         if (!acc[key]) {
           acc[key] = [];
@@ -31,33 +31,51 @@ class Cart extends React.Component {
         acc[key].push(obj);
         return acc;
       }, {});
-      this.setState({ cart: Object.values(quantidadeProdutos) });
+
+      products = Object.values(quantity).map((item) => ({
+        product: item[0],
+        quantity: item.length,
+      }));
+      // const cartSize = products.reduce((acc, curr) => acc + curr.quantity, 0);
+
+      this.setState({
+        products,
+        cartSize: api2.readCartSizeLocalStorage(),
+        cart: api2.readCartLocalStorage(),
+      });
     }
   }
 
-  handleQuantityChange = () => {
-    // Escrever aqui a funcao para ajustar o cart de acordo com a quantidade de produtos que retornar do estado de cada componente
-    // do CartAmount e setar novamente o localStorage
-  }
+  // handleQuantityChange = () => {
+  //   const { products } = this.state;
+  //   const cartSize = products.reduce((acc, curr) => acc + curr.quantity, 0);
+  //   this.setState({
+  //     cartSize,
+  //   });
+  // }
 
   render() {
-    const { cart } = this.state;
+    const { products, cartSize } = this.state;
     return (
       <div>
         <Link to="/"> home </Link>
+        <CartButton cartSize={ cartSize } />
+
         <h1 data-testid="shopping-cart-empty-message"> Seu carrinho está vazio </h1>
-        {cart && cart.map((item) => (
+        {products && products.map((item) => (
           <CartAmount
-            key={ item[0].id }
-            id={ item[0].id }
-            quantity={ item.length }
-            title={ item[0].title }
+            key={ item.product.id }
+            id={ item.product.id }
+            quantity={ item.quantity }
+            title={ item.product.title }
+            onChange={ this.fetchCart }
+            maxQuantity={ item.product.available_quantity }
           />))}
         <Link
           data-testid="checkout-products"
           to={ {
             pathname: '/checkout',
-            state: cart,
+            state: products,
           } }
         >
           Comprar

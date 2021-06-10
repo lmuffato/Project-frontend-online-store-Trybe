@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Cart from './pages/Cart';
-import CartButton from './components/CartButton';
 import Home from './pages/Home';
 import ProductDetails from './pages/ProductDetails';
 import Checkout from './pages/Checkout';
@@ -11,7 +10,6 @@ function App() {
   return (
     <div>
       <BrowserRouter>
-        <CartButton />
         <Switch>
           <Route
             path="/product/:id"

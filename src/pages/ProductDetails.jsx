@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import * as api2 from '../services/api2';
 import CartAmount from '../components/CartAmount';
 import Evaluation from '../components/Evaluation';
+import CartButton from '../components/CartButton';
 
 class ProductDetails extends Component {
   constructor(props) {
@@ -44,9 +45,11 @@ class ProductDetails extends Component {
   }
 
   render() {
-    const { product: { title, thumbnail, price, attributes, id } } = this.state;
+    const { product: { title, thumbnail, price, attributes, id }, cart } = this.state;
     return (
       <div>
+        <CartButton cartSize={ cart.length } />
+
         <h1 data-testid="product-detail-name">{ title }</h1>
         <img src={ thumbnail } alt={ title } />
         <h2>{price}</h2>

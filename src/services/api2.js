@@ -9,9 +9,13 @@ export async function getProductsFromId(productId) {
 
 export const saveCartLocalStorage = (cart) => {
   localStorage.setItem('cart', JSON.stringify(cart));
+  localStorage.setItem('cartSize', JSON.stringify(cart.length));
 };
 
 export const readCartLocalStorage = () => JSON.parse(localStorage.getItem('cart'));
+
+export const readCartSizeLocalStorage = () => JSON
+  .parse(localStorage.getItem('cartSize'));
 
 export const deleteEveryFromLocalStorage = (id) => {
   const cart = JSON.parse(localStorage.getItem('cart'));
